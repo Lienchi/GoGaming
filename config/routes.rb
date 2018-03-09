@@ -3,4 +3,9 @@ Rails.application.routes.draw do
 
   root "paths#index" 
 
+
+  namespace :admin do
+    root "paths#index"
+  end
+
 end
