@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   root "trips#index"
 
+  namespace :admin do
+    root "trips#index"
+  end
+
 
 end
