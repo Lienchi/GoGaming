@@ -25,8 +25,7 @@ module Merit
       # Should be "current_user" after registration for badge to be granted.
       # Find badge by badge_id, badge_id takes presidence over badge
       # grant_on 'users#create', badge_id: 7, badge: 'just-registered', to: :itself
-      grant_on 'users/confirmations#show', badge: 'registered', model_name: 'User', to: :itself
-     User.count <= 100
+      grant_on 'users/registrations#create', badge: 'just-registered', model_name: 'User'
 
       # If it has 10 comments, grant commenter-10 badge
       # grant_on 'comments#create', badge: 'commenter', level: 10 do |comment|
