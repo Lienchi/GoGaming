@@ -1,0 +1,12 @@
+<h3> user's badges </h3>
+
+<ul>
+  <% current_user.badges.each do |badge| %>
+    <li><%= badge.name %></li>
+  <% end %>
+</ul>
+
+<h3> user's points </h3>
+<%= current_user.points %>
+<h3> user's level </h3>
+<%= current_user.level %>
