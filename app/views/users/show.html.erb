@@ -1,0 +1,22 @@
+<h2><%= @user.email %></h2>
+
+<h3> user's badges </h3>
+
+
+
+<ul>
+  <% @user.badges.each do |badge| %>
+    <li><%= badge.name %></li>
+    <li><%= badge.id %></li>
+    <li><%= badge.img_url %></li>
+  <% end %>
+</ul>
+
+<h3> user's points </h3>
+<p><%= @user.points %></p>
+<h3> user's level </h3>
+<p><%= @user.level %></p>
+
+
+
+<%= link_to 'Home', root_path %>
