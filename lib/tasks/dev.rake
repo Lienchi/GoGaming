@@ -32,4 +32,21 @@ namespace :dev do
     puts "have created gostations!"
     puts "now you have #{Gostation.count} gostations!"
   end
+
+  task fake_user: :environment do
+    User.destroy_all
+
+    User.create!(
+      email: "root@example.com",
+      password: "123456"
+    )
+    20.times do |i|
+      User.create!(
+        email: "user#{i}@example.com",
+        password: "123456"
+      )
+    end
+    puts "have created admin and fake users!"
+    puts "now you have #{User.count} users data!"
+  end
 end
