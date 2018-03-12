@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312181459) do
+ActiveRecord::Schema.define(version: 20180312183401) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -85,6 +85,15 @@ ActiveRecord::Schema.define(version: 20180312181459) do
   end
 
   create_table "sashes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "trip_gostations", force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "gostation_id"
+    t.integer "user_id"
+    t.boolean "checkedin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

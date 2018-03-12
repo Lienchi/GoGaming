@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :challenges, dependent: :destroy
   has_many :challenged_trips, through: :challenges, source: :trip
 
+  has_many :trip_gostations
+
   def admin?
     self.role == "admin"
   end
