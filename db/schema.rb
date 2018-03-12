@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311171458) do
+ActiveRecord::Schema.define(version: 20180312155229) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20180311171458) do
     t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
     t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
     t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
+  end
+
+  create_table "gostations", force: :cascade do |t|
+    t.string "LocName"
+    t.float "Latitude"
+    t.float "Longitude"
+    t.string "ZipCode"
+    t.text "Address"
+    t.string "District"
+    t.string "City"
+    t.string "AvailableTime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "merit_actions", force: :cascade do |t|
