@@ -8,7 +8,7 @@
   <% @user.badges.each do |badge| %>
     <li><%= badge.name %></li>
     <li><%= badge.id %></li>
-    <li><%= badge.img_url %></li>
+    <li><%= image_tag badge.custom_fields[:img_url], :style => "width: 50px" %></li>
   <% end %>
 </ul>
 
