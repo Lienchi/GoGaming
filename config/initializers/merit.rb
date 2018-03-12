@@ -31,3 +31,11 @@ end
 # }].each do |attrs|
 #   Merit::Badge.create! attrs
 # end
+
+Merit::Badge.create!(
+  id: 1,
+  name: "just-registered",
+  description: "新手上路",
+  level: "1",
+  custom_fields: { img_url: "http://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Irongofans/1_newbie_l_696_696-01.svg"}
+)
