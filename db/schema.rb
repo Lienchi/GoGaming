@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312171954) do
+ActiveRecord::Schema.define(version: 20180312181459) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20180312171954) do
     t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
     t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
     t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "trip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "checkins", force: :cascade do |t|
