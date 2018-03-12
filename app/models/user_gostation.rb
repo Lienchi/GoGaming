@@ -1,0 +1,2 @@
+class UserGostation < ApplicationRecord
+end
