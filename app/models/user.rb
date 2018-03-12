@@ -6,6 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :checkins, dependent: :destroy
+  has_many :checkedin_gostations, through: :checkins, source: :gostation
+
   def admin?
     self.role == "admin"
   end
