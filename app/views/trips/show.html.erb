@@ -1,0 +1,6 @@
+<h1>trips#show</h1>
+
+<% @trip_gostations.each do |t| %>
+ <%= check_box_tag :status, true , t.status , data: {url: check_trip_gostation_path(t), method: :post, remote: true}%>
+ <%= t.gostation.LocName %>
+<% end%>
