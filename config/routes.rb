@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end 
 
+  resources :challenges, only:[:create]
+
   resources :trips, only:[:index, :show]
 
   namespace :admin do
