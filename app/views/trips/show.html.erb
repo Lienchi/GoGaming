@@ -1,14 +1,11 @@
 <h1>trips#show</h1>
 
-<%= form_for @challenge do |f|%>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :trip_id, value: params[:id] %>
-  <%= f.hidden_field :status, value: false %>
-  <%= f.submit "Start" %>
-<%end%>
-
 <% @trip_gostations.each do |t| %>
-  <%= check_box_tag :status, true , t.status , data: {url: check_trip_gostation_path(t), method: :post, remote: true}%>
+  <% if t.status == true %>
+    <button class="btn btn-primary">Done</button>
+  <% else %>
+    <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
+  <% end%>
   <%= t.gostation.LocName %>
 <% end%>
 

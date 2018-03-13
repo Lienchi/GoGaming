@@ -4,6 +4,6 @@ class Trip < ApplicationRecord
 
   has_many :trip_gostations
   has_many :gostations, through: :trip_gostations, source: :gostation
-
+  
 
 end

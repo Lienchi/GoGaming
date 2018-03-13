@@ -1,9 +1,11 @@
 <h1>trip#index</h1>
 <h1>挑戰路線all</h1>
 
-
 <% @trips.each do |t| %>
-    <%= check_box_tag :status, true %>
-    <%= link_to "#{t.name}", trip_path(t) %>
-
+  <% if t.challenges.exists?(user_id: current_user.id)%>
+    <%= link_to "#{t.name}",trip_path(t), class: "btn btn-primary"%>
+  <%else%>
+    <%= link_to "#{t.name}",challenge_trip_path(t), method: :post, class: "btn btn-primary"  %>
+  <%end%>
 <%end%>
+
