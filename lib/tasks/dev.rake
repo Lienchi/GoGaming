@@ -49,4 +49,37 @@ namespace :dev do
     puts "have created admin and fake users!"
     puts "now you have #{User.count} users data!"
   end
+
+  task fake_trip: :environment do
+    Trip.destroy_all
+
+    Trip.create!(name: "新竹城隍廟")
+    Trip.create!(name: "桃園虎頭山")
+    Trip.create!(name: "台中文青之旅")
+    Trip.create!(name: "高雄港都之戀")
+    Trip.create!(name: "基隆北海岸")
+
+    puts "have created trips!"
+    puts "now you have #{Trip.count} trips data!"
+  end
+
+  task fake_trip_gostation: :environment do
+    TripGostation.destroy_all
+
+    User.all.each do |u|
+      Trip.all.each do |t|
+        Gostation.all.sample(5) do |g|
+          TripGostation.create!(
+            user_id: u.id,
+            trip_id: t.id,
+            gostation_id: g.id,
+            checkedin: false
+          )
+        end
+      end
+    end
+
+    puts "have created fake TripGostations!"
+    puts "now you have #{TripGostation.count} TripGostations data!"
+  end
 end
