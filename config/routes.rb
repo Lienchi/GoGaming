@@ -8,6 +8,12 @@ Rails.application.routes.draw do
    
   resources :gostations, only:[:index]
 
+  resources :trip_gostations, only:[:show] do 
+    member do 
+      post :check
+    end
+  end 
+
   resources :trips, only:[:index, :show]
 
   namespace :admin do
