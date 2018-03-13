@@ -1,2 +1,8 @@
 <h1>trip#index</h1>
 <h1>挑戰路線all</h1>
+
+<% @trips.each do |t| %>
+    <%= check_box_tag :status, true %>
+    <%= t.name %>
+
+<%end%>
