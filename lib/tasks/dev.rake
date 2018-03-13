@@ -68,12 +68,12 @@ namespace :dev do
 
     User.all.each do |u|
       Trip.all.each do |t|
-        Gostation.all.sample(5) do |g|
+        Gostation.all.sample(5).each do |g|
           TripGostation.create!(
             user_id: u.id,
             trip_id: t.id,
             gostation_id: g.id,
-            checkedin: false
+            status: false
           )
         end
       end
