@@ -3,6 +3,6 @@
 
 <% @trips.each do |t| %>
     <%= check_box_tag :status, true %>
-    <%= t.name %>
+    <%= link_to "#{t.name}", trip_path(t) %>
 
 <%end%>
