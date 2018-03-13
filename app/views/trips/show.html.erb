@@ -1,4 +1,4 @@
-<h1>trips#show</h1>
+<h1>trips#show <%= @trip.name %></h1>
 
 <% @trip_gostations.each do |t| %>
   <% if t.status == true %>
@@ -7,6 +7,6 @@
     <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
   <% end%>
   <%= t.gostation.LocName %>
-<% end%>
+<% end %>
 
 

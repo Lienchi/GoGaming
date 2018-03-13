@@ -66,9 +66,9 @@ namespace :dev do
   task fake_trip_gostation: :environment do
     TripGostation.destroy_all
 
-    User.all.each do |u|
-      Trip.all.each do |t|
-        Gostation.all.sample(5).each do |g|
+    Trip.all.each do |t|
+      Gostation.all.sample(5).each do |g|
+        User.all.each do |u|
           TripGostation.create!(
             user_id: u.id,
             trip_id: t.id,

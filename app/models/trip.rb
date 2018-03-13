@@ -5,5 +5,7 @@ class Trip < ApplicationRecord
   has_many :trip_gostations
   has_many :gostations, through: :trip_gostations, source: :gostation
   
-
+  def is_challenged?(user)
+    self.challenged_users.include?(user)
+  end
 end

@@ -2,10 +2,10 @@
 <h1>挑戰路線all</h1>
 
 <% @trips.each do |t| %>
-  <% if t.challenges.exists?(user_id: current_user.id)%>
-    <%= link_to "#{t.name}",trip_path(t), class: "btn btn-primary"%>
-  <%else%>
-    <%= link_to "#{t.name}",challenge_trip_path(t), method: :post, class: "btn btn-primary"  %>
-  <%end%>
+  <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
+    <button class="btn btn-primary">Done</button>
+  <% end %>
+  <%= link_to "#{t.name}",challenge_trip_path(t), method: :post, class: "btn btn-primary"  %>
+  <br>
 <%end%>
 
