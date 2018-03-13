@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180312183401) do
+ActiveRecord::Schema.define(version: 20180313022054) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -93,21 +93,13 @@ ActiveRecord::Schema.define(version: 20180312183401) do
     t.integer "trip_id"
     t.integer "gostation_id"
     t.integer "user_id"
-    t.boolean "checkedin", default: false
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "trips", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_gostations", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "gostation_id"
-    t.boolean "checkin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
