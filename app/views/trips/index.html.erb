@@ -5,7 +5,7 @@
   <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
     <button class="btn btn-primary">Done</button>
   <% end %>
-  <%= link_to "#{t.name}",challenge_trip_path(t), method: :post, class: "btn btn-primary"  %>
+  <%= link_to "#{t.name}", trip_path(t), class: "btn btn-primary"  %>
   <br>
 <%end%>
 

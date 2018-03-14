@@ -4,7 +4,9 @@ class TripGostationsController < ApplicationController
     @trip_gostation = TripGostation.find(params[:id])
     @trip_gostation.update(status: "ture")
     if is_complete_trip(@trip_gostation.trip_id)
-      redirect_to root_path #需要改成發post 給challenge_trip_path
+      Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id)
+      redirect_to trips_path
+       #需要改成發post 給challenge_trip_path
     else
       redirect_to trip_path(@trip_gostation.trip_id)
     end
