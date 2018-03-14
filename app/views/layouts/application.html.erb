@@ -28,7 +28,8 @@
           <ul class="pull-right text-right nav navbar-nav">
             <% if current_user %>
             <li><p class="navbar-text">Hi, <%= current_user.email %></p></li>
-            <li><%= link_to 'Profile', user_path(current_user) %></li>
+            <li><%= link_to '我的帳戶', user_path(current_user) %></li>
+            <li><%= link_to "挑戰路線", trips_path %><li>
             <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
             <li><%= link_to('修改密碼', edit_user_registration_path) %></li>
             <% else %>

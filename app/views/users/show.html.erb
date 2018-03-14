@@ -1,21 +1,36 @@
-<h2><%= @user.email %></h2>
-
-<h3> user's badges </h3>
-
-
-
-<ul>
-  <% @user.badges.each do |badge| %>
-    <li><%= badge.name %></li>
-    <li><%= badge.id %></li>
-  <% end %>
-</ul>
-
-<h3> user's points </h3>
-<p><%= @user.points %></p>
-<h3> user's level </h3>
-<p><%= @user.level %></p>
-
-
+<div class="container">
+  <div class="media col-xs-12">
+    <div class="media-left media-middle">
+      <a href="#">
+        <img class="media-object" src="..." alt="...">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading"><%= @user.email%></h4>
+      <h4 class="media-heading">My Points :<%= @user.points %></h4>
+      <h4 class="media-heading">My Level :<%= @user.level %></h4>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+          <span class="sr-only">45% Complete</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <h3> user's badges </h3>
+  <div class="row col-xs-12">
+    <div>
+      <% @user.badges.each do |badge| %>
+        <div class="thumbnail card col-xs-4 col-md-2">
+          <%= image_tag badge.custom_fields[:img_url] %>
+          <div class="caption">
+            <p><%= badge.name %></p>
+            <p><%= badge.id %></p>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Home', root_path %>
