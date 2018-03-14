@@ -84,3 +84,17 @@ Merit::Badge.create!(
   level: "1",
   custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/206_ridetogether_l_696_696-01.svg?t=1520994640085"}
 )
+
+Merit::Badge.create!(
+  id: 7,
+  name: "check-out-trip",
+  description: "打開挑戰列表",
+  level: "1",
+)
+
+Merit::Badge.create!(
+  id: 8,
+  name: "check-gostation",
+  description: "站店打卡",
+  level: "1",
+)

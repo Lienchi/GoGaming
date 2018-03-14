@@ -46,6 +46,33 @@ module Merit
       # end
 
       grant_on 'users/registrations#create', badge: 'just-registered', model_name: 'User'
+      grant_on 'trips#index', badge_id: 7
+      grant_on 'trip_gostations#check', badge_id: 8 do |trip_gostation|
+        trip_gostation.status
+      end
+
+      grant_on 'users#show', badge_id: 2 do |user|
+        !!user.challenges.find_by(trip_id: (Trip.first.id))
+      end
+
+      grant_on 'users#show', badge_id: 3 do |user|
+        !!user.challenges.find_by(trip_id: (Trip.first.id+1))
+      end
+
+      grant_on 'users#show', badge_id: 4 do |user|
+        !!user.challenges.find_by(trip_id: (Trip.first.id+2))
+      end
+
+      grant_on 'users#show', badge_id: 5 do |user|
+        !!user.challenges.find_by(trip_id: (Trip.first.id+3))
+      end
+
+      grant_on 'users#show', badge_id: 6 do |user|
+        !!user.challenges.find_by(trip_id: (Trip.first.id+4))
+      end
+
+
+      
     end
   end
 end

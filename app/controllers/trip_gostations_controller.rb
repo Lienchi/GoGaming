@@ -2,7 +2,13 @@ class TripGostationsController < ApplicationController
 
   def check
     @trip_gostation = TripGostation.find(params[:id])
-    @trip_gostation.update(status: "ture")
+    #toggle status for testing
+    if @trip_gostation.status == false
+      @trip_gostation.update(status: "ture")
+    else
+      @trip_gostation.update(status: "false")
+    end
+
     if is_complete_trip(@trip_gostation.trip_id)
       Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id)
       redirect_to trips_path

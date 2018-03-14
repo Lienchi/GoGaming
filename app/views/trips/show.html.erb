@@ -2,7 +2,8 @@
 
 <% @trip_gostations.each do |t| %>
   <% if t.status == true %>
-    <button class="btn btn-primary">Done</button>
+  <!-- toggle status for testing -->
+    <%= link_to 'Done', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
   <% else %>
     <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
   <% end%>
