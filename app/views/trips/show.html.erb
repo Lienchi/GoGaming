@@ -1,12 +1,29 @@
-<h1>trips#show <%= @trip.name %></h1>
-
-<% @trip_gostations.each do |t| %>
-  <% if t.status == true %>
-    <button class="btn btn-primary">Done</button>
-  <% else %>
-    <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
-  <% end%>
-  <%= t.gostation.LocName %>
-<% end %>
-
-
+<div class="container">
+  <div class="jumbotron">
+    <h1><%= @trip.name %></h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cum earum eveniet omnis nostrum corporis excepturi repellendus at, cupiditate ut.</p>
+  </div>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+      <span class="sr-only">45% Complete</span>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <% @trip_gostations.each do |t| %>
+      <tr>
+        <td>
+          <% if t.status == true %>
+            <button class="btn btn-primary">Done</button>
+          <% else %>
+            <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
+          <% end%>
+         <%= t.gostation.LocName %>
+        </td>
+      </tr>
+    <% end %>
+   </table>
+   <div class="map col-xs-12">
+     <img src="..." alt="..." class="img-rounded">
+     <h1>map here</h1>
+   </div>
+</div>
