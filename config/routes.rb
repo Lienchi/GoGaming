@@ -8,6 +8,8 @@ Rails.application.routes.draw do
    
   resources :gostations, only:[:index]
 
+  resources :challenges, only:[:create]
+
 
   resources :trip_gostations, only:[:show] do 
     member do 
@@ -16,12 +18,7 @@ Rails.application.routes.draw do
   end 
   
 
-  resources :trips, only:[:index, :show] do 
-    member do 
-      post :challenge
-    end
-  end
-
+  resources :trips, only:[:index, :show] 
 
   namespace :admin do
     root "gostations#index"

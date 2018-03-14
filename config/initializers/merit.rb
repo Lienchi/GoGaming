@@ -39,3 +39,62 @@ Merit::Badge.create!(
   level: "1",
   custom_fields: { img_url: "http://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Irongofans/1_newbie_l_696_696-01.svg"}
 )
+
+
+Merit::Badge.create!(
+  id: 2,
+  name: "love-Hsinchu",
+  description: "就是愛新竹",
+  level: "1",
+  custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/186_hsinchu_l_696_696-01.svg?t=1520994640085"}
+)
+
+
+Merit::Badge.create!(
+  id: 3,
+  name: "love-Taoyuan",
+  description: "就是愛桃園",
+  level: "1",
+  custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/181_love_taoyuan_l_696_696-01.svg?t=1520994640085"}
+)
+
+
+Merit::Badge.create!(
+  id: 4,
+  name: "love-Taichung",
+  description: "就是愛台中",
+  level: "1",
+  custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/191_taichung_l_696_696-01.svg?t=1520994640085"}
+)
+
+
+Merit::Badge.create!(
+  id: 5,
+  name: "love-Kaohsiung",
+  description: "就是愛港都",
+  level: "1",
+  custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/200_kaohsiung_l_696_696-01.svg?t=1520994640085"}
+)
+
+
+Merit::Badge.create!(
+  id: 6,
+  name: "love-happy",
+  description: "超開薰",
+  level: "1",
+  custom_fields: { img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/206_ridetogether_l_696_696-01.svg?t=1520994640085"}
+)
+
+Merit::Badge.create!(
+  id: 7,
+  name: "check-out-trip",
+  description: "打開挑戰列表",
+  level: "1",
+)
+
+Merit::Badge.create!(
+  id: 8,
+  name: "check-gostation",
+  description: "站店打卡",
+  level: "1",
+)
