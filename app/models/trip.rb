@@ -4,6 +4,8 @@ class Trip < ApplicationRecord
 
   has_many :trip_gostations
   has_many :gostations, through: :trip_gostations, source: :gostation
+
+  serialize :gostations_index
   
   def is_challenged?(user)
     self.challenged_users.include?(user)

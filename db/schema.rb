@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314032209) do
+ActiveRecord::Schema.define(version: 20180314231207) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -103,6 +103,15 @@ ActiveRecord::Schema.define(version: 20180314032209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "stations"
+    t.text "gostations_index"
+  end
+
+  create_table "user_gostations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "gostation_id"
+    t.boolean "checkin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
