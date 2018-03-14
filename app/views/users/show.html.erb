@@ -16,6 +16,8 @@
       </div>
     </div>
   </div>
+  
+  <h3> user's badges </h3>
   <div class="row col-xs-12">
     <div>
       <% @user.badges.each do |badge| %>
@@ -23,9 +25,12 @@
           <%= image_tag badge.custom_fields[:img_url] %>
           <div class="caption">
             <p><%= badge.name %></p>
+            <p><%= badge.id %></p>
           </div>
         </div>
       <%end%>
     </div>
   </div>
 </div>
+
+<%= link_to 'Home', root_path %>

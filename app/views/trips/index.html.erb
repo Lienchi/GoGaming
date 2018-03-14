@@ -15,6 +15,7 @@
                 <button class="btn btn-primary">Done</button>
               <%else%>
                 <button class="btn btn-primary">Go</button>
+                <%= link_to "#{t.name}", trip_path(t), class: "btn btn-primary"  %>
               <% end %> 
             </p>
           </div>

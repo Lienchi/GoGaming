@@ -59,13 +59,19 @@ namespace :dev do
     Trip.create!(name: "高雄港都之戀")
     Trip.create!(name: "基隆北海岸")
 
+    Trip.all.each do |t|
+      t.stations = []
+
+      
+    end
+
+
     puts "have created trips!"
     puts "now you have #{Trip.count} trips data!"
   end
 
   task fake_trip_gostation: :environment do
     TripGostation.destroy_all
-
     Trip.all.each do |t|
       Gostation.all.sample(5).each do |g|
         User.all.each do |u|
@@ -78,6 +84,7 @@ namespace :dev do
         end
       end
     end
+
 
     puts "have created fake TripGostations!"
     puts "now you have #{TripGostation.count} TripGostations data!"
