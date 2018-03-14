@@ -5,23 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>test google map api</title>
     <style>
-      #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-
-      #right-panel select {
-        width: 100%;
-      }
-
-      #right-panel i {
-        font-size: 12px;
-      }
+     
       html, body {
         height: 100%;
         margin: 0;
@@ -30,7 +14,7 @@
       #map {
         height: 100%;
         float: left;
-        width: 70%;
+        width: 100%;
       }
       #right-panel {
         margin: 20px;
@@ -50,32 +34,21 @@
   </head>
 
   <body>
-    <h1>User Index --->root gostations#index</h1>
-
-    <div>
-      <%= link_to "Trip", trips_path %>
+    <div class="col-xs-8">
+      <input type="text" id="start" placeholder="輸入起點" class= "form-control">
+      <br/>
+      <input type="text" id="end" placeholder="輸入終點" class="form-control">
     </div>
-    <div>
-      <%= link_to "Profile", user_path(@user) %>
+    <div class="col-xs-2">
+      <input id="submit" class="btn btn-default" type="submit" value="Go">
+      <br/>
+      <br/>
+       <%= link_to "進階挑戰", trips_path, class: "btn btn-default fixed-bottom" %>
     </div>
-
-
-    <h1>路徑規劃</h1>
-
 
     <div id="map"></div>
-    <div id="right-panel">
-      <div>
-        <b>Start:</b>
-        <input type="text" id="start">
-        <br>
-        <b>End:</b>
-         <input type="text" id="end">
-        <br>
-        <br>
-        <input type="submit" id="submit">
-      </div>
-    </div>
+
+    
     <script>
       var url = 'https://wapi.gogoro.com/tw/api/vm/list';
 
