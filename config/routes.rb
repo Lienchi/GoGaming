@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "gostations#index"
+    resources :trips
   end
 
 
