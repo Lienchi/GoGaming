@@ -22,15 +22,14 @@ class Admin::TripsController < ApplicationController
       render :new
     end
   end
+
   
   def update
-
      @trip.update(trip_params)
      redirect_to admin_trips_path
   end
 
   def destroy
-
      @trip.delete
      redirect_to admin_trips_path
   end

@@ -1,0 +1,64 @@
+<div class="container">
+ <div class="row">
+    <div class="col-md-12">
+      <div class="form">
+        <%= form_for [:admin, @gostation] do |f| %>
+          <div class="form-group">
+            <%= f.label :LocName, "Name" %>
+            <%= f.text_field :LocName, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :Latitude, "Latitude" %>
+            <%= f.number_field :Latitude , class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :Longitude, "Longitude" %>
+            <%= f.number_field :Latitude, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :ZipCode, "ZipCode" %>
+            <%= f.text_field :ZipCode, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :Address, "Address" %>
+            <%= f.text_field :Address, class: "form-control"%>
+          </div>
+          <div>
+             <%= f.label :District, "District" %>
+            <%= f.text_field :District, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :City, "City" %>
+            <%= f.text_field :City, class: "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :AvailableTime, "Available Time" %>
+            <%= f.text_field :AvailableTime, class: "form-control"%>
+          </div>
+          <%= f.submit class: "btn btn-primary" %>
+          <% if @gostation.errors.any? %>
+            <%= @gostation.errors.full_messages.to_sentence %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+             <th>Gostation</th>
+             <th>#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @gostations.each do |g|%>
+            <tr>
+              <td><%= g.LocName%></td>
+              <td><%= link_to "Edit", admin_gostations_path(id: g.id) %> |
+              <%= link_to "Delete", admin_gostation_path(g), method: :delete%></td>
+           <tr/>
+          <%end%>
+        </tbody>
+      </table>
+    
+  </div>
+</div>
