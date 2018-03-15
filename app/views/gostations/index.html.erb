@@ -3,7 +3,8 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>test google map api</title>
+    <title>Gostations Direction</title>
+    <%= Gon::Base.render_data %>
     <style>
      
       html, body {
@@ -41,19 +42,15 @@
 
     
     <script>
-      var url = 'https://wapi.gogoro.com/tw/api/vm/list';
+      //var url = 'https://wapi.gogoro.com/tw/api/vm/list';
 
       var start_address;
       var end_address;
       var start_url;
       var end_url;
-
       var map;
-      function callAjax(url) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', url, true);
-        xhr.send(null);
 
+      function callAjax(url) {
         var xhr_start = new XMLHttpRequest();
         xhr_start.open('get', start_url, true);
         xhr_start.send(null);
@@ -62,26 +59,20 @@
         xhr_end.open('get', end_url, true);
         xhr_end.send(null);
 
-        xhr.onload = function() {
-         
-          var record = JSON.parse(xhr.responseText);
-          record = record.data;
-
+        xhr_end.onload = function() {
           var record_start = JSON.parse(xhr_start.responseText);
           record_start = record_start.results;
 
           var record_end = JSON.parse(xhr_end.responseText);
           record_end = record_end.results;
 
-          //跑迴圈依序將值塞入到 marker
-          for(var i=0; i<record.length; i++){
+          for(var i=0; i<gon.gostations.length; i++){
             var position = {};
-            position.lat = parseFloat(record[i]['Latitude']);
-            position.lng = parseFloat(record[i]['Longitude']);
+            position.lat = gon.gostations[i].Latitude;
+            position.lng = gon.gostations[i].Longitude;
 
             if( checkLatLngInStartEnd(position, record_start[0].geometry.location, record_end[0].geometry.location) ){
-              var LocNameList = JSON.parse(record[i]['LocName']);
-              var LocName = find_zh_tw_val(LocNameList);
+              var LocName = gon.gostations[i].LocName;
               addMarker({
                 coords: position,
                 iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png',
@@ -92,17 +83,6 @@
           }
         };
       };
-
-      function find_zh_tw_val(LocNameList){
-        var LocName = 'Unknown';
-        for(var i=0; i<LocNameList['List'].length; i++){
-          if(LocNameList['List'][i]['Lang'] == 'zh-TW'){
-            LocName = LocNameList['List'][i]['Value'];
-            return LocName;
-          }
-        }
-        return LocName;
-      }
 
       function checkLatLngInStartEnd(position, start, end){
         if( (position.lat >= start.lat && position.lat <= end.lat) || (position.lat <= start.lat && position.lat >= end.lat)){
@@ -174,8 +154,9 @@
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
-            callAjax(url);
+            callAjax();
             directionsDisplay.setDirections(response);
+            /*
             var route = response.routes[0];
             var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML = '';
@@ -188,6 +169,7 @@
               summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
               summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
             }
+            */
           } else {
             window.alert('Directions request failed due to ' + status);
           }
