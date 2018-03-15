@@ -29,6 +29,9 @@
             <% if current_user %>
             <li><p class="navbar-text">Hi, <%= current_user.email %></p></li>
             <li><%= link_to '我的帳戶', user_path(current_user) %></li>
+            <% if current_user.role == "admin" %>
+            <li><%= link_to "後台", admin_trips_path%><li>
+            <%end%>
             <li><%= link_to "挑戰路線", trips_path %><li>
             <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
             <li><%= link_to('修改密碼', edit_user_registration_path) %></li>
