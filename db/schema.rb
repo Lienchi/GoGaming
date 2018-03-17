@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314231207) do
+ActiveRecord::Schema.define(version: 20180317071448) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 20180314231207) do
   create_table "checkins", force: :cascade do |t|
     t.integer "user_id"
     t.integer "gostation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "followships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "following_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -104,14 +111,6 @@ ActiveRecord::Schema.define(version: 20180314231207) do
     t.datetime "updated_at", null: false
     t.integer "stations"
     t.text "gostations_index"
-  end
-
-  create_table "user_gostations", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "gostation_id"
-    t.boolean "checkin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

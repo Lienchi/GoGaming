@@ -22,7 +22,7 @@
     <div>
       <% @user.badges.each do |badge| %>
         <div class="thumbnail card col-xs-4 col-md-2">
-          <%= image_tag badge.custom_fields[:img_url] %>
+         <% image_tag badge.custom_fields[:img_url] %>
           <div class="caption">
             <p><%= badge.name %></p>
             <p><%= badge.id %></p>
