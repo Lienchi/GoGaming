@@ -38,6 +38,11 @@
       <input id="submit" class="btn btn-default" type="submit" value="Go">
     </div>
 
+    <div>
+      <input id="address" type="textbox" placeholder="輸入目的地">
+      <input id="submit_single_address" class="btn btn-default" type="button" value="Go">
+    </div>
+
     <div id="map"></div>
 
     
@@ -65,18 +70,36 @@
 
           var record_end = JSON.parse(xhr_end.responseText);
           record_end = record_end.results;
-
-          for(var i=0; i<gon.gostations.length; i++){
+          // --- gostations_belongs_to_trip
+          for(var i=0; i<gon.gostations_belongs_to_trip.length; i++){
             var position = {};
-            position.lat = gon.gostations[i].Latitude;
-            position.lng = gon.gostations[i].Longitude;
+            position.lat = gon.gostations_belongs_to_trip[i].Latitude;
+            position.lng = gon.gostations_belongs_to_trip[i].Longitude;
 
             if( checkLatLngInStartEnd(position, record_start[0].geometry.location, record_end[0].geometry.location) ){
-              var LocName = gon.gostations[i].LocName;
+              var LocName = gon.gostations_belongs_to_trip[i].LocName;
+              var AvailableTime = gon.gostations_belongs_to_trip[i].AvailableTime;
+              addMarker({
+                coords: position,
+                iconImage: 'http://maps.google.com/mapfiles/ms/micons/orange-dot.png',
+                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
+              });
+            }
+            
+          }
+          // --- gostations_not_belongs_to_trip
+          for(var i=0; i<gon.gostations_not_belongs_to_trip.length; i++){
+            var position = {};
+            position.lat = gon.gostations_not_belongs_to_trip[i].Latitude;
+            position.lng = gon.gostations_not_belongs_to_trip[i].Longitude;
+
+            if( checkLatLngInStartEnd(position, record_start[0].geometry.location, record_end[0].geometry.location) ){
+              var LocName = gon.gostations_not_belongs_to_trip[i].LocName;
+              var AvailableTime = gon.gostations_not_belongs_to_trip[i].AvailableTime;
               addMarker({
                 coords: position,
                 iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png',
-                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a>'
+                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
               });
             }
             
@@ -125,6 +148,86 @@
         document.getElementById('submit').addEventListener('click', function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         });
+
+        var geocoder = new google.maps.Geocoder();
+        document.getElementById('submit_single_address').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            displayGostationsNearby(address);
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+
+      function displayGostationsNearby(address) {
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address +"&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.send(null);
+
+        xhr.onload = function() {
+          var record = JSON.parse(xhr.responseText);
+          record = record.results;
+
+          // --- gostations_belongs_to_trip
+          for(var i=0; i<gon.gostations_belongs_to_trip.length; i++){
+            var position = {};
+            position.lat = gon.gostations_belongs_to_trip[i].Latitude;
+            position.lng = gon.gostations_belongs_to_trip[i].Longitude;
+
+            if( checkLatLngNearby(position, record[0].geometry.location) ){
+              var LocName = gon.gostations_belongs_to_trip[i].LocName;
+              var AvailableTime = gon.gostations_belongs_to_trip[i].AvailableTime;
+              addMarker({
+                coords: position,
+                iconImage: 'http://maps.google.com/mapfiles/ms/micons/orange-dot.png',
+                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
+              });
+            }
+            
+          }
+          // --- gostations_not_belongs_to_trip
+          for(var i=0; i<gon.gostations_not_belongs_to_trip.length; i++){
+            var position = {};
+            position.lat = gon.gostations_not_belongs_to_trip[i].Latitude;
+            position.lng = gon.gostations_not_belongs_to_trip[i].Longitude;
+
+            if( checkLatLngNearby(position, record[0].geometry.location) ){
+              var LocName = gon.gostations_not_belongs_to_trip[i].LocName;
+              var AvailableTime = gon.gostations_not_belongs_to_trip[i].AvailableTime;
+              addMarker({
+                coords: position,
+                iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png',
+                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
+              });
+            }
+            
+          }
+        };
+      }
+
+      function checkLatLngNearby(gostation, location) {
+        var disTH = 0.01;
+        if( gostation.lat <= location.lat+disTH && gostation.lat >= location.lat-disTH ){
+          if( gostation.lng <= location.lng+disTH && gostation.lng >= location.lng-disTH ){
+            return true;
+          }
+        }
+        return false;
       }
 
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
