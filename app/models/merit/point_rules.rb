@@ -25,6 +25,7 @@ module Merit
       # ]
       #
       # score -10, :on => 'comments#destroy'
+      score 20, on: 'trip_gostations#check', category: 'trip_gostations'  
     end
   end
 end

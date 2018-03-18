@@ -65,6 +65,14 @@ namespace :dev do
       
     end
 
+    Trip.all.each do |t|
+      t.gostations_index = []
+      gostations = Gostation.all.sample(5);
+      5.times do |i|
+        t.gostations_index[i] = gostations[i].id
+      end
+      t.save
+    end
 
     puts "have created trips!"
     puts "now you have #{Trip.count} trips data!"
