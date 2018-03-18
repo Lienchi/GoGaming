@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show, :index]
    
-  resources :gostations, only:[:index]
+  resources :gostations, only:[:index] do
+    member do
+      post :checkin
+      post :uncheckin
+    end
+  end
 
   resources :challenges, only:[:create]
 

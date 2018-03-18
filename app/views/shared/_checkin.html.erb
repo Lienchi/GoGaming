@@ -1,0 +1,5 @@
+<% if gostation.is_checkedin?(current_user) %>
+  <%= link_to 'Uncheckin', uncheckin_gostation_path(gostation), method: :post, class: "btn btn-info" %>
+<% else %>
+  <%= link_to 'Checkin', checkin_gostation_path(gostation), method: :post, class: "btn btn-primary" %>
+<% end %>

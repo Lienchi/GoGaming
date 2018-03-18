@@ -70,41 +70,37 @@
           var record_end = JSON.parse(xhr_end.responseText);
           record_end = record_end.results;
           // --- gostations_belongs_to_trip
-          for(var i=0; i<gon.gostations_belongs_to_trip.length; i++){
-            var position = {};
-            position.lat = gon.gostations_belongs_to_trip[i].Latitude;
-            position.lng = gon.gostations_belongs_to_trip[i].Longitude;
+          setStartEndInfobox(gon.gostations_belongs_to_trip,
+                             record_start[0].geometry.location,
+                             record_end[0].geometry.location,
+                             'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
 
-            if( checkLatLngInStartEnd(position, record_start[0].geometry.location, record_end[0].geometry.location) ){
-              var LocName = gon.gostations_belongs_to_trip[i].LocName;
-              var AvailableTime = gon.gostations_belongs_to_trip[i].AvailableTime;
-              addMarker({
-                coords: position,
-                iconImage: 'http://maps.google.com/mapfiles/ms/micons/orange-dot.png',
-                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
-              });
-            }
-            
-          }
           // --- gostations_not_belongs_to_trip
-          for(var i=0; i<gon.gostations_not_belongs_to_trip.length; i++){
-            var position = {};
-            position.lat = gon.gostations_not_belongs_to_trip[i].Latitude;
-            position.lng = gon.gostations_not_belongs_to_trip[i].Longitude;
-
-            if( checkLatLngInStartEnd(position, record_start[0].geometry.location, record_end[0].geometry.location) ){
-              var LocName = gon.gostations_not_belongs_to_trip[i].LocName;
-              var AvailableTime = gon.gostations_not_belongs_to_trip[i].AvailableTime;
-              addMarker({
-                coords: position,
-                iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png',
-                content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
-              });
-            }
-            
-          }
+          setStartEndInfobox(gon.gostations_not_belongs_to_trip,
+                             record_start[0].geometry.location,
+                             record_end[0].geometry.location,
+                             'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
         };
       };
+
+      function setStartEndInfobox(gostations, start, end, img){
+        for(var i=0; i<gostations.length; i++){
+          var position = {};
+          position.lat = gostations[i].Latitude;
+          position.lng = gostations[i].Longitude;
+
+          if( checkLatLngInStartEnd(position, start, end) ){
+            var LocName = gostations[i].LocName;
+            var AvailableTime = gostations[i].AvailableTime;
+            var id = gostations[i].id;
+            addMarker({
+              coords: position,
+              iconImage: img,
+              content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime+'<br><a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+id+'/checkin">Checkin</a>'
+            });
+          }
+        }
+      }
 
       function checkLatLngInStartEnd(position, start, end){
         if( (position.lat >= start.lat && position.lat <= end.lat) || (position.lat <= start.lat && position.lat >= end.lat)){

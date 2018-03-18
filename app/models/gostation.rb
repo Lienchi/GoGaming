@@ -4,4 +4,8 @@ class Gostation < ApplicationRecord
 
   has_many :trip_gostations
   has_many :trips, through: :trip_gostations, source: :trip
+
+  def is_checkedin?(user)
+    self.checkedin_users.include?(user)
+  end
 end
