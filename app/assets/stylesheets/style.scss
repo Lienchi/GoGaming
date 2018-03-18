@@ -1,3 +1,12 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#map {
+  height: 500px;
+}
+
 .container a{text-decoration:none;}
 .btn a {
   text-decoration:none;
