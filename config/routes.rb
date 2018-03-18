@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root "gostations#index"
   
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
    
   resources :gostations, only:[:index]
 
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :gostations
     resources :trips
   end
-
+   
+  resources :followships, only:[:create, :destroy]
 
 end
