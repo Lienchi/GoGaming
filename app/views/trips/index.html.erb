@@ -20,6 +20,13 @@
               <% end %> 
             </p>
           </div>
+          <div>
+            <% @followings.each do |following| %>
+              <% if t.is_challenged?(following) %>
+                <%= following.email%> 已完成挑戰
+              <% end %>
+            <% end %>
+          </div>
         </div>
       <%end%>
     </div>

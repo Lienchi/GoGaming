@@ -3,7 +3,7 @@ class TripsController < ApplicationController
   
   def index
     @trips = Trip.all
-    
+    @followings = current_user.followings
   end
 
   def show
