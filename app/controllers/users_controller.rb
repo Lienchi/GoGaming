@@ -6,4 +6,9 @@ class UsersController < ApplicationController
   def show
     @user = current_user
   end
+
+  def leaderboards
+    @scores = Merit::Score.top_scored
+    @friendscores = Merit::Score.top_scored
+  end
 end
