@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  validates :following_id, uniqueness: {scope: :user_id}
-
+  
   has_merit
 
   # Include default devise modules. Others available are:

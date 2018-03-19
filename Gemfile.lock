@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/tamycova/merit.git
   revision: f657596409d98fc7c8e3274b213b86cc47d87495
-  branch: f657596409d98fc7c8e3274b213b86cc47d87495
+  branch: f6575964
   specs:
     merit (2.4.0)
       ambry (~> 1.0.0)
