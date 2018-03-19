@@ -6,8 +6,8 @@
       </a>
     </div>
     <div class="media-body">
-      <h4 class="media-heading"><%= @user.email%></h4>
-      <h4 class="media-heading">My Total Points :<%= @user.points %></h4>
+      <h4 class="media-heading"><%= @user.email%><%= link_to "Users", users_path, class: "btn btn-primary"  %></h4>
+      <h4 class="media-heading">My Total Points :<%= @user.points %> <%= link_to "Leader Boards", leaderboards_users_path, class: "btn btn-primary"  %></h4>
       <h4 class="media-heading">My Points From Trips:<%= current_user.points(category: 'trip_gostations') %></h4>
       <h4 class="media-heading">My Level :<%= @user.level %></h4>
       <div class="progress">
