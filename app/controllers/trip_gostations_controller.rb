@@ -11,6 +11,7 @@ class TripGostationsController < ApplicationController
 
     if is_complete_trip(@trip_gostation.trip_id)
       Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id)
+      current_user.add_points(33, category: 'trip')
       redirect_to trips_path
        #需要改成發post 給challenge_trip_path
     else

@@ -97,4 +97,15 @@ namespace :dev do
     puts "have created fake TripGostations!"
     puts "now you have #{TripGostation.count} TripGostations data!"
   end
+
+   task fake_point: :environment do
+    User.all.each do |t|
+      t.add_points(rand(1..500), category: 'fake')
+
+    end
+
+    puts "have created fake points"
+  end
+
+
 end

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   root "gostations#index"
   
-  resources :users, only: [:show, :index]
+  resources :users, only: [:show, :index] do
+    collection do
+      get :leaderboards
+    end
+  end
    
   resources :gostations, only:[:index] do
     member do
