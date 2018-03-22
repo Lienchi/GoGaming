@@ -34,4 +34,11 @@
   </div>
 </div>
 
+<%= form_for @user do |f| %>
+  <%= image_tag @user.avatar%>
+  <%= f.file_field :avatar %>
+
+  <%= f.submit %>
+<%end%>
+
 <%= link_to 'Home', root_path %>
