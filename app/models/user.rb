@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   
+  mount_uploader :avatar, PhotoUploader
   has_merit
 
   # Include default devise modules. Others available are:

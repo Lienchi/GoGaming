@@ -21,6 +21,9 @@
             <span class="icon-bar"></span>
           </button>
           <%= link_to "gogoro", root_path, class: "navbar-brand" %>
+          <% if controller?("users") && action?("show") %>
+            <a class= "navbar-brand pull-right">Profile</a>
+          <%end%>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,7 +46,6 @@
         </div>
       </div>
     </nav>
-
     <% if flash[:notice] %>
     <div class="container">
       <div class="row">
@@ -65,12 +67,8 @@
       </div>
     </div>
     <% end %>
-
-
-
-
-
-
+    
     <%= yield %>
+
   </body>
 </html>
