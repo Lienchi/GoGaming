@@ -20,9 +20,14 @@ html, body {
 
 /*user */
 
+#main{
+  background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
+}
+
 .border{
   padding:10px;
   border: 1px solid #DDDDDD;
+  background: white;
 }
 
 .media{
