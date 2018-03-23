@@ -1,6 +1,6 @@
 <div id="main" class="m-scene user-background container">
-  <dir class="border col-xs-12">
-    <div class="col-xs-12 media scene_element scene_element--fadeinright">
+  <dir class="border col-xs-12 scene_element scene_element--fadeinright">
+    <div class="col-xs-12 media">
       <div class="col-xs-5 col-md-4 media-left media-middle">
         <a href="#" class="thumbnail">
           <%= image_tag @user.avatar, class: "media-object img-circle avatar"%>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="badges-container clearfix scene_element scene_element--fadeinup">
+    <div class="badges-container clearfix">
       <div class="user-badges clearfix">
         <% @user.badges.each do |badge| %>
           <div class="user-badge thumbnail card col-xs-4">
