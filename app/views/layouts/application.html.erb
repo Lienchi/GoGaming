@@ -21,6 +21,7 @@
             <span class="icon-bar"></span>
           </button>
           <%= link_to "gogoro", root_path, class: "navbar-brand" %>
+          <%= link_to "Points: #{current_user.points}", user_path(current_user), class: "navbar-brand" %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
