@@ -17,3 +17,117 @@ html, body {
 .card{
   float:left;
 }
+
+/*user */
+
+.border{
+  padding:10px;
+  border: 1px solid #DDDDDD;
+}
+
+.media{
+  padding: 10px;
+  border: 1px solid #DDDDDD;
+}
+
+.media-body{
+  padding:10px;
+}
+
+.media-heading img{
+  width:30px;
+  height:30px;
+
+}
+.thumbnail{
+  border:none;
+}
+.badges-container{
+  padding:10px;
+  border: 1px solid #DDDDDD;
+}
+.user-badge{
+  cursor:pointer;
+  overflow:auto;
+}
+.user-badge img:active{
+  transform:scale(2);
+  opacity:0;
+  transition:all .4s linear;
+}
+
+
+/*
+ * Keyframes
+ */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+
+
+/*
+ * CSS Page Transitions
+ * Don't forget to add vendor prefixes!
+ */
+.m-scene {
+  /** Basic styles for an animated element */
+  .scene_element {
+    animation-duration: 0.25s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+  }
+
+  /** An element that fades in */
+  .scene_element--fadein {
+    animation-name: fadeIn;
+  }
+
+  /** An element that fades in and slides up */
+  .scene_element--fadeinup {
+    animation-name: fadeInUp;
+  }
+
+  /** An element that fades in and slides from the right */
+  .scene_element--fadeinright {
+    animation-name: fadeInRight;
+  }
+  }
+
+
+  .m-scene.is-exiting .scene-element {
+  animation-direction: alternate-reverse;
+  }

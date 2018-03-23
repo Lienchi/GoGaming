@@ -1,17 +1,6 @@
-<div class="container">
-
-  <h1>LeaderBoard</h1>
-
-  <div class="row">
-
+<div id="main" class="m-scene user-background">
+  <div class="scene_element scene_element--fadeinright">
     <div class="col-md-12">
-
-      <div>
-        <%= link_to 'User Profile', user_path(current_user, class: "btn btn-primary") %>
-      </div>
-
-      <br>
-
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
@@ -30,6 +19,7 @@
           <% end %>
         </tbody>
       </table>
+      <%= link_to "My Profile", user_path(current_user)%>
     </div>
   </div>
 </div>
