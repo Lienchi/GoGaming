@@ -447,9 +447,16 @@
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
+          zoom: 7.6,
           center: {lat: 23.91566, lng: 120.66387},
-          styles: googleMapStyle
+          styles: googleMapStyle,
+          // specify map controls
+          minZoom: 7,
+          maxZoom: 18,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+          zoomControl: false
         });
 
         // find current position of user
@@ -565,7 +572,7 @@
       }
 
       function checkLatLngNearby(gostation, location) {
-        var disTH = 0.05;//1 km
+        var disTH = 0.05;//0.01 = 1km
         if( gostation.lat <= location.lat+disTH && gostation.lat >= location.lat-disTH ){
           if( gostation.lng <= location.lng+disTH && gostation.lng >= location.lng-disTH ){
             return true;
@@ -622,7 +629,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
     </script>
 
   </body>
