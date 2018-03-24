@@ -21,6 +21,9 @@
             <span class="icon-bar"></span>
           </button>
           <%= link_to "gogoro", root_path, class: "navbar-brand" %>
+          <% if current_user %>
+            <%= link_to "Points: #{current_user.points}", user_path(current_user), class: "navbar-brand" %>
+          <% end %>
           <% if controller?("users") && action?("show") %>
             <a class= "navbar-brand pull-right">Profile</a>
           <%end%>
