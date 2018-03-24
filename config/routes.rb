@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       post :checkin
       post :uncheckin
+      post :getCheckinStatus
     end
   end
 

@@ -2,6 +2,7 @@
 <html>
 
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Gostations Direction</title>
     <%= Gon::Base.render_data %>
@@ -64,7 +65,7 @@
       }
       #map {
         height: 100%;
-        width: 90%;
+        width: 75%;
         margin: auto;
       }
 
@@ -103,12 +104,13 @@
     <div id="map"></div>
     
     <script>
-      /* Set the width of the side navigation to 250px */
-      function openNav(content, storePhoto) {
+      /* Set the width of the side navigation to 400px */
+      function openNav(content, storePhoto, id, button) {
           document.getElementById("mySidenav").style.width = "400px";
           var mySidenavContent = document.getElementById('mySidenav-content');
           mySidenavContent.innerHTML = storePhoto;
           mySidenavContent.innerHTML += content;
+          mySidenavContent.innerHTML += button;
       }
 
       /* Set the width of the side navigation to 0 */
@@ -116,41 +118,57 @@
           document.getElementById("mySidenav").style.width = "0";
       }
 
-      //var url = 'https://wapi.gogoro.com/tw/api/vm/list';
+      var userCurrentPos = {
+        lat: 0.0,
+        lng: 0.0
+      };
+      var start_url = null;
+      var end_url = null;
+      var map = null;
 
-      var start_address;
-      var end_address;
-      var start_url;
-      var end_url;
-      var map;
+      function displayGostations() {
+        var record_start;
+        var record_end;
+        
+        $.ajax({
+          url: start_url,
+          type: 'GET',
+          success: function(data) {
+            record_start = data.results[0];
 
-      function callAjax(url) {
-        var xhr_start = new XMLHttpRequest();
-        xhr_start.open('get', start_url, true);
-        xhr_start.send(null);
+            $.ajax({
+              url: end_url,
+              type: 'GET',
+              success: function(data) {
+                record_end = data.results[0];
 
-        var xhr_end = new XMLHttpRequest();
-        xhr_end.open('get', end_url, true);
-        xhr_end.send(null);
+                calculateGostations(record_start, record_end);
+              },
+              
+              error: function() {
+                alert("ERROR: can not get end record!");
+              }
+            });
+          },
+          
+          error: function() {
+            alert("ERROR: can not get start record!");
+          }
+        });
+      };
 
-        xhr_end.onload = function() {
-          var record_start = JSON.parse(xhr_start.responseText);
-          record_start = record_start.results;
+      function calculateGostations(record_start, record_end) {
+        // --- gostations_belongs_to_trip
+        setStartEndInfobox(gon.gostations_belongs_to_trip,
+                           record_start.geometry.location,
+                           record_end.geometry.location,
+                           'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
 
-          var record_end = JSON.parse(xhr_end.responseText);
-          record_end = record_end.results;
-          // --- gostations_belongs_to_trip
-          setStartEndInfobox(gon.gostations_belongs_to_trip,
-                             record_start[0].geometry.location,
-                             record_end[0].geometry.location,
-                             'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
-
-          // --- gostations_not_belongs_to_trip
-          setStartEndInfobox(gon.gostations_not_belongs_to_trip,
-                             record_start[0].geometry.location,
-                             record_end[0].geometry.location,
-                             'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
-        };
+        // --- gostations_not_belongs_to_trip
+        setStartEndInfobox(gon.gostations_not_belongs_to_trip,
+                           record_start.geometry.location,
+                           record_end.geometry.location,
+                           'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
       };
 
       function setStartEndInfobox(gostations, start, end, img){
@@ -159,22 +177,29 @@
           position.lat = gostations[i].Latitude;
           position.lng = gostations[i].Longitude;
 
-          if( checkLatLngInStartEnd(position, start, end) ){
+          console.log(gostations[i].trips);
+
+          if( checkLatLngInStartEndRect(position, start, end) ){
             var LocName = gostations[i].LocName;
             var AvailableTime = gostations[i].AvailableTime;
-            var id = gostations[i].id;
-            var storePhotoUrl = gostations[i].StorePhoto;
+            
+            var infoWindowContent = '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>'
+              +'<div>營業時間：'+AvailableTime+'</div><br>';
+
+            var storePhoto = '<img src="'+gostations[i].StorePhoto+'" alt="Store Photo" width="400" height="400"><br>';
+            
             addMarker({
               coords: position,
               iconImage: img,
-              content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime+'<br><a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+id+'/checkin">Checkin</a>',
-              storePhoto: '<img src="'+storePhotoUrl+'" alt="Store Photo" width="400" height="400"><br>'
+              content: infoWindowContent,
+              storePhoto: storePhoto,
+              id: gostations[i].id
             });
           }
         }
       }
 
-      function checkLatLngInStartEnd(position, start, end){
+      function checkLatLngInStartEndRect(position, start, end){
         if( (position.lat >= start.lat && position.lat <= end.lat) || (position.lat <= start.lat && position.lat >= end.lat)){
           if( (position.lng >= start.lng && position.lng <= end.lng) || (position.lng <= start.lng && position.lng >= end.lng)){
               return true;
@@ -187,6 +212,7 @@
       function addMarker(props){
         var marker = new google.maps.Marker({
           position: props.coords,
+          animation: google.maps.Animation.DROP,
           map: map,
           icon: props.iconImage
         });
@@ -196,10 +222,42 @@
             if(infoWindow==null){
               infoWindow = new google.maps.InfoWindow();
             }
+            else{
+              infoWindow.close();
+            }
             infoWindow.setContent(props.content);
             infoWindow.open(map, marker);
 
-            openNav(props.content, props.storePhoto);
+            var checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
+
+            var uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
+
+            if( Math.abs(userCurrentPos.lat-props.coords.lat)>0.005 ||  Math.abs(userCurrentPos.lng-props.coords.lng)>0.005){
+              checkin_button = '<a class="btn btn-default">Checkin</a><br>';
+              uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+            }
+
+            $.ajaxSetup({
+              headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+            });
+            $.ajax({
+              url: "/gostations/"+props.id+"/getCheckinStatus",
+              method: "POST",
+              dataType: "json",
+              success: function(data){
+                if(data.status){
+                  openNav(props.content, props.storePhoto, props.id, uncheckin_button);
+                }
+                else{
+                  openNav(props.content, props.storePhoto, props.id, checkin_button);
+                }
+              },
+
+              error: function() {
+                alert("ERROR: can not getCheckinStatus!");
+              }
+
+            });
           });
         }
       }
@@ -208,9 +266,8 @@
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
-
-          zoom: 10,
-          center: {lat: 24.98367, lng: 121.453586},
+          zoom: 7,
+          center: {lat: 23.91566, lng: 120.66387},
           styles: [
   {
     "elementType": "geometry",
@@ -372,6 +429,39 @@
   }
 ]
         });
+
+        // find current position of user
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            userCurrentPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            map.setZoom(12);
+            map.setCenter(userCurrentPos);
+            addMarker({
+              coords: userCurrentPos,
+              iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png'
+            });
+
+            // --- gostations_belongs_to_trip
+            setNearbyInfobox(gon.gostations_belongs_to_trip,
+                             userCurrentPos,
+                             'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
+
+            // --- gostations_not_belongs_to_trip
+            setNearbyInfobox(gon.gostations_not_belongs_to_trip,
+                             userCurrentPos,
+                             'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
+
+          }, function() {
+            alert('can not get current position');
+          });
+        } else {
+          alert('Browser does not support Geolocation');
+        }
+
         directionsDisplay.setMap(map);
 
         document.getElementById('submit').addEventListener('click', function() {
@@ -383,6 +473,13 @@
           geocodeAddress(geocoder, map);
         });
 
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
       }
 
       function geocodeAddress(geocoder, resultsMap) {
@@ -446,7 +543,7 @@
       }
 
       function checkLatLngNearby(gostation, location) {
-        var disTH = 0.01;
+        var disTH = 0.05;//1 km
         if( gostation.lat <= location.lat+disTH && gostation.lat >= location.lat-disTH ){
           if( gostation.lng <= location.lng+disTH && gostation.lng >= location.lng-disTH ){
             return true;
@@ -468,11 +565,9 @@
           }
         }
         */
-        start_address = document.getElementById('start').value;
-        end_address = document.getElementById('end').value;
 
-        start_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + start_address +"&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA";
-        end_url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + end_address +"&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA";
+        start_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById('start').value +'&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA';
+        end_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById('end').value + '&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA';
 
         directionsService.route({
           origin: document.getElementById('start').value,
@@ -482,7 +577,7 @@
           travelMode: 'DRIVING'
         }, function(response, status) {
           if (status === 'OK') {
-            callAjax();
+            displayGostations();
             directionsDisplay.setDirections(response);
             /*
             var route = response.routes[0];

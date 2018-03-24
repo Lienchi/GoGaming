@@ -1,5 +1,5 @@
 class GostationsController < ApplicationController
-  before_action :set_gostation, only: [:checkin, :uncheckin]
+  before_action :set_gostation, only: [:checkin, :uncheckin, :getCheckinStatus]
 
   def index
     @user = current_user
@@ -11,14 +11,19 @@ class GostationsController < ApplicationController
   def checkin
     @gostation.checkins.create!(user: current_user)
     #@gostation.count_checkins
-    redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)
   end
 
   def uncheckin
     checkins = Checkin.where(gostation: @gostation, user: current_user)
     checkins.destroy_all
     #@gostation.count_checkins
-    redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)
+  end
+
+  def getCheckinStatus
+    status = @gostation.is_checkedin?(current_user)
+    render :json => { :status => status }
   end
 
   private
