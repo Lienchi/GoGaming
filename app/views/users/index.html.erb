@@ -1,6 +1,35 @@
-<% @users.each do |user|%>
-  <p>
-  <%= user.email%>
-  <%= render partial: "shared/follow", locals: {user: user}%>
-  </p>
-<% end %>
+<div id="main" class="m-scene user-background" style="padding:0 15px;">
+  <div class="border table-responsive scene_element scene_element--fadeinright">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class=""></th>
+          <th class="">Name</th>
+          <th class=""></th>
+          <th class="">
+            <%= image_tag(("level"), :class => "img-responsive")%>
+          </th>
+          <th class="">
+            <%= image_tag(("badge"), :class => "img-responsive") %>
+          </th>
+          <th class="">
+            <%= image_tag(("point.png"), :class => "img-responsive")%>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% @users.each do |user|%>
+          <tr>
+            <td><%= image_tag ("#{user.check_avatar(user)}"), class: "img-responsive"%></td>
+            <td><%= user.name %></td>
+            <td><%= render partial: "shared/follow", locals: {user: user}%></td>
+            <td><%= user.level%></td>
+            <td><%= user.badges.count%></td>
+            <td><%= user.points%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
+

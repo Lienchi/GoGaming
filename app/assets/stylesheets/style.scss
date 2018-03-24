@@ -28,6 +28,7 @@ html, body {
   padding:10px;
   border: 1px solid #DDDDDD;
   background: white;
+  border-radius:10px;
 }
 
 .media{
@@ -59,6 +60,64 @@ html, body {
   transform:scale(2);
   opacity:0;
   transition:all .4s linear;
+}
+
+/* users#index*/
+
+.img-responsive { 
+  width:100%; 
+}
+.table{
+  backgroud:#FFFFF;
+}
+
+/*devise*/
+
+.monitor{
+  width:90%;
+  padding: 30px 20px;
+  margin: 20px auto;
+}
+.background{
+   background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
+}
+
+/*trips#index*/
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.station{
+  background: linear-gradient(to bottom,  #F5F5F5,  #DCDCDC)
+}
+
+
+.bettery-logo{
+  color:#DDDDDD;
+  background: linear-gradient(to left,#008800,#006400)
+
+}
+.typewriter{
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 2.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0;}
+  to { width: 100% ;}
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
 }
 
 
