@@ -61,6 +61,30 @@ html, body {
   transition:all .4s linear;
 }
 
+/* users#index*/
+
+.img-responsive { 
+  width:100%; 
+}
+.table{
+  backgroud:#FFFFF;
+}
+
+/*devise*/
+
+.monitor{
+  width:90%;
+  padding: 30px 20px;
+  margin: 20px auto;
+}
+.background{
+   background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
+}
+
+/*trips#index*/
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
 
 /*
  * Keyframes

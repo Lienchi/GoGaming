@@ -27,4 +27,12 @@ class User < ApplicationRecord
     self.followings.include?(user)
   end
   
+  def check_avatar(user)
+    if user.avatar.nil?
+      "avatar.png"
+    else
+      user.avatar
+    end
+  end
+  
 end
