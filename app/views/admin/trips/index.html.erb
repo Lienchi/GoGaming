@@ -1,14 +1,15 @@
 <div class="container">
-
-  <h1>trips後台總表</h1>
-
   <div class="row">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><%= link_to "Create Gostation", admin_gostations_path %></li>
+    </ul>
+    <br/>
     <div class="col-md-12">
-
       <div class="form-inline">
         <%= form_for [:admin, @trip] do |f| %>
           <div class="form-group">
             <%= f.text_field :name, placeholder: "Trip Name", class: "form-control" %>
+            <%= f.text_field :gostations_index, placeholder: "Gostations", class: "form-control" %>
           </div>
           <%= f.submit class: "btn btn-primary" %>
           <% if @trip.errors.any? %>

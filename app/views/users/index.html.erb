@@ -1,0 +1,6 @@
+<% @users.each do |user|%>
+  <p>
+  <%= user.email%>
+  <%= render partial: "shared/follow", locals: {user: user}%>
+  </p>
+<% end %>

@@ -1,37 +1,45 @@
-<div class="container">
-  <div class="media col-xs-12">
-    <div class="media-left media-middle">
-      <a href="#">
-        <img class="media-object" src="..." alt="...">
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading"><%= @user.email%></h4>
-      <h4 class="media-heading">My Total Points :<%= @user.points %></h4>
-      <h4 class="media-heading">My Points From Trips:<%= current_user.points(category: 'trip_gostations') %></h4>
-      <h4 class="media-heading">My Level :<%= @user.level %></h4>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-          <span class="sr-only">45% Complete</span>
+<div id="main" class="m-scene user-background container">
+  <dir class="border col-xs-12 scene_element scene_element--fadeinright">
+    <div class="col-xs-12 media">
+      <div class="col-xs-5 col-md-4 media-left media-middle">
+        <a href="#" class="thumbnail">
+          <%= image_tag @user.avatar, class: "media-object img-circle avatar"%>
+        </a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><%= @user.name%></h4>
+        <h4 class="media-heading"><%= image_tag("point.png")%> 點數 <%= @user.points %></h4>
+        <h4 class="media-heading"><%= image_tag("badge")%> 徽章 <%= @user.badges.count%></h4>
+        <h4 class="media-heading"><%= image_tag("level")%> 等級 <%= @user.level %></h4>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active col-xs-12" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+            <span class="sr-only">45% Complete</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <h3> user's badges </h3>
-  <div class="row col-xs-12">
-    <div>
-      <% @user.badges.each do |badge| %>
-        <div class="thumbnail card col-xs-4 col-md-2">
-          <%= image_tag ("badges/#{badge.name}.svg") %>
-          <div class="caption">
-            <p><%= badge.name %></p>
-            <p><%= badge.id %></p>
+    <div class="badges-container clearfix">
+      <div class="user-badges clearfix">
+        <% @user.badges.each do |badge| %>
+          <div class="user-badge thumbnail card col-xs-4">
+            <%= image_tag ("badges/#{badge.name}.svg") %>
+            <div class="caption text-center">
+              <p><%= badge.name %></p>
+            </div>
           </div>
-        </div>
-      <%end%>
+        <%end%>
+      </div>
     </div>
   </div>
+  <!--
+  <%= form_for @user do |f| %>
+  
+    <%= f.file_field :avatar %>
+
+    <%= f.submit %>
+  <%end%>
+-->
 </div>
 
-<%= link_to 'Home', root_path %>
+
+

@@ -8,5 +8,5 @@
 
 # Default admin
 
-User.create(email: "admin@example.com", password: "12345678", role: "admin")
+User.create(email: "admin@example.com", password: "123456", role: "admin")
 puts "Default admin created!"

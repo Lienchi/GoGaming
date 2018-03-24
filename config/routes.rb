@@ -4,9 +4,19 @@ Rails.application.routes.draw do
 
   root "gostations#index"
   
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index, :edit, :update] do
+    collection do
+      get :leaderboards
+    end
+  end
    
-  resources :gostations, only:[:index]
+  resources :gostations, only:[:index] do
+    member do
+      post :checkin
+      post :uncheckin
+      post :getCheckinStatus
+    end
+  end
 
   resources :challenges, only:[:create]
 
@@ -22,8 +32,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "gostations#index"
+    resources :gostations
     resources :trips
   end
-
+   
+  resources :followships, only:[:create, :destroy]
 
 end

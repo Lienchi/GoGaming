@@ -8,7 +8,7 @@ def find_zh_TW(list)
 end
 
 namespace :dev do
-  task parse_gostation_list: :environment do
+  task parse_gostation_list_v1: :environment do
     Gostation.destroy_all
 
     url = 'https://wapi.gogoro.com/tw/api/vm/list'
@@ -26,6 +26,32 @@ namespace :dev do
         District:      find_zh_TW( JSON.parse(data['District']) ),
         City:          find_zh_TW( JSON.parse(data['City']) ),
         AvailableTime: data['AvailableTime']
+      )
+    end
+
+    puts "have created gostations!"
+    puts "now you have #{Gostation.count} gostations!"
+  end
+
+  task parse_gostation_list_v2: :environment do
+    Gostation.destroy_all
+
+    url = 'https://webapi.gogoro.com/api/vm/list'
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    json = JSON.parse(response)
+
+    json.each do |data|
+      Gostation.create!(
+        LocName:       find_zh_TW( JSON.parse(data['LocName']) ),
+        Latitude:      data['Latitude'],
+        Longitude:     data['Longitude'],
+        ZipCode:       data['ZipCode'],
+        Address:       find_zh_TW( JSON.parse(data['Address']) ),
+        District:      find_zh_TW( JSON.parse(data['District']) ),
+        City:          find_zh_TW( JSON.parse(data['City']) ),
+        AvailableTime: '24HR',
+        StorePhoto:    data['StorePhoto'][0]
       )
     end
 
@@ -65,6 +91,14 @@ namespace :dev do
       
     end
 
+    Trip.all.each do |t|
+      t.gostations_index = []
+      gostations = Gostation.all.sample(5);
+      5.times do |i|
+        t.gostations_index[i] = gostations[i].id
+      end
+      t.save
+    end
 
     puts "have created trips!"
     puts "now you have #{Trip.count} trips data!"
@@ -89,4 +123,15 @@ namespace :dev do
     puts "have created fake TripGostations!"
     puts "now you have #{TripGostation.count} TripGostations data!"
   end
+
+  task fake_point: :environment do
+    User.all.each do |t|
+      t.add_points(rand(1..500), category: 'fake')
+
+    end
+
+    puts "have created fake points"
+  end
+
+
 end
