@@ -1,27 +1,18 @@
-<div class="container background">
-  <div class="border col-xs-12" style="background-color: #F5F5F5;">
-    <h2 class="text-center">My Station</h2>
-    <div class="border monitor">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+<div class="background container">
+  <div class="border col-xs-12 station">
+    <h3 class="text-center">My Station</h3>
+      <div id="myCarousel" class="carousel slide border" data-ride="carousel">
 
         <!-- Wrapper for slides -->
-        <div class="carousel-inner">
+        <div class="carousel-inner" style="height:150px;">
           <div class="item active">
-            <p>歡迎來到GoFan的GoStation，你的充電站還有"5"顆未充飽的電池，現在就選擇一個電池為他充電吧!</p>
+            <p class="text-center typewriter" style="margin-top:30px;">歡迎來到Go Fan的Go Station，<br/>你的充電站還有"五顆"未充飽的電池，<br/>現在就選擇一顆電池為他充電吧!</p>
           </div>
-
           <div class="item">
-            <%= image_tag ("101.jpg")%>
+            <%= image_tag ("101.jpg"), style:"height:145px;width:100%;"%>
           </div>
-
           <div class="item">
-            <%= image_tag ("cks.jpg")%>
+            <%= image_tag ("cks.jpg"), style:"height:145px;width:100%;"%>
           </div>
         </div>
 
@@ -35,30 +26,28 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-    </div>
-    <hr/>       
-    <div class="row">
-      <% @trips.each do |t| %>
-        <div class="thumbnail card col-xs-12 col-md-4">
-          <img src="..." alt="...">
-          <div class="caption">
-            <p class="text-right">
-              <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
-                <button class="btn btn-primary">Done</button>
-              <%else%>
-                <button class="btn btn-primary">Go</button>
-                <%= link_to "#{t.name}", trip_path(t), class: "btn btn-primary"  %>
-              <% end %> 
-            </p>
-            <% @followings.each do |following| %>
-              <% if t.is_challenged?(following) %>
-                <%= following.email%> 已完成挑戰
+      <div class="badges-container border station clearfix col-xs-12" >
+        <% @trips.each do |t| %>
+          <div class="thumbnail card col-xs-5 col-md-2 " style="border-radius: 25px;background-color: green;border:1px solid #2F4F4F;margin:10px 15px;">
+            <%= image_tag ("101.jpg"), style: "border-radius: 25px;border: 1px solid #2F4F4F;"%>
+            <h4 class="text-center bettery-logo">Gogoro</h4>
+            <div class="caption" style="border-radius: 25px;background-color: #006400;border:1px solid #2F4F4F">
+              <p class="text-center" style="color:#DDDDDD;">
+                <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
+                  <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
+                <%else%>
+                  <%= link_to "挑戰 #{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
+                <% end %> 
+              </p>
+              <% @followings.each do |following| %>
+                <% if t.is_challenged?(following) %>
+                  <%= following.email%> 已完成挑戰
+                <% end %>
               <% end %>
-            <% end %>
+            </div>
           </div>
-        </div>
-      <%end%>
-    </div>
+        <%end%>
+      </div> 
   </div>
 </div>
 
