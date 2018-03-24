@@ -28,6 +28,7 @@ html, body {
   padding:10px;
   border: 1px solid #DDDDDD;
   background: white;
+  border-radius:10px;
 }
 
 .media{
@@ -87,8 +88,9 @@ html, body {
 }
 
 .station{
-  background-color:#F5F5F5;
+  background: linear-gradient(to bottom,  #F5F5F5,  #DCDCDC)
 }
+
 
 .bettery-logo{
   color:#DDDDDD;
