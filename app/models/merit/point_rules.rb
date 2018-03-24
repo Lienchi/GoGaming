@@ -26,6 +26,9 @@ module Merit
       #
       # score -10, :on => 'comments#destroy'
       score 20, on: 'trip_gostations#check', category: 'trip_gostations'  
+      score 100, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
+        Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id)).present?
+      end
     end
   end
 end
