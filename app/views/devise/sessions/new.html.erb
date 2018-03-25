@@ -1,8 +1,8 @@
 <div class="container background">
-  <dir class="border col-xs-12" style="background-color: #F5F5F5;">
+  <dir class="border col-xs-12 station box-shadow-right" >
     <h2 class="text-center">Gogoro</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
-      <div class="border monitor">
+      <div class="border monitor monitor-inner-shadow">
         <div class="field form-group">
           <%= f.label :email, class: "col-xs-4 control-label"%>
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left" %>
@@ -20,7 +20,7 @@
     </div>
   <% end -%>
 -->
-      <div class="actions text-center" style="padding-top: 130px;padding-bottom: 130px;">
+      <div class="actions text-center station-buttom">
         <input class="btn btn-success" type="submit" value="登入" style="margin-right: 20px;">
         <%= render "devise/shared/links" %>
       </div>
