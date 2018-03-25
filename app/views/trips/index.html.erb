@@ -28,7 +28,7 @@
       </div>
       <div class="badges-container border station clearfix col-xs-12" >
         <% @trips.each do |t| %>
-          <div class="thumbnail card col-xs-5 col-md-2 " style="border-radius: 25px;background-color: green;border:1px solid #2F4F4F;margin:10px 15px;">
+          <div class="thumbnail card col-xs-5 col-md-2 " style="border-radius: 25px;background-color: green;border:1px solid #2F4F4F;margin:10px 10px;">
             <%= image_tag ("101.jpg"), style: "border-radius: 25px;border: 1px solid #2F4F4F;"%>
             <h4 class="text-center bettery-logo">Gogoro</h4>
             <div class="caption" style="border-radius: 25px;background-color: #006400;border:1px solid #2F4F4F">
@@ -36,7 +36,7 @@
                 <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
                   <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
                 <%else%>
-                  <%= link_to "挑戰 #{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
+                  <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
                 <% end %> 
               </p>
               <% @followings.each do |following| %>

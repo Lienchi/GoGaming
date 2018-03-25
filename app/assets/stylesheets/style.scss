@@ -3,6 +3,13 @@ html, body {
   margin: 0;
   padding: 0;
 }
+.nav-icon{
+  margin: 2px 2px;
+  display: inline-block;
+  font-size: 2em;
+  color: #1E90FF;
+  padding: 2px 15px;
+}
 #map {
   height: 500px;
 }
@@ -107,7 +114,55 @@ html, body {
     typing 2.5s steps(40, end),
     blink-caret .75s step-end infinite;
 }
+/*trips#show*/
 
+
+.half-oval{
+  background: linear-gradient(to right, #228B22 , #00FA9A);
+  width: 80%;
+  height: 50px;
+  border-radius: 50% / 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin: 0 auto;
+}
+.half-oval-inner{
+  background: linear-gradient(to right,#227700, #00DD77);
+  width: 85%;
+  height: 40px;
+  border-radius: 50% / 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin: 0 auto;
+  border-bottom:1px solid linear-gradient(to right,#227700,#00AA55);
+}
+#myProgress{
+  position:fixed;
+  top:20%;
+  right:12%;
+  z-index:1;
+  width:550px;
+  background-color:black;
+  border-radius:50px;
+  border: 2px solid #DDDDDD;
+  transform:rotate(-90deg);
+  transform-origin:100% 100%
+}
+
+#myBar{
+  width:25%;
+  height:20px;;
+  background: linear-gradient(to right,#227700, #00DD77);
+  border-radius:50px;
+}
+
+
+.trip-button{
+  display:block;
+  margin: 0 auto;
+  border:2px solid #BBFF66;
+  background-color: #F5F5F5;
+}
 /* The typing effect */
 @keyframes typing {
   from { width: 0;}
