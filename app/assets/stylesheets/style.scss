@@ -13,6 +13,10 @@ hr{
   color: #1E90FF;
   padding: 2px 15px;
 }
+
+h2{
+  animation: zoom 1s ease-in-out 0s 1 normal forwards;
+}
 #map {
   height: 500px;
 }
@@ -55,6 +59,10 @@ input[type='file'] {
 
 .media-body{
   padding:10px;
+}
+
+.media-body h4{
+  
 }
 
 .media-heading img{
@@ -117,7 +125,9 @@ input[type='file'] {
   border:1px solid #2F4F4F;
   margin:10px 10px;
   box-shadow: inset 5px 5px 5px 8px #006400;
+  animation:betterylight 1s ease-in-out 4s 1 normal forwards;
 }
+
 .bettery-logo{
   color:#DDDDDD;
   background: linear-gradient(to left,#008800,#006400);
@@ -131,6 +141,7 @@ input[type='file'] {
   animation: 
     typing 2.5s steps(40, end),
     blink-caret .75s step-end infinite;
+  animation-delay: 1s;
 }
 /*trips#show*/
 
@@ -155,6 +166,7 @@ input[type='file'] {
   margin: 0 auto;
   border-bottom:1px solid linear-gradient(to right,#227700,#00AA55);
 }
+
 #myProgress{
   position:fixed;
   top:20%;
@@ -181,11 +193,14 @@ input[type='file'] {
   margin: 0 auto;
   border:2px solid #BBFF66;
   background-color: #F5F5F5;
+  animation:tripbutton 0.3s ease-in-out 0s infinite;
 }
+
+
 /* The typing effect */
 @keyframes typing {
-  from { width: 0;}
-  to { width: 100% ;}
+  from { width: 0;opacity:0;}
+  to { width: 100% ;opacity:1;}
 }
 
 /* The typewriter cursor effect */
@@ -194,6 +209,24 @@ input[type='file'] {
   50% { border-color: orange; }
 }
 
+/* Text transition*/
+
+@Keyframes zoom{
+  from{font-size:0px;}
+  to{font-size:25px;}
+}
+
+/*bettery frame*/
+
+@keyframes betterylight{
+  from{opacity:0;}
+  to{opacity:1;box-shadow:0px 0px 10px #00FF00;}
+}
+
+@Keyframes tripbutton{
+  from{}
+  to{box-shadow:0px 0px 10px #00FF00;}
+}
 
 /*
  * Keyframes
