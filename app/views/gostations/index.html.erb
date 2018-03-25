@@ -266,7 +266,6 @@
         }
       ];
 
-
       /* Set the width of the side navigation to 400px */
       function openNav(content, storePhoto, id, button, trip_url, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
@@ -291,8 +290,7 @@
         lat: 0.0,
         lng: 0.0
       };
-      var start_url = null;
-      var end_url = null;
+
       var map = null;
       var directionsService = null;
       var directionsDisplay = null;
@@ -329,25 +327,6 @@
       };
       */
 
-      function displayGostations2() {
-        var record_start = null;
-        var record_end;
-
-        $.ajax({
-          url: end_url,
-          type: 'GET',
-          success: function(data) {
-            record_end = data.results[0];
-
-            calculateGostations(record_start, record_end);
-          },
-          
-          error: function() {
-            alert("ERROR: can not get end record!");
-          }
-        });
-      };
-
       function displayGostations(start_location, end_location) {
         // --- gostations_belongs_to_trip
         setStartEndInfobox(gon.gostations_belongs_to_trip,
@@ -377,6 +356,8 @@
         var AvailableTime = gostation.AvailableTime;
         var tripId = getTripId(gostation.id);
         var StorePhoto = gostation.StorePhoto;
+        var BatteryCells = gostation.BatteryCells;
+        var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
         return {
           directions_url: '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
@@ -386,7 +367,8 @@
 
           infoWindowContent: '<div>站名：'+LocName+'</div><br>'
             +'<div>地址：'+Address+'</div><br>'
-            +'<div>營業時間：'+AvailableTime+'</div><br>',
+            +'<div>營業時間：'+AvailableTime+'</div><br>'
+            +'<div>滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
 
           storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
         };
@@ -437,16 +419,14 @@
         if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
           return results;
         }
-        if(directionsService==null){
-          directionsService = new google.maps.DirectionsService;
-        }
+        var directionsServiceCalc = new google.maps.DirectionsService;
         //var start = userCurrentPos.lat+','+userCurrentPos.lng;
         //var end = des.lat+','+des.lng;
         var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
         var end = new google.maps.LatLng(des.lat, des.lng);
         //var start = '37.7683909618184, -122.51089453697205';
         //var end = '41.850033, -87.6500523';
-        directionsService.route({
+        directionsServiceCalc.route({
           origin: start,
           destination: end,
           travelMode: 'DRIVING',
@@ -489,7 +469,8 @@
 
             var uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
 
-            if( Math.abs(userCurrentPos.lat-props.coords.lat)>0.005 ||  Math.abs(userCurrentPos.lng-props.coords.lng)>0.005){
+            var checkinDisTH = 0.005;//0.005 = 500m
+            if( Math.abs(userCurrentPos.lat-props.coords.lat)>checkinDisTH ||  Math.abs(userCurrentPos.lng-props.coords.lng)>checkinDisTH){
               checkin_button = '<a class="btn btn-default">Checkin</a><br>';
               uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
             }
@@ -523,6 +504,30 @@
         directionsDisplay.setMap(null);
       }
 
+      function displayFriendlyStores(){
+        for(var i=0; i<gon.friendly_stores.length; i++){
+          var position = {
+            lat: gon.friendly_stores[i].latitude,
+            lng: gon.friendly_stores[i].longitude
+          };
+
+          var infoWindowContent = '<div>商店名稱：'+gon.friendly_stores[i].name+'</div><br>'
+            +'<div>地址：'+gon.friendly_stores[i].address+'</div><br>'
+            +'<div>營業時間：'+gon.friendly_stores[i].open_time+'</div><br>';
+
+          var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
+
+          addMarker({
+            coords: position,
+            iconImage: 'http://maps.google.com/mapfiles/ms/micons/restaurant.png',
+            content: infoWindowContent,
+            storePhoto: gon.friendly_stores[i].main_photo,
+            directions_url: directions_url,
+            id: 0
+          });
+        }
+      }
+
       function initMap() {
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
@@ -540,6 +545,8 @@
         });
 
         directionsDisplay.setMap(map);
+
+        //displayFriendlyStores();
 
         // find current position of user
         if (navigator.geolocation) {
@@ -594,12 +601,17 @@
                               'Error: Your browser doesn\'t support geolocation.');
       }
 
-      function geocodeAddress(geocoder, resultsMap) {
+      function geocodeAddress(geocoder, map) {
         var address = document.getElementById('end').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
+            map.setZoom(12);
+            map.setCenter(results[0].geometry.location);
             displayGostationsNearby(address);
+            addMarker({
+              coords: results[0].geometry.location,
+              iconImage: 'http://maps.google.com/mapfiles/ms/micons/red.png'
+            });
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
@@ -655,9 +667,9 @@
       }
 
       function checkLatLngNearby(gostation, location) {
-        var disTH = 0.05;//0.01 = 1km
-        if( gostation.lat <= location.lat+disTH && gostation.lat >= location.lat-disTH ){
-          if( gostation.lng <= location.lng+disTH && gostation.lng >= location.lng-disTH ){
+        var nearbyDisTH = 0.02;//0.01 = 1km
+        if( gostation.lat <= location.lat+nearbyDisTH && gostation.lat >= location.lat-nearbyDisTH ){
+          if( gostation.lng <= location.lng+nearbyDisTH && gostation.lng >= location.lng-nearbyDisTH ){
             return true;
           }
         }
@@ -687,13 +699,12 @@
             };
 
             displayGostations(start_location, end_location);
-
+            /*
             var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
-            summaryPanel.innerHTML += '距離：'+response.routes[0].legs[0].distance.text;
+            summaryPanel.innerHTML  = '距離：'+response.routes[0].legs[0].distance.text;
             summaryPanel.innerHTML += '<br>'
             summaryPanel.innerHTML += '時間：'+response.routes[0].legs[0].duration.text;
-
+            */
             directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
