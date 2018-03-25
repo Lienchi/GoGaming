@@ -87,18 +87,19 @@
     </div>
     
     <div class="col-xs-8">
+      <!--
       <input type="text" id="start" placeholder="輸入起點" class= "form-control">
       <br/>
-      <input type="text" id="end" placeholder="輸入終點" class="form-control">
+      -->
+      <input type="text" id="end" placeholder="你想去哪裡？" class="form-control">
       <br/>
     </div>
     <div class="col-xs-2">
       <input id="submit" class="btn btn-default" type="submit" value="Go">
-    </div>
-
-    <div>
-      <input id="address" type="textbox" placeholder="輸入目的地">
-      <input id="submit_single_address" class="btn btn-default" type="button" value="Go">
+      <!--
+      <div id=directions-panel>
+      </div>
+      -->
     </div>
 
     <div id="map"></div>
@@ -267,11 +268,15 @@
 
 
       /* Set the width of the side navigation to 400px */
-      function openNav(content, storePhoto, id, button, trip_url, directions_url) {
+      function openNav(content, storePhoto, id, button, trip_url, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
           var mySidenavContent = document.getElementById('mySidenav-content');
           mySidenavContent.innerHTML = storePhoto;
           mySidenavContent.innerHTML += content;
+          if(results.status){
+            mySidenavContent.innerHTML += results.distance+' ';
+            mySidenavContent.innerHTML += results.duration;
+          }
           mySidenavContent.innerHTML += button;
           mySidenavContent.innerHTML += trip_url;
           mySidenavContent.innerHTML += directions_url;
@@ -289,7 +294,9 @@
       var start_url = null;
       var end_url = null;
       var map = null;
-
+      var directionsService = null;
+      var directionsDisplay = null;
+      /*
       function displayGostations() {
         var record_start;
         var record_end;
@@ -320,18 +327,38 @@
           }
         });
       };
+      */
 
-      function calculateGostations(record_start, record_end) {
+      function displayGostations2() {
+        var record_start = null;
+        var record_end;
+
+        $.ajax({
+          url: end_url,
+          type: 'GET',
+          success: function(data) {
+            record_end = data.results[0];
+
+            calculateGostations(record_start, record_end);
+          },
+          
+          error: function() {
+            alert("ERROR: can not get end record!");
+          }
+        });
+      };
+
+      function displayGostations(start_location, end_location) {
         // --- gostations_belongs_to_trip
         setStartEndInfobox(gon.gostations_belongs_to_trip,
-                           record_start.geometry.location,
-                           record_end.geometry.location,
+                           start_location,
+                           end_location,
                            'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
 
         // --- gostations_not_belongs_to_trip
         setStartEndInfobox(gon.gostations_not_belongs_to_trip,
-                           record_start.geometry.location,
-                           record_end.geometry.location,
+                           start_location,
+                           end_location,
                            'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
       };
 
@@ -344,6 +371,27 @@
         return -1;
       }
 
+      function getGostationInfo(gostation){
+        var LocName = gostation.LocName;
+        var Address = gostation.Address;
+        var AvailableTime = gostation.AvailableTime;
+        var tripId = getTripId(gostation.id);
+        var StorePhoto = gostation.StorePhoto;
+        return {
+          directions_url: '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+
+          StorePhoto: gostation.StorePhoto,
+
+          trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
+
+          infoWindowContent: '<div>站名：'+LocName+'</div><br>'
+            +'<div>地址：'+Address+'</div><br>'
+            +'<div>營業時間：'+AvailableTime+'</div><br>',
+
+          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+        };
+      }
+
       function setStartEndInfobox(gostations, start, end, img){
         for(var i=0; i<gostations.length; i++){
           var position = {};
@@ -351,42 +399,69 @@
           position.lng = gostations[i].Longitude;
 
           if( checkLatLngInStartEndRect(position, start, end) ){
-            var LocName = gostations[i].LocName;
-            var Address = gostations[i].Address;
-            var AvailableTime = gostations[i].AvailableTime;
-            var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+Address+'" target="_blank">導航</a><br>';
-            var StorePhoto = gostations[i].StorePhoto;
-            var tripId = getTripId(gostations[i].id);
-            var trip_url = '<a class="btn btn-default">挑戰任務</a><br>';
-            if(tripId >= 0){
-              trip_url = '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>';
-            }
-            var infoWindowContent = '<div>站名：'+LocName+'</div><br>'
-              +'<div>地址：'+Address+'</div><br>'
-              +'<div>營業時間：'+AvailableTime+'</div><br>';
 
-            var storePhoto = '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>';
-            
+            var gostationInfo = getGostationInfo(gostations[i]);
+
             addMarker({
               coords: position,
               iconImage: img,
-              content: infoWindowContent,
-              storePhoto: storePhoto,
-              directions_url: directions_url,
+              content: gostationInfo.infoWindowContent,
+              storePhoto: gostationInfo.storePhoto,
+              directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              trip_url: trip_url
+              trip_url: gostationInfo.trip_url
             });
           }
         }
       }
 
       function checkLatLngInStartEndRect(position, start, end){
+        if(start.lat==0.0 && start.lng==0.0){
+          return checkLatLngNearby(gostation, end);
+        }
+
         if( (position.lat >= start.lat && position.lat <= end.lat) || (position.lat <= start.lat && position.lat >= end.lat)){
           if( (position.lng >= start.lng && position.lng <= end.lng) || (position.lng <= start.lng && position.lng >= end.lng)){
               return true;
           }
         }
         return false;
+      }
+
+      function calculateDisDur(des){
+        var results = {
+          distance: '0.0',
+          duration: '0.0',
+          status: false
+        }
+        if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
+          return results;
+        }
+        if(directionsService==null){
+          directionsService = new google.maps.DirectionsService;
+        }
+        //var start = userCurrentPos.lat+','+userCurrentPos.lng;
+        //var end = des.lat+','+des.lng;
+        var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
+        var end = new google.maps.LatLng(des.lat, des.lng);
+        //var start = '37.7683909618184, -122.51089453697205';
+        //var end = '41.850033, -87.6500523';
+        directionsService.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING',
+          avoidHighways: true
+        }, function(response, status) {
+          if (status === 'OK') {
+            results.distance = response.routes[0].legs[0].distance.text;
+            results.duration = response.routes[0].legs[0].duration.text;
+            results.status = true;
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+
+        return results;
       }
 
       var infoWindow = null;
@@ -408,6 +483,7 @@
             }
             infoWindow.setContent(props.content);
             infoWindow.open(map, marker);
+            var results = calculateDisDur(props.coords);
 
             var checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
 
@@ -427,10 +503,10 @@
               dataType: "json",
               success: function(data){
                 if(data.status){
-                  openNav(props.content, props.storePhoto, props.id, uncheckin_button, props.trip_url, props.directions_url);
+                  openNav(props.content, props.storePhoto, props.id, uncheckin_button, props.trip_url, props.directions_url, results);
                 }
                 else{
-                  openNav(props.content, props.storePhoto, props.id, checkin_button, props.trip_url, props.directions_url);
+                  openNav(props.content, props.storePhoto, props.id, checkin_button, props.trip_url, props.directions_url, results);
                 }
               },
 
@@ -443,9 +519,13 @@
         }
       }
 
+      function clearMap(directionsDisplay){
+        directionsDisplay.setMap(null);
+      }
+
       function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 7.6,
           center: {lat: 23.91566, lng: 120.66387},
@@ -458,6 +538,8 @@
           streetViewControl: false,
           zoomControl: false
         });
+
+        directionsDisplay.setMap(map);
 
         // find current position of user
         if (navigator.geolocation) {
@@ -485,21 +567,22 @@
                              'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
 
           }, function() {
-            alert('can not get current position');
-          });
+            alert('can not get current position in 2 sec！');
+          }//,
+            //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
+          );
         } else {
           alert('Browser does not support Geolocation');
         }
 
-        directionsDisplay.setMap(map);
-
         document.getElementById('submit').addEventListener('click', function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        });
-
-        var geocoder = new google.maps.Geocoder();
-        document.getElementById('submit_single_address').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
+          if( userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0 ){
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+          }
+          else{
+            var geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map);
+          }
         });
 
       }
@@ -512,14 +595,10 @@
       }
 
       function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
+        var address = document.getElementById('end').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
             displayGostationsNearby(address);
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -535,12 +614,16 @@
           position.lng = gostations[i].Longitude;
 
           if( checkLatLngNearby(position, des) ){
-            var LocName = gostations[i].LocName;
-            var AvailableTime = gostations[i].AvailableTime;
+            var gostationInfo = getGostationInfo(gostations[i]);
+
             addMarker({
               coords: position,
               iconImage: img,
-              content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a><br>營業時間：'+AvailableTime
+              content: gostationInfo.infoWindowContent,
+              storePhoto: gostationInfo.storePhoto,
+              directions_url: gostationInfo.directions_url,
+              id: gostations[i].id,
+              trip_url: gostationInfo.trip_url
             });
           }
           
@@ -580,52 +663,43 @@
         }
         return false;
       }
-
+      
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var waypts = [];
-        /*
-        var checkboxArray = document.getElementById('waypoints');
-        for (var i = 0; i < checkboxArray.length; i++) {
-          if (checkboxArray.options[i].selected) {
-            waypts.push({
-              location: checkboxArray[i].value.split('(')[0],
-              stopover: true
-            });
-          }
+        var start = '';
+        if((userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0)){
+          start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
         }
-        */
-
-        start_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById('start').value +'&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA';
-        end_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById('end').value + '&key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA';
-
         directionsService.route({
-          origin: document.getElementById('start').value,
+          origin: start,
           destination: document.getElementById('end').value,
-          waypoints: waypts,
-          optimizeWaypoints: true,
-          travelMode: 'DRIVING'
+          travelMode: 'DRIVING',
+          avoidHighways: true
         }, function(response, status) {
           if (status === 'OK') {
-            displayGostations();
-            directionsDisplay.setDirections(response);
-            /*
-            var route = response.routes[0];
+            var start_location = {
+              lat: response.routes[0].legs[0].start_location.lat(),
+              lng: response.routes[0].legs[0].start_location.lng()
+            };
+
+            var end_location = {
+              lat: response.routes[0].legs[0].end_location.lat(),
+              lng: response.routes[0].legs[0].end_location.lng()
+            };
+
+            displayGostations(start_location, end_location);
+
             var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML = '';
-            // For each route, display summary information.
-            for (var i = 0; i < route.legs.length; i++) {
-              var routeSegment = i + 1;
-              summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                  '</b><br>';
-              summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-              summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-              summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-            }
-            */
+            summaryPanel.innerHTML += '距離：'+response.routes[0].legs[0].distance.text;
+            summaryPanel.innerHTML += '<br>'
+            summaryPanel.innerHTML += '時間：'+response.routes[0].legs[0].duration.text;
+
+            directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
+
       }
     </script>
     <script async defer
