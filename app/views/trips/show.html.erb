@@ -26,41 +26,50 @@
     </style>
   </head>
 
-  <body>
+  <body class="background">
+    <div class="half-oval">
+      <div class="half-oval-inner">
+        <button class="btn btn-sm trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
+      </div>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-    <div class="container">
-      <div class="jumbotron">
-        <h1><%= @trip.name %></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cum earum eveniet omnis nostrum corporis excepturi repellendus at, cupiditate ut.</p>
+    <!-- Modal content-->
+    <div class="modal-content trip-button">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= @trip.name%></h4>
       </div>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-          <span class="sr-only">45% Complete</span>
-        </div>
+      <div class="modal-body">
+        <p>"description here"在一週內完成以下五個夜市景點，即可獲得夜市達人徽章及100points."最快完成者:Mike"</p>
       </div>
-      <table class="table table-hover">
-        <% @trip_gostations.each do |t| %>
-          <tr>
-            <td>
-              <% if t.status == true %>
-                <!-- toggle status for testing -->
-                <%= link_to 'Done', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
-              <% else %>
-                <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
-              <% end%>
-             <%= t.gostation.LocName %>
-            </td>
-          </tr>
-        <% end %>
-       </table>
-       <div class="map col-xs-12">
-         <img src="..." alt="..." class="img-rounded">
-         <h1>map here</h1>
-       </div>
     </div>
 
+  </div>
+</div>
+    <div id="myProgress" class="float-right" onclick="move()">
+      <div id="myBar"></div>
+    </div>
     <div id="map"></div>
+  
 
+    <script type="text/javascript">
+      function move(){
+        var elem = document.getElementById("myBar");
+        var width = 25;
+        var id = setInterval(frame,10);
+        function frame(){
+          if (width >= 100){
+            clearInterval(id);
+          }
+          else{
+            width+= 25;
+            elem.style.width = width + '%';
+          }
+        }
+      }
+    </script>
     <script>
 
       var map = null;
