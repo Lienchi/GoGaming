@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20180323060134) do
     t.string "AvailableTime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "StorePhoto"
   end
 
   create_table "merit_actions", force: :cascade do |t|
@@ -111,6 +112,14 @@ ActiveRecord::Schema.define(version: 20180323060134) do
     t.datetime "updated_at", null: false
     t.integer "stations"
     t.text "gostations_index"
+  end
+
+  create_table "user_gostations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "gostation_id"
+    t.boolean "checkin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

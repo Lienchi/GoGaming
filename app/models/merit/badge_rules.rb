@@ -51,28 +51,28 @@ module Merit
         trip_gostation.status
       end
 
-      grant_on 'users#show', badge_id: 2 do |user|
-        !!user.challenges.find_by(trip_id: (Trip.first.id))
-      end
-
-      grant_on 'users#show', badge_id: 3 do |user|
-        !!user.challenges.find_by(trip_id: (Trip.first.id+1))
-      end
-
-      grant_on 'users#show', badge_id: 4 do |user|
-        !!user.challenges.find_by(trip_id: (Trip.first.id+2))
-      end
-
-      grant_on 'users#show', badge_id: 5 do |user|
-        !!user.challenges.find_by(trip_id: (Trip.first.id+3))
-      end
-
-      grant_on 'users#show', badge_id: 6 do |user|
-        !!user.challenges.find_by(trip_id: (Trip.first.id+4))
-      end
-
-
       
+      grant_on 'trip_gostations#check', badge_id: 2 do |trip_gostation|
+        trip_gostation.trip_id == 1 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      end
+
+      grant_on 'trip_gostations#check', badge_id: 3 do |trip_gostation|
+        trip_gostation.trip_id == 2 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      end
+
+      grant_on 'trip_gostations#check', badge_id: 4 do |trip_gostation|
+        trip_gostation.trip_id == 3 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      end
+      
+      grant_on 'trip_gostations#check', badge_id: 5 do |trip_gostation|
+        trip_gostation.trip_id == 4 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      end
+
+      grant_on 'trip_gostations#check', badge_id: 6 do |trip_gostation|
+        trip_gostation.trip_id == 5 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      end
+
+
     end
   end
 end
