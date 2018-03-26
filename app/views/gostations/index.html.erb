@@ -267,7 +267,7 @@
       ];
 
       /* Set the width of the side navigation to 400px */
-      function openNav(content, storePhoto, id, button, trip_url, directions_url, results) {
+      function openNav(content, storePhoto, button, trip_url, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
           var mySidenavContent = document.getElementById('mySidenav-content');
           mySidenavContent.innerHTML = storePhoto;
@@ -294,6 +294,15 @@
       var map = null;
       var directionsService = null;
       var directionsDisplay = null;
+
+      // map icons
+      var i_black_battery = null;
+      var i_green_black_battery = null;
+      var i_blue_black_battery = null;
+      var ig_black_battery = null;
+      var ig_green_black_battery = null;
+      var ig_blue_black_battery = null;
+      var friendly_store_icon = null;
       /*
       function displayGostations() {
         var record_start;
@@ -330,15 +339,17 @@
       function displayGostations(start_location, end_location) {
         // --- gostations_belongs_to_trip
         setStartEndInfobox(gon.gostations_belongs_to_trip,
+                           true,
                            start_location,
                            end_location,
-                           'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
+                           i_green_black_battery);
 
         // --- gostations_not_belongs_to_trip
         setStartEndInfobox(gon.gostations_not_belongs_to_trip,
+                           false,
                            start_location,
                            end_location,
-                           'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
+                           i_black_battery);
       };
 
       function getTripId(gostation_id){
@@ -374,7 +385,7 @@
         };
       }
 
-      function setStartEndInfobox(gostations, start, end, img){
+      function setStartEndInfobox(gostations, bBelongsToTrip, start, end, img){
         for(var i=0; i<gostations.length; i++){
           var position = {};
           position.lat = gostations[i].Latitude;
@@ -391,7 +402,8 @@
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              trip_url: gostationInfo.trip_url
+              trip_url: gostationInfo.trip_url,
+              bBelongsToTrip: bBelongsToTrip
             });
           }
         }
@@ -444,7 +456,10 @@
         return results;
       }
 
-      var infoWindow = null;
+      var activeMarkerInfo = {
+        marker: null,
+        bBelongsToTrip: false
+      };
       function addMarker(props){
         var marker = new google.maps.Marker({
           position: props.coords,
@@ -455,14 +470,23 @@
 
         if(props.content){
           marker.addListener('click', function(){
-            if(infoWindow==null){
-              infoWindow = new google.maps.InfoWindow();
+            if(activeMarkerInfo.marker!=null){
+              if(activeMarkerInfo.bBelongsToTrip){
+                activeMarkerInfo.marker.setIcon(i_green_black_battery);
+              }
+              else{
+                activeMarkerInfo.marker.setIcon(i_black_battery);
+              }
+            }
+            if(props.bBelongsToTrip){
+              marker.setIcon(ig_green_black_battery);
             }
             else{
-              infoWindow.close();
+              marker.setIcon(ig_black_battery);
             }
-            infoWindow.setContent(props.content);
-            infoWindow.open(map, marker);
+            activeMarkerInfo.marker = marker;
+            activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
+
             var results = calculateDisDur(props.coords);
 
             var checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
@@ -484,10 +508,10 @@
               dataType: "json",
               success: function(data){
                 if(data.status){
-                  openNav(props.content, props.storePhoto, props.id, uncheckin_button, props.trip_url, props.directions_url, results);
+                  openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
                 }
                 else{
-                  openNav(props.content, props.storePhoto, props.id, checkin_button, props.trip_url, props.directions_url, results);
+                  openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
                 }
               },
 
@@ -519,7 +543,7 @@
 
           addMarker({
             coords: position,
-            iconImage: 'http://maps.google.com/mapfiles/ms/micons/restaurant.png',
+            iconImage: friendly_store_icon,
             content: infoWindowContent,
             storePhoto: gon.friendly_stores[i].main_photo,
             directions_url: directions_url,
@@ -544,6 +568,31 @@
           zoomControl: false
         });
 
+        i_black_battery = {
+          url: "icons/i_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_black_battery = {
+          url: "icons/ig_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        i_green_black_battery = {
+          url: "icons/i_green_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_green_black_battery = {
+          url: "icons/ig_green_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        friendly_store_icon = {
+          url: "icons/shop.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
         directionsDisplay.setMap(map);
 
         //displayFriendlyStores();
@@ -565,13 +614,15 @@
 
             // --- gostations_belongs_to_trip
             setNearbyInfobox(gon.gostations_belongs_to_trip,
+                             true,
                              userCurrentPos,
-                             'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
+                             i_green_black_battery);
 
             // --- gostations_not_belongs_to_trip
             setNearbyInfobox(gon.gostations_not_belongs_to_trip,
+                             false,
                              userCurrentPos,
-                             'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
+                             i_black_battery);
 
           }, function() {
             alert('can not get current position in 2 sec！');
@@ -594,13 +645,6 @@
 
       }
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
-
       function geocodeAddress(geocoder, map) {
         var address = document.getElementById('end').value;
         geocoder.geocode({'address': address}, function(results, status) {
@@ -619,7 +663,7 @@
       }
 
 
-      function setNearbyInfobox(gostations, des, img) {
+      function setNearbyInfobox(gostations, bBelongsToTrip, des, img) {
         for(var i=0; i<gostations.length; i++){
           var position = {};
           position.lat = gostations[i].Latitude;
@@ -635,7 +679,8 @@
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              trip_url: gostationInfo.trip_url
+              trip_url: gostationInfo.trip_url,
+              bBelongsToTrip: bBelongsToTrip
             });
           }
           
@@ -656,13 +701,15 @@
 
           // --- gostations_belongs_to_trip
           setNearbyInfobox(gon.gostations_belongs_to_trip,
+                           true,
                            record[0].geometry.location,
-                           'http://maps.google.com/mapfiles/ms/micons/orange-dot.png');
+                           i_green_black_battery);
 
           // --- gostations_not_belongs_to_trip
           setNearbyInfobox(gon.gostations_not_belongs_to_trip,
+                           false,
                            record[0].geometry.location,
-                           'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
+                           i_black_battery);
         };
       }
 
