@@ -46,29 +46,29 @@ module Merit
       # end
 
       grant_on 'users/registrations#create', badge: 'just-registered', model_name: 'User'
-      grant_on 'trips#index', badge: 'check-out-trip'
-      grant_on 'trip_gostations#check', badge: 'check-gostation' do |trip_gostation|
+      grant_on 'trips#index', badge_id: 7
+      grant_on 'trip_gostations#check', badge_id: 8 do |trip_gostation|
         trip_gostation.status
       end
 
       
-      grant_on 'trip_gostations#check', badge_id: 1 do |trip_gostation|
+      grant_on 'trip_gostations#check', badge_id: 2 do |trip_gostation|
         trip_gostation.trip_id == 1 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
       end
 
-      grant_on 'trip_gostations#check', badge_id: 2 do |trip_gostation|
+      grant_on 'trip_gostations#check', badge_id: 3 do |trip_gostation|
         trip_gostation.trip_id == 2 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
       end
 
-      grant_on 'trip_gostations#check', badge_id: 3 do |trip_gostation|
+      grant_on 'trip_gostations#check', badge_id: 4 do |trip_gostation|
         trip_gostation.trip_id == 3 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
       end
       
-      grant_on 'trip_gostations#check', badge_id: 4 do |trip_gostation|
+      grant_on 'trip_gostations#check', badge_id: 5 do |trip_gostation|
         trip_gostation.trip_id == 4 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
       end
 
-      grant_on 'trip_gostations#check', badge_id: 5 do |trip_gostation|
+      grant_on 'trip_gostations#check', badge_id: 6 do |trip_gostation|
         trip_gostation.trip_id == 5 && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
       end
 
