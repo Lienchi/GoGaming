@@ -22,6 +22,8 @@
       <div class="user-badges clearfix">
         <% @user.badges.each do |badge| %>
           <div class="user-badge thumbnail card col-xs-4">
+            <%= image_tag (badge.custom_fields[:img_url]) %>
+            <%= image_tag (badge.custom_fields[:image]) %>
             <%= image_tag ("badges/#{badge.name}.svg") %>
             <div class="caption text-center">
               <p><%= badge.name %></p>
