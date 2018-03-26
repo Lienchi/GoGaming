@@ -52,6 +52,18 @@
       <div id="myBar"></div>
     </div>
     <div id="map"></div>
+    <%= form_for [@trip, @comment] do |f|%>
+      <%= f.text_area :comment %>
+      <%= f.submit %>
+    <% end%>
+    <% @comments.each do |comment|%>
+      <%= image_tag comment.user.avatar %>
+      <%= comment.user.name%>
+      <%= comment.user.level%>
+      <%= comment.comment %>
+      <%= comment.created_at %>
+    <% end%>
+
   
 
     <script type="text/javascript">

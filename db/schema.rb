@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323060134) do
+ActiveRecord::Schema.define(version: 20180326093838) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20180323060134) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "trip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "followships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "following_id"
@@ -54,6 +62,7 @@ ActiveRecord::Schema.define(version: 20180323060134) do
     t.string "AvailableTime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "StorePhoto"
   end
 
   create_table "merit_actions", force: :cascade do |t|
@@ -111,6 +120,8 @@ ActiveRecord::Schema.define(version: 20180323060134) do
     t.datetime "updated_at", null: false
     t.integer "stations"
     t.text "gostations_index"
+    t.string "description"
+    t.string "image"
   end
 
   create_table "users", force: :cascade do |t|

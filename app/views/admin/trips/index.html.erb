@@ -10,6 +10,10 @@
           <div class="form-group">
             <%= f.text_field :name, placeholder: "Trip Name", class: "form-control" %>
             <%= f.text_field :gostations_index, placeholder: "Gostations", class: "form-control" %>
+            <%= f.text_field :description, placeholder: "description", class: "form-control" %>
+
+            <%= f.file_field :image %>
+            <%= image_tag @trip.image, width: "300px" if @trip.image? %>
           </div>
           <%= f.submit class: "btn btn-primary" %>
           <% if @trip.errors.any? %>
@@ -23,7 +27,9 @@
           <tr>
             <th>#</th>
             <th>Trip Name</th>
+            <th>Trip Picture</th>
             <th>Gostations index</th>
+            <th>Description</th>
             <th>#</th>
           </tr>
         </thead>
@@ -32,7 +38,9 @@
           <tr>
             <th scope="row"><%= trip.id %></th>
             <td><%= trip.name %></td>
+            <td><%=image_tag  trip.image%></td>
             <td><%= trip.gostations_index %></td>
+            <td><%= trip.description%></td>
             <td>
               <%= link_to 'Edit', admin_trips_path(id: trip.id) %> | 
               <%= link_to 'Delete', admin_trip_path(trip), method: :delete, data: { confirm: "Are you sure?" } %>
