@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 
   def leaderboards
     @scores = Merit::Score.top_scored
-    @friendscores = Merit::Score.top_scored
+    @friends = current_user.followings
+
   end
 
 
