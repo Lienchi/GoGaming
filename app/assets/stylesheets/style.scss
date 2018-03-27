@@ -1,11 +1,5 @@
-.nav-style{
-  background:#FFFFFF;
-  padding: 20px 30px;
-  border:none;
-  margin-bottom:0;
-}
-.challenge-create{
-  border:10px solid #DDDDDD;
+.border{
+  border:1px solid red;
 }
 
 html, body {
@@ -13,39 +7,50 @@ html, body {
   margin: 0;
   padding: 0;
 }
-hr{
-  border:1px solid  #A9A9A9;
-}
-.nav-icon{
-  margin: 2px 2px;
-  display: inline-block;
-  font-size: 2em;
-  color: #1E90FF;
-  padding: 2px 5px;
-}
-.background-solid{
-  background:#E0FFFF;
-  
-}
+
 /*
 h2{
   animation: zoom 1s ease-in-out 0s 1 normal forwards;
 }
 */
+
 #map {
   height: 500px;
   border: 5px solid #DDDDDD;
 }
 
-.container a{text-decoration:none;}
-.btn a {
-  text-decoration:none;
+.thumbnail{
+  border:none;
 }
-.fixed-bottom{
-  position:fixed;
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
 }
-.card{
-  float:left;
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/*nav*/
+
+.nav-style{
+  background:#FFFFFF;
+  padding: 5px 20px;
+  border:none;
+  margin-bottom:0;
+}
+
+.nav-icon{
+  margin: 1px 1px;
+  display: inline-block;
+  font-size: 2em;
+  color:#228B22;
+  padding: 2px 5px;
+}
+
+.nav-icon a {
+text-decoration:none; 
 }
 
 /*user */
@@ -54,44 +59,25 @@ input[type='file'] {
   color: transparent;
 }
 
-.monitor-inner-shadow{
-  box-shadow:1px 1px 3px 2px rgba(10%,20%,40%,0.5) inset;
-}
-
-#main{
-  background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
-}
-
-.border{
-  padding:10px;
-  border: 1px solid #DDDDDD;
-  background: white;
-  border-radius:10px;
-}
-
 .media{
-  border-bottom:1px solid #DDDDDD;
+  margin-top: 0 ;
+  margin-bottom:10px;
 }
 
-.media-body{
-  padding:10px;
-}
-
-.media-body h4{
-  
-}
 
 .media-heading img{
-  width:30px;
-  height:30px;
+ width:20%;
+ height:20%;
 
 }
-.thumbnail{
-  border:none;
+.monitor{
+  margin:0 auto;
+  border:2px solid #AAAAAA;
+  border-radius:10px;
+  width:90%;
 }
-.badges-container{
-  padding:10px;
-  border: 1px solid #DDDDDD;
+.uploader{
+  padding: 0 10%;
 }
 .user-badge{
   cursor:pointer;
@@ -103,25 +89,8 @@ input[type='file'] {
   transition:all .4s linear;
 }
 
+
 /* users#index*/
-
-.table{
-  backgroud:#FFFFF;
-}
-
-/*devise*/
-
-.monitor{
-  width:90%;
-  padding: 30px 20px;
-  margin: 20px auto;
-}
-.background{
-   background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
-}
-.station-buttom{
-  padding-top: 130px;padding-bottom: 130px;
-}
 
 /*trips#index*/
 .carousel-control.left, .carousel-control.right {

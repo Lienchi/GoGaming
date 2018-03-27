@@ -1,18 +1,18 @@
-<div class="user-background" style="padding:0 15px;">
-  <div class="border table-responsive">
+<div class="media" style="padding:0 18px;">
+  <div class="border table-responsive" style="border-radius: 10px;">
     <table class="table">
       <thead>
         <tr>
           <th class=""></th>
           <th class="">Name</th>
           <th class="">
-            <%= image_tag(("level.png"), :class => "img-responsive")%>
+            <%= image_tag("icons/Lv.png")%>
           </th>
           <th class="">
-            <%= image_tag(("badge.png"), :class => "img-responsive") %>
+            <%= image_tag("icons/B.png")%>
           </th>
           <th class="">
-            <%= image_tag(("point.png"), :class => "img-responsive")%>
+            <%= image_tag("icons/G.png")%>
           </th>
         </tr>
       </thead>
@@ -21,9 +21,9 @@
           <tr>
             <td><%= image_tag ("#{user.check_avatar(user)}"), class: "img-responsive"%></td>
             <td><%= user.name %><%= render partial: "shared/follow", locals: {user: user}%></td>
-            <td><%= image_tag(("level.png"), :class => "img-responsive")%><%= user.level%></td>
-            <td><%= image_tag(("badge.png"), :class => "img-responsive")%><%= user.badges.count%></td>
-            <td><%= image_tag(("point.png"), :class => "img-responsive")%><%= user.points%></td>
+            <td><%= user.level%></td>
+            <td><%= user.badges.count%></td>
+            <td><%= user.points%></td>
           </tr>
         <%end%>
       </tbody>

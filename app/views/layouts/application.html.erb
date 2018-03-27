@@ -22,37 +22,28 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          
           <% if current_user %>
-          <%= link_to root_path do %>
             <div class="nav-icon">
-              <i class="fas fa-location-arrow"></i>
+              <%= link_to root_path do %>
+                <%= image_tag "icons/map icon.png", style:"width:35px;height:35px;"%>
+              <% end %>
             </div>
-          <% end %>
-          <%= link_to trips_path do %>
-            <div class="nav-icon" >
-              <i class="fas fa-gamepad"></i>
+            <div class="nav-icon">
+              <%= link_to trips_path do %>
+                <%= image_tag "icons/Station.png", style:"width:35px;height:35px;"%>
+              <% end %>
             </div>
-          <% end %>
-          <% if controller?("trips") && action?("show")%>
-            <button class="btn trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
-          <%end%>
-
-
-          <%= link_to user_path(current_user) do %>
-            <div class="nav-icon pull-right" >
-              <%= image_tag "point.png", style: "width:35px;height:35px;"%>
-              <%= current_user.points%>
-            </div>
-          <% end %>
-          <!--
-          <% if controller?("users") && action?("show") %>
-            <a class= "navbar-brand pull-right">Profile</a>
-          <%end%>
-        -->
+            <% if controller?("trips") && action?("show")%>
+              <button class="btn trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
+            <%end%>
+            <%= link_to user_path(current_user) do %>
+              <div class="nav-icon">
+                <%= image_tag "icons/G.png", style:"width:35px;height:35px;"%>
+                <%= current_user.points%>
+              </div>
+            <% end %>
           <%end%>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="pull-right text-right nav navbar-nav">
@@ -67,46 +58,27 @@
         </div>
       </div>
     </nav>
+    <!-- Alert-->
     <% if flash[:notice] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= notice %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= notice %>
+          </div>
         </div>
       </div>
-    </div>
     <% end %>
-
     <% if flash[:alert] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= alert %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= alert %>
+          </div>
         </div>
       </div>
-    </div>
-    <% end %>
-    
+    <% end %> 
     <%= yield %>
-    <script type="text/javascript">
-      (function ($) {
-        'use strict';
-         var $body    = $('html, body'), // Define jQuery collection 
-         content  = $('#main').smoothState({
-           onStart : {
-             duration: 250,
-             render: function () {
-               content.toggleAnimationClass('is-exiting');
-            // Scroll user to the top
-               $body.animate({ 'scrollTop': 0 });
-              }
-            }
-          }).data('smoothState');
-        })(jQuery);
-
-    </script>
-
   </body>
 </html>
