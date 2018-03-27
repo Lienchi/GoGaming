@@ -20,7 +20,7 @@
       <div class="user-badges clearfix">
         <% @user.badges.each do |badge| %>
           <div class="user-badge thumbnail card col-xs-4">
-            <%= image_tag ("badges/#{badge.name}.svg") %>
+            <%= image_tag (badge.custom_fields[:image]) %>
             <div class="caption text-center">
               <p><%= badge.name %></p>
             </div>

@@ -1,0 +1,2 @@
+class Friendlystore < ApplicationRecord
+end

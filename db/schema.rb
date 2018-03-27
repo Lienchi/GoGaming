@@ -51,6 +51,21 @@ ActiveRecord::Schema.define(version: 20180326093838) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "friendlystores", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.text "discount"
+    t.text "address"
+    t.text "source_title"
+    t.text "source_url"
+    t.string "open_time"
+    t.text "main_photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "gostations", force: :cascade do |t|
     t.string "LocName"
     t.float "Latitude"
@@ -63,6 +78,7 @@ ActiveRecord::Schema.define(version: 20180326093838) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "StorePhoto"
+    t.integer "BatteryCells"
   end
 
   create_table "merit_actions", force: :cascade do |t|
