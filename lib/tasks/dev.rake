@@ -1,3 +1,5 @@
+require 'net/http'
+
 def find_zh_TW(list)
   list['List'].each do |data|
     if data['Lang'] == 'zh-TW'
