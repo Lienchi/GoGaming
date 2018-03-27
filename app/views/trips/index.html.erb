@@ -1,7 +1,7 @@
 <div class="background container">
-  <div class="border col-xs-12 station">
-    <h3 class="text-center">My Station</h3>
-      <div id="myCarousel" class="carousel slide border" data-ride="carousel">
+  <div class="border col-xs-12 station box-shadow-right">
+    <h2 class="text-center">My Station</h2>
+      <div id="myCarousel" class="carousel slide border monitor-inner-shadow" data-ride="carousel">
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" style="height:150px;">
@@ -28,10 +28,10 @@
       </div>
       <div class="badges-container border station clearfix col-xs-12" >
         <% @trips.each do |t| %>
-          <div class="thumbnail card col-xs-5 col-md-2 " style="border-radius: 25px;background-color: green;border:1px solid #2F4F4F;margin:10px 10px;">
-            <%= image_tag ("101.jpg"), style: "border-radius: 25px;border: 1px solid #2F4F4F;"%>
+          <div class="thumbnail card col-xs-5 col-md-2 bettery >
+            <%= image_tag ("101.jpg"), style:"border-radius: 20px;border: 1px solid #2F4F4F;"%>
             <h4 class="text-center bettery-logo">Gogoro</h4>
-            <div class="caption" style="border-radius: 25px;background-color: #006400;border:1px solid #2F4F4F">
+            <div class="caption" style="border-radius: 20px;background-color: #006400;border:1px solid #2F4F4F">
               <p class="text-center" style="color:#DDDDDD;">
                 <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
                   <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>

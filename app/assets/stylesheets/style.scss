@@ -1,17 +1,40 @@
+.nav-style{
+  background:#FFFFFF;
+  padding: 20px 30px;
+  border:none;
+  margin-bottom:0;
+}
+.challenge-create{
+  border:10px solid #DDDDDD;
+}
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+hr{
+  border:1px solid  #A9A9A9;
 }
 .nav-icon{
   margin: 2px 2px;
   display: inline-block;
   font-size: 2em;
   color: #1E90FF;
-  padding: 2px 15px;
+  padding: 2px 5px;
 }
+.background-solid{
+  background:#E0FFFF;
+  
+}
+/*
+h2{
+  animation: zoom 1s ease-in-out 0s 1 normal forwards;
+}
+*/
 #map {
   height: 500px;
+  border: 5px solid #DDDDDD;
 }
 
 .container a{text-decoration:none;}
@@ -27,6 +50,14 @@ html, body {
 
 /*user */
 
+input[type='file'] {
+  color: transparent;
+}
+
+.monitor-inner-shadow{
+  box-shadow:1px 1px 3px 2px rgba(10%,20%,40%,0.5) inset;
+}
+
 #main{
   background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
 }
@@ -39,12 +70,15 @@ html, body {
 }
 
 .media{
-  padding: 10px;
-  border: 1px solid #DDDDDD;
+  border-bottom:1px solid #DDDDDD;
 }
 
 .media-body{
   padding:10px;
+}
+
+.media-body h4{
+  
 }
 
 .media-heading img{
@@ -71,9 +105,6 @@ html, body {
 
 /* users#index*/
 
-.img-responsive { 
-  width:100%; 
-}
 .table{
   backgroud:#FFFFF;
 }
@@ -88,6 +119,9 @@ html, body {
 .background{
    background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
 }
+.station-buttom{
+  padding-top: 130px;padding-bottom: 130px;
+}
 
 /*trips#index*/
 .carousel-control.left, .carousel-control.right {
@@ -95,14 +129,24 @@ html, body {
 }
 
 .station{
-  background: linear-gradient(to bottom,  #F5F5F5,  #DCDCDC)
+  background: linear-gradient(to bottom,  #F5F5F5,  #DCDCDC);
+}
+.box-shadow-right{
+  box-shadow: inset -5px -5px 10px 5px  #A9A9A9;
 }
 
+.bettery{
+  border-radius: 25px;
+  background-color: green;
+  border:1px solid #2F4F4F;
+  margin:10px 10px;
+  box-shadow: inset 5px 5px 5px 8px #006400;
+  animation:betterylight 1s ease-in-out 4s 1 normal forwards;
+}
 
 .bettery-logo{
   color:#DDDDDD;
-  background: linear-gradient(to left,#008800,#006400)
-
+  background: linear-gradient(to left,#008800,#006400);
 }
 .typewriter{
   overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -113,22 +157,24 @@ html, body {
   animation: 
     typing 2.5s steps(40, end),
     blink-caret .75s step-end infinite;
+  animation-delay: 1s;
 }
 /*trips#show*/
 
-
+/*
 .half-oval{
   background: linear-gradient(to right, #228B22 , #00FA9A);
-  width: 80%;
+  width: 90%;
   height: 50px;
   border-radius: 50% / 100%;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   margin: 0 auto;
+  box-shadow: inset 5px 5px 10px 8px #3CB371;
 }
 .half-oval-inner{
   background: linear-gradient(to right,#227700, #00DD77);
-  width: 85%;
+  width: 90%;
   height: 40px;
   border-radius: 50% / 100%;
   border-bottom-left-radius: 0;
@@ -136,37 +182,44 @@ html, body {
   margin: 0 auto;
   border-bottom:1px solid linear-gradient(to right,#227700,#00AA55);
 }
+*/
 #myProgress{
-  position:fixed;
-  top:20%;
-  right:12%;
-  z-index:1;
-  width:550px;
-  background-color:black;
+  margin: 0 auto;
+  top:5%;
+  width:90%;
+  background-color:#FFFFFF;
   border-radius:50px;
   border: 2px solid #DDDDDD;
-  transform:rotate(-90deg);
-  transform-origin:100% 100%
 }
 
 #myBar{
   width:25%;
   height:20px;;
-  background: linear-gradient(to right,#227700, #00DD77);
+  background: linear-gradient(to right, #6495ED, #E0FFFF);
   border-radius:50px;
 }
 
 
 .trip-button{
-  display:block;
-  margin: 0 auto;
-  border:2px solid #BBFF66;
+  border:2px solid #6495ED;
   background-color: #F5F5F5;
+  animation:tripbutton 0.3s ease-in-out 0s infinite;
 }
+
+.comment-group{
+  width:90%;
+  margin:auto;
+}
+.comment{
+  background:#FFFFFF;
+  border-radius:20px;
+  margin-bottom:10px;
+}
+
 /* The typing effect */
 @keyframes typing {
-  from { width: 0;}
-  to { width: 100% ;}
+  from { width: 0;opacity:0;}
+  to { width: 100% ;opacity:1;}
 }
 
 /* The typewriter cursor effect */
@@ -175,6 +228,24 @@ html, body {
   50% { border-color: orange; }
 }
 
+/* Text transition*/
+
+@Keyframes zoom{
+  from{font-size:0px;}
+  to{font-size:25px;}
+}
+
+/*bettery frame*/
+
+@keyframes betterylight{
+  from{opacity:0;}
+  to{opacity:1;box-shadow:0px 0px 10px #00FF00;}
+}
+
+@Keyframes tripbutton{
+  from{}
+  to{box-shadow:0px 0px 10px #6495ED;}
+}
 
 /*
  * Keyframes
