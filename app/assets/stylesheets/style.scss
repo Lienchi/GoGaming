@@ -1,3 +1,13 @@
+.nav-style{
+  background:#FFFFFF;
+  padding: 20px 30px;
+  border:none;
+  margin-bottom:0;
+}
+.challenge-create{
+  border:10px solid #DDDDDD;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -11,14 +21,20 @@ hr{
   display: inline-block;
   font-size: 2em;
   color: #1E90FF;
-  padding: 2px 15px;
+  padding: 2px 5px;
 }
-
+.background-solid{
+  background:#E0FFFF;
+  
+}
+/*
 h2{
   animation: zoom 1s ease-in-out 0s 1 normal forwards;
 }
+*/
 #map {
   height: 500px;
+  border: 5px solid #DDDDDD;
 }
 
 .container a{text-decoration:none;}
@@ -145,7 +161,7 @@ input[type='file'] {
 }
 /*trips#show*/
 
-
+/*
 .half-oval{
   background: linear-gradient(to right, #228B22 , #00FA9A);
   width: 90%;
@@ -166,36 +182,39 @@ input[type='file'] {
   margin: 0 auto;
   border-bottom:1px solid linear-gradient(to right,#227700,#00AA55);
 }
-
+*/
 #myProgress{
-  position:fixed;
-  top:20%;
-  right:5%;
-  z-index:1;
-  width:550px;
-  background-color:black;
+  margin: 0 auto;
+  top:5%;
+  width:90%;
+  background-color:#FFFFFF;
   border-radius:50px;
   border: 2px solid #DDDDDD;
-  transform:rotate(-90deg);
-  transform-origin:100% 100%
 }
 
 #myBar{
   width:25%;
   height:20px;;
-  background: linear-gradient(to right,#227700, #00DD77);
+  background: linear-gradient(to right, #6495ED, #E0FFFF);
   border-radius:50px;
 }
 
 
 .trip-button{
-  display:block;
-  margin: 0 auto;
-  border:2px solid #BBFF66;
+  border:2px solid #6495ED;
   background-color: #F5F5F5;
   animation:tripbutton 0.3s ease-in-out 0s infinite;
 }
 
+.comment-group{
+  width:90%;
+  margin:auto;
+}
+.comment{
+  background:#FFFFFF;
+  border-radius:20px;
+  margin-bottom:10px;
+}
 
 /* The typing effect */
 @keyframes typing {
@@ -225,7 +244,7 @@ input[type='file'] {
 
 @Keyframes tripbutton{
   from{}
-  to{box-shadow:0px 0px 10px #00FF00;}
+  to{box-shadow:0px 0px 10px #6495ED;}
 }
 
 /*

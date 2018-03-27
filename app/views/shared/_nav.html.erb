@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>GoGaming</title>
-    <%= csrf_meta_tags %>
-    <%= Gon::Base.render_data %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
-  </head>
-
-  <body>
-    <!-- 導覽列 -->
-    <nav class="navbar navbar-default nav-style">
+<!-- 導覽列 -->
+    <nav class="navbar navbar-default nav-style navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -66,46 +53,3 @@
         </div>
       </div>
     </nav>
-    <% if flash[:notice] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= notice %>
-        </div>
-      </div>
-    </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= alert %>
-        </div>
-      </div>
-    </div>
-    <% end %>
-    
-    <%= yield %>
-    <script type="text/javascript">
-      (function ($) {
-        'use strict';
-         var $body    = $('html, body'), // Define jQuery collection 
-         content  = $('#main').smoothState({
-           onStart : {
-             duration: 250,
-             render: function () {
-               content.toggleAnimationClass('is-exiting');
-            // Scroll user to the top
-               $body.animate({ 'scrollTop': 0 });
-              }
-            }
-          }).data('smoothState');
-        })(jQuery);
-
-    </script>
-
-  </body>
-</html>
