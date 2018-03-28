@@ -37,10 +37,11 @@
               <button class="btn trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
             <%end%>
             <%= link_to user_path(current_user) do %>
-              <div class="nav-icon">
+              <div class="nav-icon pull-right" style="padding: 2px 10px 0 2px;"><%= current_user.points%></div>
+              <div class="nav-icon pull-right">
                 <%= image_tag "icons/G.png", style:"width:35px;height:35px;"%>
-                <%= current_user.points%>
               </div>
+
             <% end %>
           <%end%>
         </div>
