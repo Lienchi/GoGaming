@@ -19,12 +19,23 @@ class User < ApplicationRecord
   has_many :followships, dependent: :destroy
   has_many :followings, through: :followships
 
+  has_many :comments, dependent: :destroy
+  has_many :commented_trips, through: :comments, source: :trip
+
   def admin?
     self.role == "admin"
   end
    
   def following?(user)
     self.followings.include?(user)
+  end
+  
+  def check_avatar(user)
+    if user.avatar.nil?
+      "avatar.png"
+    else
+      user.avatar
+    end
   end
   
 end

@@ -1,35 +1,54 @@
-<div class="container">
+<div class="background container">
+  <div class="border col-xs-12 station box-shadow-right">
+    <h2 class="text-center">My Station</h2>
+      <div id="myCarousel" class="carousel slide border monitor-inner-shadow" data-ride="carousel">
 
-  <div class="jumbotron">
-    <h1>!挑戰路線!</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cum earum eveniet omnis nostrum corporis excepturi repellendus at, cupiditate ut.</p>
-  </div>
-
-  <div class="row">
-    <div >
-      <% @trips.each do |t| %>
-        <div class="thumbnail card col-xs-12 col-md-4">
-          <img src="..." alt="...">
-          <div class="caption">
-            <p class="text-right">
-              <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
-                <button class="btn btn-primary">Done</button>
-              <%else%>
-                <button class="btn btn-primary">Go</button>
-                <%= link_to "#{t.name}", trip_path(t), class: "btn btn-primary"  %>
-              <% end %> 
-            </p>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" style="height:150px;">
+          <div class="item active">
+            <p class="text-center typewriter" style="margin-top:30px;">歡迎來到Go Fan的Go Station，<br/>你的充電站還有"五顆"未充飽的電池，<br/>現在就選擇一顆電池為他充電吧!</p>
           </div>
-          <div>
-            <% @followings.each do |following| %>
-              <% if t.is_challenged?(following) %>
-                <%= following.email%> 已完成挑戰
-              <% end %>
-            <% end %>
+          <div class="item">
+            <%= image_tag ("101.jpg"), style:"height:145px;width:100%;"%>
+          </div>
+          <div class="item">
+            <%= image_tag ("cks.jpg"), style:"height:145px;width:100%;"%>
           </div>
         </div>
-      <%end%>
-    </div>
-  </div>
 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div class="badges-container border station clearfix col-xs-12" >
+        <% @trips.each do |t| %>
+          <div class="thumbnail card col-xs-5 col-md-2 bettery >
+            <%= image_tag ("101.jpg"), style:"border-radius: 20px;border: 1px solid #2F4F4F;"%>
+            <h4 class="text-center bettery-logo">Gogoro</h4>
+            <div class="caption" style="border-radius: 20px;background-color: #006400;border:1px solid #2F4F4F">
+              <p class="text-center" style="color:#DDDDDD;">
+                <% if t.is_challenged?(current_user) %> <!--不知為啥只check一個就變true-->
+                  <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
+                <%else%>
+                  <%= link_to "#{t.name}", trip_path(t), style: "color:#DDDDDD;"%>
+                <% end %> 
+              </p>
+              <% @followings.each do |following| %>
+                <% if t.is_challenged?(following) %>
+                  <%= following.email%> 已完成挑戰
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <%end%>
+      </div> 
+  </div>
 </div>
+
+

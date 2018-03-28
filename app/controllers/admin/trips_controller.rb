@@ -37,7 +37,7 @@ class Admin::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :gostations_index)
+    params.require(:trip).permit(:name, :gostations_index, :description, :image)
   end
 
   def set_trip
