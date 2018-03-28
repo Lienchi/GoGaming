@@ -3,27 +3,27 @@
     <table class="table">
       <thead>
         <tr>
-          <th class=""></th>
-          <th class="">Name</th>
-          <th class="">
-            <%= image_tag("icons/Lv.png")%>
+          <th class="col-xs-3"></th>
+          <th class="col-xs-3">Name</th>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/Lv.png")%>
           </th>
-          <th class="">
-            <%= image_tag("icons/B.png")%>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/B.png")%>
           </th>
-          <th class="">
-            <%= image_tag("icons/G.png")%>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/G.png")%>
           </th>
         </tr>
       </thead>
       <tbody class="text-center">
         <% @users.each do |user|%>
           <tr>
-            <td><%= image_tag ("#{user.check_avatar(user)}"), class: "img-responsive"%></td>
-            <td><%= user.name %><%= render partial: "shared/follow", locals: {user: user}%></td>
-            <td><%= user.level%></td>
-            <td><%= user.badges.count%></td>
-            <td><%= user.points%></td>
+            <td class="col-xs-3"><%= link_to image_tag("#{user.check_avatar(user)}"), user_path(user, class: "img-responsive")%></td>
+            <td class="col-xs-3"><%= link_to "#{user.name}",user_path(user) %><%= render partial: "shared/follow", locals: {user: user}%></td>
+            <td class="col-xs-2"><%= user.level%></td>
+            <td class="col-xs-2"><%= user.badges.count%></td>
+            <td class="col-xs-2"><%= user.points%></td>
           </tr>
         <%end%>
       </tbody>

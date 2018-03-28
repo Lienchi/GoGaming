@@ -34,11 +34,23 @@ img {
 }
 /*nav*/
 
+.navbar{
+  position: relative;
+}
+.brand{
+  position:absolute;
+  left:50%;
+  margin-left:-50px !important;
+}
+
 .nav-style{
   background:#FFFFFF;
-  padding: 5px 20px;
+  padding: 5px 5px 0px 20px;
   border:none;
   margin-bottom:0;
+}
+.navbar-header button{
+  border:none;
 }
 
 .nav-icon{
@@ -49,8 +61,20 @@ img {
   padding: 5px 5px;
 }
 
+.nav-number{
+  margin: 1px 1px;
+  display: inline-block;
+  font-size: 1.5em;
+  color: #7AAB37;
+  padding-top:5px;
+
+}
+
 .nav-icon a {
 text-decoration:none; 
+}
+.table a {
+  text-decoration:none;
 }
 
 /*user */

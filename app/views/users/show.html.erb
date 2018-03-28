@@ -1,6 +1,6 @@
-<div class="media border">
-  <div class="monitor clearfix" >
-    <div class="media-left media-middle col-xs-5 col-sm-3 col-md-3 border clearfix">
+<div class="media border col-xs-12 col-sm-12 col-md-12">
+  <div class="border clearfix  col-sm-6 col-md-6" >
+    <div class="media-left media-middle col-xs-5 col-sm-6 col-md-4 border clearfix">
       <div class="thumbnail border">
         <%= image_tag @user.avatar, class: "media-object img-circle avatar border "%>
       </div>
@@ -13,44 +13,48 @@
       </div>
     </div>
     <div class="media-body border">
-      <div class="col-xs-12 border" >
-        <div class="media col-xs-12 col-sm-3 col-md-2 border">
+      <div class="col-xs-12 col-sm-12 col-md-12 border"  style="padding-top: 5%;">
+        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+          <div class="media-body media-middle">
+            <h4 class="media-heading text-center"><%= @user.name%></h4>
+          </div>
+        </div>
+        <div class="media col-xs-12 col-sm-12 col-md-12 border">
           <div class="media-left media-middle">
-            <%= image_tag(("icons/G.png"), class: "media-object",style: "width:30px;")%>
+            <%= image_tag(("navbar_icons/G.png"), class: "media-object",style: "width:30px;")%>
           </div>
           <div class="media-body">
             <h4 class="media-heading text-center">點數 <%= @user.points %></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-3 col-md-2 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 border">
           <div class="media-left media-middle">
-            <%= image_tag(("icons/B.png"), class: "media-object",style: "width:30px;")%>
+            <%= image_tag(("navbar_icons/B.png"), class: "media-object",style: "width:30px;")%>
           </div>
           <div class="media-body">
             <h4 class="media-heading text-center">徽章 <%= @user.badges.count%></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-3 col-md-2 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 border">
           <div class="media-left media-middle">
-            <%= image_tag(("icons/Lv.png"), class: "media-object",style: "width:30px;")%>
+            <%= image_tag(("navbar_icons/Lv.png"), class: "media-object",style: "width:30px;")%>
           </div>
           <div class="media-body">
             <h4 class="media-heading text-center">等級 <%= @user.level %></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-3 col-md-2 border">
-          <div class="media-left media-middle">
+        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+          <div class="media-body media-middle">
             <h4 class="media-heading text-center"><%= link_to "排行榜", users_path, class: "btn btn-danger btn-lg", style: "padding:2px 20px;"%></h4>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <br/>
-  <div class="monitor clearfix border"  >
+  <div class="border clearfix border col-sm-6 col-md-6"  >
     <div class="user-badges clearfix">
       <% @user.badges.each do |badge| %>
-        <div class="user-badge thumbnail card col-xs-4 col-sm-4 col-md-2">
+        <div class="user-badge thumbnail card col-xs-4 col-sm-4 col-md-3">
           <%= image_tag (badge.custom_fields[:image]) %>
           <div class="caption text-center">
             <p><%= badge.name %></p>
