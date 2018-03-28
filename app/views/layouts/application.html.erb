@@ -44,19 +44,19 @@
             </div>
             <div class="nav-icon">
               <%= link_to root_path do %>
-                <%= image_tag "navbar_icons/map", style: "width:20px;height:30px;"%>
+                <%= image_tag "navbar_icons/map.png", style: "width:25px;height:30px;"%>
               <% end %>
             </div>
             <div class="nav-icon">
               <%= link_to trips_path do %>
-                <%= image_tag "navbar_icons/Station",style: "width:20px;height:30px;"%>
+                <%= image_tag "navbar_icons/Station.png",style: "width:20px;height:30px;"%>
               <% end %>
             </div>
             <%= link_to user_path(current_user) do %>
               <div class="nav-number pull-right"><%= current_user.points%>
               </div>
               <div class="nav-icon pull-right">
-                <%= image_tag "navbar_icons/G", style: "width:20px;height:30px;"%>
+                <%= image_tag "navbar_icons/G.png", style: "width:30px;height:30px;"%>
               </div>
 
             <% end %>
