@@ -29,7 +29,12 @@ Rails.application.routes.draw do
   end 
   
 
-  resources :trips, only:[:index, :show] 
+  resources :trips, only: [:index, :show]
+
+  resources :trips, only: [:show] do
+    resources :comments, only: [:index, :create]
+  end
+   
 
   namespace :admin do
     root "gostations#index"

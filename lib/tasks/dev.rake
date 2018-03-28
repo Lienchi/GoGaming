@@ -1,3 +1,5 @@
+require 'net/http'
+
 def find_zh_TW(list)
   list['List'].each do |data|
     if data['Lang'] == 'zh-TW'
@@ -51,12 +53,37 @@ namespace :dev do
         District:      find_zh_TW( JSON.parse(data['District']) ),
         City:          find_zh_TW( JSON.parse(data['City']) ),
         AvailableTime: '24HR',
-        StorePhoto:    data['StorePhoto'][0]
+        StorePhoto:    data['StorePhoto'][0],
+        BatteryCells:  rand(1..4)*8
       )
     end
 
     puts "have created gostations!"
     puts "now you have #{Gostation.count} gostations!"
+  end
+
+  task parse_friendly_stores: :environment do
+    Friendlystore.destroy_all
+
+    json = JSON.parse(File.read('app/assets/javascripts/friendly_stores.json'))
+
+    json['friendly_stores'].each do |data|
+      Friendlystore.create!(
+        name: data['name'],
+        description: data['description'],
+        latitude: data['latitude'],
+        longitude: data['longitude'],
+        discount: data['discount'],
+        address: data['address'],
+        source_title: data['source_title'],
+        source_url: data['source_url'],
+        open_time: data['open_time'],
+        main_photo: data['main_photo']
+      )
+    end
+
+    puts "have created friendly stores!"
+    puts "now you have #{Friendlystore.count} friendly stores!"
   end
 
   task fake_user: :environment do
