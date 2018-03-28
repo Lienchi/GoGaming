@@ -4,7 +4,9 @@ class TripsController < ApplicationController
   def index
     @trips = Trip.all
     @followings = current_user.followings
-
+    @trips_count = Trip.all.count
+    @challenge_trips = Challenge.where(user_id: current_user).count
+    @unchallenge_trips = @trips_count - @challenge_trips
   end
 
   def show
@@ -15,5 +17,7 @@ class TripsController < ApplicationController
     @comments = Comment.where(trip_id: @trip)
   end
   
+
+
 
 end

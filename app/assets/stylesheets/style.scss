@@ -1,13 +1,18 @@
 .border{
-  border:1px solid red;
+  border:1px solid #AAAAAA;
+  border-radius:10px;
 }
+
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
 
+}
+.bottom{
+  padding: 150px 20px 150px 20px;
+}
 /*
 h2{
   animation: zoom 1s ease-in-out 0s 1 normal forwards;
@@ -93,12 +98,7 @@ input[type='file'] {
  height:20%;
 
 }
-.monitor{
-  margin:0 auto;
-  border:2px solid #AAAAAA;
-  border-radius:10px;
-  width:90%;
-}
+
 .uploader{
   padding: 0 10%;
 }
@@ -112,8 +112,6 @@ input[type='file'] {
   transition:all .4s linear;
 }
 
-
-/* users#index*/
 
 
 /*trips#index*/
@@ -153,32 +151,11 @@ input[type='file'] {
 }
 .badges-container a{
   text-decoration:none;
-  color:#227700;
+  color:#888888;
 }
 /*trips#show*/
 
-/*
-.half-oval{
-  background: linear-gradient(to right, #228B22 , #00FA9A);
-  width: 90%;
-  height: 50px;
-  border-radius: 50% / 100%;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin: 0 auto;
-  box-shadow: inset 5px 5px 10px 8px #3CB371;
-}
-.half-oval-inner{
-  background: linear-gradient(to right,#227700, #00DD77);
-  width: 90%;
-  height: 40px;
-  border-radius: 50% / 100%;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin: 0 auto;
-  border-bottom:1px solid linear-gradient(to right,#227700,#00AA55);
-}
-*/
+
 #myProgress{
   margin: 0 auto;
   top:5%;
@@ -196,10 +173,11 @@ input[type='file'] {
 }
 
 
+
 .trip-button{
   border:2px solid #6495ED;
   background-color: #F5F5F5;
-  animation:tripbutton 0.3s ease-in-out 0s infinite;
+  animation:tripbutton 0.3s ease-in-out 0s 12 normal forwards;
 }
 
 .comment-group{
@@ -208,7 +186,7 @@ input[type='file'] {
 }
 .comment{
   background:#FFFFFF;
-  border-radius:20px;
+  border-radius:10px;
   margin-bottom:10px;
 }
 
@@ -248,7 +226,7 @@ input[type='file'] {
 
 /*
  * Keyframes
- */
+
 
 @keyframes fadeIn {
   0% {
@@ -284,13 +262,13 @@ input[type='file'] {
   }
 }
 
-
+ */
 
 
 /*
  * CSS Page Transitions
  * Don't forget to add vendor prefixes!
- */
+   */
 .m-scene {
   /** Basic styles for an animated element */
   .scene_element {
@@ -314,9 +292,10 @@ input[type='file'] {
   .scene_element--fadeinright {
     animation-name: fadeInRight;
   }
-  }
+}
 
 
   .m-scene.is-exiting .scene-element {
   animation-direction: alternate-reverse;
   }
+

@@ -1,10 +1,10 @@
-<div class="media border col-xs-12 col-sm-12 col-md-12">
+<div class="media  col-xs-12 col-sm-12 col-md-12">
   <div class="border clearfix  col-sm-6 col-md-6" >
-    <div class="media-left media-middle col-xs-5 col-sm-6 col-md-4 border clearfix">
+    <div class="media-left media-middle col-xs-5 col-sm-6 col-md-4 clearfix">
       <div class="thumbnail border">
-        <%= image_tag @user.avatar, class: "media-object img-circle avatar border "%>
+        <%= image_tag @user.avatar, class: "media-object img-circle avatar "%>
       </div>
-      <div class="uploader border">
+      <div class="uploader ">
         <%= form_for @user do |f| %>
           <%= f.file_field :avatar, style: " width:150px;"%>
           <input class="btn btn-success btn-sm" type="submit" value="更新照片">
@@ -12,14 +12,14 @@
         <%end%>
       </div>
     </div>
-    <div class="media-body border">
-      <div class="col-xs-12 col-sm-12 col-md-12 border"  style="padding-top: 5%;">
-        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+    <div class="media-body ">
+      <div class="col-xs-12 col-sm-12 col-md-12 "  style="padding-top: 5%;">
+        <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-body media-middle">
             <h4 class="media-heading text-center"><%= @user.name%></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-left media-middle">
             <%= image_tag(("navbar_icons/G.png"), class: "media-object",style: "width:30px;")%>
           </div>
@@ -27,7 +27,7 @@
             <h4 class="media-heading text-center">點數 <%= @user.points %></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-left media-middle">
             <%= image_tag(("navbar_icons/B.png"), class: "media-object",style: "width:30px;")%>
           </div>
@@ -35,7 +35,7 @@
             <h4 class="media-heading text-center">徽章 <%= @user.badges.count%></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-left media-middle">
             <%= image_tag(("navbar_icons/Lv.png"), class: "media-object",style: "width:30px;")%>
           </div>
@@ -43,7 +43,7 @@
             <h4 class="media-heading text-center">等級 <%= @user.level %></h4>
           </div>
         </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 border">
+        <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-body media-middle">
             <h4 class="media-heading text-center"><%= link_to "排行榜", users_path, class: "btn btn-danger btn-lg", style: "padding:2px 20px;"%></h4>
           </div>

@@ -1,26 +1,26 @@
-<div class="container background">
-  <div class="border col-xs-12 station box-shadow-right">
+
+  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"">
     <h2 class="text-center">更改密碼</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, :class => 'form-horizontal text-center'}}) do |f| %>
         <%= devise_error_messages! %>
         <%= f.hidden_field :reset_password_token %>
-        <div class="border monitor monitor-inner-shadow">
+        <div class="border" style="padding:20px;">
           <div class="field form-group">
-            <%= f.label :password, "New password", class: "col-xs-4 control-label"%><br />
+            <%= f.label :password, "New password", class: "col-xs-4 control-label"%>
               <% if @minimum_password_length %>
                 <em>(<%= @minimum_password_length %> characters minimum)</em><br />
              <% end %>
             <%= f.password_field :password, autofocus: true, autocomplete: "off" , class: "float-left"%>
           <div class="field form-group">
-            <%= f.label :password_confirmation, "Confirm new password" %><br />
+            <%= f.label :password_confirmation, "Confirm new password", class: "col-xs-4 control-label"% %>
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left" %>
           </div>
         </div>
-        <hr/>
-        <div class="actions text-center station-buttom">
-          <input class="btn btn-success" type="submit" value="更改密碼" style= "margin-right: 20px;">
-          <%= render "devise/shared/links" %> 
+        <div class="col-xs-12 border clearfix bottom" >
+          <div class="actions text-center station-buttom">
+            <input class="btn btn-success" type="submit" value="更改密碼" style= "margin-right: 20px;">
+            <%= render "devise/shared/links" %> 
+          </div>
         </div>
       <% end %>
   </div>
-</div>

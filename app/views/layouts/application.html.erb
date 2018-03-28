@@ -7,31 +7,39 @@
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
-
   </head>
 
   <body>
     <!-- 導覽列 -->
     <nav class="navbar navbar-default nav-style">
-      <div class="container-fluid">
+      <div class="container-fluid ">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header ">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <div class="nav-icon brand">
+            <% if controller?("devise/sessions")||controller?("devise/passwords")||controller?("users/registrations")%>
+              <%= image_tag "gogoro.png", style:"width:100px;"%>
+            <%end%>
+          </div>
           <% if current_user %>
-            <div class="nav-icon border brand">
-              <% if controller?("users")%>
+            <div class="nav-icon brand">
+              <% if controller?("users")&& action?("show")%>
                 <%= image_tag "gogoro.png", style:"width:100px;"%>
+              <% elsif controller?("users")&& action?("index")%>
+                <h3 style="color:black;">排行榜</h3>
               <% elsif controller?("gostations")%>
                 <h3 style="color:black;"> 規劃路線</h3>
               <% elsif controller?("trips") && action?("index")%>
-                <h3 style="color:black;">My Station</h3>
+                <h3 style="color:black;"> 我的挑戰</h3>
+              <% elsif controller?("trips") && action?("show")%>
+                <h3>
+                  <button class="btn" data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding-top:0px;font-size:16px;color:black; "><%= @trip.name%></button>
+                </h3>
               <%end%>
             </div>
             <div class="nav-icon">
@@ -39,14 +47,11 @@
                 <%= image_tag "navbar_icons/map", style: "width:20px;height:30px;"%>
               <% end %>
             </div>
-            <div class="nav-icon border">
+            <div class="nav-icon">
               <%= link_to trips_path do %>
                 <%= image_tag "navbar_icons/Station",style: "width:20px;height:30px;"%>
               <% end %>
             </div>
-            <% if controller?("trips") && action?("show")%>
-              <button class="btn trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
-            <%end%>
             <%= link_to user_path(current_user) do %>
               <div class="nav-number pull-right"><%= current_user.points%>
               </div>
