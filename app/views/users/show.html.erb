@@ -11,8 +11,8 @@
       <div class="media-body">
         <h4 class="media-heading"><%= @user.name%></h4>
         <h4 class="media-heading"><%= image_tag("point.png")%> 點數 <%= @user.points %></h4>
-        <h4 class="media-heading"><%= image_tag("badge")%> 徽章 <%= @user.badges.count%></h4>
-        <h4 class="media-heading"><%= image_tag("level")%> 等級 <%= @user.level %></h4>
+        <h4 class="media-heading"><%= image_tag("badge.png")%> 徽章 <%= @user.badges.count%></h4>
+        <h4 class="media-heading"><%= image_tag("level.png")%> 等級 <%= @user.level %></h4>
         <%= link_to "排行榜", users_path, class: "btn btn-danger btn-sm"%>
       </div>
     </div>
