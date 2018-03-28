@@ -1,3 +1,5 @@
+require 'net/http'
+
 def find_zh_TW(list)
   list['List'].each do |data|
     if data['Lang'] == 'zh-TW'
@@ -89,7 +91,8 @@ namespace :dev do
 
     User.create!(
       email: "root@example.com",
-      password: "123456"
+      password: "123456",
+      role: "admin"
     )
     20.times do |i|
       User.create!(
