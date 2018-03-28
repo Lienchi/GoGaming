@@ -152,6 +152,75 @@ namespace :dev do
     puts "now you have #{TripGostation.count} TripGostations data!"
   end
 
+  task create_trip: :environment do
+    Trip.destroy_all
+
+    Trip.create!(name: "台北逛夜市")
+    Trip.create!(name: "新竹東西南北")
+    Trip.create!(name: "大口吃牛肉")
+    Trip.create!(name: "孤單終結")
+    Trip.create!(name: "北海小英雄")
+    Trip.create!(name: "台南直直撞")
+    Trip.create!(name: "高雄龍兄虎弟")
+
+    gostation_list = [
+                        ["台北捷運劍潭站", "台北捷運民權西路站", "中油信義路加油站",
+                         "Gogoro 饒河服務中心站", "Gogoro 師大和平店站A", "康定路機車停車場站"],
+
+                        ["中油竹東加油站", "中油關西加油站", "中油南寮加油站", "中油竹北加油站",
+                         "Gogoro 新竹北大店站"],
+
+                        ["Gogoro 師大和平店站A", "中油內湖加油站", "中油新生北路加油站",
+                         "Gogoro 信義松仁授權服務中心站", "中油中崙加油站"],
+
+                        ["先奕實業站", "便利停車場建國站", "艋舺公園地下停車場站",
+                         "台塑政大加油站", "中油振興路加油站"],
+
+                        ["中油石門加油站", "中油大嘉好加油站", "台北捷運淡水站",
+                         "台北捷運民權西路站", "中油信義路加油站"],
+
+                        ["7-ELEVEN 安安店站", "善化國小站", "7-ELEVEN 仁伯店站",
+                         "全聯台南明興店站", "Gogoro 台南公園店站"],
+
+                        ["中油軍校路加油站", "中油九曲堂加油站", "中油小港加油站",
+                         "中油旗津加油站", "九號倉會館站"]
+                     ]
+
+    idx = 0
+    Trip.all.each do |t|
+      t.gostations_index = []
+
+      gostation_list[idx].each do |g|
+        t.gostations_index.push(Gostation.where(LocName: g).first.id)
+      end
+      t.save
+      idx = idx + 1
+    end
+
+    puts "have created trips!"
+    puts "now you have #{Trip.count} trips data!"
+  end
+
+  task create_trip_gostation: :environment do
+    TripGostation.destroy_all
+    Trip.all.each do |t|
+      t.gostations_index.each do |gid|
+        User.all.each do |u|
+          TripGostation.create!(
+            user_id: u.id,
+            trip_id: t.id,
+            gostation_id: gid,
+            status: false
+          )
+        end
+      end
+    end
+
+
+    puts "have created fake TripGostations!"
+    puts "now you have #{TripGostation.count} TripGostations data!"
+  end
+
   task fake_point: :environment do
     User.all.each do |t|
       t.add_points(rand(1..500), category: 'fake')
