@@ -91,7 +91,8 @@ namespace :dev do
 
     User.create!(
       email: "root@example.com",
-      password: "123456"
+      password: "123456",
+      role: "admin"
     )
     20.times do |i|
       User.create!(
