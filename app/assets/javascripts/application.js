@@ -16,3 +16,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= retuire_tree .
+
+//= require social-share-button
