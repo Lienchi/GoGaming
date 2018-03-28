@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update] do
     collection do
       get :leaderboards
+      get :f_leaderboards
     end
   end
    

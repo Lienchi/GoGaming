@@ -16,8 +16,9 @@ class UsersController < ApplicationController
 
   def leaderboards
     @scores = Merit::Score.top_scored
-    # @friends = friends_leaderboards(current_user)
-    @friends = current_user.followings
+  end
+
+  def f_leaderboards
     @friends_scores = friends_leaderboards(current_user).sort_by { |k, v| k[:sum_points]}.reverse
   end
 
@@ -35,6 +36,7 @@ class UsersController < ApplicationController
     user.followings.each do |friend| 
       leaderboard << {:user_id => friend.id, :sum_points => friend.points }
     end
+      leaderboard << {:user_id => user.id, :sum_points => user.points }
     return leaderboard
 
   end
