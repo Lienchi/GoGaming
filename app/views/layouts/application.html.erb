@@ -3,56 +3,65 @@
   <head>
     <title>GoGaming</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
   </head>
 
   <body>
     <!-- 導覽列 -->
     <nav class="navbar navbar-default nav-style">
-      <div class="container-fluid">
+      <div class="container-fluid ">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header ">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          
+          <div class="nav-icon brand">
+            <% if controller?("devise/sessions")||controller?("devise/passwords")||controller?("users/registrations")%>
+              <%= image_tag "gogoro.png", style:"width:100px;"%>
+            <%end%>
+          </div>
           <% if current_user %>
-          <%= link_to root_path do %>
+            <div class="nav-icon brand">
+              <% if controller?("users")&& action?("show")%>
+                <%= image_tag "gogoro.png", style:"width:100px;"%>
+              <% elsif controller?("users")&& action?("index")%>
+                <h3 style="color:black;">排行榜</h3>
+              <% elsif controller?("gostations")%>
+                <h3 style="color:black;"> 規劃路線</h3>
+              <% elsif controller?("trips") && action?("index")%>
+                <h3 style="color:black;"> 我的挑戰</h3>
+              <% elsif controller?("trips") && action?("show")%>
+                <h3>
+                  <button class="btn" data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding-top:0px;font-size:16px;color:black; "><%= @trip.name%></button>
+                </h3>
+              <%end%>
+            </div>
             <div class="nav-icon">
-              <i class="fas fa-location-arrow"></i>
+              <%= link_to root_path do %>
+                <%= image_tag "navbar_icons/map.png", style: "width:25px;height:30px;"%>
+              <% end %>
             </div>
-          <% end %>
-          <%= link_to trips_path do %>
-            <div class="nav-icon" >
-              <i class="fas fa-gamepad"></i>
+            <div class="nav-icon">
+              <%= link_to trips_path do %>
+                <%= image_tag "navbar_icons/Station.png",style: "width:20px;height:30px;"%>
+              <% end %>
             </div>
-          <% end %>
-          <% if controller?("trips") && action?("show")%>
-            <button class="btn trip-button" data-toggle="modal" data-target="#myModal"><%= @trip.name%></button>
-          <%end%>
+            <%= link_to user_path(current_user) do %>
+              <div class="nav-number pull-right"><%= current_user.points%>
+              </div>
+              <div class="nav-icon pull-right">
+                <%= image_tag "navbar_icons/G.png", style: "width:30px;height:30px;"%>
+              </div>
 
-
-          <%= link_to user_path(current_user) do %>
-            <div class="nav-icon pull-right" >
-              <%= image_tag "point.png", style: "width:35px;height:35px;"%>
-              <%= current_user.points%>
-            </div>
-          <% end %>
-          <!--
-          <% if controller?("users") && action?("show") %>
-            <a class= "navbar-brand pull-right">Profile</a>
-          <%end%>
-        -->
+            <% end %>
           <%end%>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="pull-right text-right nav navbar-nav">
@@ -67,46 +76,27 @@
         </div>
       </div>
     </nav>
+    <!-- Alert-->
     <% if flash[:notice] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= notice %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= notice %>
+          </div>
         </div>
       </div>
-    </div>
     <% end %>
-
     <% if flash[:alert] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= alert %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= alert %>
+          </div>
         </div>
       </div>
-    </div>
-    <% end %>
-    
+    <% end %> 
     <%= yield %>
-    <script type="text/javascript">
-      (function ($) {
-        'use strict';
-         var $body    = $('html, body'), // Define jQuery collection 
-         content  = $('#main').smoothState({
-           onStart : {
-             duration: 250,
-             render: function () {
-               content.toggleAnimationClass('is-exiting');
-            // Scroll user to the top
-               $body.animate({ 'scrollTop': 0 });
-              }
-            }
-          }).data('smoothState');
-        })(jQuery);
-
-    </script>
-
   </body>
 </html>
