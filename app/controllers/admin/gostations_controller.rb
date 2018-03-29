@@ -1,5 +1,5 @@
 class Admin::GostationsController < ApplicationController
-
+  before_action :authenticate_admin
   before_action :set_gostation, only:[:edit, :update, :destroy]
 
  def index
