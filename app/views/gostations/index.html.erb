@@ -309,52 +309,21 @@
       var ig_green_black_battery = null;
       var ig_blue_black_battery = null;
       var friendly_store_icon = null;
-      /*
-      function displayGostations() {
-        var record_start;
-        var record_end;
-        
-        $.ajax({
-          url: start_url,
-          type: 'GET',
-          success: function(data) {
-            record_start = data.results[0];
 
-            $.ajax({
-              url: end_url,
-              type: 'GET',
-              success: function(data) {
-                record_end = data.results[0];
+      function displayGostations(route) {
+        // --- create milestones
+        var milestones = createMilestone(route, 1000);
 
-                calculateGostations(record_start, record_end);
-              },
-              
-              error: function() {
-                alert("ERROR: can not get end record!");
-              }
-            });
-          },
-          
-          error: function() {
-            alert("ERROR: can not get start record!");
-          }
-        });
-      };
-      */
-
-      function displayGostations(start_location, end_location) {
         // --- gostations_belongs_to_trip
         setStartEndInfobox(gon.gostations_belongs_to_trip,
                            true,
-                           start_location,
-                           end_location,
+                           milestones,
                            i_green_black_battery);
 
         // --- gostations_not_belongs_to_trip
         setStartEndInfobox(gon.gostations_not_belongs_to_trip,
                            false,
-                           start_location,
-                           end_location,
+                           milestones,
                            i_black_battery);
       };
 
@@ -391,13 +360,20 @@
         };
       }
 
-      function setStartEndInfobox(gostations, bBelongsToTrip, start, end, img){
+      function setStartEndInfobox(gostations, bBelongsToTrip, milestones, img){
         for(var i=0; i<gostations.length; i++){
           var position = {};
           position.lat = gostations[i].Latitude;
           position.lng = gostations[i].Longitude;
 
-          if( checkLatLngInStartEndRect(position, start, end) ){
+          var flag = false;
+          for(var j=0; j<milestones.length; j++){
+            if( checkLatLngNearby(position, milestones[j]) ){
+              flag = true;
+              break;
+            }
+          }
+          if( flag ){
 
             var gostationInfo = getGostationInfo(gostations[i]);
 
@@ -717,13 +693,60 @@
       }
 
       function checkLatLngNearby(gostation, location) {
-        var nearbyDisTH = 0.02;//0.01 = 1km
-        if( gostation.lat <= location.lat+nearbyDisTH && gostation.lat >= location.lat-nearbyDisTH ){
-          if( gostation.lng <= location.lng+nearbyDisTH && gostation.lng >= location.lng-nearbyDisTH ){
-            return true;
-          }
+        var nearbyDisTH = 0.015;//0.01 = 1km
+
+        var a = (gostation.lat-location.lat)*(gostation.lat-location.lat);
+        var b = (gostation.lng-location.lng)*(gostation.lng-location.lng);
+
+        if( Math.sqrt(a+b) < nearbyDisTH ){
+          return true;
         }
         return false;
+      }
+
+      function createMilestone(route, dist){
+        var milestones = [];
+        var opts = {
+          map: map,
+          icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'
+        };
+
+        var markers=[],
+            geo = google.maps.geometry.spherical,
+            path = route.overview_path,
+            point = path[0],
+            distance = 0,
+            leg,
+            overflow,
+            pos;
+                  
+        for(var p=1;p<path.length;++p){ 
+          leg=Math.round(geo.computeDistanceBetween(point,path[p]));
+          d1=distance+0
+          distance+=leg;        
+          overflow=dist-(d1%dist);
+          
+          if(distance>=dist && leg>=overflow){
+            if(overflow && leg>=overflow){ 
+              pos=geo.computeOffset(point,overflow,geo.computeHeading(point,path[p]));
+              opts.position=pos;
+              //markers.push(new google.maps.Marker(opts));
+              milestones.push({lat: pos.lat(), lng: pos.lng()});
+              distance-=dist;
+            }
+            
+            while(distance>=dist){ 
+              pos=geo.computeOffset(point,dist+overflow,geo.computeHeading(point,path[p]));
+              opts.position=pos;
+              //markers.push(new google.maps.Marker(opts));
+              milestones.push({lat: pos.lat(), lng: pos.lng()});
+              distance-=dist;
+            }
+          }
+          point=path[p];
+        }
+
+        return milestones;    
       }
       
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -748,13 +771,14 @@
               lng: response.routes[0].legs[0].end_location.lng()
             };
 
-            displayGostations(start_location, end_location);
+            displayGostations(response.routes[0]);
             /*
             var summaryPanel = document.getElementById('directions-panel');
             summaryPanel.innerHTML  = '距離：'+response.routes[0].legs[0].distance.text;
             summaryPanel.innerHTML += '<br>'
             summaryPanel.innerHTML += '時間：'+response.routes[0].legs[0].duration.text;
             */
+
             directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
