@@ -268,6 +268,10 @@
         }
       ];
 
+      $.ajaxSetup({
+        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+      });
+
       /* Set the width of the side navigation to 400px */
       function openNav(content, storePhoto, button, trip_url, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
@@ -501,9 +505,6 @@
               uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
             }
 
-            $.ajaxSetup({
-              headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-            });
             $.ajax({
               url: "/gostations/"+props.id+"/getCheckinStatus",
               method: "POST",
