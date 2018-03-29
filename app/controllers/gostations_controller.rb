@@ -12,15 +12,17 @@ class GostationsController < ApplicationController
 
   def checkin
     @gostation.checkins.create!(user: current_user)
+    current_user.add_points(5, category: 'gostation')
     #@gostation.count_checkins
-    #redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   def uncheckin
     checkins = Checkin.where(gostation: @gostation, user: current_user)
     checkins.destroy_all
+    current_user.subtract_points(5, category: 'gostation')
     #@gostation.count_checkins
-    #redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   def getCheckinStatus
