@@ -46,24 +46,30 @@
     </div>
     <div id="map"></div>
     <br/>
-    <div class="form-group comment-group">  
+    <div class="form-group comment-group clearfix">  
       <%= form_for [@trip, @comment] do |f|%>
         <%= f.text_area :comment, class: "form-control" %>
-         <input class="btn btn-default" type="submit" value="留言">
+          <%= f.file_field :image %>
+          <input class="btn btn-default" type="submit" value="留言">
+        </div>
       <% end%>
     </div>
     <br/>
     <div class="comment-group">
       <h5>推荐景點</h5>
+      <br/>
       <div class="">
       <% @comments.each do |comment|%>
         <div class="comment border col-xs-12 col-sm-4 col-xs-4">
           <div class="media">
-            <div class="media-left">
+            <div class="media-left text-center">
               <%= image_tag comment.user.avatar, class: "media-object", style: "width:64px;height:64px;border-radius:50%" %>
+              Level: <%= comment.user.level%>
             </div>
-            <div class="media-body">
-              <p class="media-heading"><%= comment.user.name %><em class="pull-right">Level: <%= comment.user.level%></em></p>
+            <div class="media-body clearfix">
+              <p class="media-heading"><%= comment.user.name %></p>
+              <P class="pull-right"><%= time_ago_in_words(comment.created_at)%></P>
+              <%= image_tag comment.image,style:"border-radius:10px;"%>
               <p><%= comment.comment %></p>
             </div>
           </div>

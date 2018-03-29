@@ -14,7 +14,7 @@ class TripsController < ApplicationController
     @trip_gostations = TripGostation.where(trip_id: @trip.id, user_id: current_user.id)
     gon.gostations = Gostation.where(id: @trip_gostations.map(&:gostation_id))
     @comment = Comment.new
-    @comments = Comment.where(trip_id: @trip)
+    @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
   end
   
 
