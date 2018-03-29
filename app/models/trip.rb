@@ -1,5 +1,7 @@
 class Trip < ApplicationRecord
   mount_uploader :image, TripUploader
+  validates_length_of :name, :maximum => 6
+  validates_presence_of :name, :image, :description
   has_many :challenges, dependent: :destroy
   has_many :challenged_users, through: :challenges, source: :user
 

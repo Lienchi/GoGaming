@@ -2,14 +2,18 @@
   border:1px solid #AAAAAA;
   border-radius:10px;
 }
-
-
+.background{
+  background: linear-gradient(to bottom, #FFFFFF , #CCF4FF);
+}
+.white{
+  background:#FFFFFF;
+}
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-
 }
+
 .bottom{
   padding: 150px 20px 150px 20px;
 }
@@ -43,7 +47,7 @@ img {
 }
 .brand{
   position:absolute;
-  left:50%;
+  left:48%;
   margin-left:-50px !important;
 }
 
@@ -173,13 +177,12 @@ input[type='file'] {
 }
 
 
-/*
+
 .trip-button{
   border:2px solid #6495ED;
   background-color: #F5F5F5;
   animation:tripbutton 0.3s ease-in-out 0s 12 normal forwards;
 }
-*/
 .comment-group{
   width:90%;
   margin:auto;

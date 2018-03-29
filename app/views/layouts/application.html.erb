@@ -31,14 +31,14 @@
               <% if controller?("users")&& action?("show")%>
                 <%= image_tag "gogoro.png", style:"width:100px;"%>
               <% elsif controller?("users")&& action?("index")%>
-                <h3 style="color:black;">排行榜</h3>
+                <h3 style="color:black;">&nbsp;排行榜</h3>
               <% elsif controller?("gostations")%>
                 <h3 style="color:black;"> 規劃路線</h3>
               <% elsif controller?("trips") && action?("index")%>
                 <h3 style="color:black;"> 我的挑戰</h3>
               <% elsif controller?("trips") && action?("show")%>
                 <h3>
-                  <button class="btn" data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding-top:0px;font-size:16px;color:black; "><%= @trip.name%></button>
+                  <button class="btn " data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding:0px 0px;font-size:18px;color:black; "><strong><%= @trip.name%></strong></button>
                 </h3>
               <%end%>
             </div>
