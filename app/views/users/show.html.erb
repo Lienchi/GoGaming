@@ -17,9 +17,9 @@
       </div>
     </div>
     <div class="media-body ">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-        <div class="media col-xs-12 col-sm-12 col-md-12 ">
-          <div class="media-body media-middle">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 name-topping">
+        <div class="media col-xs-12 col-sm-12 col-md-12  ">
+          <div class="media-body media-middle ">
             <h4 class="media-heading text-center"><%= @user.name%></h4>
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="media col-xs-12 col-sm-12 col-md-12 ">
           <div class="media-body media-middle">
             <div class="media-heading">
-              <%= link_to "排行榜", users_path, class: "btn btn-danger"%>
+              <%= link_to "排行榜", f_leaderboards_users_path, class: "btn btn-danger"%>
             </div>
           </div>
         </div>
