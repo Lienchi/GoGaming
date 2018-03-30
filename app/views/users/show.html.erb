@@ -6,6 +6,7 @@
         <%= image_tag @user.avatar, class: "media-object img-circle avatar "%>
          <%= render partial: "shared/follow", locals: {user: @user}%>
       </div>
+
       <div class="uploader text-center " style="padding-bottom: 20px;">
         <% if @user == current_user %>
           <%= form_for @user do |f| %>
@@ -68,6 +69,7 @@
         </div>
       <%end%>
     </div>
+    <%= social_share_button_tag('My Gogoro Badges', :url => 'user_url(@user)', desc: 'My Gogoro Badges') %>
   </div>
 </div>
 
