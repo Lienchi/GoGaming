@@ -1,16 +1,16 @@
 
 <div class="media  col-xs-12 col-sm-12 col-md-12 background">
-  <div class="border clearfix  col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 white" >
+  <div class="border clearfix  white col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
     <div class="media-left media-middle col-xs-5 col-sm-4 col-md-4 clearfix ">
       <div class="text-center ">
         <%= image_tag @user.avatar, class: "media-object img-circle avatar "%>
          <%= render partial: "shared/follow", locals: {user: @user}%>
       </div>
-      <div class="uploader ">
+      <div class="uploader text-center " style="padding-bottom: 20px;">
         <% if @user == current_user %>
           <%= form_for @user do |f| %>
-            <%= f.file_field :avatar, style: " width:90px;"%>
-            <input class="btn btn-success btn-sm " type="submit" value="更新照片">
+            <%= f.file_field :avatar, style: " width:90px;margin:0 auto;"%>
+            <input class="btn btn-success btn-sm  " type="submit" value="更新照片">
             <br/>
           <%end%>
         <%end%>
@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div class="border clearfix border col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 white" style="min-height:430px;"  >
+  <div class="border clearfix border white  white col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height:430px;"  >
     <div class="user-badges clearfix">
       <% @user.badges.each do |badge| %>
         <div class="user-badge thumbnail card col-xs-4 col-sm-4 col-md-3">
