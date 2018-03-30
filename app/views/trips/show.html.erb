@@ -124,8 +124,13 @@
     </div>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <div id="mySidenav-content">
-
+      <div id="mySidenav-content" class="mysidenav">
+        <div id="mysidenav-img"></div>
+        <div id="mysidenav-content"></div>
+        <div id="mysidenav-disdur"></div>
+        <div id="mysidenav-button"></div>
+        <div id="mysidenav-tripurl"></div>
+        <div id="mysidenav-directionurl"></div>
       </div>
     </div>
 
@@ -299,24 +304,19 @@
         }
       ];
 
-      $.ajaxSetup({
-        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-      });
-
       /* Set the width of the side navigation to 400px */
       function openNav(content, storePhoto, button, trip_url, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
           var mySidenavContent = document.getElementById('mySidenav-content');
-          mySidenavContent.classList.add("mysidenav");
-          mySidenavContent.innerHTML = storePhoto;
-          mySidenavContent.innerHTML += content;
+
+          document.getElementById('mysidenav-img').innerHTML = storePhoto;
+          document.getElementById('mysidenav-content').innerHTML = content;
           if(results.status){
-            mySidenavContent.innerHTML += results.distance+' ';
-            mySidenavContent.innerHTML += results.duration;
+            document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
           }
-          mySidenavContent.innerHTML += button;
-          mySidenavContent.innerHTML += trip_url;
-          mySidenavContent.innerHTML += directions_url;
+          document.getElementById('mysidenav-button').innerHTML = button;
+          document.getElementById('mysidenav-tripurl').innerHTML = trip_url;
+          document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
       }
 
       /* Set the width of the side navigation to 0 */
@@ -409,6 +409,32 @@
         return results;
       }
 
+      var currentGostationId = 0;
+      function toggle(){
+        $.ajaxSetup({
+          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+        });
+        $.ajax({
+          url: "/gostations/"+currentGostationId+"/getCheckinStatus",
+          method: "POST",
+          dataType: "json",
+          success: function(data){
+            if(data.status){
+              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/checkin">Checkin</a><br>';
+            }
+            else{
+              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/uncheckin">Unheckin</a><br>'; 
+            }
+          },
+
+          error: function() {
+            alert("ERROR: can not getCheckinStatus!");
+          }
+
+        });
+
+      }
+
       var activeMarkerInfo = {
         marker: null,
         bBelongsToTrip: false
@@ -423,6 +449,8 @@
 
         if(props.content){
           marker.addListener('click', function(){
+            currentGostationId = props.id;
+
             if(activeMarkerInfo.marker!=null){
               activeMarkerInfo.marker.setIcon('http://maps.google.com/mapfiles/ms/micons/yellow.png');
             }
@@ -431,16 +459,20 @@
 
             var results = calculateDisDur(props.coords);
 
-            var checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
-
-            var uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
+            var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
+            var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
 
             var checkinDisTH = 0.005;//0.005 = 500m
-            if( Math.abs(userCurrentPos.lat-props.coords.lat)>checkinDisTH ||  Math.abs(userCurrentPos.lng-props.coords.lng)>checkinDisTH){
-              checkin_button = '<a class="btn btn-default">Checkin</a><br>';
-              uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+            if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
+            {
+              checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
+
+              uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
             }
 
+            $.ajaxSetup({
+              headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+            });
             $.ajax({
               url: "/gostations/"+props.id+"/getCheckinStatus",
               method: "POST",
