@@ -1,37 +1,38 @@
-<div class="container">
-<div class="col-xs-12">
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-  <div class="field">
-    <%= f.label :name%><br />
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <!--<h2 class="text-center">註冊</h2>-->
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="border" style="padding:20px;">
+          <div class="field form-group">
+            <%= f.label :name, class: "col-xs-4 control-label"%>
+            <%= f.text_field :name, class: "float-left"%>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" , class: "form-control"%>
-  </div>
+          <div class="field form-group">
+            <%= f.label :email, class: "col-xs-4 control-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control"%>
-  </div>
+          <div class="field form-group">
+            <%= f.label :password, class: "col-xs-4 control-label" %>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+            <%= f.password_field :password, autocomplete: "off" , class: "float-left"%>
+          </div>
 
-  <div class="actions">
-    <input class="btn btn-default" type="submit" value="註冊">
-  </div>
-<% end %>
+          <div class="field form-group">
+            <%= f.label :password_confirmation, class: "col-xs-4 control-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left"%>
+          </div>
+        </div>
+        <div class="col-xs-12 border clearfix bottom" >
+          <div class="actions station-buttom">
+            <input class="btn btn-success" type="submit" value="註冊" style="margin-right: 20px;">
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      <% end %>
 
-<%= render "devise/shared/links" %>
-</div>
-</div>

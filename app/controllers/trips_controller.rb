@@ -1,16 +1,23 @@
 class TripsController < ApplicationController
-  before_action :authenticate_user!
   
   def index
     @trips = Trip.all
     @followings = current_user.followings
+    @trips_count = Trip.all.count
+    @challenge_trips = Challenge.where(user_id: current_user).count
+    @unchallenge_trips = @trips_count - @challenge_trips
   end
 
   def show
     @trip = Trip.find(params[:id])
     @trip_gostations = TripGostation.where(trip_id: @trip.id, user_id: current_user.id)
     gon.gostations = Gostation.where(id: @trip_gostations.map(&:gostation_id))
+    gon.trip_gostations = @trip_gostations
+    @comment = Comment.new
+    @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
   end
   
+
+
 
 end

@@ -1,21 +1,19 @@
-<div class="container">
-<div class="col-xs-12">
-<h2>Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control"%>
-  </div>
-  <br/>
-  <div class="actions">
-    <input class="btn btn-default" type="submit" value="Send me reset password instructions">
-    
-  </div>
-<% end %>
-
-  <%= render "devise/shared/links" %>
-</div>
-</div>
+  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <h2 class="text-center">忘記密碼?</h2>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, :class => 'form-horizontal text-center'}) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="border " style="padding:20px;">
+          <div class="field form-group">
+            <%= f.label :email, class: "col-xs-4 control-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left"%>
+          </div>
+        </div>
+        <div class="col-xs-12 border clearfix bottom" >
+          <div class="actions text-center station-buttom">
+            <input class="btn btn-success" type="submit" value="寄信重設密碼" style="margin-right: 20px;">
+            <%= render "devise/shared/links" %>
+          </div>
+      </div>
+      <% end %>
+   </div>

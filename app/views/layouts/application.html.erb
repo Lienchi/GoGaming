@@ -3,75 +3,100 @@
   <head>
     <title>GoGaming</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-<!-- 導覽列 -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-default nav-style">
+      <div class="container-fluid ">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header ">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to "gogoro", root_path, class: "navbar-brand" %>
+          <div class="nav-icon brand">
+            <% if controller?("devise/sessions")||controller?("devise/passwords")||controller?("users/registrations")%>
+              <%= image_tag "gogoro.png", style:"width:100px;"%>
+            <%end%>
+          </div>
           <% if current_user %>
-            <%= link_to "Points: #{current_user.points}", user_path(current_user), class: "navbar-brand" %>
-          <% end %>
-          <% if controller?("users") && action?("show") %>
-            <a class= "navbar-brand pull-right">Profile</a>
+            <div class="nav-icon brand">
+              <% if controller?("users")&& action?("show")%>
+                <%= image_tag "gogoro.png", style:"width:100px;"%>
+              <% elsif controller?("users")&& action?("index")%>
+                <h3 style="color:black;">&nbsp;排行榜</h3>
+              <% elsif controller?("gostations")%>
+                <h3 style="color:black;"> 規劃路線</h3>
+              <% elsif controller?("trips") && action?("index")%>
+                <h3 style="color:black;"> 我的挑戰</h3>
+              <% elsif controller?("trips") && action?("show")%>
+                <h3>
+                  <button class="btn " data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding:0px 0px;font-size:18px;color:black; "><strong><%= @trip.name%></strong></button>
+                </h3>
+              <%end%>
+            </div>
+            <div class="nav-icon">
+              <%= link_to root_path do %>
+                <%= image_tag "navbar_icons/map.png", style: "width:25px;height:30px;"%>
+              <% end %>
+            </div>
+            <div class="nav-icon">
+              <%= link_to trips_path do %>
+                <%= image_tag "navbar_icons/Station.png",style: "width:20px;height:30px;"%>
+              <% end %>
+            </div>
+            <%= link_to user_path(current_user) do %>
+              <div class="nav-number pull-right"><%= current_user.points%>
+              </div>
+              <div class="nav-icon pull-right">
+                <%= image_tag "navbar_icons/G.png", style: "width:30px;height:30px;"%>
+              </div>
+
+            <% end %>
           <%end%>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="pull-right text-right nav navbar-nav">
             <% if current_user %>
-            <li><p class="navbar-text">Hi, <%= current_user.email %></p></li>
-            <li><%= link_to '我的帳戶', user_path(current_user) %></li>
-            <% if current_user.role == "admin" %>
-            <li><%= link_to "後台", admin_trips_path%><li>
-            <%end%>
-            <li><%= link_to "挑戰路線", trips_path %><li>
+              <% if current_user.role == "admin" %>
+                <li><%= link_to "後台", admin_trips_path%><li>
+              <%end%>
             <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
             <li><%= link_to('修改密碼', edit_user_registration_path) %></li>
-            <% else %>
-            <li><%= link_to('註冊', new_user_registration_path) %></li>
-            <li><%= link_to('登入', new_user_session_path) %></li>
             <% end %>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- Alert-->
     <% if flash[:notice] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= notice %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= notice %>
+          </div>
         </div>
       </div>
-    </div>
     <% end %>
-
     <% if flash[:alert] %>
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <%= alert %>
+      <div class="container">
+        <div class="row">
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%= alert %>
+          </div>
         </div>
       </div>
-    </div>
-    <% end %>
-    
+    <% end %> 
     <%= yield %>
-
   </body>
 </html>

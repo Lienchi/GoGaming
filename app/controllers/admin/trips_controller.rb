@@ -1,5 +1,4 @@
 class Admin::TripsController < ApplicationController
-  before_action :authenticate_user!
   before_action :authenticate_admin
   before_action :set_trip, only:[:update, :destroy]
   def index
@@ -37,7 +36,7 @@ class Admin::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :gostations_index)
+    params.require(:trip).permit(:name, :gostations_index, :description, :image)
   end
 
   def set_trip

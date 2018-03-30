@@ -1,6 +1,33 @@
-<% @users.each do |user|%>
-  <p>
-  <%= user.email%>
-  <%= render partial: "shared/follow", locals: {user: user}%>
-  </p>
-<% end %>
+<div class="media background" style="padding:0 18px;">
+  <div class="border white table-responsive col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="border-radius: 10px;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-xs-3"></th>
+          <th class="col-xs-3 text-center">Name</th>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/Lv.png",style: "width:30px; margin:0 auto;")%>
+          </th>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/B.png",style: "width:30px; margin:0 auto;")%>
+          </th>
+          <th class="col-xs-2">
+            <%= image_tag("navbar_icons/G.png",style: "width:30px;height:32px; margin:0 auto;")%>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% @users.each do |user|%>
+          <tr>
+            <td class="col-xs-3"><%= link_to image_tag("#{user.check_avatar(user)}"), user_path(user, class: "img-responsive")%></td>
+            <td class="col-xs-3"><%= link_to "#{user.name}",user_path(user) %><%= render partial: "shared/follow", locals: {user: user}%></td>
+            <td class="col-xs-2"><%= user.level%></td>
+            <td class="col-xs-2"><%= user.badges.count%></td>
+            <td class="col-xs-2"><%= user.points%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
+

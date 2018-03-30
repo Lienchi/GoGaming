@@ -1,55 +1,110 @@
+.border{
+  border:1px solid #AAAAAA;
+  border-radius:10px;
+}
+.background{
+  background: linear-gradient(to bottom, #FFFFFF , #CCF4FF);
+}
+.white{
+  background:#FFFFFF;
+}
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
+.bottom{
+  padding: 150px 20px 150px 20px;
+}
+/*
+h2{
+  animation: zoom 1s ease-in-out 0s 1 normal forwards;
+}
+*/
 #map {
   height: 500px;
+  border: 5px solid #DDDDDD;
 }
 
-.container a{text-decoration:none;}
-.btn a {
+.thumbnail{
+  border:none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/*nav*/
+
+.navbar{
+  position: relative;
+}
+.brand{
+  position:absolute;
+  left:48%;
+  margin-left:-50px !important;
+}
+
+.nav-style{
+  background:#FFFFFF;
+  padding: 5px 5px 0px 20px;
+  border:none;
+  margin-bottom:0;
+}
+.navbar-header button{
+  border:none;
+}
+
+.nav-icon{
+  margin: 1px 1px;
+  display: inline-block;
+  font-size: 2em;
+  color:#228B22;
+  padding: 5px 5px;
+}
+
+.nav-number{
+  margin: 1px 1px;
+  display: inline-block;
+  font-size: 1.5em;
+  color: #7AAB37;
+  padding-top:5px;
+
+}
+
+.nav-icon a {
+text-decoration:none; 
+}
+.table a {
   text-decoration:none;
-}
-.fixed-bottom{
-  position:fixed;
-}
-.card{
-  float:left;
 }
 
 /*user */
 
-#main{
-  background: linear-gradient(to bottom, #FFFFFF , #E0FFFF);
-}
-
-.border{
-  padding:10px;
-  border: 1px solid #DDDDDD;
-  background: white;
+input[type='file'] {
+  color: transparent;
 }
 
 .media{
-  padding: 10px;
-  border: 1px solid #DDDDDD;
+  margin-top: 0 ;
+  margin-bottom:10px;
 }
 
-.media-body{
-  padding:10px;
-}
 
 .media-heading img{
-  width:30px;
-  height:30px;
+ width:20%;
+ height:20%;
 
 }
-.thumbnail{
-  border:none;
-}
-.badges-container{
-  padding:10px;
-  border: 1px solid #DDDDDD;
+
+.uploader{
+  padding: 0 10%;
 }
 .user-badge{
   cursor:pointer;
@@ -62,9 +117,119 @@ html, body {
 }
 
 
+
+/*trips#index*/
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+
+.bettery-green{
+  border-radius: 25px;
+  border:1px solid #2F4F4F;
+  margin:10px auto;
+  animation:betterylight-green 1s ease-in-out 3s 1 normal forwards;
+}
+.bettery-red{
+  border-radius: 25px;
+  border:1px solid #FF7744;
+  margin:10px auto;
+  animation:betterylight-red 1s ease-in-out 3s 1 normal forwards;
+}
+.bettery img{
+  width:100%;
+  height:100%;
+}
+
+.typewriter{
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 2.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+  animation-delay: 1s;
+}
+.badges-container a{
+  text-decoration:none;
+  color:#888888;
+}
+/*trips#show*/
+
+
+#myProgress{
+  margin: 0 auto;
+  top:5%;
+  width:90%;
+  background-color:#FFFFFF;
+  border-radius:50px;
+  border: 2px solid #DDDDDD;
+}
+
+#myBar{
+  width:25%;
+  height:20px;;
+  background: linear-gradient(to right, #6495ED, #E0FFFF);
+  border-radius:50px;
+}
+
+
+
+.trip-button{
+  border:2px solid #6495ED;
+  background-color: #F5F5F5;
+  animation:tripbutton 0.3s ease-in-out 0s 12 normal forwards;
+}
+.comment-group{
+  width:90%;
+  margin:auto;
+}
+.comment{
+  background:#FFFFFF;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0;opacity:0;}
+  to { width: 100% ;opacity:1;}
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+
+/* Text transition*/
+
+@Keyframes zoom{
+  from{font-size:0px;}
+  to{font-size:25px;}
+}
+
+/*bettery frame*/
+
+@keyframes betterylight-green{
+  from{opacity:0;}
+  to{opacity:1;box-shadow:0px 0px 10px #00FF00;}
+}
+@keyframes betterylight-red{
+  from{opacity:0;}
+  to{opacity:1;box-shadow:0px 0px 10px #FF0000;}
+}
+@Keyframes tripbutton{
+  from{}
+  to{box-shadow:0px 0px 10px #6495ED;}
+}
+
 /*
  * Keyframes
- */
+
 
 @keyframes fadeIn {
   0% {
@@ -100,13 +265,13 @@ html, body {
   }
 }
 
-
+ */
 
 
 /*
  * CSS Page Transitions
  * Don't forget to add vendor prefixes!
- */
+   */
 .m-scene {
   /** Basic styles for an animated element */
   .scene_element {
@@ -130,9 +295,10 @@ html, body {
   .scene_element--fadeinright {
     animation-name: fadeInRight;
   }
-  }
+}
 
 
   .m-scene.is-exiting .scene-element {
   animation-direction: alternate-reverse;
   }
+

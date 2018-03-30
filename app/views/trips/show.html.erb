@@ -2,19 +2,58 @@
 <html>
 
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Gostations Direction</title>
     <%= Gon::Base.render_data %>
     <style>
+
+      /* The side navigation menu */
+      .sidenav {
+          height: 100%; /* 100% Full-height */
+          width: 0; /* 0 width - change this with JavaScript */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Stay on top */
+          top: 0; /* Stay at the top */
+          left: 0;
+          background-color: white;/*#111; /* Black*/
+          overflow-x: hidden; /* Disable horizontal scroll */
+          padding-top: 60px; /* Place content 60px from the top */
+          transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      }
+
+      /* The navigation menu links */
+      .sidenav a {
+          padding: 8px 8px 8px 32px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          display: block;
+          transition: 0.3s;
+      }
+
+      /* When you mouse over the navigation links, change their color */
+      .sidenav a:hover {
+          color: #f1f1f1;
+      }
+
+      /* Position and style the close button (top right corner) */
+      .sidenav .closebtn {
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 36px;
+          margin-left: 50px;
+      }
      
       html, body {
-        height: 100%;
+        height: 80%;
         margin: 50;
         padding: 50;
       }
       #map {
         height: 100%;
-        width: 80%;
+        width: 90%;
         margin: auto;
       }
 
@@ -26,45 +65,291 @@
     </style>
   </head>
 
-  <body>
-
-    <div class="container">
-      <div class="jumbotron">
-        <h1><%= @trip.name %></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum cum earum eveniet omnis nostrum corporis excepturi repellendus at, cupiditate ut.</p>
-      </div>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-          <span class="sr-only">45% Complete</span>
+  <body class="background">
+    <div id="myModal" class="modal fade " role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content trip-button">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><%= @trip.name%></h4>
+          </div>
+          <div class="modal-body">
+            <p><%= @trip.description %></p>
+          </div>
         </div>
       </div>
-      <table class="table table-hover">
-        <% @trip_gostations.each do |t| %>
-          <tr>
-            <td>
-              <% if t.status == true %>
-                <!-- toggle status for testing -->
-                <%= link_to 'Done', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
-              <% else %>
-                <%= link_to 'Submit', check_trip_gostation_path(t), method: :post, class: "btn btn-primary" %>
-              <% end%>
-             <%= t.gostation.LocName %>
-            </td>
-          </tr>
-        <% end %>
-       </table>
-       <div class="map col-xs-12">
-         <img src="..." alt="..." class="img-rounded">
-         <h1>map here</h1>
-       </div>
+    </div>
+    <div id="myProgress"  onclick="move()">
+      <div id="myBar"></div>
+    </div>
+    <div id="map"></div>
+    <br/>
+    <div class="form-group comment-group clearfix">  
+      <%= form_for [@trip, @comment] do |f|%>
+        <%= f.text_area :comment, class: "form-control" %>
+          <%= f.file_field :image, style: " width:90px;" ,class: "border" %>
+          <input class="btn btn-default" type="submit" value="留言">
+        </div>
+      <% end%>
+    </div>
+    <br/>
+    <div class="comment-group">
+      <h5>推荐景點</h5>
+      <br/>
+      <div class="">
+      <% @comments.each do |comment|%>
+        <div class="comment col-xs-12 col-sm-4 col-xs-4">
+          <div class="media">
+            <div class="media-left text-center">
+              <%= link_to(image_tag(comment.user.avatar), user_path(comment.user), class: "media-object", style: "width:64px;height:64px;border-radius:50%")%>
+              Level: <%= comment.user.level%>
+            </div>
+            <div class="media-body clearfix">
+              <p class="media-heading"><%= comment.user.name %></p>
+              <P class="pull-right"><%= time_ago_in_words(comment.created_at)%></P>
+              <%= image_tag comment.image,style:"border-radius:10px;"%>
+              <p><%= comment.comment %></p>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
     </div>
 
-    <div id="map"></div>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div id="mySidenav-content">
 
+      </div>
+    </div>
+
+    <script type="text/javascript">
+       var width = 20;
+      function move(){
+        var elem = document.getElementById("myBar");
+            width+= 20; 
+            elem.style.width = width + '%';
+          }
+    </script>
     <script>
+      var googleMapStyle = [
+        {
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#f5f5f5"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#f5f5f5"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative.land_parcel",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#bdbdbd"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#eeeeee"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#e5e5e5"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.park",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#ffffff"
+            }
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#757575"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#dadada"
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#616161"
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.line",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#e5e5e5"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.station",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#eeeeee"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#c9c9c9"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#9e9e9e"
+            }
+          ]
+        }
+      ];
 
+      $.ajaxSetup({
+        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+      });
+
+      /* Set the width of the side navigation to 400px */
+      function openNav(content, storePhoto, button, trip_url, directions_url, results) {
+          document.getElementById("mySidenav").style.width = "400px";
+          var mySidenavContent = document.getElementById('mySidenav-content');
+          mySidenavContent.innerHTML = storePhoto;
+          mySidenavContent.innerHTML += content;
+          if(results.status){
+            mySidenavContent.innerHTML += results.distance+' ';
+            mySidenavContent.innerHTML += results.duration;
+          }
+          mySidenavContent.innerHTML += button;
+          mySidenavContent.innerHTML += trip_url;
+          mySidenavContent.innerHTML += directions_url;
+      }
+
+      /* Set the width of the side navigation to 0 */
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+      }
+
+      var userCurrentPos = {
+        lat: 0.0,
+        lng: 0.0
+      };
       var map = null;
+      var directionsService = null;
+      var directionsDisplay = null;
       var infoWindow = null;
+
+      function getGostationInfo(gostation){
+        var LocName = gostation.LocName;
+        var Address = gostation.Address;
+        var AvailableTime = gostation.AvailableTime;
+        var tripId = gon.trip_gostations[0].trip_id;
+        var StorePhoto = gostation.StorePhoto;
+        var BatteryCells = gostation.BatteryCells;
+        var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
+        return {
+          directions_url: '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+
+          StorePhoto: gostation.StorePhoto,
+
+          trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
+
+          infoWindowContent: '<div>站名：'+LocName+'</div><br>'
+            +'<div>地址：'+Address+'</div><br>'
+            +'<div>營業時間：'+AvailableTime+'</div><br>'
+            +'<div>滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
+
+          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+        };
+      }
 
       function showGostations(){
         for(var i=0; i<gon.gostations.length; i++){
@@ -72,231 +357,156 @@
           position.lat = +gon.gostations[i].Latitude;
           position.lng = +gon.gostations[i].Longitude;
           var LocName = gon.gostations[i].LocName;
+
+          var gostationInfo = getGostationInfo(gon.gostations[i]);
+
           addMarker({
             coords: position,
-            iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow-dot.png',
-            content: '<a href="https://www.google.com/maps/dir/Current+Location/'+LocName+'" target="_blank">'+LocName+'</a>'
+            iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow.png',
+            content: gostationInfo.infoWindowContent,
+            storePhoto: gostationInfo.storePhoto,
+            directions_url: gostationInfo.directions_url,
+            id: gon.gostations[i].id,
+            trip_url: gostationInfo.trip_url,
+            bBelongsToTrip: true
           });
         }
       }
 
+      function calculateDisDur(des){
+        var results = {
+          distance: '0.0',
+          duration: '0.0',
+          status: false
+        }
+        if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
+          return results;
+        }
+        var directionsServiceCalc = new google.maps.DirectionsService;
+        var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
+        var end = new google.maps.LatLng(des.lat, des.lng);
+        directionsServiceCalc.route({
+          origin: start,
+          destination: end,
+          travelMode: 'DRIVING',
+          avoidHighways: true
+        }, function(response, status) {
+          if (status === 'OK') {
+            results.distance = response.routes[0].legs[0].distance.text;
+            results.duration = response.routes[0].legs[0].duration.text;
+            results.status = true;
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+
+        return results;
+      }
+
+      var activeMarkerInfo = {
+        marker: null,
+        bBelongsToTrip: false
+      };
       function addMarker(props){
         var marker = new google.maps.Marker({
           position: props.coords,
+          animation: google.maps.Animation.DROP,
           map: map,
           icon: props.iconImage
         });
 
         if(props.content){
           marker.addListener('click', function(){
-            if(infoWindow==null){
-              infoWindow = new google.maps.InfoWindow();
+            if(activeMarkerInfo.marker!=null){
+              activeMarkerInfo.marker.setIcon('http://maps.google.com/mapfiles/ms/micons/yellow.png');
             }
-            infoWindow.setContent(props.content);
-            infoWindow.open(map, marker);
+            marker.setIcon('http://maps.google.com/mapfiles/ms/micons/yellow-dot.png');
+            activeMarkerInfo.marker = marker;
+
+            var results = calculateDisDur(props.coords);
+
+            var checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
+
+            var uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
+
+            var checkinDisTH = 0.005;//0.005 = 500m
+            if( Math.abs(userCurrentPos.lat-props.coords.lat)>checkinDisTH ||  Math.abs(userCurrentPos.lng-props.coords.lng)>checkinDisTH){
+              checkin_button = '<a class="btn btn-default">Checkin</a><br>';
+              uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+            }
+
+            $.ajax({
+              url: "/gostations/"+props.id+"/getCheckinStatus",
+              method: "POST",
+              dataType: "json",
+              success: function(data){
+                if(data.status){
+                  openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+                }
+                else{
+                  openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                }
+              },
+
+              error: function() {
+                alert("ERROR: can not getCheckinStatus!");
+              }
+
+            });
           });
         }
       }
 
-      function initMap() {
+      function calculateGostationCenter(){
+        lat = 0.0;
+        lng = 0.0;
+        for(var i=0; i<gon.gostations.length; i++){
+          lat += +gon.gostations[i].Latitude;
+          lng += +gon.gostations[i].Longitude;
+        }
+        lat /= gon.gostations.length;
+        lng /= gon.gostations.length;
+        return {lat: lat, lng: lng};
+      }
 
+      function initMap() {
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: 23.96099, lng: 120.97186},
-          styles: [
-  {
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#212121"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#212121"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.country",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#9e9e9e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#bdbdbd"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#181818"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.park",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#1b1b1b"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#2c2c2c"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#8a8a8a"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#373737"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#3c3c3c"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway.controlled_access",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#4e4e4e"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#616161"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#757575"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#000000"
-      }
-    ]
-  },
-  {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
-      {
-        "color": "#3d3d3d"
-      }
-    ]
-  }
-]
+          zoom: 10,
+          center: calculateGostationCenter(),
+          styles: googleMapStyle,
+          // specify map controls
+          minZoom: 8,
+          maxZoom: 16,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+          zoomControl: false
         });
+
+        // find current position of user
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            userCurrentPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          }, function() {
+            alert('can not get current position in 2 sec！');
+          }//,
+            //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
+          );
+        } else {
+          alert('Browser does not support Geolocation');
+        }
 
         showGostations();
       }
 
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
     </script>
 
   </body>

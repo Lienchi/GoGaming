@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :edit, :update] do
     collection do
       get :leaderboards
+      get :f_leaderboards
     end
   end
    
@@ -28,7 +29,12 @@ Rails.application.routes.draw do
   end 
   
 
-  resources :trips, only:[:index, :show] 
+  resources :trips, only: [:index, :show]
+
+  resources :trips, only: [:show] do
+    resources :comments, only: [:index, :create]
+  end
+   
 
   namespace :admin do
     root "gostations#index"
