@@ -1,10 +1,13 @@
+
 .border{
-  border:1px solid #AAAAAA;
+  border:1.5px solid #AAAAAA;
   border-radius:10px;
 }
+
 .background{
-  background: linear-gradient(to bottom, #FFFFFF , #CCF4FF);
+  background: linear-gradient(to bottom, #FFFFFF ,  #F5F5F5);
 }
+
 .white{
   background:#FFFFFF;
 }
@@ -12,6 +15,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: linear-gradient(to bottom, #FFFFFF ,  #F5F5F5);
 }
 
 .bottom{
@@ -65,7 +69,7 @@ img {
   margin: 1px 1px;
   display: inline-block;
   font-size: 2em;
-  color:#228B22;
+  color:#227700;
   padding: 5px 5px;
 }
 
@@ -105,6 +109,9 @@ input[type='file'] {
 
 .uploader{
   padding: 0 10%;
+}
+.name-topping{
+  padding-top:15px;
 }
 .user-badge{
   cursor:pointer;
@@ -155,7 +162,8 @@ input[type='file'] {
 }
 .badges-container a{
   text-decoration:none;
-  color:#888888;
+  color:  #888888;
+  letter-spacing:0.3em;
 }
 /*trips#show*/
 
@@ -171,7 +179,7 @@ input[type='file'] {
 
 #myBar{
   width:25%;
-  height:20px;;
+  height:10px;;
   background: linear-gradient(to right, #6495ED, #E0FFFF);
   border-radius:50px;
 }

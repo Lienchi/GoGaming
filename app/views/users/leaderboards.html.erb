@@ -1,41 +1,47 @@
-<div id="main" class="m-scene user-background">
-  <div class="scene_element scene_element--fadeinright">
-
+<div class="media background" style="padding:0 18px;">
+  <div class="border white table-responsive col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="border-radius: 10px;min-height: 605px;">
+    <br/>
     <ul class="nav nav-tabs">
-      <li role="presentation">
-        <%= link_to '我的朋友', f_leaderboards_users_path %>
-      </li>
       <li role="presentation"  class="active" >
         <%= link_to '所有玩家', leaderboards_users_path %>
       </li>
+      <li role="presentation">
+        <%= link_to '我的朋友', f_leaderboards_users_path %>
+      </li>
+      <li>
+        <%= link_to "我的記錄", user_path(current_user)%>
+      </li>
     </ul>
-
-
-    <div class="col-md-12">
-      
-
-      <table class="table table-striped table-bordered">
-        <thead>
+    <table class="table">
+     <thead>
+        <tr>
+          <th class="col-xs-2 text-center">Top 10</th>
+          <th class="col-xs-2"></th>
+          <th class="col-xs-2 text-center">Name</th>
+          <th class="col-xs-2">
+              <%= image_tag("navbar_icons/Lv.png",style: "width:25px;height:25px; margin:0 auto;")%>
+          </th>
+          <th class="col-xs-2">
+              <%= image_tag("navbar_icons/B.png",style: "width:25px;height:25px; margin:0 auto;")%>
+          </th>
+          <th class="col-xs-2">
+              <%= image_tag("navbar_icons/G.png",style: "width:25px;height:25px; margin:0 auto;")%>
+          </th>
+        </tr>
+      </thead>  
+      <tbody>
+        <% i=1 %>
+        <% @scores.each do |score| %>
           <tr>
-            <th>Top 10 for all</th>
-            <th>Name</th>
-            <th>score</th>
+            <th class="col-xs-2 text-center media-middle" scope="row" style="padding-top:5%;"><%=  i %><% i+=1 %></th>
+           <td class="col-xs-2"><%= image_tag "#{User.find(score[:user_id]).avatar}", class: "img-responsive"%></td>
+            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= link_to "#{User.find(score[:user_id]).name}", user_path(User.find(score[:user_id]))%><%= render partial: "shared/follow", locals: {user: User.find(score[:user_id]) }%></td>
+             <td class="col-xs-2 text-center" style="padding-top:5%;"><%= User.find(score[:user_id]).level %></td>
+              <td class="col-xs-2 text-center" style="padding-top:5%;"><%= User.find(score[:user_id]).badges.count %></td>
+            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= score[:sum_points] %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% i=1 %>
-          <% @scores.each do |score| %>
-          <tr>
-            <th scope="row"><%= i %><% i+=1 %></th>
-            <td><%= User.find(score['user_id']).email %></td>
-            <td><%= score['sum_points'] %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      
-      <%= link_to "My Profile", user_path(current_user)%>
-    </div>
+        <%end%>
+      </tbody>
+    </table>
   </div>
 </div>
