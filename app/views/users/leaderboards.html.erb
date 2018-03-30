@@ -35,7 +35,7 @@
           <tr>
             <th class="col-xs-2 text-center media-middle" scope="row" style="padding-top:5%;"><%=  i %><% i+=1 %></th>
            <td class="col-xs-2"><%= image_tag "#{User.find(score[:user_id]).avatar}", class: "img-responsive"%></td>
-            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= link_to "#{User.find(score[:user_id]).name}", user_path(User.find(score[:user_id]))%></td>
+            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= link_to "#{User.find(score[:user_id]).name}", user_path(User.find(score[:user_id]))%><%= render partial: "shared/follow", locals: {user: User.find(score[:user_id]) }%></td>
              <td class="col-xs-2 text-center" style="padding-top:5%;"><%= User.find(score[:user_id]).level %></td>
               <td class="col-xs-2 text-center" style="padding-top:5%;"><%= User.find(score[:user_id]).badges.count %></td>
             <td class="col-xs-2 text-center" style="padding-top:5%;"><%= score[:sum_points] %></td>
