@@ -1,6 +1,6 @@
 
 .border{
-  border:1.5px solid #AAAAAA;
+  border:1px solid #AAAAAA;
   border-radius:10px;
 }
 
@@ -50,6 +50,7 @@ img {
   position: relative;
 }
 .brand{
+  padding-top: 10px;
   position:absolute;
   left:48%;
   margin-left:-50px !important;
@@ -90,7 +91,7 @@ img {
 }
 
 .nav-number-inactive{
-  margin: 1px 1px;
+  
   display: inline-block;
   font-size: 16px;
   color: #323237;
@@ -143,22 +144,33 @@ input[type='file'] {
 
 /*trips#index*/
 
+
 .carousel-control.left, .carousel-control.right {
     background-image: none
 }
 
+#myCarousel {
+  margin: 15px 0;
+}
+
+.badges{
+  margin: 0 0 20px 0;
+
+}
 
 .bettery-green{
   border-radius: 25px;
-  border:1px solid #2F4F4F;
+  border:1px solid #A1CA76;
   margin:10px auto;
-  animation:betterylight-green 1s ease-in-out 3s 1 normal forwards;
+  padding: 15px;
 }
 .bettery-red{
   border-radius: 25px;
-  border:1px solid #FF7744;
+  border:1px solid #FFB6B6;
   margin:10px auto;
-  animation:betterylight-red 1s ease-in-out 3s 1 normal forwards;
+  padding: 15px;
+  box-shadow:0px 0px 10px #FF9999;
+
 }
 .bettery img{
   width:100%;
@@ -176,6 +188,14 @@ input[type='file'] {
     blink-caret .75s step-end infinite;
   animation-delay: 1s;
 }
+
+.trip-screen{
+   margin-top:30px;
+   padding: 10px;
+   line-height: 2em;
+   color:#4A90E2;
+}
+
 .badges-container a{
   text-decoration:none;
   color:  #888888;
@@ -244,7 +264,7 @@ input[type='file'] {
 }
 @keyframes betterylight-red{
   from{opacity:0;}
-  to{opacity:1;box-shadow:0px 0px 10px #FF0000;}
+  to{opacity:1;box-shadow:0px 0px 10px #FF9999;}
 }
 @Keyframes tripbutton{
   from{}

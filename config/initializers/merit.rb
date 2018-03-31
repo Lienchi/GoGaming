@@ -58,7 +58,7 @@ Merit::Badge.create!(
   name: "Taipei_beef_noodle",
   description: "台北牛人",
   level: "1",
-  custom_fields: { image: "badges/lTaipei_beef_noodle.svg"}
+  custom_fields: { image: "badges/Taipei_beef_noodle.svg"}
 )
 
 
