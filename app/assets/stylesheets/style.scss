@@ -27,7 +27,7 @@ h2{
 }
 */
 #map {
-  height: 60%;
+  height: 100%;
   border: 1px solid #DDDDDD;
 }
 
@@ -50,9 +50,9 @@ img {
   position: relative;
 }
 .brand{
-  padding-top: 10px;
+  padding-top: 14px;
   position:absolute;
-  left:48%;
+  left:50%;
   margin-left:-50px !important;
   font-family: "graphik-lt", "PingFangTC-Light", "Noto Sans Light";
 }
@@ -84,10 +84,9 @@ img {
 .nav-number{
   margin: 1px 1px;
   display: inline-block;
-  font-size: 16px;
-  color: #4A90E2;
-  padding-top:5px;
-
+  font-size: 20px;
+  color: #979797;
+  padding-top:8px;
 }
 
 .nav-number-inactive{

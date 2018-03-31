@@ -87,51 +87,59 @@
     </style>
   </head>
 
-  <body class="col-xs-12 col-sm-12 col-md-12 background">
+  <body>
+    <div  class="col-xs-12 col-sm-12 col-md-12 background">
 
-    <div class="border clearfix  white " style="height: 92%;">
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div id="mySidenav-content" class="mysidenav">
-          <div id="mysidenav-img"></div>
-          <div id="mysidenav-content"></div>
-          <div id="mysidenav-disdur"></div>
-          <div id="mysidenav-button"></div>
-          <div id="mysidenav-tripurl"></div>
-          <div id="mysidenav-directionurl"></div>
+      <div class="border clearfix  white " style="height: 100%;">
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <div id="mySidenav-content" class="mysidenav">
+            <div id="mysidenav-img"></div>
+            <div id="mysidenav-content"></div>
+            <div id="mysidenav-disdur"></div>
+            <div id="mysidenav-button"></div>
+            <div id="mysidenav-tripurl"></div>
+            <div id="mysidenav-directionurl"></div>
+          </div>
         </div>
+        <br/>
+
+        <div class="col-xs-12">
+          <div class="col-xs-10">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">現在位置</button>
+              </span>
+              <input type="text" class="form-control" placeholder="或 輸入起點">
+            </div><!-- /input-group -->
+            <br>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="你想去哪裡？">
+              <span class="input-group-btn">
+                <<input id="submit" class="btn btn-primary" type="submit" value="Go">
+              </span>
+            </div><!-- /input-group -->
+          </div>
+          <div class="col-xs-2" style="padding-left: 0;">
+            <br>
+            <button class="btn btn-default" type="submit" >友好<br>店家</button>
+
+          </div>
+        </div>
+        <div class="col-xs-12"><hr></div>
+        
+
+        <div class="col-xs-12">
+          <div id="map" class="z-depth-2" style="height: 500px"></div>
+        </div>
+
+
+
+
+        
+        <hr>
+        
       </div>
-      <br/>
-
-      <div class="col-xs-12">
-        <div class="col-xs-10">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">現在位置</button>
-            </span>
-            <input type="text" class="form-control" placeholder="或 輸入起點">
-          </div><!-- /input-group -->
-          <br>
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="你想去哪裡？">
-            <span class="input-group-btn">
-              <<input id="submit" class="btn btn-primary" type="submit" value="Go">
-            </span>
-          </div><!-- /input-group -->
-        </div>
-        <div class="col-xs-2" style="padding-left: 0;">
-          <br>
-          <button class="btn btn-default" type="submit" >友好<br>店家</button>
-
-        </div>
-      </div>
-      <div class="col-xs-12"><hr></div>
-
-
-
-
-      <div id="map" style="height: 70%;"></div>
-      
     </div>
     
     

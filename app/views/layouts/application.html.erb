@@ -34,16 +34,16 @@
           <% if current_user %>
             <div class="nav-icon brand">
               <% if controller?("gostations")%>
-                <h4> 規劃路線</h4>
+                <h4>規劃路線</h4>
               <% elsif controller?("trips") && action?("index")%>
-                <h4> 我的挑戰</h4>
+                <h4>我的挑戰</h4>
               <% elsif controller?("trips") && action?("show")%>
                 <h4>
                   <%= @trip.name%>
                   <!-- <button class="btn " data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding:0px 0px;font-size:18px;"><strong><%= @trip.name%></strong></button> -->
                 </h4>
               <% elsif controller?("users") %>
-                <h4> 我的紀錄</h4>
+                <h4>我的紀錄</h4>
               <% else %>
                 <%= image_tag "gogoro.png", style:"width:100px;"%>
               <%end%>
@@ -67,25 +67,28 @@
               <% end %>
             </div>
 
+            <div class="nav-icon pull-right nav-number">
+              <%= current_user.points%>
+            </div>
+
             <div class="nav-icon pull-right">
               <%= link_to user_path(current_user) do %>
                 <% if controller?("users")%>
                   
-                  <div class="nav-icon ">
+                  <div class=" ">
                     <%= image_tag "navbar_icons/G.svg", :class => "nav-icon-style"%>
-                  </div>
-                  <div class="nav-number"><%= current_user.points%>
                   </div>
                 <% else %>
                   
                   <div class="nav-icon ">
                     <%= image_tag "navbar_icons/g_G.svg", :class => "nav-icon-style "%>
                   </div>
-                  <div class="nav-number-inactive "><%= current_user.points%>
-                  </div>
                 <% end %>
               <% end %>
             </div>
+
+
+
           <%end%>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
