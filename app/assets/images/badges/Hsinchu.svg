@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="640px" height="640px" viewBox="0 0 640 640" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Hsinchu</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="124" y="0" width="25" height="89"></rect>
+        <rect id="path-2" x="44" y="37" width="25" height="89"></rect>
+        <rect id="path-3" x="65" y="136" width="25" height="89"></rect>
+        <rect id="path-4" x="83" y="232" width="25" height="62"></rect>
+        <rect id="path-5" x="205" y="35" width="25" height="89"></rect>
+        <rect id="path-6" x="183" y="131" width="25" height="89"></rect>
+        <rect id="path-7" x="162" y="230" width="25" height="66"></rect>
+        <rect id="path-8" x="124" y="110" width="25" height="89"></rect>
+        <rect id="path-9" x="124" y="220" width="25" height="73"></rect>
+        <rect id="path-10" x="0" y="0" width="88.8" height="120" rx="8.4"></rect>
+        <rect id="path-11" x="0" y="0" width="88.8" height="120" rx="8.4"></rect>
+        <rect id="path-12" x="0" y="0" width="88.8" height="120" rx="8.4"></rect>
+        <rect id="path-13" x="0" y="0" width="88.8" height="120" rx="8.4"></rect>
+        <rect id="path-14" x="0" y="0" width="88.8" height="120" rx="8.4"></rect>
+    </defs>
+    <g id="Hsinchu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#FFF46F" cx="320" cy="320" r="320"></circle>
+        <circle id="Oval-Copy" fill="#FFFFFF" cx="320" cy="320" r="304"></circle>
+        <circle id="Oval-Copy-2" fill="#FAEB38" cx="320" cy="320" r="256"></circle>
+        <g id="竹" transform="translate(249.000000, 214.000000)">
+            <g id="Group-2" transform="translate(0.000000, 45.000000)" fill="#D9F75B" stroke="#0848C5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <g id="leaf" transform="translate(140.810149, 0.000000)">
+                    <path d="M0.453183457,45.1031321 C2.07811688,31.2853509 8.27618628,18.9176696 19.0065136,10.534219 C26.034121,5.04365042 34.249627,1.85280521 42.9595101,0.800604101 L0.453183457,45.1031321 Z" id="Combined-Shape"></path>
+                    <path d="M44.7648784,0.797356828 C43.1180035,14.585554 36.9199033,26.9260878 26.2123877,35.2999914 C19.2109572,40.7755197 11.0319971,43.9681349 2.36097476,45.0368536 L44.7648784,0.797356828 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-2" transform="translate(241.973036, 45.581267) rotate(18.271568) translate(-241.973036, -45.581267) translate(219.473036, 22.581267)">
+                    <path d="M0.454071571,45.1013948 C2.079005,31.2836136 8.27707439,18.9159323 19.0074017,10.5324818 C26.0350091,5.04191313 34.2505151,1.85106792 42.9603982,0.798866815 L0.454071571,45.1013948 Z" id="Combined-Shape"></path>
+                    <path d="M44.7657665,0.795619542 C43.1188916,14.5838167 36.9207914,26.9243505 26.2132759,35.2982541 C19.2118453,40.7737824 11.0328852,43.9663976 2.36186287,45.0351163 L44.7657665,0.795619542 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-3" transform="translate(217.739277, 151.942092) rotate(18.271568) translate(-217.739277, -151.942092) translate(195.239277, 128.942092)">
+                    <path d="M0.454071571,45.1013948 C2.079005,31.2836136 8.27707439,18.9159323 19.0074017,10.5324818 C26.0350091,5.04191313 34.2505151,1.85106792 42.9603982,0.798866815 L0.454071571,45.1013948 Z" id="Combined-Shape"></path>
+                    <path d="M44.7657665,0.795619542 C43.1188916,14.5838167 36.9207914,26.9243505 26.2132759,35.2982541 C19.2118453,40.7737824 11.0328852,43.9663976 2.36186287,45.0351163 L44.7657665,0.795619542 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-4" transform="translate(89.371554, 79.487618) rotate(-6.911943) translate(-89.371554, -79.487618) translate(66.871554, 56.987618)">
+                    <path d="M0.446966889,44.8070531 C2.07190032,30.9892719 8.26996971,18.6215906 19.000297,10.23814 C26.0279044,4.74757143 34.2434104,1.55672621 42.9532935,0.504525106 L0.446966889,44.8070531 Z" id="Combined-Shape"></path>
+                    <path d="M44.7586618,0.501277833 C43.1117869,14.289475 36.9136868,26.6300088 26.2061712,35.0039124 C19.2047406,40.4794407 11.0257806,43.6720559 2.35475819,44.7407746 L44.7586618,0.501277833 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-5" transform="translate(29.705168, 45.354942) rotate(72.178298) translate(-29.705168, -45.354942) translate(7.205168, 22.354942)">
+                    <path d="M0.453767477,45.1019919 C2.0787009,31.2842108 8.2767703,18.9165294 19.0070976,10.5330789 C26.034705,5.04251028 34.250211,1.85166507 42.9600941,0.799463963 L0.453767477,45.1019919 Z" id="Combined-Shape"></path>
+                    <path d="M44.7654624,0.796216691 C43.1185875,14.5844138 36.9204874,26.9249477 26.2129718,35.2988513 C19.2115412,40.7743795 11.0325811,43.9669947 2.36155878,45.0357135 L44.7654624,0.796216691 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-6" transform="translate(57.667198, 151.715767) rotate(72.178298) translate(-57.667198, -151.715767) translate(35.167198, 128.715767)">
+                    <path d="M0.453767477,45.1019919 C2.0787009,31.2842108 8.2767703,18.9165294 19.0070976,10.5330789 C26.034705,5.04251028 34.250211,1.85166507 42.9600941,0.799463963 L0.453767477,45.1019919 Z" id="Combined-Shape"></path>
+                    <path d="M44.7654624,0.796216691 C43.1185875,14.5844138 36.9204874,26.9249477 26.2129718,35.2988513 C19.2115412,40.7743795 11.0325811,43.9669947 2.36155878,45.0357135 L44.7654624,0.796216691 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-7" transform="translate(113.591257, 123.726076) rotate(72.178298) translate(-113.591257, -123.726076) translate(91.091257, 100.726076)">
+                    <path d="M0.453767477,45.1019919 C2.0787009,31.2842108 8.2767703,18.9165294 19.0070976,10.5330789 C26.034705,5.04251028 34.250211,1.85166507 42.9600941,0.799463963 L0.453767477,45.1019919 Z" id="Combined-Shape"></path>
+                    <path d="M44.7654624,0.796216691 C43.1185875,14.5844138 36.9204874,26.9249477 26.2129718,35.2988513 C19.2115412,40.7743795 11.0325811,43.9669947 2.36155878,45.0357135 L44.7654624,0.796216691 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy-8" transform="translate(186.904245, 79.457291) rotate(96.815618) translate(-186.904245, -79.457291) translate(164.404245, 56.457291)">
+                    <path d="M0.455825946,45.0979017 C2.08075937,31.2801206 8.27882877,18.9124392 19.0091561,10.5289887 C26.0367635,5.03842008 34.2522695,1.84757487 42.9621526,0.795373762 L0.455825946,45.0979017 Z" id="Combined-Shape"></path>
+                    <path d="M44.7675209,0.79212649 C43.120646,14.5803236 36.9225458,26.9208575 26.2150302,35.2947611 C19.2135997,40.7702893 11.0346396,43.9629045 2.36361725,45.0316233 L44.7675209,0.79212649 Z" id="Combined-Shape-Copy"></path>
+                </g>
+                <g id="leaf-copy" transform="translate(140.810149, 111.958763)">
+                    <path d="M0.453183457,45.1031321 C2.07811688,31.2853509 8.27618628,18.9176696 19.0065136,10.534219 C26.034121,5.04365042 34.249627,1.85280521 42.9595101,0.800604101 L0.453183457,45.1031321 Z" id="Combined-Shape"></path>
+                    <path d="M44.7648784,0.797356828 C43.1180035,14.585554 36.9199033,26.9260878 26.2123877,35.2999914 C19.2109572,40.7755197 11.0319971,43.9681349 2.36097476,45.0368536 L44.7648784,0.797356828 Z" id="Combined-Shape-Copy"></path>
+                </g>
+            </g>
+            <g id="Rectangle-2">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="125" y="1" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-6" transform="translate(56.500000, 81.500000) rotate(-12.000000) translate(-56.500000, -81.500000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="45" y="38" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-7" transform="translate(77.500000, 180.500000) rotate(-13.000000) translate(-77.500000, -180.500000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="66" y="137" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-8" transform="translate(95.500000, 263.000000) rotate(-13.721802) translate(-95.500000, -263.000000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-4"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="84" y="233" width="23" height="60"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-3" transform="translate(217.500000, 79.500000) rotate(13.000000) translate(-217.500000, -79.500000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-5"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="206" y="36" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-4" transform="translate(195.500000, 175.500000) rotate(12.724332) translate(-195.500000, -175.500000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-6"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="184" y="132" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-5" transform="translate(174.500000, 263.000000) rotate(15.000000) translate(-174.500000, -263.000000) ">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-7"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="163" y="231" width="23" height="64"></rect>
+            </g>
+            <g id="Rectangle-2-Copy">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-8"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="125" y="111" width="23" height="87"></rect>
+            </g>
+            <g id="Rectangle-2-Copy-2">
+                <use fill="#1ECE50" fill-rule="evenodd" xlink:href="#path-9"></use>
+                <rect stroke="#0848C5" stroke-width="2" x="125" y="221" width="23" height="71"></rect>
+            </g>
+            <rect id="Rectangle-3" fill="#0848C5" x="34" y="286" width="205" height="13"></rect>
+        </g>
+        <g id="Group" transform="translate(129.000000, 114.000000)">
+            <g id="東" transform="translate(177.600000, 120.000000)">
+                <g id="Rectangle">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-10"></use>
+                    <rect stroke="#4DD662" stroke-width="4.8" x="2.4" y="2.4" width="84" height="115.2" rx="8.4"></rect>
+                </g>
+                <text font-family="JCkg, GungSeo" font-size="76.8" font-weight="normal" letter-spacing="1.53600025" fill="#2C5B93">
+                    <tspan x="7.2" y="82.6">東</tspan>
+                </text>
+            </g>
+            <g id="西" transform="translate(0.000000, 120.000000)">
+                <g id="Rectangle">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-11"></use>
+                    <rect stroke="#4DD662" stroke-width="4.8" x="2.4" y="2.4" width="84" height="115.2" rx="8.4"></rect>
+                </g>
+                <text font-family="JCkg, GungSeo" font-size="76.8" font-weight="normal" letter-spacing="1.53600025" fill="#2C5B93">
+                    <tspan x="7.2" y="82.6">西</tspan>
+                </text>
+            </g>
+            <g id="南" transform="translate(88.800000, 240.000000)">
+                <g id="Rectangle">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-12"></use>
+                    <rect stroke="#4DD662" stroke-width="4.8" x="2.4" y="2.4" width="84" height="115.2" rx="8.4"></rect>
+                </g>
+                <text font-family="JCkg, GungSeo" font-size="76.8" font-weight="normal" letter-spacing="1.53600025" fill="#2C5B93">
+                    <tspan x="7.2" y="82.6">南</tspan>
+                </text>
+            </g>
+            <g id="北" transform="translate(88.800000, 0.000000)">
+                <g id="Rectangle">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-13"></use>
+                    <rect stroke="#4DD662" stroke-width="4.8" x="2.4" y="2.4" width="84" height="115.2" rx="8.4"></rect>
+                </g>
+                <text font-family="JCkg, GungSeo" font-size="76.8" font-weight="normal" letter-spacing="1.53600025" fill="#2C5B93">
+                    <tspan x="7.2" y="82.6">北</tspan>
+                </text>
+            </g>
+            <g id="中" transform="translate(88.800000, 120.000000)">
+                <g id="Rectangle">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-14"></use>
+                    <rect stroke="#4DD662" stroke-width="4.8" x="2.4" y="2.4" width="84" height="115.2" rx="8.4"></rect>
+                </g>
+                <text font-family="JCkg, GungSeo" font-size="76.8" font-weight="normal" letter-spacing="1.53600025" fill="#D0021B">
+                    <tspan x="7.2" y="82.6">中</tspan>
+                </text>
+            </g>
+        </g>
+        <g id="Group-3" transform="translate(320.000000, 102.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,23.7829832 C39.855075,23.7829832 61.923342,23.7829832 66.2048009,23.7829832 C72.6269893,23.7829832 74.0177898,16.3895439 74.0177898,12.8297873 C74.0177898,9.27003071 69.4514991,4 64.3161861,4 C60.8926442,4 58.1499615,5.17012003 56.0881382,7.51036008" id="Path-2"></path>
+            <path d="M7,16.7829832 C27.2871619,16.7829832 38.9202436,16.7829832 41.8992454,16.7829832 C46.3677479,16.7829832 48.0350407,12.1647401 48.0350407,7.26086345 C48.0350407,2.35698684 44.6062778,0.780938894 41.8992454,0.780938894 C40.094557,0.780938894 38.3169221,1.51330254 36.5663407,2.97802984" id="Path-2-Copy"></path>
+        </g>
+        <g id="Group-3-Copy-5" transform="translate(488.000000, 345.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,19 C34.4609695,19 53.542451,19 57.2444444,19 C62.7974346,19 64,12.6466373 64,9.5876516 C64,6.52866593 60.0517247,2 55.6114405,2 C52.6512509,2 50.2797712,3.00551268 48.4970012,5.01653804" id="Path-2"></path>
+            <path d="M6,14 C23.7979067,14 34.0035977,14 36.6170729,14 C40.5372858,14 42,9.95955349 42,5.66920963 C42,1.37886577 38.9919498,0 36.6170729,0 C35.0338217,0 33.4743044,0.640736325 31.938521,1.92220898" id="Path-2-Copy"></path>
+        </g>
+        <g id="Group-3-Copy-4" transform="translate(188.000000, 490.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,16 C27.9995378,16 43.5032415,16 46.5111111,16 C51.0229156,16 52,10.7678189 52,8.24865426 C52,5.72948959 48.7920263,2 45.1842954,2 C42.7791414,2 40.8523141,2.82806927 39.4038135,4.4842078" id="Path-2"></path>
+            <path d="M5,11 C19.3372026,11 27.5584537,11 29.6637532,11 C32.8217024,11 34,7.82536346 34,4.454379 C34,1.08339453 31.5768485,0 29.6637532,0 C28.3883564,0 27.1320785,0.503435684 25.8949197,1.51030705" id="Path-2-Copy"></path>
+        </g>
+        <g id="Group-3-Copy-3" transform="translate(92.000000, 382.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,29 C50.0760964,29 77.8038742,29 83.1833333,29 C91.2525221,29 93,19.6568195 93,15.1583112 C93,10.6598028 87.2626625,4 80.8103744,4 C76.508849,4 73.0627925,5.47869512 70.4722049,8.43608535" id="Path-2"></path>
+            <path d="M9,20 C34.2137012,20 48.6717634,20 52.3741866,20 C57.9278215,20 60,14.2279336 60,8.0988709 C60,1.96980824 55.7385956,0 52.3741866,0 C50.1312474,0 47.9219312,0.915337607 45.746238,2.74601282" id="Path-2-Copy"></path>
+        </g>
+        <g id="Group-3-Copy-2" transform="translate(129.000000, 164.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,18 C31.2302537,18 48.5228462,18 51.8777778,18 C56.9101751,18 58,12.0203645 58,9.14131915 C58,6.26227382 54.4218755,2 50.3978679,2 C47.7151962,2 45.5660426,2.94636487 43.9504073,4.83909462" id="Path-2"></path>
+            <path d="M6,13 C21.8203615,13 30.8920869,13 33.2151759,13 C36.6998096,13 38,9.24815681 38,5.26426609 C38,1.28037536 35.3261776,0 33.2151759,0 C31.8078415,0 30.4216039,0.594969445 29.0564631,1.78490833" id="Path-2-Copy"></path>
+        </g>
+        <g id="Group-3-Copy" transform="translate(358.000000, 155.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M0,36 C62.4605073,36 97.0456925,36 103.755556,36 C113.82035,36 116,24.4144562 116,18.8363059 C116,13.2581555 108.843751,5 100.795736,5 C95.4303923,5 91.1320853,6.83358194 87.9008147,10.5007458" id="Path-2"></path>
+            <path d="M11,25 C43.1351094,25 61.5620514,25 66.2808261,25 C73.3589882,25 76,17.7849169 76,10.1235886 C76,2.46226031 70.5687983,0 66.2808261,0 C63.422178,0 60.6063829,1.14417201 57.8334407,3.43251603" id="Path-2-Copy"></path>
+        </g>
+    </g>
+</svg>
