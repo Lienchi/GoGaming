@@ -4,7 +4,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" style="height: 180px;border-radius: 10px;">
           <div class="item active " style="height:100%;width:100%;">
-            <h5 class="text-center typewriter" style="margin-top:30px;line-height: 2em;color:#4cae4c;">歡迎來到Go Fan的Go Station，<br/>你的充電站還有"<strong><%= @unchallenge_trips%>顆</strong>"未充飽的電池，<br/>現在就選擇一顆電池為他充電吧!</h5>
+            <h5 class="text-center typewriter" style="margin-top:30px;line-height: 2em;color:#4cae4c;">歡迎來到 <%= current_user.name %> Go Station，<br/>你的充電站還有"<strong><%= @unchallenge_trips%>顆</strong>"未充飽的電池，<br/>現在就選擇一顆電池為他充電吧!</h5>
           </div>
           <div class="item">
             <%= image_tag ("101.jpg"),style:"height:180px;width:100%;border-radius:10px;"%>
@@ -28,17 +28,29 @@
         <% @trips.each do |t| %>
           <div class="col-xs-6 col-sm-3 col-md-2">
             <div class="">
-              <% if t.is_challenged?(current_user)%>
-                <%=link_to(image_tag(t.image, class: "bettery-green"), trip_path(t))%>
-              <%else%>
-                <%= link_to(image_tag(t.image, class: "bettery-red"), trip_path(t))%>
-              <%end%>
+              <%= link_to trip_path(t) do %>
+                <% if Merit::Badge.find(t.id) %>
+                  <% if t.is_challenged?(current_user)%>                  
+                    <%= image_tag Merit::Badge.find(t.id).custom_fields[:image],alt: t.name, class: "bettery-green" %>
+                  <% else %>
+                    <%= image_tag Merit::Badge.find(t.id).custom_fields[:image],alt: t.name, class: "bettery-red" %>
+                  <% end %>
+                <% else %>
+                  <% if t.is_challenged?(current_user)%>                  
+                    <%= image_tag Merit::Badge.find(101).custom_fields[:image],alt: t.name, class: "bettery-green" %>
+                  <% else %>
+                    <%= image_tag Merit::Badge.find(101).custom_fields[:image],alt: t.name, class: "bettery-red" %>
+                  <% end %>
 
+                <% end %>
+              <% end %>
             </div>
             <div class="text-center">
               <%= link_to "#{t.name}", trip_path(t)%>
             </div>
           </div>
+
+         <%= image_tag Merit::Badge.find(6).custom_fields[:image],alt: t.name, class: "bettery-green" %> 
   
       <!--
               <% @followings.each do |following| %>
