@@ -53,6 +53,7 @@ img {
   position:absolute;
   left:48%;
   margin-left:-50px !important;
+  font-family: "graphik-lt", "PingFangTC-Light", "Noto Sans Light";
 }
 
 .nav-style{
@@ -69,15 +70,30 @@ img {
   margin: 1px 1px;
   display: inline-block;
   font-size: 2em;
-  color:#227700;
-  padding: 5px 5px;
+  color:#323237;
+  height:50px;
+
+}
+
+.nav-icon-style{
+  height:40px;
+  width: 40px;
 }
 
 .nav-number{
   margin: 1px 1px;
   display: inline-block;
-  font-size: 1.5em;
-  color: #7AAB37;
+  font-size: 16px;
+  color: #4A90E2;
+  padding-top:5px;
+
+}
+
+.nav-number-inactive{
+  margin: 1px 1px;
+  display: inline-block;
+  font-size: 16px;
+  color: #323237;
   padding-top:5px;
 
 }
