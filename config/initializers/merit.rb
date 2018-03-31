@@ -37,46 +37,54 @@ end
 
 Merit::Badge.create!(
   id: 1,
-  name: "love-Hsinchu",
-  description: "就是愛新竹",
+  name: "Taipei_night_market",
+  description: "台北夜市達人",
   level: "1",
-  custom_fields: { image: "badges/love-Hsinchu.svg", img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/186_hsinchu_l_696_696-01.svg?t=1520994640085"}
+  custom_fields: { image: "badges/Taipei_night_market.svg"}
 )
 
 
 Merit::Badge.create!(
   id: 2,
-  name: "love-Taoyuan",
-  description: "就是愛桃園",
+  name: "Hsinchu",
+  description: "環遊新竹",
   level: "1",
-  custom_fields: { image: "badges/love-Taoyuan.svg", img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/181_love_taoyuan_l_696_696-01.svg?t=1520994640085"}
+  custom_fields: { image: "badges/Hsinchu.svg"}
 )
 
 
 Merit::Badge.create!(
   id: 3,
-  name: "love-Taichung",
-  description: "就是愛台中",
+  name: "Taipei_beef_noodle",
+  description: "台北牛人",
   level: "1",
-  custom_fields: { image: "badges/love-Taichung.svg", img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/191_taichung_l_696_696-01.svg?t=1520994640085"}
+  custom_fields: { image: "badges/lTaipei_beef_noodle.svg"}
 )
 
 
 Merit::Badge.create!(
   id: 4,
-  name: "love-Kaohsiung",
-  description: "就是愛港都",
+  name: "Temple_love",
+  description: "好姻緣",
   level: "1",
-  custom_fields: { image: "badges/love-Taichung.svg", img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/191_taichung_l_696_696-01.svg?t=1520994640085"}
+  custom_fields: { image: "badges/Temple_love.svg"}
 )
 
 
 Merit::Badge.create!(
   id: 5,
-  name: "love-happy",
-  description: "超開薰",
+  name: "North_shore",
+  description: "北海小英雄",
   level: "1",
-  custom_fields: { image: "badges/love-Kaohsiung.svg", img_url: "https://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Lovegogoro/200_kaohsiung_l_696_696-01.svg?t=1520994640085"}
+  custom_fields: { image: "badges/North_shore.svg"}
+)
+
+Merit::Badge.create!(
+  id: 6,
+  name: "Tainan",
+  description: "台南文青",
+  level: "1",
+  custom_fields: { image: "badges/Tainan.svg"}
 )
 
 Merit::Badge.create!(
