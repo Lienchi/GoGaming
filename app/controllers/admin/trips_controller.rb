@@ -42,4 +42,19 @@ class Admin::TripsController < ApplicationController
   def set_trip
      @trip = Trip.find(params[:id])
   end
+
+  def create_new_trip_gostation
+  Trip.all.each do |t|
+    t.gostations_index.each do |gid|
+      User.all.each do |u|
+        TripGostation.create!(
+            user_id: u.id,
+            trip_id: t.id,
+            gostation_id: gid,
+            status: false
+          )
+        end
+      end
+    end
+  end
 end
