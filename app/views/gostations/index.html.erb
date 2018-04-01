@@ -108,21 +108,21 @@
           <div class="col-xs-10">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">現在位置</button>
+                <button id="current-position-submit" class="btn btn-default" type="submit">現在位置</button>
               </span>
-              <input type="text" class="form-control" placeholder="或 輸入起點">
+              <input id="direction-start" type="text" class="form-control" placeholder="或 輸入起點">
             </div><!-- /input-group -->
             <br>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="你想去哪裡？">
+              <input id="direction-end" type="text" class="form-control" placeholder="你想去哪裡？">
               <span class="input-group-btn">
-                <<input id="submit" class="btn btn-primary" type="submit" value="Go">
+                <<input id="direction-submit" class="btn btn-primary" type="submit" value="GO">
               </span>
             </div><!-- /input-group -->
           </div>
           <div class="col-xs-2" style="padding-left: 0;">
             <br>
-            <button class="btn btn-default" type="submit" >友好<br>店家</button>
+            <button id="friendly-store-submit" class="btn btn-default" type="submit" >友好<br>店家</button>
 
           </div>
         </div>
@@ -382,8 +382,6 @@
         return {
           directions_url: '<a style="color:#FFFFFF;" class="btn btn-success" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
-          StorePhoto: gostation.StorePhoto,
-
           trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
 
           infoWindowContent: '<div>站名：'+LocName+'</div><br>'
@@ -439,22 +437,25 @@
         return false;
       }
 
+      function hasUserCurrentPos(){
+        if(userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0){
+          return true;
+        }
+        return false;
+      }
+
       function calculateDisDur(des){
         var results = {
           distance: '0.0',
           duration: '0.0',
           status: false
         }
-        if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
+        if(!hasUserCurrentPos()){
           return results;
         }
         var directionsServiceCalc = new google.maps.DirectionsService;
-        //var start = userCurrentPos.lat+','+userCurrentPos.lng;
-        //var end = des.lat+','+des.lng;
         var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
         var end = new google.maps.LatLng(des.lat, des.lng);
-        //var start = '37.7683909618184, -122.51089453697205';
-        //var end = '41.850033, -87.6500523';
         directionsServiceCalc.route({
           origin: start,
           destination: end,
@@ -501,7 +502,8 @@
 
       var activeMarkerInfo = {
         marker: null,
-        bBelongsToTrip: false
+        bBelongsToTrip: false,
+        bFriendlyStore: false
       };
       function addMarker(props){
         var marker = new google.maps.Marker({
@@ -513,60 +515,88 @@
 
         if(props.content){
           marker.addListener('click', function(){
-            currentGostationId = props.id;
+            if(props.id >= 0){// 如果是交換站
+              currentGostationId = props.id;
 
-            if(activeMarkerInfo.marker!=null){
-              if(activeMarkerInfo.bBelongsToTrip){
-                activeMarkerInfo.marker.setIcon(i_green_black_battery);
-              }
-              else{
-                activeMarkerInfo.marker.setIcon(i_black_battery);
-              }
-            }
-            if(props.bBelongsToTrip){
-              marker.setIcon(ig_green_black_battery);
-            }
-            else{
-              marker.setIcon(ig_black_battery);
-            }
-            activeMarkerInfo.marker = marker;
-            activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
-
-            var results = calculateDisDur(props.coords);
-
-            var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
-            var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
-
-            var checkinDisTH = 0.005;//0.005 = 500m
-            if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-            {
-              checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
-
-              uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
-            }
-
-            $.ajaxSetup({
-              headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-            });
-            $.ajax({
-              url: "/gostations/"+props.id+"/getCheckinStatus",
-              method: "POST",
-              dataType: "json",
-              success: function(data){
-
-                if(data.status){
-                  openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+              if(activeMarkerInfo.marker!=null){
+                if(activeMarkerInfo.bFriendlyStore){
+                  activeMarkerInfo.marker.setIcon(friendly_store_icon);
+                }
+                else if(activeMarkerInfo.bBelongsToTrip){
+                  activeMarkerInfo.marker.setIcon(i_green_black_battery);
                 }
                 else{
-                  openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                  activeMarkerInfo.marker.setIcon(i_black_battery);
                 }
-              },
+              }
+              if(props.bBelongsToTrip){
+                marker.setIcon(ig_green_black_battery);
+              }
+              else{
+                marker.setIcon(ig_black_battery);
+              }
+              activeMarkerInfo.marker = marker;
+              activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
+              activeMarkerInfo.bFriendlyStore = false;
 
-              error: function() {
-                alert("ERROR: can not getCheckinStatus!");
+              var results = calculateDisDur(props.coords);
+
+              var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
+              var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+
+              var checkinDisTH = 0.005;//0.005 = 500m
+              if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
+              {
+                checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
+
+                uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
               }
 
-            });
+              $.ajaxSetup({
+                headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+              });
+              $.ajax({
+                url: "/gostations/"+props.id+"/getCheckinStatus",
+                method: "POST",
+                dataType: "json",
+                success: function(data){
+
+                  if(data.status){
+                    openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+                  }
+                  else{
+                    openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                  }
+                },
+
+                error: function() {
+                  alert("ERROR: can not getCheckinStatus!");
+                }
+
+              });
+            }
+            else if(props.id == -1){
+
+              if(activeMarkerInfo.marker!=null){
+                if(activeMarkerInfo.bFriendlyStore){
+                  activeMarkerInfo.marker.setIcon(friendly_store_icon);
+                }
+                else if(activeMarkerInfo.bBelongsToTrip){
+                  activeMarkerInfo.marker.setIcon(i_green_black_battery);
+                }
+                else{
+                  activeMarkerInfo.marker.setIcon(i_black_battery);
+                }
+              }
+              marker.setIcon(friendly_store_icon_onclick);
+              activeMarkerInfo.marker = marker;
+              activeMarkerInfo.bFriendlyStore = true;
+
+              var results = calculateDisDur(props.coords);
+              openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
+
+            }
+
           });
         }
       }
@@ -588,13 +618,15 @@
 
           var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
 
+          var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400"><br>';
+
           addMarker({
             coords: position,
             iconImage: friendly_store_icon,
             content: infoWindowContent,
-            storePhoto: gon.friendly_stores[i].main_photo,
+            storePhoto: storePhoto,
             directions_url: directions_url,
-            id: 0
+            id: -1
           });
         }
       }
@@ -640,18 +672,26 @@
           scaledSize: new google.maps.Size(28, 32)
         };
 
+        friendly_store_icon_onclick = {
+          url: "icons/shop.png",
+          scaledSize: new google.maps.Size(35, 40)
+        };
+
         directionsDisplay.setMap(map);
 
-        //displayFriendlyStores();
+        document.getElementById('friendly-store-submit').addEventListener('click', function() {
+          displayFriendlyStores();
+        });
 
-        // find current position of user
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
+        document.getElementById('current-position-submit').addEventListener('click', function() {
+          var locationPromise = getUserCurrentPosition();
+
+          locationPromise
+          .then(function(position) {
             userCurrentPos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
             map.setZoom(12);
             map.setCenter(userCurrentPos);
             addMarker({
@@ -659,41 +699,56 @@
               iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png'
             });
 
+            document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
+
             // --- gostations_belongs_to_trip
             setNearbyInfobox(gon.gostations_belongs_to_trip,
                              true,
                              userCurrentPos,
                              i_green_black_battery);
-
             // --- gostations_not_belongs_to_trip
             setNearbyInfobox(gon.gostations_not_belongs_to_trip,
                              false,
                              userCurrentPos,
                              i_black_battery);
+          })
+          .catch(function(err) {
+            console.log("Can not get current position!");
+          });
+        });
 
-          }, function() {
-            alert('can not get current position in 2 sec！');
-          }//,
-            //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
-          );
-        } else {
-          alert('Browser does not support Geolocation');
-        }
-
-        document.getElementById('submit').addEventListener('click', function() {
-          if( userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0 ){
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-          }
-          else{
-            var geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map);
+        document.getElementById('direction-submit').addEventListener('click', function() {
+          if(document.getElementById('direction-end').value != ''){
+            if( document.getElementById('direction-start').value != ''  ){
+              calculateAndDisplayRoute(directionsService, directionsDisplay);
+            }
+            else{
+              var geocoder = new google.maps.Geocoder();
+              geocodeAddress(geocoder, map);
+            }
           }
         });
 
       }
 
+      function getUserCurrentPosition(){
+        var promise = new Promise(function(resolve, reject) {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              function(position){
+                resolve(position)
+              }
+            );
+          } else {
+            reject("Can not get current position!");
+          }
+        });
+
+        return promise;
+      }
+
       function geocodeAddress(geocoder, map) {
-        var address = document.getElementById('end').value;
+        var address = document.getElementById('direction-end').value;
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             map.setZoom(12);
@@ -818,13 +873,9 @@
       }
       
       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = '';
-        if((userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0)){
-          start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
-        }
         directionsService.route({
-          origin: start,
-          destination: document.getElementById('end').value,
+          origin: document.getElementById('direction-start').value,
+          destination: document.getElementById('direction-end').value,
           travelMode: 'DRIVING',
           avoidHighways: true
         }, function(response, status) {
