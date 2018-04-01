@@ -4,73 +4,55 @@
     <div class="media-left media-middle col-xs-5 col-sm-4 col-md-4 clearfix ">
       <div class="text-center ">
         <%= image_tag @user.avatar, class: "media-object img-circle avatar "%>
-         <%= render partial: "shared/follow", locals: {user: @user}%>
+         
       </div>
-
       <div class="uploader text-center " style="padding-bottom: 20px;">
         <% if @user == current_user %>
           <%= form_for @user do |f| %>
             <%= f.file_field :avatar, style: " width:90px;margin:0 auto;"%>
-            <input class="btn btn-success btn-sm  " type="submit" value="更新照片">
+            <input class="btn btn-default btn-sm  " type="submit" value="更新">
             <br/>
           <%end%>
+        <% else %>
+          <%= render partial: "shared/follow", locals: {user: @user}%>
         <%end%>
       </div>
+
     </div>
     <div class="media-body ">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 name-topping">
-        <div class="media col-xs-12 col-sm-12 col-md-12  ">
-          <div class="media-body media-middle ">
-            <h4 class="media-heading text-center"><%= @user.name%></h4>
-          </div>
-        </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 ">
-          <div class="media-left media-middle">
-            <%= image_tag(("navbar_icons/G.png"), class: "media-object",style: "width:32px;")%>
-          </div>
-          <div class="media-body media-bottom">
-            <h4 class="media-heading text-center">點數 <%= @user.points %></h4>
-          </div>
-        </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 ">
-          <div class="media-left media-middle">
-            <%= image_tag(("navbar_icons/B.png"), class: "media-object",style: "width:30px;")%>
-          </div>
-          <div class="media-body media-bottom">
-            <h4 class="media-heading text-center">徽章 <%= @user.badges.count%></h4>
-          </div>
-        </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 ">
-          <div class="media-left media-middle">
-            <%= image_tag(("navbar_icons/Lv.png"), class: "media-object",style: "width:30px;")%>
-          </div>
-          <div class="media-body media-bottom">
-            <h4 class="media-heading text-center">等級 <%= @user.level %></h4>
-          </div>
-        </div>
-        <div class="media col-xs-12 col-sm-12 col-md-12 ">
-          <div class="media-body media-middle">
-            <div class="media-heading">
-              <%= link_to "排行榜", f_leaderboards_users_path, class: "btn btn-danger"%>
+      <div><%= @user.email%></div>
+
+      <div>
+        <div class="user-icon"> <%= image_tag(("navbar_icons/b_G.svg")) %></div> 
+        <div class="user-icon-text">點數 <%= @user.points %></div>
+      </div>
+      <div>
+        <div class="user-icon"><%= image_tag(("navbar_icons/B.svg")) %></div>
+        <div class="user-icon-text"> 徽章 <%= @user.badges.count%></div>
+      </div>
+      <div>
+        <div class="user-icon"><%= link_to "排行榜", f_leaderboards_users_path, class: "btn btn-default"%></div>
+        <div class=""><%= social_share_button_tag('My Gogoro Badges', :url => 'user_url(@user)', desc: 'My Gogoro Badges') %></div>
+      </div>   
+    </div>
+
+<br>
+<hr>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height:400px;"  >
+      <div class="user-badges clearfix">
+        <% @user.badges.each do |badge| %>
+          <div class="user-badge thumbnail card col-xs-4 col-sm-4 col-md-3">
+            <%= image_tag (badge.custom_fields[:image]) %>
+            <div class="caption text-center">
+              <p><%= badge.name %></p>
             </div>
           </div>
-        </div>
-      </div>
+        <%end%>
+      </div>    
     </div>
   </div>
-  <div class="border clearfix border white  white col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height:400px;"  >
-    <div class="user-badges clearfix">
-      <% @user.badges.each do |badge| %>
-        <div class="user-badge thumbnail card col-xs-4 col-sm-4 col-md-3">
-          <%= image_tag (badge.custom_fields[:image]) %>
-          <div class="caption text-center">
-            <p><%= badge.name %></p>
-          </div>
-        </div>
-      <%end%>
-    </div>
-    <%= social_share_button_tag('My Gogoro Badges', :url => 'user_url(@user)', desc: 'My Gogoro Badges') %>
-  </div>
+  
 </div>
 
 

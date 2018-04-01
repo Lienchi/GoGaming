@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>g_map</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="g_map" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(23.000000, 0.000000)">
+            <path d="M6.02738004,56.834506 C2.2172689,51.0509003 0,44.1249969 0,36.6812227 C0,16.4227428 16.4227428,0 36.6812227,0 C56.9397026,0 73.3624454,16.4227428 73.3624454,36.6812227 C73.3624454,44.1249969 71.1451765,51.0509003 67.3350654,56.834506 L36.6812227,120 L6.02738004,56.834506 Z" id="Combined-Shape" fill="#323237"></path>
+            <polygon id="Path" fill="#FFFFFF" points="37.0916041 14.5764192 51.0778939 21.3665376 51.0778939 55.4620024 37.0916041 61.8363992 22.5327511 55.4620024 22.5327511 19.9493051"></polygon>
+        </g>
+    </g>
+</svg>
