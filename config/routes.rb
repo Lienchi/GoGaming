@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :trip_gostations, only:[:show] do 
     member do 
       post :check
+      post :getCheckinStatus
     end
   end 
   
