@@ -522,8 +522,19 @@
               document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/checkin">Checkin</a><br>';
             }
             else{
-              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/uncheckin">Unheckin</a><br>'; 
+              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/uncheckin">Uncheckin</a><br>';
             }
+            $.ajax({
+              url: "/gostations/getCurrentUserPoints",
+              method: "POST",
+              dataType: "json",
+              success: function(data){
+                document.getElementById('layout-nav-point').innerHTML = data.points;
+              },
+              error: function() {
+                alert("ERROR: can not getCurrentUserPoints!");
+              }
+            });
           },
 
           error: function() {
@@ -578,13 +589,13 @@
               var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
               var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
 
-              var checkinDisTH = 0.005;//0.005 = 500m
-              if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-              {
+              //var checkinDisTH = 0.005;//0.005 = 500m
+              //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
+              //{
                 checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
 
                 uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
-              }
+              //}
 
               $.ajaxSetup({
                 headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }

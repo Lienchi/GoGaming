@@ -30,6 +30,10 @@ class GostationsController < ApplicationController
     render :json => { :status => status }
   end
 
+  def getCurrentUserPoints
+    render :json => { :points => current_user.points }
+  end
+
   private
 
   def set_gostation
