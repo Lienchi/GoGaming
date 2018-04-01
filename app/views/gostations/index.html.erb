@@ -333,6 +333,7 @@
       };
 
       var map = null;
+      var markers = [];
       var directionsService = null;
       var directionsDisplay = null;
 
@@ -344,6 +345,29 @@
       var ig_green_black_battery = null;
       var ig_blue_black_battery = null;
       var friendly_store_icon = null;
+
+      // Sets the map on all markers in the array.
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
+
+      // Removes the markers from the map, but keeps them in the array.
+      function clearMarkers() {
+        setMapOnAll(null);
+      }
+
+      // Shows any markers currently in the array.
+      function showMarkers() {
+        setMapOnAll(map);
+      }
+
+      // Deletes all markers in the array by removing references to them.
+      function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+      }
 
       function displayGostations(route) {
         // --- create milestones
@@ -599,6 +623,7 @@
 
           });
         }
+        markers.push(marker);
       }
 
       function clearMap(directionsDisplay){
@@ -719,6 +744,7 @@
 
         document.getElementById('direction-submit').addEventListener('click', function() {
           if(document.getElementById('direction-end').value != ''){
+            deleteMarkers();
             if( document.getElementById('direction-start').value != ''  ){
               calculateAndDisplayRoute(directionsService, directionsDisplay);
             }
@@ -853,7 +879,6 @@
             if(overflow && leg>=overflow){ 
               pos=geo.computeOffset(point,overflow,geo.computeHeading(point,path[p]));
               opts.position=pos;
-              //markers.push(new google.maps.Marker(opts));
               milestones.push({lat: pos.lat(), lng: pos.lng()});
               distance-=dist;
             }
@@ -861,7 +886,6 @@
             while(distance>=dist){ 
               pos=geo.computeOffset(point,dist+overflow,geo.computeHeading(point,path[p]));
               opts.position=pos;
-              //markers.push(new google.maps.Marker(opts));
               milestones.push({lat: pos.lat(), lng: pos.lng()});
               distance-=dist;
             }
