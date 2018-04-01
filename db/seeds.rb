@@ -8,7 +8,17 @@
 
 # Default admin
 
-User.create(email: "admin@example.com", password: "123456", role: "admin")
+User.destroy_all
+20.times do |i|
+  User.create!(
+    email: "user#{i}@example.com",
+    password: "123456"
+  )
+end
+puts "have created admin and fake users!"
+puts "now you have #{User.count} users data!"
+
+User.create!(email: "admin@example.com", password: "123456", role: "admin")
 puts "Default admin created!"
 
 
