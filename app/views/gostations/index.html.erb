@@ -519,22 +519,52 @@
           dataType: "json",
           success: function(data){
             if(data.status){
-              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/checkin">Checkin</a><br>';
+              $.ajax({
+                url: "/gostations/"+currentGostationId+"/uncheckin",
+                method: "POST",
+                success: function(){
+                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                  $.ajax({
+                    url: "/gostations/getCurrentUserPoints",
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data){
+                      document.getElementById('layout-nav-point').innerHTML = data.points;
+                    },
+                    error: function() {
+                      alert("ERROR: can not getCurrentUserPoints!");
+                    }
+                  });
+                },
+                error: function() {
+                  alert("ERROR: can not uncheckin!");
+                }
+              });
             }
             else{
-              document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+currentGostationId+'/uncheckin">Uncheckin</a><br>';
+              $.ajax({
+                url: "/gostations/"+currentGostationId+"/checkin",
+                method: "POST",
+                success: function(){
+                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                  $.ajax({
+                    url: "/gostations/getCurrentUserPoints",
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data){
+                      document.getElementById('layout-nav-point').innerHTML = data.points;
+                    },
+                    error: function() {
+                      alert("ERROR: can not getCurrentUserPoints!");
+                    }
+                  });
+                },
+                error: function() {
+                  alert("ERROR: can not uncheckin!");
+                }
+              });
             }
-            $.ajax({
-              url: "/gostations/getCurrentUserPoints",
-              method: "POST",
-              dataType: "json",
-              success: function(data){
-                document.getElementById('layout-nav-point').innerHTML = data.points;
-              },
-              error: function() {
-                alert("ERROR: can not getCurrentUserPoints!");
-              }
-            });
+
           },
 
           error: function() {
@@ -592,9 +622,9 @@
               //var checkinDisTH = 0.005;//0.005 = 500m
               //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
               //{
-                checkin_button = '<a class="btn btn-primary" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/checkin">Checkin</a><br>';
+                checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
 
-                uncheckin_button = '<a class="btn btn-info" rel="nofollow" data-method="post" onclick="toggle()" href="/gostations/'+props.id+'/uncheckin">Uncheckin</a><br>';
+                uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
               //}
 
               $.ajaxSetup({
