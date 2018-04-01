@@ -15,7 +15,6 @@ In this application, users are able to :
 (6)leave a Comment on a Trip
 
 
-
 * Screenshot
 ![Screenshot](index.png)
 ![Screenshot](trip_index.png)
@@ -72,8 +71,3 @@ Amazon S3
 Lienchi  
 Sapphirekuo 
 anna770822
-
-
-
-
-

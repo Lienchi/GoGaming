@@ -29,14 +29,15 @@
         </div>
         <hr>
         <div class= "badges col-xs-12">
+          <% badge_id = 1 %>
           <% @trips.each do |t| %>
             <div class="col-xs-6 col-sm-3 col-md-2 ">  
               <div class="">
                 <%= link_to trip_path(t) do %>
                   <% if t.is_challenged?(current_user)%>                  
-                    <%= image_tag Merit::Badge.find(t.id).custom_fields[:image],alt: t.name, class: "bettery-green" %>
+                    <%= image_tag Merit::Badge.find(badge_id).custom_fields[:image],alt: t.name, class: "bettery-green" %>
                   <% else %>
-                    <%= image_tag Merit::Badge.find(t.id).custom_fields[:image],alt: t.name, class: "bettery-red" %>
+                    <%= image_tag Merit::Badge.find(badge_id).custom_fields[:image],alt: t.name, class: "bettery-red" %>
                   <% end %>
                 <% end %>
               </div>
@@ -45,6 +46,7 @@
                 <%= link_to "#{t.name}", trip_path(t)%>
               </div>     
             </div>
+            <% badge_id = badge_id + 1 %>
           <%end%>          
         </div>        
       </div> 
