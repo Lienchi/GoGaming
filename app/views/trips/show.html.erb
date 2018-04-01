@@ -93,20 +93,23 @@
     </div>
     <br/>
     <div class="comment-group">
-      <h5>推荐景點</h5>
+      <h5>推薦景點</h5>
       <br/>
       <div class="">
         <% @comments.each do |comment|%>
           <div class="comment col-xs-12 col-sm-4 col-xs-4">
+
             <div class="media">
               <div class="media-left text-center">
+                <%= image_tag comment.image,style:"border-radius:10px;"%>
+
                 <%= link_to(image_tag(comment.user.avatar), user_path(comment.user), class: "media-object", style: "width:64px;height:64px;border-radius:50%")%>
-                Level: <%= comment.user.level%>
+                
               </div>
               <div class="media-body clearfix">
                 <p class="media-heading"><%= comment.user.name %></p>
-                <P class="pull-right"><%= time_ago_in_words(comment.created_at)%></P>
-                <%= image_tag comment.image,style:"border-radius:10px;"%>
+                <P class="pull-right">by <%= comment.user.name %>(<%= comment.user.points%> points)<%= time_ago_in_words(comment.created_at)%> ago</P>
+                
                 <p><%= comment.comment %></p>
               </div>
             </div>

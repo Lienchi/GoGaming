@@ -1,11 +1,11 @@
+.container {
+  
+}
 
 .border{
   border:1px solid #AAAAAA;
   border-radius:10px;
-}
 
-.background{
-  background: linear-gradient(to bottom, #FFFFFF ,  #F5F5F5);
 }
 
 .white{
@@ -15,6 +15,8 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: Microsoft JhengHei , sans-serif;
+  color: #323237;
   background: linear-gradient(to bottom, #FFFFFF ,  #F5F5F5);
 }
 
@@ -106,12 +108,21 @@ text-decoration:none;
 }
 
 /*user */
+.user-data {
+  margin-top: 5px;
+}
+
+.user-avatar {
+  margin-top: 30px;
+}
+
 .user-icon{
   width: 30px;
-  display: inline-block;
+
 }
 .user-icon-text{
-  display: inline-block;
+  margin-top: 10px;
+
 }
 
 input[type='file'] {
@@ -207,6 +218,11 @@ input[type='file'] {
   color:  #888888;
   letter-spacing:0.3em;
 }
+
+.trip-img {
+  padding: 5px;
+}
+
 /*trips#show*/
 
 
