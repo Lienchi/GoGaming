@@ -129,7 +129,6 @@
         <div id="mysidenav-content"></div>
         <div id="mysidenav-disdur"></div>
         <div id="mysidenav-button"></div>
-        <div id="mysidenav-tripurl"></div>
         <div id="mysidenav-directionurl"></div>
       </div>
     </div>
@@ -315,7 +314,6 @@
             document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
           }
           document.getElementById('mysidenav-button').innerHTML = button;
-          document.getElementById('mysidenav-tripurl').innerHTML = trip_url;
           document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
       }
 
@@ -333,6 +331,15 @@
       var directionsDisplay = null;
       var infoWindow = null;
 
+      // map icons
+      var i_black_battery = null;
+      var i_green_black_battery = null;
+      var i_blue_black_battery = null;
+      var ig_black_battery = null;
+      var ig_green_black_battery = null;
+      var ig_blue_black_battery = null;
+      var friendly_store_icon = null;
+
       function getGostationInfo(gostation){
         var LocName = gostation.LocName;
         var Address = gostation.Address;
@@ -343,8 +350,6 @@
         var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
         return {
           directions_url: '<a style="color:#FFFFFF;" class="btn btn-success" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
-
-          StorePhoto: gostation.StorePhoto,
 
           trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
 
@@ -368,7 +373,7 @@
 
           addMarker({
             coords: position,
-            iconImage: 'http://maps.google.com/mapfiles/ms/micons/yellow.png',
+            iconImage: i_green_black_battery,
             content: gostationInfo.infoWindowContent,
             storePhoto: gostationInfo.storePhoto,
             directions_url: gostationInfo.directions_url,
@@ -522,6 +527,36 @@
           streetViewControl: false,
           zoomControl: false
         });
+
+        i_black_battery = {
+          url: "../icons/i_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_black_battery = {
+          url: "../icons/ig_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        i_green_black_battery = {
+          url: "../icons/i_green_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_green_black_battery = {
+          url: "../icons/ig_green_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        friendly_store_icon = {
+          url: "../icons/shop.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        friendly_store_icon_onclick = {
+          url: "../icons/shop.png",
+          scaledSize: new google.maps.Size(35, 40)
+        };
 
         // find current position of user
         if (navigator.geolocation) {

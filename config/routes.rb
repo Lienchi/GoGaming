@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       post :uncheckin
       post :getCheckinStatus
     end
+    collection do
+      post :getCurrentUserPoints
+    end
   end
 
   resources :challenges, only:[:create]
