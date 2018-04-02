@@ -1,4 +1,4 @@
-
+<div class="container">
   <div class="border col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"">
     <h2 class="text-center">更改密碼</h2>
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, :class => 'form-horizontal text-center'}}) do |f| %>
@@ -16,11 +16,12 @@
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left" %>
           </div>
         </div>
-        <div class="col-xs-12 border clearfix bottom" >
+        <div class="col-xs-12  clearfix bottom" >
           <div class="actions text-center station-buttom">
-            <input class="btn btn-success" type="submit" value="更改密碼" style= "margin-right: 20px;">
+            <input class="btn btn-primary btn-lg float-left" type="submit" value="更改密碼" style= "margin-right: 20px;">
             <%= render "devise/shared/links" %> 
           </div>
         </div>
       <% end %>
   </div>
+</div>
