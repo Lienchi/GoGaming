@@ -48,6 +48,8 @@
                 <h4>Top 10 玩家</h4>
               <% elsif controller?("users")  && action?("f_leaderboards")%>
                 <h4>朋友排行</h4>
+              <% elsif controller?("users")  && action?("index")%>
+                <h4>所有玩家</h4>
               <% else %>
                 <%= image_tag "gogoro.png", style:"width:100px;"%>
               <%end%>

@@ -168,6 +168,12 @@ input[type='file'] {
     background-image: none
 }
 
+.carousel-inner {
+   height: 120px; 
+   padding: 0 15%;
+   border-radius: 10px;
+}
+
 #myCarousel {
   margin: 15px 0;
 }
