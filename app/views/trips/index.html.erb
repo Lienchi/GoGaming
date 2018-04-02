@@ -3,17 +3,19 @@
       <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
         <div id="myCarousel" class="carousel slide"  data-ride="carousel">
           <!-- Wrapper for slides -->
-          <div class="carousel-inner" style="height: 120px; border-radius: 10px;">
+          <div class="carousel-inner" style="height: 120px; padding: 0 15%;border-radius: 10px;">
             <div class="item active " style="height:100%;width:100%;">
               <h4 class="text-center" style="line-height:3em;">歡迎來到 <%= current_user.name %> Go Station</h4>
               <h5 class="text-center" style="line-height: 2em;">你的充電站還有 <strong style="color:#ED4559;"><%= @unchallenge_trips%>顆</strong> 未充飽的電池<br/>現在就選擇一顆電池為他充電吧!</h5>
             </div>
 
             <% @trips.each do |t| %>
-              <div class="item text-center">
-              <h4 style="line-height: 3em;"> <%= t.name %></h4>
-              <h5 style="line-height: 2em;"> <%= t.description %></h5>
-             </div>
+              <% if !t.is_challenged?(current_user)%>  
+                <div class="item text-center">
+                <h4 style="line-height: 3em;"> <%= t.name %></h4>
+                <h5 style="line-height: 1.5em;"> <%= t.description %></h5>
+                </div>
+              <% end %>
             <% end %>
 
             
