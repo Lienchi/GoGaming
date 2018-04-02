@@ -6,22 +6,47 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+require 'ffaker'
+
+#User
 # Default admin
+    User.destroy_all
 
-User.destroy_all
-20.times do |i|
-  User.create!(
-    email: "user#{i}@example.com",
-    password: "123456"
-  )
-end
-puts "have created admin and fake users!"
-puts "now you have #{User.count} users data!"
+    User.create!(
+      name: "adminuser", email: "admin@example.com", password: "123456", role: "admin"
+      )
+    puts "Default admin created!"
+    
+    30.times do |i|
+      user_name = FFaker::Name.first_name
+      User.create!(email: "#{user_name}@example.com", password: "123456", name: "#{user_name}")
+    end
+    puts "now you have #{User.count} users data!"
 
-User.create!(email: "admin@example.com", password: "123456", role: "admin")
-puts "Default admin created!"
+    Followship.destroy_all
 
+    User.all.each do |user|    
+      10.times do |i|
+        fake_following = user.id + i
+        user.followships.create!(following_id: fake_following)
+        puts "followships created"
+      end
+      puts "#{User.count} user's followships created"
+    end
 
+    Checkin.destroy_all
+
+    User.all.each do |user|
+      10.times do |i|
+        random_gostation = rand(Gostation.first.id..Gostation.last.id)
+        user.checkins.create!(gostation_id: random_gostation)
+      end
+      puts "#{Checkin.count} checkins created"
+    end
+
+    
+    
 #  task parse_gostation_list_v2: :environment do
     Gostation.destroy_all
 

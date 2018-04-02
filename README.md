@@ -32,22 +32,22 @@
 
 # Prerequisites
 
-## Please check on [Merit](https://github.com/merit-gem/merit) to understand the PBL structure.
+Please check on [Merit](https://github.com/merit-gem/merit) to understand the PBL structure.
 
 # ERD
 
 ![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/ERD.png)
 
 
-**Challenge:**  a trip which user completed
-**Trip_gostation:** a gostation "belongs to a trip" 
-**Checkin:** a gostation which user checkin to ("not belongs to a trip")
+- **Challenge:**  a trip which user completed
+- **Trip_gostation:** a gostation "belongs to a trip" 
+- **Checkin:** a gostation which user checkin to ("not belongs to a trip")
 
 
 
 # How to win badges
 
-## A trip include many trip_gostations , if all the trip_gostations#check status is true. Trip is completed (Challenge then create to user) and Badge will issue by Merit
+A trip include many trip_gostations , if all the trip_gostations#check status is true. Trip is completed (Challenge then create to user) and Badge will issue by Merit
 
 # How to win points
 
@@ -58,8 +58,8 @@
 
 - Rails '~> 5.1.5' - frame work
 - Google Map API 
-- gon(https://github.com/gazay/gon)
-- Merit](https://github.com/merit-gem/merit) PBL system
+- [gon](https://github.com/gazay/gon)
+- [Merit](https://github.com/merit-gem/merit) PBL system
 - Bootstrap3 - Front End
 
 # Deployment
