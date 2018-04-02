@@ -38,7 +38,7 @@ end
 Merit::Badge.create!(
   id: 1,
   name: "Taipei_night_market",
-  description: "台北夜市達人",
+  description: "台北逛夜市",
   level: "1",
   custom_fields: { image: "badges/Taipei_night_market.svg"}
 )
@@ -47,7 +47,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 2,
   name: "Hsinchu",
-  description: "環遊新竹",
+  description: "新竹東西南北",
   level: "1",
   custom_fields: { image: "badges/Hsinchu.svg"}
 )
@@ -56,7 +56,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 3,
   name: "Taipei_beef_noodle",
-  description: "台北牛人",
+  description: "大口吃牛肉",
   level: "1",
   custom_fields: { image: "badges/Taipei_beef_noodle.svg"}
 )
@@ -65,7 +65,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 4,
   name: "Temple_love",
-  description: "好姻緣",
+  description: "孤單終結",
   level: "1",
   custom_fields: { image: "badges/Temple_love.svg"}
 )
@@ -82,7 +82,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 6,
   name: "Tainan",
-  description: "台南文青",
+  description: "台南直直去",
   level: "1",
   custom_fields: { image: "badges/Tainan.svg"}
 )
