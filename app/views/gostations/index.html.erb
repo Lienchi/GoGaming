@@ -620,12 +620,12 @@
               var uncheckin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px; margin-left: 20px;" class="btn btn-secondary">Uncheckin</a><br>';
 
               var checkinDisTH = 0.005;//0.005 = 500m
-              if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-              {
+              //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
+              //{
                 checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
 
                 uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
-              }
+              //}
 
               $.ajaxSetup({
                 headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
