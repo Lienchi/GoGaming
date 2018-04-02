@@ -418,11 +418,11 @@
 
             trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
 
-            infoWindowContent: '<div style="color:#323237;" class="text-center">站名：'+LocName+'</div><br>'
+            infoWindowContent: '<div style="color:#323237;" class="text-center">'+LocName+'</div><br>'
               +'<div style="font-size: 14px;"  class="text-center">'+Address+'</div><br>'
-              +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div>',
+              +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
 
-            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>'
           };
         }
 

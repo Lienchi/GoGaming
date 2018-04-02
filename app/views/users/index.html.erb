@@ -33,7 +33,10 @@
         <% @users.each do |user|%>
           <tr>
             <td class="col-xs-4"><%= link_to image_tag("#{user.check_avatar(user)}"), user_path(user, class: "img-responsive")%></td>
-            <td class="col-xs-4"><%= link_to "#{user.name}",user_path(user) %><%= render partial: "shared/follow", locals: {user: user}%></td>
+            <td class="col-xs-4">
+              <p><%= link_to "#{user.name}",user_path(user) %></p>
+              <%= render partial: "shared/follow", locals: {user: user}%>
+            </td>
             <td class="col-xs-2"><%= user.badges.count%></td>
             <td class="col-xs-2"><%= user.points%></td>
           </tr>

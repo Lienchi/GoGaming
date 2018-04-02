@@ -11,7 +11,7 @@
 <div class="container">
   <div class=" border white col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3", style="min-height: 605px;">
     <div class="user-data col-xs-12">
-      <div class=" btn btn-default pull-right">
+      <div class=" btn btn-default btn-lg pull-right" style="font-size: 12px;">
         <%= link_to " 排行榜 ", f_leaderboards_users_path%>
       </div>
 
@@ -45,10 +45,10 @@
         <% if @user == current_user %>      
           <%= form_for @user do |f| %>
             <div class="col-xs-7">
-              <%= f.file_field :avatar, class: "btn form-control-file " %>
+              <%= f.file_field :avatar, class: "btn form-control-file ", style:"width: 100px;" %>
             </div>
             <div class="col-xs-2", style="padding-left: 25px;">
-              <input class="form-control-file  btn-sm" type="submit" value="update">
+              <input class="form-control-file  btn-sm btn-default" type="submit" value="更新圖片">
             </div>
           <%end%>
         <% else %>
