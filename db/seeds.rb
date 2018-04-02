@@ -6,23 +6,47 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+require 'ffaker'
+
+#User
 # Default admin
+    User.destroy_all
 
-User.destroy_all
-20.times do |i|
-  User.create!(
-    name: "user#{i}",
-    email: "user#{i}@example.com",
-    password: "123456"
-  )
-end
-puts "have created admin and fake users!"
-puts "now you have #{User.count} users data!"
-
-User.create!(name: "admin", email: "admin@example.com", password: "123456", role: "admin")
-puts "Default admin created!"
+    User.create!(
+      name: "adminuser", email: "admin@example.com", password: "123456", role: "admin"
+      )
+    puts "Default admin created!"
+    
+    30.times do |i|
+      user_name = FFaker::Name.first_name
+      User.create!(email: "#{user_name}@example.com", password: "123456", name: "#{user_name}")
+    end
+    puts "now you have #{User.count} users data!"
 
 
+    Followship.destroy_all
+
+    User.all.each do |user|
+      User.all.sample(10) do |u|
+        user.followships.create!(following_id: u.id)
+        #puts "followships created"
+      end
+      puts "#{User.count} user's followships created"
+    end
+
+    Checkin.destroy_all
+
+    User.all.each do |user|
+      10.times do |i|
+        random_gostation = rand(Gostation.first.id..Gostation.last.id)
+        user.checkins.create!(gostation_id: random_gostation)
+      end
+      puts "#{Checkin.count} checkins created"
+    end
+
+    
+    
 #  task parse_gostation_list_v2: :environment do
     Gostation.destroy_all
 
@@ -77,12 +101,18 @@ puts "Default admin created!"
 # task create_trip: :environment do
     Trip.destroy_all
 
-    Trip.create!(name: "台北逛夜市", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "逛完台北六大夜市，並在六個gostation完成打卡，就可獲得 夜市達人 徽章")
-    Trip.create!(name: "新竹東西南北", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
-    Trip.create!(name: "大口吃牛肉", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
-    Trip.create!(name: "孤單終結", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
-    Trip.create!(name: "北海小英雄", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
-    Trip.create!(name: "台南直直去", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(id: 1, name: "台北逛夜市", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "別管晚上吃什麼，到夜市再說吧!找到散佈在台北的六大夜市，肚子吃飽，電池充飽飽!")
+    Trip.create!(id: 2, name: "新竹東西南北", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "誰說打麻將只能在桌上打?你也可以一邊騎gogoro，一邊打麻將，趕快搜集完所有東南西北Gostation，看誰先糊牌!")
+    Trip.create!(id: 3, name: "大口吃牛肉", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "你敢挑戰，每天吃牛肉麵嗎?還是挑戰一天吃完5家牛肉麵?快點查查，到底是哪些牛肉麵隱藏在Gostation旁邊吧!別忘了打卡上傳照片，告訴我們你完成了哪一種挑戰吧")
+    Trip.create!(id: 4, name: "孤單終結", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "跟著Gogoro 的腳步，讓全台最靈驗的月老，幫你牽起那條看不見紅線，不管是戀人未滿，還是友達以上，你再也不孤單!")
+    Trip.create!(id: 5, name: "北海小英雄", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "Gogoro 英雄們，一起征服北海岸吧!不管你是誰?今天你就是「北海小英雄」，航行了一整天，別忘了尉勞自己，在北投泡個溫泉，最後在全台灣最大的士林夜市，大口吃雞排吧!")
+    Trip.create!(id: 6, name: "台南直直去", image: File.open(Rails.root.join("public/apple-touch-icon.png")),
+                 description: "歷史幽久的台南古城，除了道地的古早味，還有希臘城堡般的建築等著你，和三五好友來趟文化之旅，一起一探就竟，蹦出新滋味吧!")
     #Trip.create!(name: "高雄龍兄虎弟", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
 
     gostation_list = [
