@@ -1,5 +1,7 @@
 <div class="container">
-<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+<br>
+  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
+    <br>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -34,9 +36,10 @@
     <%= f.label :current_password %> <i>(請輸入更新前密碼)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" , class: "form-control"%>
   </div>
+  <br/>
 
   <div class="actions">
-    <input class="btn btn-default" type="submit" value="更新">
+    <input class="btn btn-primary" type="submit" value="更新">
     <%= link_to "Back", :back %>
   </div>
 <% end %>
