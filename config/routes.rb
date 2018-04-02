@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       post :uncheckin
       post :getCheckinStatus
     end
+    collection do
+      post :getCurrentUserPoints
+    end
   end
 
   resources :challenges, only:[:create]
@@ -25,6 +28,7 @@ Rails.application.routes.draw do
   resources :trip_gostations, only:[:show] do 
     member do 
       post :check
+      post :getCheckinStatus
     end
   end 
   

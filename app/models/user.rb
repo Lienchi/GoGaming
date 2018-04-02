@@ -8,6 +8,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  #after_save :create_trip_gostation_record, on: :create
+
   has_many :checkins, dependent: :destroy
   has_many :checkedin_gostations, through: :checkins, source: :gostation
 

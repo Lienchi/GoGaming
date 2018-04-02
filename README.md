@@ -73,7 +73,3 @@ A trip include many trip_gostations , if all the trip_gostations#check status is
 - Sapphirekuo 
 - anna770822
 
-
-
-
-

@@ -17,7 +17,6 @@ require 'ffaker'
       name: "adminuser", email: "admin@example.com", password: "123456", role: "admin"
       )
     puts "Default admin created!"
-
     
     30.times do |i|
       user_name = FFaker::Name.first_name
@@ -29,8 +28,8 @@ require 'ffaker'
 
     User.all.each do |user|    
       10.times do |i|
-        fake_following = User.first.id + i
-        user.followships.create!(following_id: User.first.id + i)
+        fake_following = user.id + i
+        user.followships.create!(following_id: fake_following)
         puts "followships created"
       end
       puts "#{User.count} user's followships created"
@@ -38,9 +37,9 @@ require 'ffaker'
 
     Checkin.destroy_all
 
-    Gostation.all.each do |gostation|
+    User.all.each do |user|
       10.times do |i|
-        random_user = rand(User.first.id..User.last.id)
+        random_user = rand(user.id+1..User.last.id)
         gostation.checkins.create!(user_id: random_user)
       end
     end
@@ -105,7 +104,7 @@ require 'ffaker'
     Trip.create!(name: "孤單終結", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
     Trip.create!(name: "北海小英雄", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
     Trip.create!(name: "台南直直去", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
-    Trip.create!(name: "高雄龍兄虎弟", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    #Trip.create!(name: "高雄龍兄虎弟", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
 
     gostation_list = [
                         ["台北捷運劍潭站", "台北捷運民權西路站", "中油信義路加油站",
@@ -124,11 +123,11 @@ require 'ffaker'
                          "台北捷運民權西路站", "中油信義路加油站"],
 
                         ["7-ELEVEN 安安店站", "善化國小站", "7-ELEVEN 仁伯店站",
-                         "全聯台南明興店站", "Gogoro 台南公園店站"],
-
-                        ["中油軍校路加油站", "中油九曲堂加油站", "中油小港加油站",
-                         "中油旗津加油站", "九號倉會館站"]
+                         "全聯台南明興店站", "Gogoro 台南公園店站"]#,
                      ]
+                    #    ["中油軍校路加油站", "中油九曲堂加油站", "中油小港加油站",
+                    #     "中油旗津加油站", "九號倉會館站"]
+                    # ]
 
     idx = 0
     Trip.all.each do |t|
