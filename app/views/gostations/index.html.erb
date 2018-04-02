@@ -415,11 +415,11 @@
         var BatteryCells = gostation.BatteryCells;
         var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
         return {
-          directions_url: '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-1" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+          directions_url: '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
-          trip_url: tripId >= 0 ? '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-success text-center col-xs-5 col-xs-offset-1" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a>' : '<a style="font-size: 16px;" class="btn btn-sm btn-default text-center col-xs-5 col-xs-offset-1" disabled>挑戰任務</a>',
+          trip_url: tripId >= 0 ? '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-success text-center col-xs-5" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a>' : '<a style="font-size: 16px;padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5" disabled>挑戰任務</a>',
 
-          infoWindowContent: '<div style="color:#323237;" class="text-center">'+LocName+'</div><br>'
+          infoWindowContent: '<div style="color:#323237; " class="text-center">'+LocName+'</div><br>'
             +'<div style="font-size: 14px;"  class="text-center">'+Address+'</div><br>'
             +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
 
@@ -616,8 +616,8 @@
 
               var results = calculateDisDur(props.coords);
 
-              var checkin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px; margin-left: 20px;" class="btn btn-primary">Checkin</a><br>';
-              var uncheckin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px; margin-left: 20px;" class="btn btn-secondary">Uncheckin</a><br>';
+              var checkin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-primary">Checkin</a><br>';
+              var uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-secondary">Uncheckin</a><br>';
 
               var checkinDisTH = 0.005;//0.005 = 500m
               //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
