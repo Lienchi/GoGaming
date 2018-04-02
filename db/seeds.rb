@@ -39,10 +39,13 @@ require 'ffaker'
 
     User.all.each do |user|
       10.times do |i|
-        random_user = rand(user.id+1..User.last.id)
-        gostation.checkins.create!(user_id: random_user)
+        random_gostation = rand(Gostation.first.id..Gostation.last.id)
+        user.checkins.create!(gostation_id: random_gostation)
       end
+      puts "#{Checkin.count} checkins created"
     end
+
+    
     
 #  task parse_gostation_list_v2: :environment do
     Gostation.destroy_all
