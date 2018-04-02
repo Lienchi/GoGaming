@@ -24,6 +24,7 @@ require 'ffaker'
     end
     puts "now you have #{User.count} users data!"
 
+
     Followship.destroy_all
 
     User.all.each do |user|    
@@ -101,7 +102,7 @@ require 'ffaker'
 # task create_trip: :environment do
     Trip.destroy_all
 
-    Trip.create!(name: "台北逛夜市", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(name: "台北逛夜市", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "逛完台北六大夜市，並在六個gostation完成打卡，就可獲得 夜市達人 徽章")
     Trip.create!(name: "新竹東西南北", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
     Trip.create!(name: "大口吃牛肉", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
     Trip.create!(name: "孤單終結", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")

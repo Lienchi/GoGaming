@@ -42,8 +42,14 @@
                   <%= @trip.name%>
                   <!-- <button class="btn " data-toggle="modal" data-target="#myModal" style="background-color: #FFFFFF;padding:0px 0px;font-size:18px;"><strong><%= @trip.name%></strong></button> -->
                 </h4>
-              <% elsif controller?("users") %>
+              <% elsif controller?("users")  && action?("show")%>
                 <h4>我的紀錄</h4>
+              <% elsif controller?("users")  && action?("leaderboards")%>
+                <h4>Top 10 玩家</h4>
+              <% elsif controller?("users")  && action?("f_leaderboards")%>
+                <h4>朋友排行</h4>
+              <% elsif controller?("users")  && action?("index")%>
+                <h4>所有玩家</h4>
               <% else %>
                 <%= image_tag "gogoro.png", style:"width:100px;"%>
               <%end%>
@@ -71,7 +77,7 @@
               <%= current_user.points%>
             </div>
 
-            <div class="nav-icon pull-right">
+            <div class="nav-icon pull-right ">
               <%= link_to user_path(current_user) do %>
                 <% if controller?("users")%>
                   

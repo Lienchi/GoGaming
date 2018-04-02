@@ -72,10 +72,10 @@
     </style>
   </head>
 
-  <body class="background">
-    <div id="myModal" class="modal fade " role="dialog">
+  <body>
+    <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
-        <!-- Modal content-->
+         Modal content
         <div class="modal-content trip-button">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -86,620 +86,685 @@
           </div>
         </div>
       </div>
-    </div>
-    <div id="map"></div>
-    <div id="myProgress"  onclick="move()">
-      <div id="myBar"></div>
-    </div>
-    <br/>
-    <div class="comment-group">
-      <h5>推荐景點</h5>
-      <br/>
-      <div class="">
-        <% @comments.each do |comment|%>
-          <div class="comment col-xs-12 col-sm-4 col-xs-4">
-            <div class="media">
-              <div class="media-left text-center">
-                <%= link_to(image_tag(comment.user.avatar), user_path(comment.user), class: "media-object", style: "width:64px;height:64px;border-radius:50%")%>
-                Level: <%= comment.user.level%>
-              </div>
-              <div class="media-body clearfix">
-                <p class="media-heading"><%= comment.user.name %></p>
-                <P class="pull-right"><%= time_ago_in_words(comment.created_at)%></P>
-                <%= image_tag comment.image,style:"border-radius:10px;"%>
-                <p><%= comment.comment %></p>
-              </div>
-            </div>
+    </div> -->
+    <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
+      <div class="border clearfix  white " style="min-height: 605px;">
+
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <div id="mySidenav-content" class="mysidenav">
+            <div id="mysidenav-img"></div>
+            <div id="mysidenav-content"></div>
+            <div id="mysidenav-disdur"></div>
+            <div id="mysidenav-button"></div>
+            <div id="mysidenav-directionurl"></div>
           </div>
-        <%end%>
-      </div>
-    </div>
-    <div class="form-group comment-group clearfix">  
-      <%= form_for [@trip, @comment] do |f|%>
-        <%= f.text_area :comment, class: "form-control" %>
-          <%= f.file_field :image, style: " width:90px;" %>
-          <input class="btn btn-default" type="submit" value="留言">
         </div>
-      <% end%>
-    </div>
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <div id="mySidenav-content" class="mysidenav">
-        <div id="mysidenav-img"></div>
-        <div id="mysidenav-content"></div>
-        <div id="mysidenav-disdur"></div>
-        <div id="mysidenav-button"></div>
-        <div id="mysidenav-directionurl"></div>
+          
+        <div class="trip-data col-xs-12">
+          <br>
+          <div class="col-xs-12">
+            <div class="col-xs-9 col-sm-11">
+              <p><%= @trip.description %></p>
+            </div>
+            <div class="pull-right">
+              <% if @trip.is_challenged?(current_user)%>                  
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-green-sm" %>
+              <% else %>
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-red-sm" %>
+              <% end %>
+            </div>
+            
+          </div>
+          <div id="map" class="z-depth-2" style="height: 250px"></div>
+          <div id="myProgress"  onclick="move()">
+            <div id="myBar"></div>
+          </div>
+          <br>
+        </div>       
+
+        <div class="comment-group">
+          <div class="col-xs-8 col-sm-10">
+            <h5>推薦景點</h5>
+          </div>
+          <div class="col-xs-4 col-sm-2 pull-right">
+            <button id="friendly-store-submit" class="btn btn-default btn-sm" type="submit" >友好店家</button>
+          </div>
+          <div class="clearfix"></div>
+          <br/>
+          <div class="">
+            <% @comments.each do |comment|%>
+              <div class="comment col-xs-12 col-sm-6 col-xs-6">
+
+                <div class="media">
+                  <div class="media-left ">
+                    <!-- Button trigger modal -->
+                  <button type="button" class="btn" data-toggle="modal" data-target=#<%= "comment#{comment.id}"%> >
+                    <%= image_tag comment.image, class: "img-fluid", style: "width:64px;border-radius:5px"%>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id=<%= "comment#{comment.id}" %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <h5 class="modal-title" id="exampleModalLabel">
+                            <p><%= comment.comment %></p>
+                          <P class="text-right">
+                            by <%= link_to comment.user.name, user_path(comment.user) %> <%= time_ago_in_words(comment.created_at)%> ago
+                          </P>
+                          </h5>
+                          
+                        </div>
+                        <div class="modal-body">
+                          <%= image_tag comment.image %>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                    
+                  </div>
+                  <div class="media-body clearfix">
+                    <P class="text-right">
+                      by <%= link_to comment.user.name, user_path(comment.user) %> <%= time_ago_in_words(comment.created_at)%> ago</P>
+                    
+                    <p><%= comment.comment %></p>
+                  </div>
+                  <hr/>
+                </div>
+              </div>
+            <%end%>
+          </div>
+        </div>
+
+        <div class="form-group comment-group clearfix">  
+          <%= form_for [@trip, @comment] do |f|%>
+            <%= f.text_area :comment, class: "form-control" %>
+              <%= f.file_field :image, style: " width:90px;" %>
+              <input class="btn btn-default" type="submit" value="留言">
+            </div>
+          <% end%>
+        </div>
+
+
       </div>
-    </div>
+      
+      <br/>
+      
 
-    <script>
-      var width = 20;
-      function move(){
-        var elem = document.getElementById("myBar");
-        if(width<=100){
-          width+= 20; 
-        }
-        elem.style.width = width + '%';
-      }
 
-      var googleMapStyle = [
-        {
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#f5f5f5"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.icon",
-          "stylers": [
-            {
-              "visibility": "off"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#616161"
-            }
-          ]
-        },
-        {
-          "elementType": "labels.text.stroke",
-          "stylers": [
-            {
-              "color": "#f5f5f5"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.land_parcel",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#bdbdbd"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#eeeeee"
-            }
-          ]
-        },
-        {
-          "featureType": "poi",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#757575"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#e5e5e5"
-            }
-          ]
-        },
-        {
-          "featureType": "poi.park",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        },
-        {
-          "featureType": "road",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#ffffff"
-            }
-          ]
-        },
-        {
-          "featureType": "road.arterial",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#757575"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#dadada"
-            }
-          ]
-        },
-        {
-          "featureType": "road.highway",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#616161"
-            }
-          ]
-        },
-        {
-          "featureType": "road.local",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#e5e5e5"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.station",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#eeeeee"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "geometry",
-          "stylers": [
-            {
-              "color": "#c9c9c9"
-            }
-          ]
-        },
-        {
-          "featureType": "water",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#9e9e9e"
-            }
-          ]
-        }
-      ];
-
-      /* Set the width of the side navigation to 400px */
-      function openNav(content, storePhoto, button, trip_url, directions_url, results) {
-          document.getElementById("mySidenav").style.width = "400px";
-          var mySidenavContent = document.getElementById('mySidenav-content');
-
-          document.getElementById('mysidenav-img').innerHTML = storePhoto;
-          document.getElementById('mysidenav-content').innerHTML = content;
-          if(results.status){
-            document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
+      <script>
+        var width = 20;
+        function move(){
+          var elem = document.getElementById("myBar");
+          if(width<=100){
+            width+= 20; 
           }
-          document.getElementById('mysidenav-button').innerHTML = button;
-          document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
-      }
+          elem.style.width = width + '%';
+        }
 
-      /* Set the width of the side navigation to 0 */
-      function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
-      }
+        var googleMapStyle = [
+          {
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#f5f5f5"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#616161"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#f5f5f5"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#bdbdbd"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#eeeeee"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#e5e5e5"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#ffffff"
+              }
+            ]
+          },
+          {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#757575"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#dadada"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#616161"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#e5e5e5"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#eeeeee"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#c9c9c9"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#9e9e9e"
+              }
+            ]
+          }
+        ];
 
-      var userCurrentPos = {
-        lat: 0.0,
-        lng: 0.0
-      };
-      var map = null;
-      var directionsService = null;
-      var directionsDisplay = null;
-      var infoWindow = null;
+        /* Set the width of the side navigation to 400px */
+        function openNav(content, storePhoto, button, trip_url, directions_url, results) {
+            document.getElementById("mySidenav").style.width = "400px";
+            var mySidenavContent = document.getElementById('mySidenav-content');
 
-      // map icons
-      var i_black_battery = null;
-      var i_green_black_battery = null;
-      var i_blue_black_battery = null;
-      var ig_black_battery = null;
-      var ig_green_black_battery = null;
-      var ig_blue_black_battery = null;
-      var friendly_store_icon = null;
+            document.getElementById('mysidenav-img').innerHTML = storePhoto;
+            document.getElementById('mysidenav-content').innerHTML = content;
+            if(results.status){
+              document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
+            }
+            document.getElementById('mysidenav-button').innerHTML = button;
+            document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
+        }
 
-      function getGostationInfo(gostation){
-        var LocName = gostation.LocName;
-        var Address = gostation.Address;
-        var AvailableTime = gostation.AvailableTime;
-        var tripId = gon.trip_gostations[0].trip_id;
-        var StorePhoto = gostation.StorePhoto;
-        var BatteryCells = gostation.BatteryCells;
-        var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
-        return {
-          directions_url: '<a style="color:#FFFFFF;" class="btn btn-success" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
 
-          trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
-
-          infoWindowContent: '<div>站名：'+LocName+'</div><br>'
-            +'<div>地址：'+Address+'</div><br>'
-            +'<div>營業時間：'+AvailableTime+'</div><br>'
-            +'<div>滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
-
-          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+        var userCurrentPos = {
+          lat: 0.0,
+          lng: 0.0
         };
-      }
+        var map = null;
+        var directionsService = null;
+        var directionsDisplay = null;
+        var infoWindow = null;
 
-      function showGostations(){
-        for(var i=0; i<gon.gostations.length; i++){
-          var position = {};
-          position.lat = +gon.gostations[i].Latitude;
-          position.lng = +gon.gostations[i].Longitude;
-          var LocName = gon.gostations[i].LocName;
+        // map icons
+        var i_black_battery = null;
+        var i_green_black_battery = null;
+        var i_blue_black_battery = null;
+        var ig_black_battery = null;
+        var ig_green_black_battery = null;
+        var ig_blue_black_battery = null;
+        var friendly_store_icon = null;
 
-          var gostationInfo = getGostationInfo(gon.gostations[i]);
+        function getGostationInfo(gostation){
+          var LocName = gostation.LocName;
+          var Address = gostation.Address;
+          var AvailableTime = gostation.AvailableTime;
+          var tripId = gon.trip_gostations[0].trip_id;
+          var StorePhoto = gostation.StorePhoto;
+          var BatteryCells = gostation.BatteryCells;
+          var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
+          return {
+            directions_url: '<a style="color:#FFFFFF;" class="btn btn-success" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
-          addMarker({
-            coords: position,
-            iconImage: i_green_black_battery,
-            content: gostationInfo.infoWindowContent,
-            storePhoto: gostationInfo.storePhoto,
-            directions_url: gostationInfo.directions_url,
-            id: gon.gostations[i].id,
-            trip_url: gostationInfo.trip_url,
-            bBelongsToTrip: true
+            trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
+
+            infoWindowContent: '<div>站名：'+LocName+'</div><br>'
+              +'<div>地址：'+Address+'</div><br>'
+              +'<div>營業時間：'+AvailableTime+'</div><br>'
+              +'<div>滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
+
+            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+          };
+        }
+
+        function showGostations(){
+          for(var i=0; i<gon.gostations.length; i++){
+            var position = {};
+            position.lat = +gon.gostations[i].Latitude;
+            position.lng = +gon.gostations[i].Longitude;
+            var LocName = gon.gostations[i].LocName;
+
+            var gostationInfo = getGostationInfo(gon.gostations[i]);
+
+            addMarker({
+              coords: position,
+              iconImage: i_green_black_battery,
+              content: gostationInfo.infoWindowContent,
+              storePhoto: gostationInfo.storePhoto,
+              directions_url: gostationInfo.directions_url,
+              id: gon.gostations[i].id,
+              trip_url: gostationInfo.trip_url,
+              bBelongsToTrip: true
+            });
+          }
+        }
+
+        function calculateDisDur(des){
+          var results = {
+            distance: '0.0',
+            duration: '0.0',
+            status: false
+          }
+          if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
+            return results;
+          }
+          var directionsServiceCalc = new google.maps.DirectionsService;
+          var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
+          var end = new google.maps.LatLng(des.lat, des.lng);
+          directionsServiceCalc.route({
+            origin: start,
+            destination: end,
+            travelMode: 'DRIVING',
+            avoidHighways: true
+          }, function(response, status) {
+            if (status === 'OK') {
+              results.distance = response.routes[0].legs[0].distance.text;
+              results.duration = response.routes[0].legs[0].duration.text;
+              results.status = true;
+            } else {
+              window.alert('Directions request failed due to ' + status);
+            }
           });
-        }
-      }
 
-      function calculateDisDur(des){
-        var results = {
-          distance: '0.0',
-          duration: '0.0',
-          status: false
-        }
-        if(userCurrentPos.lat==0.0 && userCurrentPos.lng==0.0){
           return results;
         }
-        var directionsServiceCalc = new google.maps.DirectionsService;
-        var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
-        var end = new google.maps.LatLng(des.lat, des.lng);
-        directionsServiceCalc.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING',
-          avoidHighways: true
-        }, function(response, status) {
-          if (status === 'OK') {
-            results.distance = response.routes[0].legs[0].distance.text;
-            results.duration = response.routes[0].legs[0].duration.text;
-            results.status = true;
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
 
-        return results;
-      }
-
-      var currentGostationId = 0;
-      var currentTripGostationId = -1;
-      function toggle(){
-        move();
-        $.ajaxSetup({
-          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-        });
-        $.ajax({
-          url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
-          method: "POST",
-          dataType: "json",
-          success: function(data){
-            if(data.status){
-              $.ajax({
-                url: "/trip_gostations/"+currentTripGostationId+"/check",
-                method: "POST",
-                success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
-                  $.ajax({
-                    url: "/gostations/getCurrentUserPoints",
-                    method: "POST",
-                    dataType: "json",
-                    success: function(data){
-                      document.getElementById('layout-nav-point').innerHTML = data.points;
-                    },
-                    error: function() {
-                      alert("ERROR: can not getCurrentUserPoints!");
-                    }
-                  });
-                },
-                error: function() {
-                  //alert("ERROR: can not uncheckin(1)!");
-                }
-              });
-            }
-            else{
-              $.ajax({
-                url: "/trip_gostations/"+currentTripGostationId+"/check",
-                method: "POST",
-                success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
-                  $.ajax({
-                    url: "/gostations/getCurrentUserPoints",
-                    method: "POST",
-                    dataType: "json",
-                    success: function(data){
-                      document.getElementById('layout-nav-point').innerHTML = data.points;
-                    },
-                    error: function() {
-                      alert("ERROR: can not getCurrentUserPoints!");
-                    }
-                  });
-                },
-                error: function() {
-                  //alert("ERROR: can not uncheckin(2)!");
-                }
-              });
-            }
-
-          },
-
-          error: function() {
-            alert("ERROR: can not getCheckinStatus from toggle()!");
-          }
-
-        });
-
-      }
-
-      var activeMarkerInfo = {
-        marker: null,
-        bBelongsToTrip: false,
-        bFriendlyStore: false
-      };
-      function addMarker(props){
-        var marker = new google.maps.Marker({
-          position: props.coords,
-          animation: google.maps.Animation.DROP,
-          map: map,
-          icon: props.iconImage
-        });
-
-        if(props.content){
-          marker.addListener('click', function(){
-            if(props.id >= 0){//gostations
-              currentGostationId = props.id;
-
-              if(activeMarkerInfo.marker!=null){
-                if(activeMarkerInfo.bFriendlyStore){
-                  activeMarkerInfo.marker.setIcon(friendly_store_icon);
-                }
-                else if(activeMarkerInfo.bBelongsToTrip){
-                  activeMarkerInfo.marker.setIcon(i_green_black_battery);
-                }
-                else{
-                  activeMarkerInfo.marker.setIcon(i_black_battery);
-                }
-              }
-              if(props.bBelongsToTrip){
-                marker.setIcon(ig_green_black_battery);
+        var currentGostationId = 0;
+        var currentTripGostationId = -1;
+        function toggle(){
+          move();
+          $.ajaxSetup({
+            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+          });
+          $.ajax({
+            url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
+            method: "POST",
+            dataType: "json",
+            success: function(data){
+              if(data.status){
+                $.ajax({
+                  url: "/trip_gostations/"+currentTripGostationId+"/check",
+                  method: "POST",
+                  success: function(){
+                    document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                    $.ajax({
+                      url: "/gostations/getCurrentUserPoints",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-point').innerHTML = data.points;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserPoints!");
+                      }
+                    });
+                  },
+                  error: function() {
+                    //alert("ERROR: can not uncheckin(1)!");
+                  }
+                });
               }
               else{
-                marker.setIcon(ig_black_battery);
+                $.ajax({
+                  url: "/trip_gostations/"+currentTripGostationId+"/check",
+                  method: "POST",
+                  success: function(){
+                    document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                    $.ajax({
+                      url: "/gostations/getCurrentUserPoints",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-point').innerHTML = data.points;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserPoints!");
+                      }
+                    });
+                  },
+                  error: function() {
+                    //alert("ERROR: can not uncheckin(2)!");
+                  }
+                });
               }
-              activeMarkerInfo.marker = marker;
-              activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
-              activeMarkerInfo.bFriendlyStore = false;
-              
-              // get id of trip_gostation
-              currentTripGostationId = -1;
-              for(var i=0; i<gon.trip_gostations.length; i++){
-                if(props.id==gon.trip_gostations[i].gostation_id){
-                  currentTripGostationId = gon.trip_gostations[i].id;
-                }
-              }
 
-              var results = calculateDisDur(props.coords);
+            },
 
-              var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
-              var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+            error: function() {
+              alert("ERROR: can not getCheckinStatus from toggle()!");
+            }
 
-              var checkinDisTH = 0.005;//0.005 = 500m
-              //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-              //{
-                checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+          });
 
-                uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
-              //}
+        }
 
-              $.ajaxSetup({
-                headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-              });
-              $.ajax({
-                url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
-                method: "POST",
-                dataType: "json",
-                success: function(data){
-                  if(data.status){
-                    openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+        var activeMarkerInfo = {
+          marker: null,
+          bBelongsToTrip: false,
+          bFriendlyStore: false
+        };
+        function addMarker(props){
+          var marker = new google.maps.Marker({
+            position: props.coords,
+            animation: google.maps.Animation.DROP,
+            map: map,
+            icon: props.iconImage
+          });
+
+          if(props.content){
+            marker.addListener('click', function(){
+              if(props.id >= 0){//gostations
+                currentGostationId = props.id;
+
+                if(activeMarkerInfo.marker!=null){
+                  if(activeMarkerInfo.bFriendlyStore){
+                    activeMarkerInfo.marker.setIcon(friendly_store_icon);
+                  }
+                  else if(activeMarkerInfo.bBelongsToTrip){
+                    activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
                   else{
-                    openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                    activeMarkerInfo.marker.setIcon(i_black_battery);
                   }
-                },
-
-                error: function() {
-                  alert("ERROR: can not getCheckinStatus!");
                 }
-
-              });
-            }
-            else if(props.id == -1){//friendly stores
-
-              if(activeMarkerInfo.marker!=null){
-                if(activeMarkerInfo.bFriendlyStore){
-                  activeMarkerInfo.marker.setIcon(friendly_store_icon);
-                }
-                else if(activeMarkerInfo.bBelongsToTrip){
-                  activeMarkerInfo.marker.setIcon(i_green_black_battery);
+                if(props.bBelongsToTrip){
+                  marker.setIcon(ig_green_black_battery);
                 }
                 else{
-                  activeMarkerInfo.marker.setIcon(i_black_battery);
+                  marker.setIcon(ig_black_battery);
                 }
+                activeMarkerInfo.marker = marker;
+                activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
+                activeMarkerInfo.bFriendlyStore = false;
+                
+                // get id of trip_gostation
+                currentTripGostationId = -1;
+                for(var i=0; i<gon.trip_gostations.length; i++){
+                  if(props.id==gon.trip_gostations[i].gostation_id){
+                    currentTripGostationId = gon.trip_gostations[i].id;
+                  }
+                }
+
+                var results = calculateDisDur(props.coords);
+
+                var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
+                var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+
+                var checkinDisTH = 0.005;//0.005 = 500m
+                //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
+                //{
+                  checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+
+                  uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                //}
+
+                $.ajaxSetup({
+                  headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+                });
+                $.ajax({
+                  url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
+                  method: "POST",
+                  dataType: "json",
+                  success: function(data){
+                    if(data.status){
+                      openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+                    }
+                    else{
+                      openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                    }
+                  },
+
+                  error: function() {
+                    alert("ERROR: can not getCheckinStatus!");
+                  }
+
+                });
               }
-              marker.setIcon(friendly_store_icon_onclick);
-              activeMarkerInfo.marker = marker;
-              activeMarkerInfo.bFriendlyStore = true;
+              else if(props.id == -1){//friendly stores
 
-              var results = calculateDisDur(props.coords);
-              openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
+                if(activeMarkerInfo.marker!=null){
+                  if(activeMarkerInfo.bFriendlyStore){
+                    activeMarkerInfo.marker.setIcon(friendly_store_icon);
+                  }
+                  else if(activeMarkerInfo.bBelongsToTrip){
+                    activeMarkerInfo.marker.setIcon(i_green_black_battery);
+                  }
+                  else{
+                    activeMarkerInfo.marker.setIcon(i_black_battery);
+                  }
+                }
+                marker.setIcon(friendly_store_icon_onclick);
+                activeMarkerInfo.marker = marker;
+                activeMarkerInfo.bFriendlyStore = true;
 
-            }
-          });
+                var results = calculateDisDur(props.coords);
+                openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
+
+              }
+            });
+          }
         }
-      }
 
-      function displayFriendlyStores(){
+        function displayFriendlyStores(){
 
-        for(var i=0; i<gon.friendly_stores.length; i++){
-          var position = {
-            lat: gon.friendly_stores[i].latitude,
-            lng: gon.friendly_stores[i].longitude
+          for(var i=0; i<gon.friendly_stores.length; i++){
+            var position = {
+              lat: gon.friendly_stores[i].latitude,
+              lng: gon.friendly_stores[i].longitude
+            };
+
+            var infoWindowContent = '<div>商店名稱：'+gon.friendly_stores[i].name+'</div><br>'
+              +'<div>地址：'+gon.friendly_stores[i].address+'</div><br>'
+              +'<div>營業時間：'+gon.friendly_stores[i].open_time+'</div><br>';
+
+            var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
+
+            var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400"><br>';
+
+            addMarker({
+              coords: position,
+              iconImage: friendly_store_icon,
+              content: infoWindowContent,
+              storePhoto: storePhoto,
+              directions_url: directions_url,
+              id: -1
+            });
+          }
+        }
+
+        function calculateGostationCenter(){
+          lat = 0.0;
+          lng = 0.0;
+          for(var i=0; i<gon.gostations.length; i++){
+            lat += +gon.gostations[i].Latitude;
+            lng += +gon.gostations[i].Longitude;
+          }
+          lat /= gon.gostations.length;
+          lng /= gon.gostations.length;
+          return {lat: lat, lng: lng};
+        }
+
+        function initMap() {
+          directionsService = new google.maps.DirectionsService;
+          directionsDisplay = new google.maps.DirectionsRenderer;
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: calculateGostationCenter(),
+            styles: googleMapStyle,
+            // specify map controls
+            minZoom: 8,
+            maxZoom: 16,
+            mapTypeControl: false,
+            fullscreenControl: false,
+            streetViewControl: false,
+            zoomControl: false
+          });
+
+          i_black_battery = {
+            url: "../icons/i_black_battery.png",
+            scaledSize: new google.maps.Size(28, 32)
           };
 
-          var infoWindowContent = '<div>商店名稱：'+gon.friendly_stores[i].name+'</div><br>'
-            +'<div>地址：'+gon.friendly_stores[i].address+'</div><br>'
-            +'<div>營業時間：'+gon.friendly_stores[i].open_time+'</div><br>';
+          ig_black_battery = {
+            url: "../icons/ig_black_battery.png",
+            scaledSize: new google.maps.Size(42, 48)
+          };
 
-          var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
+          i_green_black_battery = {
+            url: "../icons/i_green_black_battery.png",
+            scaledSize: new google.maps.Size(28, 32)
+          };
 
-          var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400"><br>';
+          ig_green_black_battery = {
+            url: "../icons/ig_green_black_battery.png",
+            scaledSize: new google.maps.Size(42, 48)
+          };
 
-          addMarker({
-            coords: position,
-            iconImage: friendly_store_icon,
-            content: infoWindowContent,
-            storePhoto: storePhoto,
-            directions_url: directions_url,
-            id: -1
-          });
-        }
-      }
+          friendly_store_icon = {
+            url: "../icons/Shop.png",
+            scaledSize: new google.maps.Size(28, 32)
+          };
 
-      function calculateGostationCenter(){
-        lat = 0.0;
-        lng = 0.0;
-        for(var i=0; i<gon.gostations.length; i++){
-          lat += +gon.gostations[i].Latitude;
-          lng += +gon.gostations[i].Longitude;
-        }
-        lat /= gon.gostations.length;
-        lng /= gon.gostations.length;
-        return {lat: lat, lng: lng};
-      }
+          friendly_store_icon_onclick = {
+            url: "../icons/Shop.png",
+            scaledSize: new google.maps.Size(35, 40)
+          };
 
-      function initMap() {
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: calculateGostationCenter(),
-          styles: googleMapStyle,
-          // specify map controls
-          minZoom: 8,
-          maxZoom: 16,
-          mapTypeControl: false,
-          fullscreenControl: false,
-          streetViewControl: false,
-          zoomControl: false
-        });
+          // find current position of user
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              userCurrentPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+            }, function() {
+              alert('can not get current position in 2 sec！');
+            }//,
+              //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
+            );
+          } else {
+            alert('Browser does not support Geolocation');
+          }
 
-        i_black_battery = {
-          url: "../icons/i_black_battery.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        ig_black_battery = {
-          url: "../icons/ig_black_battery.png",
-          scaledSize: new google.maps.Size(42, 48)
-        };
-
-        i_green_black_battery = {
-          url: "../icons/i_green_black_battery.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        ig_green_black_battery = {
-          url: "../icons/ig_green_black_battery.png",
-          scaledSize: new google.maps.Size(42, 48)
-        };
-
-        friendly_store_icon = {
-          url: "../icons/Shop.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        friendly_store_icon_onclick = {
-          url: "../icons/Shop.png",
-          scaledSize: new google.maps.Size(35, 40)
-        };
-
-        // find current position of user
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            userCurrentPos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-          }, function() {
-            alert('can not get current position in 2 sec！');
-          }//,
-            //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
-          );
-        } else {
-          alert('Browser does not support Geolocation');
+          showGostations();
+          //displayFriendlyStores();
         }
 
-        showGostations();
-        //displayFriendlyStores();
-      }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
+      </script>
 
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
-    </script>
 
   </body>
 </html>

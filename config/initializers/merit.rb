@@ -98,7 +98,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 102,
   name: "check-out-trip",
-  description: "打開挑戰列表",
+  description: "挑戰任務",
   level: "1",
   custom_fields: { image: "badges/check-out-trip.svg", img_url: "http://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Irongofans/1_newbie_l_696_696-01.svg"}
 )
@@ -106,7 +106,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 103,
   name: "check-gostation",
-  description: "站店打卡",
+  description: "踏上旅程",
   level: "1",
   custom_fields: { image: "badges/check-gostation.svg", img_url: "http://blog.gogoro.com/hubfs/1-Taiwan_Blog_(08.11_onwards)/Community/Badge/Irongofans/1_newbie_l_696_696-01.svg"}
 
