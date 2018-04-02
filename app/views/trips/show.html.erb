@@ -407,6 +407,13 @@
         var ig_blue_black_battery = null;
         var friendly_store_icon = null;
         
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map, markers) {
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+          }
+        }
+        
         function clearMarkers(markers) {
           setMapOnAll(null, markers);
         }
