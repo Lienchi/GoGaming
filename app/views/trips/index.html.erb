@@ -5,7 +5,7 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
             <div class="item active " style="height:100%;width:100%; padding-top:10px;">
-              <h4 class="text-center" style="line-height:2em;">歡迎來到 <%= current_user.name %> GoStation</h4>
+              <h4 class="text-center" style="line-height:2em;"><%= current_user.name %>'s GoStation</h4>
               <h5 class="text-center" style="line-height: 2em;">你的充電站還有 <strong style="color:#ED4559;"><%= @unchallenge_trips%>顆</strong> 未充飽的電池<br/>現在就選擇一顆電池為他充電吧!</h5>
             </div>
 
@@ -13,7 +13,7 @@
               <% if !t.is_challenged?(current_user)%>  
                 <div class="item text-center">
                 <h4 style="line-height: 3em;"> <%= t.name %></h4>
-                <h5 style="line-height: 1.5em;"> <%= t.description %></h5>
+                <h5 style="line-height: 1.5em;" class="text-truncate"> <%= t.description %></h5>
                 </div>
               <% end %>
             <% end %>
