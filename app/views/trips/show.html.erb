@@ -414,16 +414,15 @@
           var BatteryCells = gostation.BatteryCells;
           var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
           return {
-            directions_url: '<a style="color:#FFFFFF;" class="btn btn-success" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+            directions_url: '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1"  href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
             trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
 
-            infoWindowContent: '<div>站名：'+LocName+'</div><br>'
-              +'<div>地址：'+Address+'</div><br>'
-              +'<div>營業時間：'+AvailableTime+'</div><br>'
-              +'<div>滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
+            infoWindowContent: '<div style="color:#323237;" class="text-center">'+LocName+'</div><br>'
+              +'<div style="font-size: 14px;"  class="text-center">'+Address+'</div><br>'
+              +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
 
-            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400"><br>'
+            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>'
           };
         }
 
@@ -496,7 +495,7 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                    document.getElementById("mysidenav-button").innerHTML = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">打卡</a>';
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
                       method: "POST",
@@ -519,7 +518,7 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                    document.getElementById("mysidenav-button").innerHTML = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-secondary text-center col-xs-4 col-xs-offset-1" rel="nofollow" onclick="toggle()">已打卡</a>';
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
                       method: "POST",
@@ -597,15 +596,15 @@
 
                 var results = calculateDisDur(props.coords);
 
-                var checkin_button = '<a class="btn btn-default">Checkin</a><br>';
-                var uncheckin_button = '<a class="btn btn-default">Uncheckin</a><br>';
+                var checkin_button = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1" ">打卡</a>';
+                var uncheckin_button = '<a style="color:gray; font-size: 16px;" class="btn btn-sm btn-secondary text-center col-xs-4 col-xs-offset-1" >已打卡</a>';
 
                 var checkinDisTH = 0.005;//0.005 = 500m
                 //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
                 //{
-                  checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                  checkin_button = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">打卡</a>';
 
-                  uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                  uncheckin_button = '<a style="color:gray; font-size: 16px;" class="btn btn-sm btn-secondary text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">已打卡</a>';
                 //}
 
                 $.ajaxSetup({
@@ -667,7 +666,7 @@
               +'<div>地址：'+gon.friendly_stores[i].address+'</div><br>'
               +'<div>營業時間：'+gon.friendly_stores[i].open_time+'</div><br>';
 
-            var directions_url = '<a class="btn btn-primary" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
+            var directions_url = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-10 col-xs-offset-1"  href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
 
             var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400"><br>';
 
