@@ -178,19 +178,39 @@ input[type='file'] {
 }
 
 .bettery-green{
-  border-radius: 25px;
+  border-radius: 10%;
   border:1px solid #A1CA76;
   margin:10px auto;
   padding: 15px;
 }
 .bettery-red{
-  border-radius: 25px;
+  border-radius: 10%;
   border:1px solid #FFB6B6;
   margin:10px auto;
   padding: 15px;
   box-shadow:0px 0px 10px #FF9999;
 
 }
+
+.bettery-green-sm{
+  border-radius: 10%;
+  border:1px solid #A1CA76;
+  margin:3px auto;
+  padding: 3px;
+  width: 60px;
+  hiegh: 60px;
+}
+
+.bettery-red-sm{
+  border-radius: 10%;
+  border:1px solid #FFB6B6;
+  margin:3px auto;
+  padding: 3px;
+  width: 60px;
+  hiegh: 60px;
+  box-shadow:0px 0px 10px #FF9999;
+}
+
 .bettery img{
   width:100%;
   height:100%;
@@ -253,7 +273,7 @@ input[type='file'] {
 }
 .comment-group{
   width:90%;
-  margin:auto;
+  margin: 10px auto;
 }
 .comment{
   background:#FFFFFF;

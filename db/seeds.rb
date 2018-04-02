@@ -8,7 +8,18 @@
 
 # Default admin
 
-User.create(email: "admin@example.com", password: "123456", role: "admin")
+User.destroy_all
+20.times do |i|
+  User.create!(
+    name: "user#{i}",
+    email: "user#{i}@example.com",
+    password: "123456"
+  )
+end
+puts "have created admin and fake users!"
+puts "now you have #{User.count} users data!"
+
+User.create!(name: "admin", email: "admin@example.com", password: "123456", role: "admin")
 puts "Default admin created!"
 
 
@@ -66,13 +77,13 @@ puts "Default admin created!"
 # task create_trip: :environment do
     Trip.destroy_all
 
-    Trip.create!(name: "台北逛夜市")
-    Trip.create!(name: "新竹東西南北")
-    Trip.create!(name: "大口吃牛肉")
-    Trip.create!(name: "孤單終結")
-    Trip.create!(name: "北海小英雄")
-    Trip.create!(name: "台南直直撞")
-    Trip.create!(name: "高雄龍兄虎弟")
+    Trip.create!(name: "台北逛夜市", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "逛完台北六大夜市，並在六個gostation完成打卡，就可獲得 夜市達人 徽章")
+    Trip.create!(name: "新竹東西南北", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(name: "大口吃牛肉", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(name: "孤單終結", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(name: "北海小英雄", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    Trip.create!(name: "台南直直去", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
+    #Trip.create!(name: "高雄龍兄虎弟", image: File.open(Rails.root.join("public/apple-touch-icon.png")), description: "123")
 
     gostation_list = [
                         ["台北捷運劍潭站", "台北捷運民權西路站", "中油信義路加油站",
@@ -91,16 +102,15 @@ puts "Default admin created!"
                          "台北捷運民權西路站", "中油信義路加油站"],
 
                         ["7-ELEVEN 安安店站", "善化國小站", "7-ELEVEN 仁伯店站",
-                         "全聯台南明興店站", "Gogoro 台南公園店站"],
-
-                        ["中油軍校路加油站", "中油九曲堂加油站", "中油小港加油站",
-                         "中油旗津加油站", "九號倉會館站"]
+                         "全聯台南明興店站", "Gogoro 台南公園店站"]#,
                      ]
+                    #    ["中油軍校路加油站", "中油九曲堂加油站", "中油小港加油站",
+                    #     "中油旗津加油站", "九號倉會館站"]
+                    # ]
 
     idx = 0
     Trip.all.each do |t|
       t.gostations_index = []
-
       gostation_list[idx].each do |g|
         t.gostations_index.push(Gostation.where(LocName: g).first.id)
       end
