@@ -11,7 +11,7 @@ class TripGostationsController < ApplicationController
 
     if is_complete_trip?(@trip_gostation.trip_id)
       Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id)
-      current_user.add_points(33, category: 'trip')
+      # current_user.add_points(33, category: 'trip')
       redirect_to trips_path
     else
       #redirect_to trip_path(@trip_gostation.trip_id)
