@@ -395,6 +395,8 @@
         var directionsService = null;
         var directionsDisplay = null;
         var infoWindow = null;
+        var toggleFriendlyStore = false;
+        var friendlyStoreMarkers = [];
 
         // map icons
         var i_black_battery = null;
@@ -404,6 +406,14 @@
         var ig_green_black_battery = null;
         var ig_blue_black_battery = null;
         var friendly_store_icon = null;
+        
+        function clearMarkers(markers) {
+          setMapOnAll(null, markers);
+        }
+        // Shows any markers currently in the array.
+        function showMarkers(markers) {
+          setMapOnAll(map, markers);
+        }
 
         function getGostationInfo(gostation){
           var LocName = gostation.LocName;
@@ -652,9 +662,20 @@
               }
             });
           }
+          
+          if(props.id >= 0){//gostations
+            //gostationMarkers.push(marker);
+          }
+          else if(props.id == -1){//friendly stores
+            friendlyStoreMarkers.push(marker);
+          }
+          else if(props.id == -2){
+            destinationMarker = marker;
+          }
         }
 
         function displayFriendlyStores(){
+          if(friendlyStoreMarkers.length>0){ return; }
 
           for(var i=0; i<gon.friendly_stores.length; i++){
             var position = {
@@ -692,6 +713,19 @@
           lng /= gon.gostations.length;
           return {lat: lat, lng: lng};
         }
+        
+        document.getElementById('friendly-store-submit').addEventListener('click', function() {
+          displayFriendlyStores();
+          toggleFriendlyStore = !toggleFriendlyStore;
+          if(toggleFriendlyStore){
+            showMarkers(friendlyStoreMarkers);
+            document.getElementById('friendly-store-submit').className = "btn btn-info";
+          }
+          else{
+            clearMarkers(friendlyStoreMarkers);
+            document.getElementById('friendly-store-submit').className = "btn btn-default";
+          }
+        });
 
         function initMap() {
           directionsService = new google.maps.DirectionsService;
