@@ -732,8 +732,8 @@
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7.6,
-          center: {lat: 23.91566, lng: 120.66387},
+          zoom: 7.4,
+          center: {lat: 23.65566, lng: 120.96387},
           styles: googleMapStyle,
           // specify map controls
           minZoom: 7,
@@ -822,6 +822,38 @@
               var geocoder = new google.maps.Geocoder();
               geocodeAddress(geocoder, map);
             }
+          }
+        });
+
+        var input_start = /** @type {!HTMLInputElement} */(
+            document.getElementById('direction-start'));
+
+        var autocomplete_start = new google.maps.places.Autocomplete(input_start);
+        autocomplete_start.bindTo('bounds', map);
+
+        autocomplete_start.addListener('place_changed', function() {
+          var place = autocomplete_start.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+        });
+
+        var input_end = /** @type {!HTMLInputElement} */(
+            document.getElementById('direction-end'));
+
+        var autocomplete_end = new google.maps.places.Autocomplete(input_end);
+        autocomplete_end.bindTo('bounds', map);
+
+        autocomplete_end.addListener('place_changed', function() {
+          var place = autocomplete_end.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
           }
         });
 
@@ -995,7 +1027,7 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&libraries=places&callback=initMap&language=zh-TW">
     </script>
 
   </body>
