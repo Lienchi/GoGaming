@@ -838,6 +838,32 @@
         centerControlDiv.index = 1;
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
 
+        var locationPromise = getUserCurrentPosition();
+
+        locationPromise
+        .then(function(position) {
+          userCurrentPos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map.setZoom(12);
+          map.setCenter(userCurrentPos);
+          addMarker({
+            coords: userCurrentPos,
+            iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png'
+          });
+
+          document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
+
+          // --- gostations
+          setNearbyInfobox(gon.gostations,
+                           userCurrentPos,
+                           i_black_battery);
+        })
+        .catch(function(err) {
+          console.log("Can not get current position!");
+        });
+
         document.getElementById('current-position-submit').addEventListener('click', function() {
           var locationPromise = getUserCurrentPosition();
 
