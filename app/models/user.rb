@@ -24,6 +24,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :commented_trips, through: :comments, source: :trip
 
+  has_many :user_products
+  has_many :products, through: :user_products, source: :product
+
   def admin?
     self.role == "admin"
   end

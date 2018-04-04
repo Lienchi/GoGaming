@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329024403) do
+ActiveRecord::Schema.define(version: 20180404130942) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180329024403) do
     t.integer "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "completetime"
   end
 
   create_table "checkins", force: :cascade do |t|
@@ -117,6 +118,14 @@ ActiveRecord::Schema.define(version: 20180329024403) do
     t.index ["sash_id"], name: "index_merit_scores_on_sash_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "product_points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+  end
+
   create_table "sashes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,6 +148,13 @@ ActiveRecord::Schema.define(version: 20180329024403) do
     t.text "gostations_index"
     t.string "description"
     t.string "image"
+  end
+
+  create_table "user_products", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "product_id"
   end
 
   create_table "users", force: :cascade do |t|

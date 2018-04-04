@@ -16,6 +16,7 @@ class TripsController < ApplicationController
     gon.friendly_stores = Friendlystore.all
     @comment = Comment.new
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
+    @challenge = Challenge.where(trip_id: @trip).order(:completetime).first
   end
   
 

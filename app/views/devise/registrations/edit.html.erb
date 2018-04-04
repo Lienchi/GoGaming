@@ -3,12 +3,13 @@
   <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
     <br>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: :true }) do |f| %>
   <%= devise_error_messages! %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, class: "form-control" %>
   </div>
+  <%= f.file_field :avatar, class: "btn form-control-file ", style:"width: 100px;" %>
 
   <div class="field">
     <%= f.label :email %><br />
