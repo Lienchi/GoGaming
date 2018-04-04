@@ -364,7 +364,7 @@
       ];
 
       /* Set the width of the side navigation to 400px */
-      function openNav(content, storePhoto, button, trip_url, directions_url, results) {
+      function openNav(content, storePhoto, button, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
           var mySidenavContent = document.getElementById('mySidenav-content');
 
@@ -374,7 +374,6 @@
             document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
           }
           document.getElementById('mysidenav-button').innerHTML = button;
-          document.getElementById('mysidenav-tripurl').innerHTML = trip_url;
           document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
       }
 
@@ -404,6 +403,7 @@
       var ig_green_black_battery = null;
       var ig_blue_black_battery = null;
       var friendly_store_icon = null;
+      var friendly_store_icon_onclick = null;
 
       // Sets the map on all markers in the array.
       function setMapOnAll(map, markers) {
@@ -439,50 +439,33 @@
         // --- create milestones
         var milestones = createMilestone(route, 1000);
 
-        // --- gostations_belongs_to_trip
-        setStartEndInfobox(gon.gostations_belongs_to_trip,
-                           true,
-                           milestones,
-                           i_green_black_battery);
-
-        // --- gostations_not_belongs_to_trip
-        setStartEndInfobox(gon.gostations_not_belongs_to_trip,
-                           false,
+        // --- gostations
+        setStartEndInfobox(gon.gostations,
                            milestones,
                            i_black_battery);
       };
-
-      function getTripId(gostation_id){
-        for(var i=0; i<gon.trip_gostations.length; i++){
-          if(gon.trip_gostations[i].gostation_id == gostation_id){
-            return gon.trip_gostations[i].trip_id;
-          }
-        }
-        return -1;
-      }
 
       function getGostationInfo(gostation){
         var LocName = gostation.LocName;
         var Address = gostation.Address;
         var AvailableTime = gostation.AvailableTime;
-        var tripId = getTripId(gostation.id);
         var StorePhoto = gostation.StorePhoto;
         var BatteryCells = gostation.BatteryCells;
         var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8-2;
         return {
           directions_url: '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
 
-          trip_url: tripId >= 0 ? '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-success text-center col-xs-5" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a>' : '<a style="font-size: 16px;padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5" disabled>挑戰任務</a>',
-
           infoWindowContent: '<div style="color:#323237; " class="text-center">'+LocName+'</div><br>'
             +'<div style="font-size: 14px;"  class="text-center">'+Address+'</div><br>'
             +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
 
-          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>'
+          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>',
+
+          bHasPower: FullBatteryCells>8?true:false
         };
       }
 
-      function setStartEndInfobox(gostations, bBelongsToTrip, milestones, img){
+      function setStartEndInfobox(gostations, milestones, img){
         for(var i=0; i<gostations.length; i++){
           var position = {};
           position.lat = gostations[i].Latitude;
@@ -501,29 +484,15 @@
 
             addMarker({
               coords: position,
-              iconImage: img,
+              iconImage: gostationInfo.bHasPower?i_green_black_battery:i_black_battery,
               content: gostationInfo.infoWindowContent,
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              trip_url: gostationInfo.trip_url,
-              bBelongsToTrip: bBelongsToTrip
+              bHasPower: gostationInfo.bHasPower
             });
           }
         }
-      }
-
-      function checkLatLngInStartEndRect(position, start, end){
-        if(start.lat==0.0 && start.lng==0.0){
-          return checkLatLngNearby(gostation, end);
-        }
-
-        if( (position.lat >= start.lat && position.lat <= end.lat) || (position.lat <= start.lat && position.lat >= end.lat)){
-          if( (position.lng >= start.lng && position.lng <= end.lng) || (position.lng <= start.lng && position.lng >= end.lng)){
-              return true;
-          }
-        }
-        return false;
       }
 
       function hasUserCurrentPos(){
@@ -578,7 +547,7 @@
                 url: "/gostations/"+currentGostationId+"/uncheckin",
                 method: "POST",
                 success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                  document.getElementById("mysidenav-button").innerHTML = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow" onclick="toggle()">Checkin</a>';
                   $.ajax({
                     url: "/gostations/getCurrentUserPoints",
                     method: "POST",
@@ -601,7 +570,7 @@
                 url: "/gostations/"+currentGostationId+"/checkin",
                 method: "POST",
                 success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                  document.getElementById("mysidenav-button").innerHTML = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-5" rel="nofollow" onclick="toggle()">Uncheckin</a>';
                   $.ajax({
                     url: "/gostations/getCurrentUserPoints",
                     method: "POST",
@@ -632,7 +601,7 @@
 
       var activeMarkerInfo = {
         marker: null,
-        bBelongsToTrip: false,
+        bHasPower: false,
         bFriendlyStore: false
       };
       function addMarker(props){
@@ -652,34 +621,34 @@
                 if(activeMarkerInfo.bFriendlyStore){
                   activeMarkerInfo.marker.setIcon(friendly_store_icon);
                 }
-                else if(activeMarkerInfo.bBelongsToTrip){
+                else if(activeMarkerInfo.bHasPower){
                   activeMarkerInfo.marker.setIcon(i_green_black_battery);
                 }
                 else{
                   activeMarkerInfo.marker.setIcon(i_black_battery);
                 }
               }
-              if(props.bBelongsToTrip){
+              if(props.bHasPower){
                 marker.setIcon(ig_green_black_battery);
               }
               else{
                 marker.setIcon(ig_black_battery);
               }
               activeMarkerInfo.marker = marker;
-              activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
+              activeMarkerInfo.bHasPower = props.bHasPower;
               activeMarkerInfo.bFriendlyStore = false;
 
               var results = calculateDisDur(props.coords);
 
-              var checkin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-primary">Checkin</a><br>';
-              var uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-secondary">Uncheckin</a><br>';
+              var checkin_button = '<a style="text-align:center; color:#323237; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Checkin</a>';
+              var uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Uncheckin</a>';
 
-              var checkinDisTH = 0.005;//0.005 = 500m
+              //var checkinDisTH = 0.005;//0.005 = 500m
               //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
               //{
-                checkin_button = '<a class="btn btn-primary" rel="nofollow" onclick="toggle()">Checkin</a><br>';
+                checkin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;"  class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow" onclick="toggle()">Checkin</a>';
 
-                uncheckin_button = '<a class="btn btn-info" rel="nofollow" onclick="toggle()">Uncheckin</a><br>';
+                uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-5" rel="nofollow" onclick="toggle()">Uncheckin</a>';
               //}
 
               $.ajaxSetup({
@@ -692,10 +661,10 @@
                 success: function(data){
 
                   if(data.status){
-                    openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+                    openNav(props.content, props.storePhoto, uncheckin_button, props.directions_url, results);
                   }
                   else{
-                    openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
+                    openNav(props.content, props.storePhoto, checkin_button, props.directions_url, results);
                   }
                 },
 
@@ -711,7 +680,7 @@
                 if(activeMarkerInfo.bFriendlyStore){
                   activeMarkerInfo.marker.setIcon(friendly_store_icon);
                 }
-                else if(activeMarkerInfo.bBelongsToTrip){
+                else if(activeMarkerInfo.bHasPower){
                   activeMarkerInfo.marker.setIcon(i_green_black_battery);
                 }
                 else{
@@ -887,14 +856,8 @@
 
             document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
 
-            // --- gostations_belongs_to_trip
-            setNearbyInfobox(gon.gostations_belongs_to_trip,
-                             true,
-                             userCurrentPos,
-                             i_green_black_battery);
-            // --- gostations_not_belongs_to_trip
-            setNearbyInfobox(gon.gostations_not_belongs_to_trip,
-                             false,
+            // --- gostations
+            setNearbyInfobox(gon.gostations,
                              userCurrentPos,
                              i_black_battery);
           })
@@ -987,7 +950,7 @@
       }
 
 
-      function setNearbyInfobox(gostations, bBelongsToTrip, des, img) {
+      function setNearbyInfobox(gostations, des, img) {
         for(var i=0; i<gostations.length; i++){
           var position = {};
           position.lat = gostations[i].Latitude;
@@ -998,13 +961,12 @@
 
             addMarker({
               coords: position,
-              iconImage: img,
+              iconImage: gostationInfo.bHasPower?i_green_black_battery:i_black_battery,
               content: gostationInfo.infoWindowContent,
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              trip_url: gostationInfo.trip_url,
-              bBelongsToTrip: bBelongsToTrip
+              bHasPower: gostationInfo.bHasPower
             });
           }
           
@@ -1023,15 +985,8 @@
           var record = JSON.parse(xhr.responseText);
           record = record.results;
 
-          // --- gostations_belongs_to_trip
-          setNearbyInfobox(gon.gostations_belongs_to_trip,
-                           true,
-                           record[0].geometry.location,
-                           i_green_black_battery);
-
-          // --- gostations_not_belongs_to_trip
-          setNearbyInfobox(gon.gostations_not_belongs_to_trip,
-                           false,
+          // --- gostations
+          setNearbyInfobox(gon.gostations,
                            record[0].geometry.location,
                            i_black_battery);
         };
@@ -1104,12 +1059,6 @@
             };
 
             displayGostations(response.routes[0]);
-            /*
-            var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML  = '距離：'+response.routes[0].legs[0].distance.text;
-            summaryPanel.innerHTML += '<br>'
-            summaryPanel.innerHTML += '時間：'+response.routes[0].legs[0].duration.text;
-            */
 
             directionsDisplay.setDirections(response);
           } else {
