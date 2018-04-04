@@ -363,6 +363,10 @@
         }
       ];
 
+      $.ajaxSetup({
+        headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+      });
+
       /* Set the width of the side navigation to 400px */
       function openNav(content, storePhoto, button, directions_url, results) {
           document.getElementById("mySidenav").style.width = "400px";
@@ -502,41 +506,43 @@
         return false;
       }
 
-      function calculateDisDur(des){
-        var results = {
-          distance: '0.0',
-          duration: '0.0',
-          status: false
-        }
-        if(!hasUserCurrentPos()){
-          return results;
-        }
-        var directionsServiceCalc = new google.maps.DirectionsService;
-        var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
-        var end = new google.maps.LatLng(des.lat, des.lng);
-        directionsServiceCalc.route({
-          origin: start,
-          destination: end,
-          travelMode: 'DRIVING',
-          avoidHighways: true
-        }, function(response, status) {
-          if (status === 'OK') {
-            results.distance = response.routes[0].legs[0].distance.text;
-            results.duration = response.routes[0].legs[0].duration.text;
-            results.status = true;
-          } else {
-            window.alert('Directions request failed due to ' + status);
+      function promiseCalculateDisDur(des){
+        var promise = new Promise(function(resolve, reject) {
+          var results = {
+            distance: '0.0',
+            duration: '0.0',
+            status: false
+          }
+          if(!hasUserCurrentPos()){
+            resolve(results);
+          }
+          else{
+            var directionsServiceCalc = new google.maps.DirectionsService;
+            var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
+            var end = new google.maps.LatLng(des.lat, des.lng);
+            directionsServiceCalc.route({
+              origin: start,
+              destination: end,
+              travelMode: 'DRIVING',
+              avoidHighways: true
+            }, function(response, status) {
+              if (status === 'OK') {
+                results.distance = response.routes[0].legs[0].distance.text;
+                results.duration = response.routes[0].legs[0].duration.text;
+                results.status = true;
+                resolve(results);
+              } else {
+                reject('Directions request failed due to ' + status);
+              }
+            });
           }
         });
 
-        return results;
+        return promise;
       }
 
       var currentGostationId = 0;
       function toggle(){
-        $.ajaxSetup({
-          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-        });
         $.ajax({
           url: "/gostations/"+currentGostationId+"/getCheckinStatus",
           method: "POST",
@@ -638,7 +644,6 @@
               activeMarkerInfo.bHasPower = props.bHasPower;
               activeMarkerInfo.bFriendlyStore = false;
 
-              var results = calculateDisDur(props.coords);
 
               var checkin_button = '<a style="text-align:center; color:#323237; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Checkin</a>';
               var uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Uncheckin</a>';
@@ -651,27 +656,32 @@
                 uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-5" rel="nofollow" onclick="toggle()">Uncheckin</a>';
               //}
 
-              $.ajaxSetup({
-                headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-              });
-              $.ajax({
-                url: "/gostations/"+props.id+"/getCheckinStatus",
-                method: "POST",
-                dataType: "json",
-                success: function(data){
+              var disDurPromise = promiseCalculateDisDur(props.coords);
 
-                  if(data.status){
-                    openNav(props.content, props.storePhoto, uncheckin_button, props.directions_url, results);
+              disDurPromise
+              .then(function(results) {
+                $.ajax({
+                  url: "/gostations/"+props.id+"/getCheckinStatus",
+                  method: "POST",
+                  dataType: "json",
+                  success: function(data){
+
+                    if(data.status){
+                      openNav(props.content, props.storePhoto, uncheckin_button, props.directions_url, results);
+                    }
+                    else{
+                      openNav(props.content, props.storePhoto, checkin_button, props.directions_url, results);
+                    }
+                  },
+
+                  error: function() {
+                    alert("ERROR: can not getCheckinStatus!");
                   }
-                  else{
-                    openNav(props.content, props.storePhoto, checkin_button, props.directions_url, results);
-                  }
-                },
 
-                error: function() {
-                  alert("ERROR: can not getCheckinStatus!");
-                }
-
+                });
+              })
+              .catch(function(err) {
+                console.log("Can not get disDur");
               });
             }
             else if(props.id == -1){//friendly stores
@@ -691,9 +701,15 @@
               activeMarkerInfo.marker = marker;
               activeMarkerInfo.bFriendlyStore = true;
 
-              var results = calculateDisDur(props.coords);
-              openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
 
+              var disDurPromise = promiseCalculateDisDur(props.coords);
+              disDurPromise
+              .then(function(results) {
+                openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
+              })
+              .catch(function(err) {
+                console.log("Can not get disDur");
+              });
             }
 
           });
