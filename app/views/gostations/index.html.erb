@@ -97,9 +97,11 @@
           <div id="mySidenav-content" class="mysidenav">
             <div id="mysidenav-img"></div>
             <div id="mysidenav-content"></div>
+            <div id="myCellProgress">
+              <div id="myCellBar"></div>
+            </div>
             <div id="mysidenav-disdur"></div>
             <div id="mysidenav-button"></div>
-            <div id="mysidenav-tripurl"></div>
             <div id="mysidenav-directionurl"></div>
           </div>
         </div>
@@ -465,7 +467,7 @@
 
           storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>',
 
-          bHasPower: FullBatteryCells>8?true:false
+          fullBatteryCells: FullBatteryCells
         };
       }
 
@@ -488,12 +490,13 @@
 
             addMarker({
               coords: position,
-              iconImage: gostationInfo.bHasPower?i_green_black_battery:i_black_battery,
+              iconImage: isHasPower(gostationInfo.fullBatteryCells)?i_green_black_battery:i_black_battery,
               content: gostationInfo.infoWindowContent,
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              bHasPower: gostationInfo.bHasPower
+              fullBatteryCells: gostationInfo.fullBatteryCells,
+              totalBatteryCells: gostations[i].BatteryCells
             });
           }
         }
@@ -605,6 +608,10 @@
 
       }
 
+      function isHasPower(fullBatteryCells){
+        return fullBatteryCells>8;
+      }
+
       var activeMarkerInfo = {
         marker: null,
         bHasPower: false,
@@ -621,6 +628,12 @@
         if(props.content){
           marker.addListener('click', function(){
             if(props.id >= 0){//gostations
+              var percentage = props.fullBatteryCells/props.totalBatteryCells;
+              document.getElementById('myCellProgress').className = 'myProgress';
+              document.getElementById('myCellBar').className = 'myBar';
+              var elem = document.getElementById("myCellBar");
+              elem.style.width = percentage*100 + '%';
+
               currentGostationId = props.id;
 
               if(activeMarkerInfo.marker!=null){
@@ -634,14 +647,14 @@
                   activeMarkerInfo.marker.setIcon(i_black_battery);
                 }
               }
-              if(props.bHasPower){
+              if(isHasPower(props.fullBatteryCells)){
                 marker.setIcon(ig_green_black_battery);
               }
               else{
                 marker.setIcon(ig_black_battery);
               }
               activeMarkerInfo.marker = marker;
-              activeMarkerInfo.bHasPower = props.bHasPower;
+              activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
               activeMarkerInfo.bFriendlyStore = false;
 
 
@@ -685,7 +698,8 @@
               });
             }
             else if(props.id == -1){//friendly stores
-
+              document.getElementById('myCellProgress').className = '';
+              document.getElementById('myCellBar').className = '';
               if(activeMarkerInfo.marker!=null){
                 if(activeMarkerInfo.bFriendlyStore){
                   activeMarkerInfo.marker.setIcon(friendly_store_icon);
@@ -705,7 +719,7 @@
               var disDurPromise = promiseCalculateDisDur(props.coords);
               disDurPromise
               .then(function(results) {
-                openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
+                openNav(props.content, props.storePhoto, '', props.directions_url, results);
               })
               .catch(function(err) {
                 console.log("Can not get disDur");
@@ -1003,12 +1017,13 @@
 
             addMarker({
               coords: position,
-              iconImage: gostationInfo.bHasPower?i_green_black_battery:i_black_battery,
+              iconImage: isHasPower(gostationInfo.fullBatteryCells)?i_green_black_battery:i_black_battery,
               content: gostationInfo.infoWindowContent,
               storePhoto: gostationInfo.storePhoto,
               directions_url: gostationInfo.directions_url,
               id: gostations[i].id,
-              bHasPower: gostationInfo.bHasPower
+              fullBatteryCells: gostationInfo.fullBatteryCells,
+              totalBatteryCells: gostations[i].BatteryCells
             });
           }
           

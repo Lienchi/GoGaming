@@ -261,7 +261,7 @@ input[type='file'] {
 /*trips#show*/
 
 
-#myProgress{
+.myProgress{
   margin: 0 auto;
   top:5%;
   width:90%;
@@ -270,7 +270,7 @@ input[type='file'] {
   border: 2px solid #DDDDDD;
 }
 
-#myBar{
+.myBar{
   width:25%;
   height:10px;;
   background: linear-gradient(to right, #6495ED, #E0FFFF);
