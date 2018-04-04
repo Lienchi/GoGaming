@@ -10,7 +10,10 @@ class TripGostationsController < ApplicationController
     end
 
     if is_complete_trip?(@trip_gostation.trip_id)
-      Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id)
+      @first = Trip.find(@trip_gostation.trip_id).trip_gostations.where(user_id:current_user.id).order(:updated_at).first.updated_at
+      @last = Trip.find(@trip_gostation.trip_id).trip_gostations.where(user_id:current_user.id).order(updated_at: :desc).first.updated_at
+      @completetime = ((@last-@first)/60).round(2)
+      Challenge.create!(user: current_user, trip_id: @trip_gostation.trip_id, completetime: @completetime )
       # current_user.add_points(33, category: 'trip')
       redirect_to trips_path
     else

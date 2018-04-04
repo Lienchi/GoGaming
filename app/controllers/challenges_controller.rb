@@ -7,6 +7,6 @@ class ChallengesController < ApplicationController
   private 
 
   def challenge_params
-    params.require(:challenge).permit(:user_id, :trip_id)
+    params.require(:challenge).permit(:user_id, :trip_id, :completetime)
   end
 end

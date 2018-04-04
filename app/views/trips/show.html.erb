@@ -121,7 +121,15 @@
             <div id="myBar"></div>
           </div>
           <br>
-        </div>       
+        </div>  
+        <div class="">
+          <%if Challenge.where(trip_id:@trip).exists?%>
+            <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
+            <%= @challenge.user.name%>
+            <%= @challenge.completetime%>
+          <%end%>
+   
+        </div>     
 
         <div class="comment-group">
           <div class="col-xs-8 col-sm-10">
