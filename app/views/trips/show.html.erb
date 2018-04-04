@@ -797,6 +797,22 @@
           }
         });
 
+        function getUserCurrentPosition(){
+          var promise = new Promise(function(resolve, reject) {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                function(position){
+                  resolve(position)
+                }
+              );
+            } else {
+              reject("Can not get current position!");
+            }
+          });
+
+          return promise;
+        }
+
         function initMap() {
           directionsService = new google.maps.DirectionsService;
           directionsDisplay = new google.maps.DirectionsRenderer;
@@ -844,20 +860,18 @@
           };
 
           // find current position of user
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-              userCurrentPos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
-            }, function() {
-              alert('can not get current position in 2 sec！');
-            }//,
-              //{maximumAge: 0, timeout: 2000, enableHighAccuracy:false}
-            );
-          } else {
-            alert('Browser does not support Geolocation');
-          }
+          var locationPromise = getUserCurrentPosition();
+
+          locationPromise
+          .then(function(position) {
+            userCurrentPos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          })
+          .catch(function(err) {
+            console.log("Browser does not support Geolocation!");
+          });
 
           showGostations();
           //displayFriendlyStores();
