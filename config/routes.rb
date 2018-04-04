@@ -48,4 +48,7 @@ Rails.application.routes.draw do
    
   resources :followships, only:[:create, :destroy]
 
+  resources :products, only:[:index]
+  resources :user_products, only:[:create]
+
 end
