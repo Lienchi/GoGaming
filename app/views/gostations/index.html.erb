@@ -49,11 +49,7 @@
           font-size: 36px;
           margin-left: 50px;
       }
-      .mysidenav{
-        padding: 0 20%;
-        font-size:1.5em;
-        line-height: 1em;
-      }
+
       /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
       #main {
           transition: margin-left .3s;
@@ -93,47 +89,37 @@
 
       <div class="border clearfix  white " style="height: 100%;">
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-- google marker Modal -->
+        <div class="modal fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                <h5 class="modal-title" id="markerModalLongTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <div id="mysidenav-img"></div>
-                <div id="mysidenav-content"></div>
-                <div id="myCellProgress">
-                  <div id="myCellBar"></div>
+                <div>
+                  <img id="markerModal-img" alt="Store Photo" width="400" height="400" class="border rounded">
                 </div>
-                <div id="mysidenav-disdur"></div>
-                <div id="myCellProgress">
-                  <div id="myCellBar"></div>
+                <div id="markerModal-content" style="font-size: 14px;" class="text-center"></div>
+                <div id="markerModal-disdur" style="font-size: 14px;" class="text-center"></div>
+                <div id="markerModal-availableTime" style="font-size: 14px;" class="text-center"></div>
+                <div id="markerModal-cellContent" style="font-size: 14px;" class="text-center"></div>
+                <div id="markerModal-cellProgress">
+                  <div id="markerModal-cellBar"></div>
                 </div>
               </div>
               <div class="modal-footer">
-                <div id="mysidenav-button"></div>
-                <div id="mysidenav-directionurl"></div>
+                <div>
+                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">Checkin</a>
+                </div>
+                <div>
+                  <a id="markerModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        
-        <div id="mySidenav" class="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <div id="mySidenav-content" class="mysidenav">
-            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-            <div id="mysidenav-img"></div>
-            <div id="mysidenav-content"></div>
-            <div id="myCellProgress">
-              <div id="myCellBar"></div>
-            </div>
-            <div id="mysidenav-disdur"></div>
-            <div id="mysidenav-button"></div>
-            <div id="mysidenav-directionurl"></div>
           </div>
         </div>
         <br/>
@@ -400,22 +386,56 @@
         headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
       });
 
-      /* Set the width of the side navigation to 400px */
-      function openNav(title, content, storePhoto, button, directions_url, results) {
-          //document.getElementById("mySidenav").style.width = "400px";
-          document.getElementById('exampleModalLongTitle').innerHTML = title;
-          document.getElementById('mysidenav-img').innerHTML = storePhoto;
-          document.getElementById('mysidenav-content').innerHTML = content;
-          if(results.status){
-            document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
-          }
-          document.getElementById('mysidenav-button').innerHTML = button;
-          document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
-      }
+      // --- <div id="markerModalCenter"></div>
+      function setMarkerModalInfo(props) {
+        var cellProgressEle = document.getElementById('markerModal-cellProgress');
+        cellProgressEle.className = '';
+        document.getElementById('markerModal-cellBar').className = '';
 
-      /* Set the width of the side navigation to 0 */
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+        var markerModalEle = document.getElementById("markerModal-checkin");
+        markerModalEle.innerHTML = "";
+        markerModalEle.className = "";
+        markerModalEle.onclick = null;
+
+        if(props.id >= 0){//gostations
+          var percentage = props.fullBatteryCells/props.totalBatteryCells;
+          cellProgressEle.className = 'myProgress';
+          document.getElementById('markerModal-cellBar').className = 'myBar';
+          var elem = document.getElementById("markerModal-cellBar");
+          elem.style.width = percentage*100 + '%';
+
+          markerModalEle.style.color = "#323237";
+          markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
+          if( props.bCloseGostation ){
+            markerModalEle.onclick = toggle;
+          }
+
+          if(props.bCheckin){
+            markerModalEle.innerHTML = "Uncheckin";
+            if(props.bCloseGostation){
+              markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
+            }
+            
+          }
+          else{
+            markerModalEle.innerHTML = "Checkin";
+            if(props.bCloseGostation){
+              markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
+            }
+          }
+        }
+        document.getElementById('markerModalLongTitle').innerHTML = props.title;
+        document.getElementById('markerModal-img').src = props.storePhoto;
+        document.getElementById('markerModal-content').innerHTML = '地址：'+props.address;
+        document.getElementById('markerModal-availableTime').innerHTML = '營業時間：'+props.availableTime;
+        document.getElementById('markerModal-cellContent').innerHTML = "";
+        if(props.totalBatteryCells>0){
+          document.getElementById('markerModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
+        }
+        if(props.distance!=null && props.duration!=null){
+          document.getElementById('markerModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
+        }
+        document.getElementById("markerModal-directionurl").href = props.directions_url
       }
 
       var userCurrentPos = {
@@ -427,6 +447,7 @@
       var gostationMarkers = [];
       var toggleFriendlyStore = false;
       var friendlyStoreMarkers = [];
+      var currentPositionMarker = null;
       var destinationMarker = null;
       var directionsService = null;
       var directionsDisplay = null;
@@ -464,71 +485,70 @@
         markers = [];
       }
 
-      function deleteDestinationMarker(){
-        if(destinationMarker){
-          destinationMarker.setMap(null);
-          destinationMarker = null;
+      function deleteMarker(marker) {
+        if(marker){
+          marker.setMap(null);
+          marker = null;
         }
+      }
+
+      function deleteDestinationMarker(){
+        deleteMarker(destinationMarker);
+      }
+
+      function deleteCurrentPositionMarker(){
+        deleteMarker(currentPositionMarker);
       }
 
       function displayGostations(route) {
         // --- create milestones
         var milestones = createMilestone(route, 1000);
 
-        // --- gostations
-        setStartEndInfobox(gon.gostations,
-                           milestones,
-                           i_black_battery);
+        setMarkerInfo({
+          gostations: gon.gostations,
+          milestones: milestones
+        });
       };
 
       function getGostationInfo(gostation){
-        var LocName = gostation.LocName;
-        var Address = gostation.Address;
-        var AvailableTime = gostation.AvailableTime;
-        var StorePhoto = gostation.StorePhoto;
-        var BatteryCells = gostation.BatteryCells;
-        var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8-2;
-        return {
-          title: LocName,
-          directions_url: '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+        var batteryCells = gostation.BatteryCells;
+        var fullBatteryCells = (Math.floor(Math.random()*(batteryCells/8-1))+1)*8-2;
 
-          infoWindowContent: '<div style="font-size: 14px;"  class="text-center">'+Address+'</div><br>'
-            +'<div style="font-size: 14px;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
+        var info = {
+          title: gostation.LocName,
+          storePhoto: gostation.StorePhoto,
+          address: gostation.Address,
+          availableTime: gostation.AvailableTime,
+          totalBatteryCells: batteryCells,
+          fullBatteryCells: fullBatteryCells
+        }
 
-          storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>',
-
-          fullBatteryCells: FullBatteryCells
-        };
+        info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude;
+        
+        return info;
       }
 
-      function setStartEndInfobox(gostations, milestones, img){
-        for(var i=0; i<gostations.length; i++){
+
+      function setMarkerInfo(props){
+        for(var i=0; i<props.gostations.length; i++){
           var position = {};
-          position.lat = gostations[i].Latitude;
-          position.lng = gostations[i].Longitude;
+          position.lat = props.gostations[i].Latitude;
+          position.lng = props.gostations[i].Longitude;
 
           var flag = false;
-          for(var j=0; j<milestones.length; j++){
-            if( checkLatLngNearby(position, milestones[j]) ){
+          for(var j=0; j<props.milestones.length; j++){
+            if( checkLatLngNearby(position, props.milestones[j], 0.02) ){//0.01 = 1km
               flag = true;
               break;
             }
           }
-          if( flag ){
+          if(flag){
+            var gostationInfo = getGostationInfo(props.gostations[i]);
+            gostationInfo.position = position;
+            gostationInfo.id = props.gostations[i].id;
+            gostationInfo.iconImage = isHasPower(gostationInfo.fullBatteryCells)?i_green_black_battery:i_black_battery;
 
-            var gostationInfo = getGostationInfo(gostations[i]);
-
-            addMarker({
-              title: gostationInfo.title,
-              coords: position,
-              iconImage: isHasPower(gostationInfo.fullBatteryCells)?i_green_black_battery:i_black_battery,
-              content: gostationInfo.infoWindowContent,
-              storePhoto: gostationInfo.storePhoto,
-              directions_url: gostationInfo.directions_url,
-              id: gostations[i].id,
-              fullBatteryCells: gostationInfo.fullBatteryCells,
-              totalBatteryCells: gostations[i].BatteryCells
-            });
+            addMarker(gostationInfo);
           }
         }
       }
@@ -543,8 +563,8 @@
       function promiseCalculateDisDur(des){
         var promise = new Promise(function(resolve, reject) {
           var results = {
-            distance: '0.0',
-            duration: '0.0',
+            distance: null,
+            duration: null,
             status: false
           }
           if(!hasUserCurrentPos()){
@@ -575,6 +595,7 @@
         return promise;
       }
 
+      // toggle button for switch checkin status and update user's point
       var currentGostationId = 0;
       function toggle(){
         $.ajax({
@@ -587,7 +608,8 @@
                 url: "/gostations/"+currentGostationId+"/uncheckin",
                 method: "POST",
                 success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow" onclick="toggle()">Checkin</a>';
+                  document.getElementById("markerModal-checkin").innerHTML = 'Checkin';
+                  document.getElementById("markerModal-checkin").className = "btn btn-sm btn-primary text-center col-xs-5";
                   $.ajax({
                     url: "/gostations/getCurrentUserPoints",
                     method: "POST",
@@ -610,7 +632,8 @@
                 url: "/gostations/"+currentGostationId+"/checkin",
                 method: "POST",
                 success: function(){
-                  document.getElementById("mysidenav-button").innerHTML = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-5" rel="nofollow" onclick="toggle()">Uncheckin</a>';
+                  document.getElementById("markerModal-checkin").innerHTML = 'Uncheckin';
+                  document.getElementById("markerModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
                   $.ajax({
                     url: "/gostations/getCurrentUserPoints",
                     method: "POST",
@@ -624,7 +647,7 @@
                   });
                 },
                 error: function() {
-                  alert("ERROR: can not uncheckin!");
+                  alert("ERROR: can not checkin!");
                 }
               });
             }
@@ -650,24 +673,15 @@
       };
       function addMarker(props){
         var marker = new google.maps.Marker({
-          position: props.coords,
+          position: props.position,
           animation: google.maps.Animation.DROP,
           map: map,
           icon: props.iconImage
         });
 
-        if(props.content){
+        if(props.address){
           marker.addListener('click', function(){
-        
-            
-
             if(props.id >= 0){//gostations
-              var percentage = props.fullBatteryCells/props.totalBatteryCells;
-              document.getElementById('myCellProgress').className = 'myProgress';
-              document.getElementById('myCellBar').className = 'myBar';
-              var elem = document.getElementById("myCellBar");
-              elem.style.width = percentage*100 + '%';
-
               currentGostationId = props.id;
 
               if(activeMarkerInfo.marker!=null){
@@ -691,19 +705,12 @@
               activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
               activeMarkerInfo.bFriendlyStore = false;
 
+              var bCloseGostation = false;
+              if( checkLatLngNearby(userCurrentPos, props.position, 0.005) ){//0.005 = 500m
+                bCloseGostation = true;
+              }
 
-              var checkin_button = '<a style="text-align:center; color:#323237; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Checkin</a>';
-              var uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-default text-center col-xs-5">Uncheckin</a>';
-
-              //var checkinDisTH = 0.005;//0.005 = 500m
-              //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-              //{
-                checkin_button = '<a style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;"  class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow" onclick="toggle()">Checkin</a>';
-
-                uncheckin_button = '<a style="text-align:center; color:#323237; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-5" rel="nofollow" onclick="toggle()">Uncheckin</a>';
-              //}
-
-              var disDurPromise = promiseCalculateDisDur(props.coords);
+              var disDurPromise = promiseCalculateDisDur(props.position);
 
               disDurPromise
               .then(function(results) {
@@ -712,14 +719,12 @@
                   method: "POST",
                   dataType: "json",
                   success: function(data){
-
-                    if(data.status){
-                      openNav(props.title, props.content, props.storePhoto, uncheckin_button, props.directions_url, results);
-                    }
-                    else{
-                      openNav(props.title, props.content, props.storePhoto, checkin_button, props.directions_url, results);
-                    }
-                    $('#exampleModalCenter').modal();
+                    props.distance = results.distance;
+                    props.duration = results.duration;
+                    props.bCheckin = data.status;
+                    props.bCloseGostation = bCloseGostation;
+                    setMarkerModalInfo(props);
+                    $('#markerModalCenter').modal();
                   },
 
                   error: function() {
@@ -733,8 +738,6 @@
               });
             }
             else if(props.id == -1){//friendly stores
-              document.getElementById('myCellProgress').className = '';
-              document.getElementById('myCellBar').className = '';
               if(activeMarkerInfo.marker!=null){
                 if(activeMarkerInfo.bFriendlyStore){
                   activeMarkerInfo.marker.setIcon(friendly_store_icon);
@@ -751,11 +754,13 @@
               activeMarkerInfo.bFriendlyStore = true;
 
 
-              var disDurPromise = promiseCalculateDisDur(props.coords);
+              var disDurPromise = promiseCalculateDisDur(props.position);
               disDurPromise
               .then(function(results) {
-                openNav(props.title, props.content, props.storePhoto, '', props.directions_url, results);
-                $('#exampleModalCenter').modal();
+                props.distance = results.distance;
+                props.duration = results.duration;
+                setMarkerModalInfo(props);
+                $('#markerModalCenter').modal();
               })
               .catch(function(err) {
                 console.log("Can not get disDur");
@@ -774,6 +779,9 @@
         else if(props.id == -2){
           destinationMarker = marker;
         }
+        else if(props.id == -3){
+          currentPositionMarker = marker;
+        }
         
       }
 
@@ -786,22 +794,19 @@
             lng: +gon.friendly_stores[i].longitude
           };
 
-          var infoWindowContent = '<div style="font-size: 14px;"  class="text-center">'+gon.friendly_stores[i].address+'</div><br>'
-            +'<div style="font-size: 14px;"  class="text-center">'+gon.friendly_stores[i].open_time+'</div><br>';
+          var info = {
+            title: gon.friendly_stores[i].name,
+            storePhoto: gon.friendly_stores[i].main_photo,
+            address: gon.friendly_stores[i].address,
+            availableTime: gon.friendly_stores[i].open_time,
+            totalBatteryCells: 0
+          }
+          info.position = position;
+          info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+          info.id = -1;
+          info.iconImage = friendly_store_icon;
 
-          var directions_url = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-10 col-xs-offset-1" href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
-
-          var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>';
-
-          addMarker({
-            tile: gon.friendly_stores[i].name,
-            coords: position,
-            iconImage: friendly_store_icon,
-            content: infoWindowContent,
-            storePhoto: storePhoto,
-            directions_url: directions_url,
-            id: -1
-          });
+          addMarker(info);
         }
       }
 
@@ -810,7 +815,6 @@
         // Set CSS for the control border.
         var controlUI = document.createElement('div');
         controlUI.style.backgroundColor = '#fff';
-        //controlUI.style.border = '2px solid #fff';
         controlUI.style.borderRadius = '3px';
         controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
         controlUI.style.cursor = 'pointer';
@@ -848,165 +852,6 @@
 
       }
 
-      function initMap() {
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7.4,
-          center: {lat: 23.65566, lng: 120.96387},
-          styles: googleMapStyle,
-          // specify map controls
-          minZoom: 7,
-          maxZoom: 18,
-          mapTypeControl: false,
-          fullscreenControl: false,
-          streetViewControl: false,
-          zoomControl: false
-        });
-
-        i_black_battery = {
-          url: "icons/i_black_battery.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        ig_black_battery = {
-          url: "icons/ig_black_battery.png",
-          scaledSize: new google.maps.Size(42, 48)
-        };
-
-        i_green_black_battery = {
-          url: "icons/i_green_black_battery.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        ig_green_black_battery = {
-          url: "icons/ig_green_black_battery.png",
-          scaledSize: new google.maps.Size(42, 48)
-        };
-
-        friendly_store_icon = {
-          url: "icons/Shop.png",
-          scaledSize: new google.maps.Size(28, 32)
-        };
-
-        friendly_store_icon_onclick = {
-          url: "icons/Shop.png",
-          scaledSize: new google.maps.Size(35, 40)
-        };
-
-        directionsDisplay.setMap(map);
-
-        // Create the DIV to hold the control and call the CenterControl()
-        // constructor passing in this DIV.
-        var centerControlDiv = document.createElement('div');
-        var centerControl = new CenterControl(centerControlDiv, map);
-
-        centerControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-
-        var locationPromise = getUserCurrentPosition();
-
-        locationPromise
-        .then(function(position) {
-          userCurrentPos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          map.setZoom(12);
-          map.setCenter(userCurrentPos);
-          addMarker({
-            coords: userCurrentPos,
-            iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png'
-          });
-
-          document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
-
-          // --- gostations
-          setNearbyInfobox(gon.gostations,
-                           userCurrentPos,
-                           i_black_battery);
-        })
-        .catch(function(err) {
-          console.log("Can not get current position!");
-        });
-
-        document.getElementById('current-position-submit').addEventListener('click', function() {
-          var locationPromise = getUserCurrentPosition();
-
-          locationPromise
-          .then(function(position) {
-            userCurrentPos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            map.setZoom(12);
-            map.setCenter(userCurrentPos);
-            addMarker({
-              coords: userCurrentPos,
-              iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png'
-            });
-
-            document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
-
-            // --- gostations
-            setNearbyInfobox(gon.gostations,
-                             userCurrentPos,
-                             i_black_battery);
-          })
-          .catch(function(err) {
-            console.log("Can not get current position!");
-          });
-        });
-
-        document.getElementById('direction-submit').addEventListener('click', function() {
-          directionsDisplay.set('directions', null);
-          if(document.getElementById('direction-end').value != ''){
-            deleteDestinationMarker();
-            deleteMarkers(gostationMarkers);
-            if( document.getElementById('direction-start').value != ''  ){
-              calculateAndDisplayRoute(directionsService, directionsDisplay);
-            }
-            else{
-              var geocoder = new google.maps.Geocoder();
-              geocodeAddress(geocoder, map);
-            }
-          }
-        });
-
-        var input_start = /** @type {!HTMLInputElement} */(
-            document.getElementById('direction-start'));
-
-        var autocomplete_start = new google.maps.places.Autocomplete(input_start);
-        autocomplete_start.bindTo('bounds', map);
-
-        autocomplete_start.addListener('place_changed', function() {
-          var place = autocomplete_start.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-        });
-
-        var input_end = /** @type {!HTMLInputElement} */(
-            document.getElementById('direction-end'));
-
-        var autocomplete_end = new google.maps.places.Autocomplete(input_end);
-        autocomplete_end.bindTo('bounds', map);
-
-        autocomplete_end.addListener('place_changed', function() {
-          var place = autocomplete_end.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-        });
-
-      }
-
       function getUserCurrentPosition(){
         var promise = new Promise(function(resolve, reject) {
           if (navigator.geolocation) {
@@ -1023,6 +868,40 @@
         return promise;
       }
 
+      function setUserCurrentPosition(){
+        deleteCurrentPositionMarker();
+
+        var locationPromise = getUserCurrentPosition();
+
+        locationPromise
+        .then(function(position) {
+          userCurrentPos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          map.setZoom(12);
+          map.setCenter(userCurrentPos);
+          addMarker({
+            position: userCurrentPos,
+            iconImage: 'http://maps.google.com/mapfiles/ms/micons/blue.png',
+            id: -3
+          });
+
+          document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
+
+          // --- gostations
+          var milestones = [];
+          milestones.push(userCurrentPos);
+          setMarkerInfo({
+            gostations: gon.gostations,
+            milestones: milestones
+          });
+        })
+        .catch(function(err) {
+          console.log("Can not get current position!");
+        });
+      }
+
       function geocodeAddress(geocoder, map) {
         var address = document.getElementById('direction-end').value;
         geocoder.geocode({'address': address}, function(results, status) {
@@ -1031,7 +910,7 @@
             map.setCenter(results[0].geometry.location);
             displayGostationsNearby(address);
             addMarker({
-              coords: results[0].geometry.location,
+              position: results[0].geometry.location,
               iconImage: 'http://maps.google.com/mapfiles/ms/micons/red.png',
               id: -2
             });
@@ -1039,32 +918,6 @@
             alert('Geocode was not successful for the following reason: ' + status);
           }
         });
-      }
-
-
-      function setNearbyInfobox(gostations, des, img) {
-        for(var i=0; i<gostations.length; i++){
-          var position = {};
-          position.lat = gostations[i].Latitude;
-          position.lng = gostations[i].Longitude;
-
-          if( checkLatLngNearby(position, des) ){
-            var gostationInfo = getGostationInfo(gostations[i]);
-
-            addMarker({
-              title: gostationInfo.title,
-              coords: position,
-              iconImage: isHasPower(gostationInfo.fullBatteryCells)?i_green_black_battery:i_black_battery,
-              content: gostationInfo.infoWindowContent,
-              storePhoto: gostationInfo.storePhoto,
-              directions_url: gostationInfo.directions_url,
-              id: gostations[i].id,
-              fullBatteryCells: gostationInfo.fullBatteryCells,
-              totalBatteryCells: gostations[i].BatteryCells
-            });
-          }
-          
-        }
       }
 
 
@@ -1080,17 +933,18 @@
           record = record.results;
 
           // --- gostations
-          setNearbyInfobox(gon.gostations,
-                           record[0].geometry.location,
-                           i_black_battery);
+          var milestones = [];
+          milestones.push(record[0].geometry.location);
+          setMarkerInfo({
+            gostations: gon.gostations,
+            milestones: milestones
+          });
         };
       }
 
-      function checkLatLngNearby(gostation, location) {
-        var nearbyDisTH = 0.02;//0.01 = 1km
-
-        var a = (gostation.lat-location.lat)*(gostation.lat-location.lat);
-        var b = (gostation.lng-location.lng)*(gostation.lng-location.lng);
+      function checkLatLngNearby(pos_1, pos_2, nearbyDisTH) {
+        var a = (pos_1.lat-pos_2.lat)*(pos_1.lat-pos_2.lat);
+        var b = (pos_1.lng-pos_2.lng)*(pos_1.lng-pos_2.lng);
 
         if( Math.sqrt(a+b) < nearbyDisTH ){
           return true;
@@ -1161,6 +1015,117 @@
         });
 
       }
+
+      function initMap() {
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7.4,
+          center: {lat: 23.65566, lng: 120.96387},
+          styles: googleMapStyle,
+          // specify map controls
+          minZoom: 7,
+          maxZoom: 18,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+          zoomControl: false
+        });
+
+        i_black_battery = {
+          url: "icons/i_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_black_battery = {
+          url: "icons/ig_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        i_green_black_battery = {
+          url: "icons/i_green_black_battery.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        ig_green_black_battery = {
+          url: "icons/ig_green_black_battery.png",
+          scaledSize: new google.maps.Size(42, 48)
+        };
+
+        friendly_store_icon = {
+          url: "icons/Shop.png",
+          scaledSize: new google.maps.Size(28, 32)
+        };
+
+        friendly_store_icon_onclick = {
+          url: "icons/Shop.png",
+          scaledSize: new google.maps.Size(35, 40)
+        };
+
+        directionsDisplay.setMap(map);
+
+        // Create the DIV to hold the control and call the CenterControl()
+        // constructor passing in this DIV.
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+
+        setUserCurrentPosition();
+        document.getElementById('current-position-submit').addEventListener('click', function() {
+          setUserCurrentPosition();
+        });
+
+        document.getElementById('direction-submit').addEventListener('click', function() {
+          directionsDisplay.set('directions', null);
+          if(document.getElementById('direction-end').value != ''){
+            deleteDestinationMarker();
+            deleteMarkers(gostationMarkers);
+            if( document.getElementById('direction-start').value != ''  ){
+              calculateAndDisplayRoute(directionsService, directionsDisplay);
+            }
+            else{
+              var geocoder = new google.maps.Geocoder();
+              geocodeAddress(geocoder, map);
+            }
+          }
+        });
+
+        var input_start = /** @type {!HTMLInputElement} */(
+            document.getElementById('direction-start'));
+
+        var autocomplete_start = new google.maps.places.Autocomplete(input_start);
+        autocomplete_start.bindTo('bounds', map);
+
+        autocomplete_start.addListener('place_changed', function() {
+          var place = autocomplete_start.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+        });
+
+        var input_end = /** @type {!HTMLInputElement} */(
+            document.getElementById('direction-end'));
+
+        var autocomplete_end = new google.maps.places.Autocomplete(input_end);
+        autocomplete_end.bindTo('bounds', map);
+
+        autocomplete_end.addListener('place_changed', function() {
+          var place = autocomplete_end.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+        });
+
+      }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&libraries=places&callback=initMap&language=zh-TW">
