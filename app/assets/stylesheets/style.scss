@@ -17,11 +17,15 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: Microsoft JhengHei , sans-serif;
-  color: #323237;
+  color: #666C65;
 }
 
 .bottom{
   padding: 150px 20px 150px 20px;
+}
+a {
+  color: #666C65;
+  text-decoration: none;
 }
 /*
 h2{
@@ -41,7 +45,7 @@ h1, h2, h3, h4, h5, h6, p {
   margin: 0px;
   padding: 0px;
    font-family: Microsoft JhengHei , sans-serif;
-   color: #323237;
+   color: #666C65;
 }
 img {
   width: 100%;
@@ -126,10 +130,15 @@ text-decoration:none;
 
 .user-data {
   margin-top: 5px;
+  color: #6C6565;
 }
 
 .user-avatar {
   margin-top: 30px;
+}
+.avatar {
+  width: 90px;
+
 }
 
 .user-icon{
@@ -420,4 +429,20 @@ input[type='file'] {
     background-color: #C6E6A7;
     color: gray;
     text-align: center;
+}
+/* button */
+.btn-green {
+  color: #6C6565;
+  background-color: #C6E6A7;
+  border-color: #C6E6A7;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-green-outline {
+  color: #6C6565;
+
+  border-color: #C6E6A7;
+  border-radius: 20px;
+  text-decoration:none; 
 }

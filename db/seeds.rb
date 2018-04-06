@@ -45,7 +45,7 @@ require 'ffaker'
       puts "#{Checkin.count} checkins created"
     end
 # Products
-   Products.destroy_all
+   Product.destroy_all
  
    Product.create!(name:"GOGORO 安全帽 S PERFORMANCE - 黑暗騎士"   ,product_points: 5880   ,image:"products/helmet.jpg")
    Product.create!(name:"鋪棉飛行夾克"   ,product_points: 3490   ,image:"products/clothe.jpg")

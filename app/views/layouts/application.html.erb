@@ -42,48 +42,50 @@
           </div>
         </div>
         <div class="clearfix"></div>
-        <div class="">
-          <div class="col-xs-3 my-nav-tab">
-            <%= link_to root_path do %>
-              <% if controller?("gostations")%>
-                <%= image_tag "icons/i_black_battery.png", :class => "nav-icon-style" %>
-              <% else %>
-                <%= image_tag "icons/ig_black_battery.png", :class => "nav-icon-style" %>
+        <% if current_user %>
+          <div class="">
+            <div class="col-xs-3 my-nav-tab">
+              <%= link_to root_path do %>
+                <% if controller?("gostations")%>
+                  <%= image_tag "icons/i_black_battery.png", :class => "nav-icon-style" %>
+                <% else %>
+                  <%= image_tag "icons/ig_black_battery.png", :class => "nav-icon-style" %>
+                <% end %>
+                找電池
               <% end %>
-              找電池
-            <% end %>
-          </div>
-          <div class="col-xs-3 my-nav-tab">
-            <%= link_to trips_path do %>
-              <% if controller?("trips")%>
-                <%= image_tag "navbar_icons/gogoro.svg", :class => "nav-icon-style" %>
-              <% else %>
-                <%= image_tag "navbar_icons/g_gogoro.svg", :class => "nav-icon-style" %>
+            </div>
+            <div class="col-xs-3 my-nav-tab">
+              <%= link_to trips_path do %>
+                <% if controller?("trips")%>
+                  <%= image_tag "navbar_icons/gogoro.svg", :class => "nav-icon-style" %>
+                <% else %>
+                  <%= image_tag "navbar_icons/g_gogoro.svg", :class => "nav-icon-style" %>
+                <% end %>
+                去玩耍
               <% end %>
-              去玩耍
-            <% end %>
+            </div>
+            <div class="col-xs-3 my-nav-tab">
+              <%= link_to user_path(current_user) do %>
+                <% if controller?("users")%>
+                  <%= image_tag "navbar_icons/G.svg", :class => "nav-icon-style" %>
+                <% else %>
+                  <%= image_tag "navbar_icons/g_G.svg", :class => "nav-icon-style" %>
+                <% end %>
+                看積分
+              <% end %>            
+            </div>
+            <div class="col-xs-3 my-nav-tab">
+              <%= link_to products_path do %>
+                <% if controller?("users")%>
+                  <%= image_tag "navbar_icons/bag.svg", :class => "nav-icon-style" %>
+                <% else %>
+                  <%= image_tag "navbar_icons/bag.svg", :class => "nav-icon-style" %>
+                <% end %>
+                換商品
+              <% end %>    
+            </div>
           </div>
-          <div class="col-xs-3 my-nav-tab">
-            <%= link_to users_path do %>
-              <% if controller?("users")%>
-                <%= image_tag "navbar_icons/G.svg", :class => "nav-icon-style" %>
-              <% else %>
-                <%= image_tag "navbar_icons/g_G.svg", :class => "nav-icon-style" %>
-              <% end %>
-              看積分
-            <% end %>            
-          </div>
-          <div class="col-xs-3 my-nav-tab">
-            <%= link_to products_path do %>
-              <% if controller?("users")%>
-                <%= image_tag "navbar_icons/bag.svg", :class => "nav-icon-style" %>
-              <% else %>
-                <%= image_tag "navbar_icons/bag.svg", :class => "nav-icon-style" %>
-              <% end %>
-              換商品
-            <% end %>    
-          </div>
-        </div>
+        <% end %>
       </nav>
     </nav>
     <!-- Alert-->
@@ -108,26 +110,28 @@
       </div>
     <% end %> 
 
-    <div class="footer navbar-fixed-bottom">
-      <div  class="col-xs-2 user-data">
-        <div class="user-icon"><%= image_tag(("navbar_icons/Lv.png")) %> </div>
+    <% if current_user %>
+      <div class="footer navbar-fixed-bottom">
+        <div  class="col-xs-2 user-data">
+          <div class="user-icon"><%= image_tag(("navbar_icons/Lv.png")) %> </div>
+        </div>
+        <div  class="col-xs-2 ">
+          <div class="user-icon-text"><%= current_user.level%> </div>
+        </div>
+        <div  class="col-xs-2 user-data">
+          <div class="user-icon"><%= image_tag(("navbar_icons/B.svg")) %> </div>
+        </div>
+        <div  class="col-xs-2 ">
+          <div class="user-icon-text"><%= current_user.badges.count%> </div>
+        </div>
+        <div  class="col-xs-2 user-data">
+          <div class="user-icon"> <%= image_tag(("navbar_icons/b_G.svg")) %></div> 
+        </div>
+        <div  class="col-xs-2">
+          <div class="user-icon-text"><%= current_user.points %></div>
+        </div>    
       </div>
-      <div  class="col-xs-2 ">
-        <div class="user-icon-text"><%= current_user.level%> </div>
-      </div>
-      <div  class="col-xs-2 user-data">
-        <div class="user-icon"><%= image_tag(("navbar_icons/B.svg")) %> </div>
-      </div>
-      <div  class="col-xs-2 ">
-        <div class="user-icon-text"><%= current_user.badges.count%> </div>
-      </div>
-      <div  class="col-xs-2 user-data">
-        <div class="user-icon"> <%= image_tag(("navbar_icons/b_G.svg")) %></div> 
-      </div>
-      <div  class="col-xs-2">
-        <div class="user-icon-text"><%= current_user.points %></div>
-      </div>    
-    </div>
+    <% end %>
 
     <%= yield %>
   </body>
