@@ -2,14 +2,17 @@ class UserProductsController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
-    @user_product = @product.user_products.new(user_product_params)
+    @repairstore = Repairstore.find(params[:user_product][:repairstore_id])
+    @user_product = @product.user_products.where(user_id: current_user).new(user_product_params)
     if current_user.points > @product.product_points
-      @user_product.save
+      @user_product.save!
+      current_user.subtract_points(@product.product_points)
+      UserMailer.notify_order_create(@user_product).deliver_now!
       redirect_to products_path
-      flash[:notice] = "商品成功兌換，請預約維修站取貨!"
+      flash[:notice] = "商品成功兌換，請於" + " #{@repairstore.name} " + "取貨!"
     else
       redirect_to products_path
-      flash[:alert] = "您尚未有足夠點數，加把勁賺取積分吧!"
+      flash[:alert] = "您的點數不足，請加把勁挑戰任務!"
     end
   end
 
@@ -17,7 +20,7 @@ class UserProductsController < ApplicationController
   private
 
   def user_product_params
-    params.permit(:user_id, :product_id)
+    params.require(:user_product).permit(:user_id, :product_id, :repairstore_id)
   end
 
  
