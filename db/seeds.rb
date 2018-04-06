@@ -45,7 +45,7 @@ require 'ffaker'
       puts "#{Checkin.count} checkins created"
     end
 # Products
-   Products.destroy_all
+   Product.destroy_all
  
    Product.create!(name:"GOGORO 安全帽 S PERFORMANCE - 黑暗騎士"   ,product_points: 5880   ,image:"products/helmet.jpg")
    Product.create!(name:"鋪棉飛行夾克"   ,product_points: 3490   ,image:"products/clothe.jpg")
@@ -53,9 +53,31 @@ require 'ffaker'
    Product.create!(name:"GOGORO安全帽 競賽風格 - 復刻款(銀)"   ,product_points: 2990   ,image:"products/helmet2.jpg")
    Product.create!(name:"反光條紋 女裝T恤"  ,product_points: 690    ,image:"products/tshirt.jpg")
    Product.create!(name:"經典鑰匙皮套"   ,product_points: 690    ,image:"products/keyholder.jpg")
-    Product.create!(name:"GOGORO 2 PEBBLE 多功能風鏡"   ,product_points: 4320   ,image:"products/mirror.jpg")
-     Product.create!(name:"GOGORO 2 復古造型座墊"   ,product_points: 4980   ,image:"products/seat.jpg")
-      Product.create!(name:"GOGORO 2 一體成型鋁合金踏墊"   ,product_points: 3390    ,image:"products/floorpad.jpg")
+   Product.create!(name:"GOGORO 2 PEBBLE 多功能風鏡"   ,product_points: 4320   ,image:"products/mirror.jpg")
+   Product.create!(name:"GOGORO 2 復古造型座墊"   ,product_points: 4980   ,image:"products/seat.jpg")
+   Product.create!(name:"GOGORO 2 一體成型鋁合金踏墊"   ,product_points: 3390    ,image:"products/floorpad.jpg")
+
+#Repairstore
+
+ Repairstore.destroy_all
+
+ repairstore_list = [
+   {name:"松山饒河店", address: "台北市松山區八德路四段650號", telephone: "0981-186-111",  officehours:"銷售服務：週一至週日 12:30 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"板橋館前店", address: "新北市板橋區館前東路26號", telephone: "0981-070-220",  officehours:"銷售服務：週一至週日 12:00 - 22:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"桃園八德店", address: "桃園市八德區介壽路二段312號", telephone: "0981-158-688",  officehours:"銷售服務：週一至週日 11:00 - 21:00" , repairhours:"保修服務：週一至週六 11:00 - 21:00 週日公休"},
+   {name:"新竹北大店", address: "新竹市北區北大路321號", telephone: "0981-166-333",  officehours:"" , repairhours:"保修服務：週一至週日 12:00 - 21:00"},
+   {name:"頭份自強服務中心", address: "苗栗縣頭份市自強路230號2樓", telephone: "0981-070-220",  officehours:"" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"大里德芳服務中心", address: "台中市大里區德芳南路459號", telephone: "0981-686-966",  officehours:"銷售服務：週一至週日 12:00 - 22:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"彰化中山店", address: "彰化市中山路二段437號", telephone: "04-7201966",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"嘉義興業東店", address: "台南市中西區公園路36號", telephone: "0981-167-111",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"鳳山青年店", address: "高雄市鳳山區青年路二段287號", telephone: "0981-058-333",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
+   {name:"屏東公園店", address: "屏東市中華路80號", telephone: "08-7338868",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"}
+ ]
+
+ repairstore_list.each do |repairstore|
+   Repairstore.create(name: repairstore[:name], address: repairstore[:address], telephone: repairstore[:telephone], officehours: repairstore[:officehours], repairhours: repairstore[:repairhours])
+ end
+ puts "repairstore created"
 #  task parse_gostation_list_v2: :environment do
     Gostation.destroy_all
 
