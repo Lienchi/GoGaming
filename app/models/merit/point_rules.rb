@@ -45,6 +45,7 @@ module Merit
         Challenge.find_by(trip_id: 6, user_id: (trip_gostation.user_id)).present?
       end
       #score 5, on: 'gostations#checkin', category: 'gostations'
+
     end
   end
 end
