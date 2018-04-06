@@ -62,16 +62,16 @@ require 'ffaker'
  Repairstore.destroy_all
 
  repairstore_list = [
-   {name:"松山饒河店", address: "台北市松山區八德路四段650號", telephone: "0981-186-111",  officehours:"銷售服務：週一至週日 12:30 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"板橋館前店", address: "新北市板橋區館前東路26號", telephone: "0981-070-220",  officehours:"銷售服務：週一至週日 12:00 - 22:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"桃園八德店", address: "桃園市八德區介壽路二段312號", telephone: "0981-158-688",  officehours:"銷售服務：週一至週日 11:00 - 21:00" , repairhours:"保修服務：週一至週六 11:00 - 21:00 週日公休"},
-   {name:"新竹北大店", address: "新竹市北區北大路321號", telephone: "0981-166-333",  officehours:"" , repairhours:"保修服務：週一至週日 12:00 - 21:00"},
-   {name:"頭份自強服務中心", address: "苗栗縣頭份市自強路230號2樓", telephone: "0981-070-220",  officehours:"" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"大里德芳服務中心", address: "台中市大里區德芳南路459號", telephone: "0981-686-966",  officehours:"銷售服務：週一至週日 12:00 - 22:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"彰化中山店", address: "彰化市中山路二段437號", telephone: "04-7201966",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"嘉義興業東店", address: "台南市中西區公園路36號", telephone: "0981-167-111",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"鳳山青年店", address: "高雄市鳳山區青年路二段287號", telephone: "0981-058-333",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"},
-   {name:"屏東公園店", address: "屏東市中華路80號", telephone: "08-7338868",  officehours:"銷售服務：週一至週日 12:00 - 21:00" , repairhours:"保修服務：週一至週六 12:00 - 21:00 週日公休"}
+   {name:"松山饒河店", address: "台北市松山區八德路四段650號", telephone: "0981-186-111",  officehours:"週一至週日 12:30 - 21:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"板橋館前店", address: "新北市板橋區館前東路26號", telephone: "0981-070-220",  officehours:"週一至週日 12:00 - 22:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"桃園八德店", address: "桃園市八德區介壽路二段312號", telephone: "0981-158-688",  officehours:"週一至週日 11:00 - 21:00" , repairhours:"週一至週六 11:00 - 21:00 週日公休"},
+   {name:"新竹北大店", address: "新竹市北區北大路321號", telephone: "0981-166-333",  officehours:"" , repairhours:"週一至週日 12:00 - 21:00"},
+   {name:"頭份自強服務中心", address: "苗栗縣頭份市自強路230號2樓", telephone: "0981-070-220",  officehours:"" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"大里德芳服務中心", address: "台中市大里區德芳南路459號", telephone: "0981-686-966",  officehours:"週一至週日 12:00 - 22:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"彰化中山店", address: "彰化市中山路二段437號", telephone: "04-7201966",  officehours:"週一至週日 12:00 - 21:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"嘉義興業東店", address: "台南市中西區公園路36號", telephone: "0981-167-111",  officehours:"週一至週日 12:00 - 21:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"鳳山青年店", address: "高雄市鳳山區青年路二段287號", telephone: "0981-058-333",  officehours:"週一至週日 12:00 - 21:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"},
+   {name:"屏東公園店", address: "屏東市中華路80號", telephone: "08-7338868",  officehours:"週一至週日 12:00 - 21:00" , repairhours:"週一至週六 12:00 - 21:00 週日公休"}
  ]
 
  repairstore_list.each do |repairstore|
