@@ -465,12 +465,25 @@ input[type='file'] {
   border-radius: 20px;
   text-decoration:none; 
 }
+.btn-red:hover, .btn-red:focus, .btn-red:active:hover{
+  color: #fff;
+  background-color: 8A130D;
+  border-color: 8A130D;
+  text-decoration:none; 
+}
 
 .btn-red-outline {
   color: #FFFFFF;
   background-color: #8A130D;
   border-color: #8A130D;
   border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-ored-outline:hover, .btn-ored-outline:focus, .btn-ored-outline:active:hover{
+  color: #fff;
+  background-color: 8A130D;
+  border-color: 8A130D;
   text-decoration:none; 
 }
 
