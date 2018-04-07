@@ -87,8 +87,9 @@
         </div>
       </div>
     </div> -->
+    <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
-      <div class="border clearfix  white " style="min-height: 605px;">
+      <div class="clearfix" style="min-height: 605px;">
 
         <div id="mySidenav" class="sidenav">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -101,10 +102,35 @@
           </div>
         </div>
           
+        <div class="row">
+          <%= link_to trips_path do %>
+            <%= image_tag "navbar_icons/back_button.svg", :class => "nav-icon-style" %><%= @trip.name %>
+          <% end %>
+        </div>
+
+        <div id="map" class="z-depth-2" style="height: 250px"></div>
+        <div id="myProgress" class="myProgress" onclick="move()">
+          <div id="myBar" class="myBar"></div>
+        </div>
+        <p class="mt-2"><%= @trip.description %></p>
+
+        <div class="">
+          <%if Challenge.where(trip_id:@trip).exists?%>
+            <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
+            <%= @challenge.user.name%>
+            <%= @challenge.completetime%>
+          <%end%>   
+        </div> 
+
+
+
         <div class="trip-data col-xs-12">
           <br>
-          <div class="col-xs-12">
-            <div class="col-xs-3 col-sm-1">
+          <div class="col-xs-12">            
+          </div>
+          
+          
+          <div class="col-xs-3 col-sm-1">
               <% if @trip.is_challenged?(current_user)%>                  
                 <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-green-sm" %>
               <% else %>
@@ -112,32 +138,72 @@
               <% end %>
             </div>
             <div class="col-xs-9 col-sm-11">
-              <p><%= @trip.description %></p>
-            </div>
-            
-          </div>
-          <div id="map" class="z-depth-2" style="height: 250px"></div>
-          <div id="myProgress" class="myProgress" onclick="move()">
-            <div id="myBar" class="myBar"></div>
-          </div>
-          <br>
-        </div>  
-        <div class="">
-          <%if Challenge.where(trip_id:@trip).exists?%>
-            <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
-            <%= @challenge.user.name%>
-            <%= @challenge.completetime%>
-          <%end%>
-   
-        </div>     
+              <ul>
+                <li><%= link_to "永康牛肉麵" %></li>
+              </ul>
 
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sight">
+              永康牛肉麵
+            </button>
+
+            <!-- Modal for sight-->
+            <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">永康牛肉麵</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="map" class="z-depth-2" style="height: 250px"></div>
+                    <p>位於台北市的永康牛肉麵最早發跡於永康公園旁的小牛肉麵攤，已經有五十幾年的歷史了喔!川味道地的牛肉麵，愛吃的你，趕快去嘗嘗!</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
+                    <button type="button" class="btn btn-primary">導航</button>
+                    <p>完成<strong>"<%= @trip.name %>"</strong>所有景點可額外獲得180 points</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal for trip_gostation-->
+            <div class="modal fade" id="trip_gostation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Gogoro 師大和平店站A</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="map" class="z-depth-2" style="height: 250px"></div>
+                    <p>台北市大安區和平東路一段129號(近和平東路一段141巷口)</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">打卡 +20p</button>
+                    <button type="button" class="btn btn-primary">導航</button>
+                    <p>完成<strong>"<%= @trip.name %>"</strong>所有景點可額外獲得180 points</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+        </div>  
+    
+<div class="clearfix"></div>
         <div class="comment-group">
           <div class="col-xs-8 col-sm-10">
             <h5>推薦景點</h5>
           </div>
-          <div class="col-xs-4 col-sm-2 pull-right">
-            <button id="friendly-store-submit" class="btn btn-default btn-sm" type="submit" >友好店家</button>
-          </div>
+
           <div class="clearfix"></div>
           <br/>
           <div class="">
@@ -202,6 +268,9 @@
       </div>
       
       <br/>
+    </div>
+    </div>
+
       
 
 

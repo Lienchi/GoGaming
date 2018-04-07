@@ -1,16 +1,22 @@
 <div class="container">
 <br>
-  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 ", style="min-height: 605px;">
     <br>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: :true }) do |f| %>
   <%= devise_error_messages! %>
+
+  <div class="">
+    <%= image_tag @user.avatar, class: "img-circle avatar", style:"width: 100px;"%> 
+    <%= f.file_field :avatar, class: "btn form-control-file ", style:"width: 100px;" %>
+  </div>
+
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, class: "form-control" %>
   </div>
-  <%= f.file_field :avatar, class: "btn form-control-file ", style:"width: 100px;" %>
 
+  
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -27,7 +33,6 @@
       <em>最少<%= @minimum_password_length %>個字</em>
     <% end %>
   </div>
-  <br/>
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>

@@ -1,48 +1,67 @@
-<div class="container">
-  <div class="border white table-responsive col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height: 605px;">
+<div class="container" style="padding-top: 20px;">
+  <%= link_to user_path(current_user) do %>
+  <div class="row" style="background-color: #F0F0F0; ">
+    
+    <div class="col-xs-8 user-data">
+      <h3><%= current_user.name %> </h3> 
+        <div class="user-icon-text text-muted">
+          等級    <%= current_user.level %>     -   
+          徽章    <%= current_user.badges.count%>     -   
+          點數    <%= current_user.points %>      
+        </div>
+        <br>
+    </div>
+    <div class="col-xs-2">
 
-    <ul class="nav nav-pills nav-fill pull-right">
-      <li role="presentation" >
-        <%= link_to '所有玩家', users_path %>
-      </li>
-      <li role="presentation"  class="active" >
-        <%= link_to 'Top 10', leaderboards_users_path %>
-      </li>
-      <li role="presentation">
-        <%= link_to '我的朋友', f_leaderboards_users_path %>
-      </li>
-      <li>
-        <%= link_to "我的記錄", user_path(current_user)%>
-      </li>
-    </ul>
-    <table class="table">
-     <thead>
-        <tr>
-          <th class="col-xs-1 text-center"> </th>
-          <th class="col-xs-3"> </th>
-          <th class="col-xs-4 text-center"> </th>
-          
-          <th class="col-xs-2">
-              <%= image_tag("navbar_icons/B.svg",style: "width:30px;height:30px; margin:0 auto;")%>
-          </th>
-          <th class="col-xs-2">
-              <%= image_tag("navbar_icons/b_G.svg",style: "width:30px;height:30px; margin:0 auto;")%>
-          </th>
-        </tr>
-      </thead>  
+    <%= image_tag current_user.avatar, class: "img-circle avatar" %>   
+    </div>
+  
+  </div>
+  <% end %>
+  
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height: 605px;">
+
+    <div class="clearfix"></div>
+      <div class="col-xs-4 col-xs-offset-2 text-center" style="padding: 8px 0;">
+        <div class=" btn btn-green">
+          <%= link_to " 所有玩家 ", leaderboards_users_path%>
+        </div>
+      </div>
+      <div class="col-xs-4 text-center" style="padding: 8px 0;">
+        <div class=" btn btn-green">
+          <%= link_to " 我的朋友 ", f_leaderboards_users_path%>
+        </div>
+      </div>
+    <div class="clearfix"></div>
+
+    <table class="table  table-hover ">
       <tbody>
         <% i=1 %>
         <% @scores.each do |score| %>
           <tr>
-            <th class="col-xs-1 text-center media-middle" scope="row" style="padding-top:5%;"><%=  i %><% i+=1 %></th>
-            <td class="col-xs-3"><%= image_tag "#{User.find(score['user_id']).avatar}", class: "img-responsive"%></td>
-            <td class="col-xs-4 text-center" style="padding-top:5%;">
-              <p><%= link_to "#{User.find(score['user_id']).name}", user_path(User.find(score['user_id']))%></p>
-              <%= render partial: "shared/follow", locals: {user: User.find(score['user_id']) }%>
+            <th class="col-xs-1 text-center media-middle" scope="row" style="padding-top: 4px;"><%=  i %><% i+=1 %></th>
+            <td class="col-xs-3" style="padding-top: 4px;"><%= image_tag "#{User.find(score['user_id']).avatar}", class: "img-responsive" %></td>
+            <td class="col-xs-8" style="padding-top: 4px;">
+              <h3 style="padding-left: 15px;">
+                <%= link_to "#{User.find(score['user_id']).name}", user_path(User.find(score['user_id']))%>
+                <div class="pull-right">
+                  <%= render partial: "shared/follow", locals: {user: User.find(score['user_id']) }%>
+                </div>
+              </h3>
+              
+              <div class="col-xs-4">
+                <p>等級</p>
+                <h3><%= User.find(score['user_id']).level %></h3>
+              </div>
+              <div class="col-xs-4">
+                <p>徽章</p>
+                <h3><%= User.find(score['user_id']).badges.count %></h3>
+              </div>
+              <div class="col-xs-4">
+                <p>點數</p>
+                <h3><%= score['sum_points'] %></h3>
+              </div>
             </td>
-            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= User.find(score['user_id']).badges.count %></td>
-            <td class="col-xs-2 text-center" style="padding-top:5%;"><%= score['sum_points'] %></td>
-          </tr>
         <%end%>
       </tbody>
     </table>
