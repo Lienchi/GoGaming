@@ -13,6 +13,12 @@
 .white{
   background:#FFFFFF;
 }
+
+.text-white{
+  color: #FFFFFF;
+}
+
+
 html, body {
   height: 100%;
   margin: 0;
@@ -431,8 +437,8 @@ input[type='file'] {
     left: 0;
     bottom: 0;
     width: 100%;
+    color: #FFFFFF;
     background-color: #50A1D8;
-    color: gray;
     text-align: center;
 }
 /* button */
@@ -451,3 +457,22 @@ input[type='file'] {
   border-radius: 20px;
   text-decoration:none; 
 }
+
+.btn-red {
+  color: #FFFFFF;
+  background-color: #8A130D;
+  border-color: #8A130D;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-red-outline {
+  color: #FFFFFF;
+  background-color: #8A130D;
+  border-color: #8A130D;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+
+

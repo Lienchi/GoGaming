@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="30px" viewBox="0 0 26 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Star Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="24.3161551%" fx="50%" fy="24.3161551%" r="79.1417472%" id="radialGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#9E7F00" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#EAE9E9" offset="0%"></stop>
+            <stop stop-color="#4C4343" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-1.8%" y="-0.9%" width="103.6%" height="101.8%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="user#show" transform="translate(-228.000000, -78.000000)" fill="url(#radialGradient-1)" stroke="url(#linearGradient-2)" stroke-width="0.5">
+            <polygon id="Star-Copy" filter="url(#filter-3)" transform="translate(241.231707, 93.231707) rotate(29.360934) translate(-241.231707, -93.231707) " points="241.231707 101.211707 234.231707 105.356063 234.320825 97.2217073 227.231707 93.2317073 234.320825 89.2417074 234.231707 81.1073517 241.231707 85.2517074 248.231707 81.1073517 248.14259 89.2417074 255.231707 93.2317073 248.14259 97.2217073 248.231707 105.356063"></polygon>
+        </g>
+    </g>
+</svg>
