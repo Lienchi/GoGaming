@@ -5,7 +5,7 @@
     <p>$<%= product.product_points%></p>
     <%= form_for @user_product, url: user_products_path(product_id: product.id,user_id: current_user.id), method: :post do |f| %>
       <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: true}, {class: "form-control"} %>
-     <%= f.submit '兌換',data:{confirm: '確定兌換?你的點數將扣除 #{product.product_points}'}, class: "btn btn-primary"%>
+     <%= f.submit '兌換',data:{confirm: '確定兌換?你的點數將被扣除!'}, class: "btn btn-primary"%>
     <%end%>
   <%end%>
   <p id= "demo"></p>
