@@ -6,6 +6,7 @@ class GostationsController < ApplicationController
     @trip_gostations = TripGostation.where(user_id: current_user.id).uniq
     gon.gostations = Gostation.all
     gon.friendly_stores = Friendlystore.all
+    gon.sign_in_count = current_user.sign_in_count
   end
 
   def checkin

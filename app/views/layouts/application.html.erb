@@ -7,11 +7,16 @@
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css">
+      .introjs-helperNumberLayer{
+        font-size: 0px;
+      }
+    </style>
   </head>
 
   <body>
     <!-- 導覽列 -->
-    <nav class="navbar">
+    <nav class="navbar" >
       <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #C6E6A7;">
         <div class="container-fluid ">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,7 +35,7 @@
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="pull-right text-right nav navbar-nav">
+            <ul  class="pull-right text-right nav navbar-nav">
               <% if current_user %>
                 <% if current_user.role == "admin" %>
                   <li><%= link_to "後台", admin_trips_path%><li>
@@ -43,8 +48,8 @@
         </div>
         <div class="clearfix"></div>
         <% if current_user %>
-          <div class="">
-            <div class="col-xs-3 my-nav-tab">
+          <div class="" >
+            <div class="col-xs-3 my-nav-tab" data-step="1" data-intro= "規劃路線，尋找充電站" data-position="right">
               <%= link_to root_path do %>
                 <% if controller?("gostations")%>
                   <%= image_tag "icons/i_black_battery.png", :class => "nav-icon-style" %>
@@ -54,7 +59,7 @@
                 找電池
               <% end %>
             </div>
-            <div class="col-xs-3 my-nav-tab">
+            <div class="col-xs-3 my-nav-tab" data-step="2" data-intro="挑戰任務，賺取積分">
               <%= link_to trips_path do %>
                 <% if controller?("trips")%>
                   <%= image_tag "navbar_icons/gogoro.svg", :class => "nav-icon-style" %>
@@ -64,7 +69,7 @@
                 去玩耍
               <% end %>
             </div>
-            <div class="col-xs-3 my-nav-tab">
+            <div class="col-xs-3 my-nav-tab" data-step="3" data-intro="看積分，查排名">
               <%= link_to user_path(current_user) do %>
                 <% if controller?("users")%>
                   <%= image_tag "navbar_icons/G.svg", :class => "nav-icon-style" %>
@@ -74,7 +79,7 @@
                 看積分
               <% end %>            
             </div>
-            <div class="col-xs-3 my-nav-tab">
+            <div class="col-xs-3 my-nav-tab" data-position="left" data-step="4" data-intro="用積分，換商品">
               <%= link_to products_path do %>
                 <% if controller?("users")%>
                   <%= image_tag "navbar_icons/bag.svg", :class => "nav-icon-style" %>
@@ -111,7 +116,7 @@
     <% end %> 
 
     <% if current_user %>
-      <div class="footer navbar-fixed-bottom">
+      <div class="footer navbar-fixed-bottom" >
         <div  class="col-xs-2 user-data">
           <div class="user-icon"><%= image_tag(("navbar_icons/Lv.png")) %> </div>
         </div>
@@ -134,5 +139,12 @@
     <% end %>
 
     <%= yield %>
+    <script type="text/javascript">
+      if (gon.sign_in_count < 2 ){
+        introJs().start();
+      }
+      // introJs().start();
+    </script>
+
   </body>
 </html>
