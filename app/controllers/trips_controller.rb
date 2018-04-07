@@ -14,6 +14,8 @@ class TripsController < ApplicationController
     gon.gostations = Gostation.where(id: @trip_gostations.map(&:gostation_id))
     gon.trip_gostations = @trip_gostations
     gon.friendly_stores = Friendlystore.all
+    gon.gostation_sites = Site.where(trip_id: @trip.id)
+
     @comment = Comment.new
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
     @challenge = Challenge.where(trip_id: @trip).order(:completetime).first
