@@ -4,16 +4,12 @@ class UserProductsController < ApplicationController
     @product = Product.find(params[:product_id])
     @repairstore = Repairstore.find(params[:user_product][:repairstore_id])
     @user_product = @product.user_products.where(user_id: current_user).new(user_product_params)
-    if current_user.points > @product.product_points
+
       @user_product.save!
       current_user.subtract_points(@product.product_points)
-      UserMailer.notify_order_create(@user_product).deliver_now!
       redirect_to products_path
       flash[:notice] = "商品成功兌換，請於" + " #{@repairstore.name} " + "取貨!"
-    else
-      redirect_to products_path
-      flash[:alert] = "您的點數不足，請加把勁挑戰任務!"
-    end
+  
   end
 
 

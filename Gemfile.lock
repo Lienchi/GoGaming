@@ -86,6 +86,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    data-confirm-modal (1.6.2)
+      railties (>= 3.0)
     devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -419,6 +421,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   carrierwave
   coffee-rails (~> 4.2)
+  data-confirm-modal
   devise
   ffaker
   fog

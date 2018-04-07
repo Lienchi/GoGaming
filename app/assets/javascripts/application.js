@@ -18,3 +18,4 @@
 //= retuire_tree .
 
 //= require social-share-button
+//= require data-confirm-modal
