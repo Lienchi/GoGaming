@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="28px" height="30px" viewBox="0 0 28 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
-    <title>B</title>
+    <title>Path 9</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="B" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g>
-            <rect id="Rectangle-2" x="0" y="0" width="120" height="120"></rect>
-            <path d="M10.5,10.5 L10.5,99.8093137 L59.949581,113.481278 L109.5,99.8091087 L109.5,10.5 L10.5,10.5 Z" id="Combined-Shape" stroke="#4A90E2"></path>
+    <defs>
+        <radialGradient cx="82.147147%" cy="15.0262818%" fx="82.147147%" fy="15.0262818%" r="122.185787%" gradientTransform="translate(0.821471,0.150263),scale(1.000000,0.928571),rotate(132.281409),translate(-0.821471,-0.150263)" id="radialGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#3B3A3A" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="87.2624118%" y1="7.65007535%" x2="-5.80604877%" y2="85.9261895%" id="linearGradient-2">
+            <stop stop-color="#C8C8C8" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="user#show" transform="translate(-272.000000, -80.000000)" fill="url(#radialGradient-1)" stroke="url(#linearGradient-2)" stroke-width="0.5">
+            <path d="M277.304433,81 C279.749004,83.0631579 283.41586,83.0631579 286.166002,81.8842105 C288.916145,83.0631579 293.194144,83.0631579 294.722001,81 L299,84.8315789 C297.777715,86.7964912 297.166572,88.5649123 297.166572,90.1368421 C297.166572,92.4947368 299,95.1109722 299,98.3894737 C299,101.667975 297.777715,103.105263 294.722001,104.873684 C291.666287,106.642105 287.388288,107.526316 286.166002,109 C284.943717,107.526316 280.360146,106.936842 277.304433,104.873684 C274.248719,102.810526 273.332005,101.926316 273.026434,98.3894737 C272.720862,94.8526316 275.165433,92.7894737 275.165433,90.1368421 C275.165433,88.3684211 274.55429,86.6 273.332005,84.8315789 L277.304433,81 Z" id="Path-9"></path>
         </g>
-        <text font-family="HiraginoSansGB-W3, Hiragino Sans GB" font-size="60" font-weight="300" letter-spacing="1.2" fill="#4A90E2">
-            <tspan x="41" y="83">B</tspan>
-        </text>
     </g>
 </svg>

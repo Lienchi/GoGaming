@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="66px" height="32px" viewBox="0 0 66 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>g_shop</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="g_shop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="換商品" transform="translate(4.000000, 2.000000)">
+            <text font-family="HiraginoSansGB-W3, Hiragino Sans GB" font-size="10.8" font-weight="300" fill="#5B4D4C">
+                <tspan x="29" y="18">換商品</tspan>
+            </text>
+            <path d="M4.5793224,6.52173913 C5.1361467,2.7889077 7.35166901,0 10,0 C12.648331,0 14.8638533,2.7889077 15.4206776,6.52173913 L17.7777778,6.52173913 C19.0050772,6.52173913 20,7.49503315 20,8.69565217 L20,22.826087 C20,24.026706 19.0050772,25 17.7777778,25 L2.22222222,25 C0.994922778,25 1.50300834e-16,24.026706 0,22.826087 L0,8.69565217 C-1.50300834e-16,7.49503315 0.994922778,6.52173913 2.22222222,6.52173913 L4.5793224,6.52173913 Z M5.18905599,6.52173913 L14.810944,6.52173913 C14.3039765,3.16827251 12.3424536,0.668896321 10,0.668896321 C7.65754639,0.668896321 5.69602347,3.16827251 5.18905599,6.52173913 Z" id="Combined-Shape" fill="#463B3A"></path>
+        </g>
+    </g>
+</svg>

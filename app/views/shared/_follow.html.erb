@@ -1,7 +1,11 @@
 <% if user != current_user%>
   <% if current_user.following?(user)%>
-    <%= link_to "Unfollow", followship_path(user), method: :delete, class: "btn btn-sm btn-green-outline"%>
+    <%= link_to followship_path(user), method: :delete, class: "" do %>
+      <%= image_tag "navbar_icons/g_follow.svg", :class => "nav-icon-style" %>
+    <% end %>
   <%else%>
-    <%= link_to "Follow", followships_path(following_id: user), method: :post, class: "btn btn-sm btn-green"%>
+    <%= link_to followships_path(following_id: user), method: :post, class: "" do %>
+      <%= image_tag "navbar_icons/follow.svg", :class => "nav-icon-style" %>
+    <% end %>
   <%end%>
 <%end%>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="66px" height="32px" viewBox="0 0 66 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>find</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="find" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="找電池" font-family="HiraginoSansGB-W3, Hiragino Sans GB" font-size="10.8" font-weight="300" fill="#80ADD7">
+            <tspan x="33" y="21">找電池</tspan>
+        </text>
+        <g id="i_black_battery-copy" transform="translate(1.000000, 0.000000)">
+            <path d="M8.39527463,25.7890696 C3.47019018,23.7923834 0,18.9929832 0,13.3896987 C0,5.99477232 6.04415588,0 13.5,0 C20.9558441,0 27,5.99477232 27,13.3896987 C27,18.9929832 23.5298098,23.7923834 18.6047254,25.7890696 L13.5,32 L8.39527463,25.7890696 Z" id="Combined-Shape" fill="#80ADD7"></path>
+            <g id="Group-3" transform="translate(7.200000, 4.571429)" stroke="#FFFFFF" stroke-width="0.9">
+                <path d="M0.0431387958,15.0185814 L0,15.0185814 L0,2.47006327 L12.6,2.47006327 L12.6,15.0185814 L12.5568612,15.0185814 C12.1900323,16.3434446 9.52864385,17.3714286 6.3,17.3714286 C3.07135615,17.3714286 0.409967726,16.3434446 0.0431387958,15.0185814 Z" id="Combined-Shape" fill="#80ADD7" stroke-linecap="round" stroke-linejoin="round"></path>
+                <ellipse id="Oval-2-Copy" fill="#80ADD7" cx="6.3" cy="1.94365634" rx="6.3" ry="1.94365634"></ellipse>
+                <path d="M1.64212105,3.12568067 L10.9444029,0.660431228" id="Path-2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.69103624,9.37250548 C7.5788409,8.44174471 8.45967083,7.75756843 9.72633931,8.19751627 C9.7526593,8.2066579 9.78161927,8.21678659 9.80536637,8.22975892 C11.1472036,8.9627647 11.1934734,10.4393353 10.2657137,11.0966946 C8.52091771,12.3329605 6.75841512,10.7348254 5.59388073,9.37250548 C4.58947982,8.19751627 3.36353012,7.4414434 2.25460788,8.44174471 C1.40257845,9.21031632 1.40454593,10.8110768 2.85227369,11.3252005 C4.0735358,11.7589008 4.74250026,11.3252005 5.59388073,10.5570737" id="Path-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>

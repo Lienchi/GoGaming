@@ -1,5 +1,6 @@
 .container {
   padding-top: 30px;
+  padding-bottom: 30px;
   
 }
 
@@ -12,11 +13,17 @@
 .white{
   background:#FFFFFF;
 }
+
+.text-white{
+  color: #FFFFFF;
+}
+
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: Microsoft JhengHei , sans-serif;
+  font-family: Hiragino Sans, Microsoft JhengHei , sans-serif;
   color: #666C65;
 }
 
@@ -44,8 +51,9 @@ h2{
 h1, h2, h3, h4, h5, h6, p {
   margin: 0px;
   padding: 0px;
-   font-family: Microsoft JhengHei , sans-serif;
+   font-family: Heiti SC, Microsoft JhengHei , sans-serif;
    color: #666C65;
+   font-weight: 200;
 }
 img {
   width: 100%;
@@ -73,6 +81,10 @@ img {
   border:none;
 }
 
+.navbar-text {
+  color: #FFFFFF;
+}
+
 .nav-icon{
   margin: 1px 1px;
   display: inline-block;
@@ -83,8 +95,8 @@ img {
 }
 
 .nav-icon-style{
-  height:30px;
-  width: 30px;
+  height:32px;
+  width: 66px;
   display: inline-block;
 }
 
@@ -185,6 +197,28 @@ input[type='file'] {
 
 
 /*trips#index*/
+
+.card {
+  border-radius: 8px;
+
+}
+
+.card img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width:100%; 
+  height: 186px;
+}
+
+.card-body {
+  height: 73px;
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
+.card-body a {
+  color: #FFFFFF;
+}
 
 
 .carousel-control.left, .carousel-control.right {
@@ -426,8 +460,8 @@ input[type='file'] {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #C6E6A7;
-    color: gray;
+    color: #FFFFFF;
+    background-color: #50A1D8;
     text-align: center;
 }
 /* button */
@@ -446,3 +480,44 @@ input[type='file'] {
   border-radius: 20px;
   text-decoration:none; 
 }
+
+.btn-main {
+  color: #FFFFFF;
+  background-color: #77D6AC;
+  border-color: #77D6AC;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-main a {
+  color: #FFFFFF;
+}
+
+.btn-main:hover, .btn-main:focus, .btn-main:active:hover{
+  color: #fff;
+  background-color: 77D6AC;
+  border-color: 77D6AC;
+  text-decoration:none; 
+}
+
+.btn-main-outline {
+  color: #77D6AC;
+  background-color: #FFFFFF;
+  border-color: #77D6AC;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-main-outline a {
+  color: #77D6AC;
+}
+.btn-main-outline:hover, .btn-main-outline:focus, .btn-main-outline:active:hover{
+  color: #77D6AC;
+  background-color: #FFFFFF;
+  border-color: #77D6AC;
+  text-decoration:none; 
+}
+
+
+
+
