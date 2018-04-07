@@ -119,7 +119,7 @@
               </div>
               <div class="modal-footer">
                 <div>
-                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">Checkin</a>
+                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">打卡</a>
                 </div>
                 <div>
                   <a id="markerModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
@@ -388,7 +388,7 @@
           headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
         });
 
-        // --- <div id="markerModalCenter"></div>
+        // --- HTML: <div id="markerModalCenter"></div>
         function setMarkerModalInfo(props) {
           var cellProgressEle = document.getElementById('markerModal-cellProgress');
           cellProgressEle.className = '';
@@ -409,18 +409,22 @@
             markerModalEle.style.color = "#323237";
             markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
             if( props.bCloseGostation ){
+              markerModalEle.style.color = "#ffffff";
               markerModalEle.onclick = toggle;
             }
 
             if(props.bCheckin){
-              markerModalEle.innerHTML = "Uncheckin";
+              markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
               }
               
             }
             else{
-              markerModalEle.innerHTML = "Checkin";
+              markerModalEle.innerHTML = "打卡 +"+gon.checkin_pts+"Pts";
+              if(isOffPeak()){
+                markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+"Pts";
+              }
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
               }
@@ -634,7 +638,7 @@
                   url: "/gostations/"+currentGostationId+"/checkin",
                   method: "POST",
                   success: function(){
-                    document.getElementById("markerModal-checkin").innerHTML = 'Uncheckin';
+                    document.getElementById("markerModal-checkin").innerHTML = '已打卡';
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
@@ -662,6 +666,14 @@
 
           });
 
+        }
+
+        function isOffPeak(){
+          var currentdate = new Date(); 
+          var datetime = currentdate.getHours() + ":"
+                       + currentdate.getMinutes() + ":"
+                       + currentdate.getSeconds();
+          return datetime > gon.offpeak_start && datetime < gon.offpeak_end;
         }
 
         function isHasPower(fullBatteryCells){
@@ -716,6 +728,9 @@
 
                 disDurPromise
                 .then(function(results) {
+                  $.ajaxSetup({
+                    headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+                  });
                   $.ajax({
                     url: "/gostations/"+props.id+"/getCheckinStatus",
                     method: "POST",
