@@ -10,12 +10,12 @@ class GostationsController < ApplicationController
 
   def checkin
     @checkin = @gostation.checkins.create!(user: current_user)
-    current_user.add_points(5, category: 'gostation')
+    current_user.add_points(3, category: 'gostation')
     #@gostation.count_checkins
     #redirect_back(fallback_location: root_path)
 
     if checkin_time(@checkin, "22:00:00", "23:59:59")
-      current_user.add_points(10, category: 'gostation')
+      current_user.add_points(5, category: 'gostation')
     end
 
     # if checkin_time(@checkin, "14:00:00", "16:00:00")
@@ -26,7 +26,7 @@ class GostationsController < ApplicationController
   def uncheckin
     checkins = Checkin.where(gostation: @gostation, user: current_user)
     checkins.destroy_all
-    current_user.subtract_points(5, category: 'gostation')
+    current_user.subtract_points(3, category: 'gostation')
     #@gostation.count_checkins
     #redirect_back(fallback_location: root_path)
   end
