@@ -3,8 +3,8 @@ development:
   port: 587
   domain: "gmail.com"
   authentication: "plain"
-  user_name: "gogoroproject@gmail.com"
-  password: "GoGaming123456"
+  user_name: <%= ENV["EMAIL_USERNAME"] %>
+  password: <%= ENV["EMAIL_PASSWORD"] %>
   enable_starttls_auto: true
 
 production:
