@@ -1,5 +1,6 @@
 .container {
   padding-top: 30px;
+  padding-bottom: 30px;
   
 }
 
@@ -73,6 +74,10 @@ img {
   border:none;
 }
 
+.navbar-text {
+  color: #FFFFFF;
+}
+
 .nav-icon{
   margin: 1px 1px;
   display: inline-block;
@@ -83,8 +88,8 @@ img {
 }
 
 .nav-icon-style{
-  height:30px;
-  width: 30px;
+  height:32px;
+  width: 66px;
   display: inline-block;
 }
 
@@ -426,7 +431,7 @@ input[type='file'] {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #C6E6A7;
+    background-color: #50A1D8;
     color: gray;
     text-align: center;
 }
