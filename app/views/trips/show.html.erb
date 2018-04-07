@@ -132,9 +132,9 @@
           
           <div class="col-xs-3 col-sm-1">
               <% if @trip.is_challenged?(current_user)%>                  
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-green-sm" %>
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% else %>
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-red-sm" %>
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% end %>
             </div>
             <div class="col-xs-9 col-sm-11">

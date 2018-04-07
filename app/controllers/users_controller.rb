@@ -14,7 +14,10 @@ class UsersController < ApplicationController
   end
 
   def leaderboards
-    @scores = Merit::Score.top_scored
+    @scores = Merit::Score.top_scored(
+  since_date: 50.year.ago,
+  limit: 1000000
+)
   end
 
   def f_leaderboards
