@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="28px" height="30px" viewBox="0 0 28 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
-    <title>Path 9</title>
+<svg width="52px" height="69px" viewBox="0 0 52 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Badge</title>
     <desc>Created with Sketch.</desc>
-    <defs>
-        <radialGradient cx="82.147147%" cy="15.0262818%" fx="82.147147%" fy="15.0262818%" r="122.185787%" gradientTransform="translate(0.821471,0.150263),scale(1.000000,0.928571),rotate(132.281409),translate(-0.821471,-0.150263)" id="radialGradient-1">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#3B3A3A" offset="100%"></stop>
-        </radialGradient>
-        <linearGradient x1="87.2624118%" y1="7.65007535%" x2="-5.80604877%" y2="85.9261895%" id="linearGradient-2">
-            <stop stop-color="#C8C8C8" offset="0%"></stop>
-            <stop stop-color="#000000" offset="100%"></stop>
-        </linearGradient>
-    </defs>
+    <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="user#show" transform="translate(-272.000000, -80.000000)" fill="url(#radialGradient-1)" stroke="url(#linearGradient-2)" stroke-width="0.5">
-            <path d="M277.304433,81 C279.749004,83.0631579 283.41586,83.0631579 286.166002,81.8842105 C288.916145,83.0631579 293.194144,83.0631579 294.722001,81 L299,84.8315789 C297.777715,86.7964912 297.166572,88.5649123 297.166572,90.1368421 C297.166572,92.4947368 299,95.1109722 299,98.3894737 C299,101.667975 297.777715,103.105263 294.722001,104.873684 C291.666287,106.642105 287.388288,107.526316 286.166002,109 C284.943717,107.526316 280.360146,106.936842 277.304433,104.873684 C274.248719,102.810526 273.332005,101.926316 273.026434,98.3894737 C272.720862,94.8526316 275.165433,92.7894737 275.165433,90.1368421 C275.165433,88.3684211 274.55429,86.6 273.332005,84.8315789 L277.304433,81 Z" id="Path-9"></path>
+        <g id="iPhone-8" transform="translate(-186.000000, -184.000000)">
+            <g id="Badge" transform="translate(188.000000, 186.000000)">
+                <polygon id="Path-11" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="13.6530552 40.2717391 2.80062671 59.3478261 12.6028202 54.4021739 14.0031336 65 24.5054837 46.6304348"></polygon>
+                <polygon id="Path-11-Copy" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(34.657756, 52.635870) scale(-1, 1) translate(-34.657756, -52.635870) " points="34.6577556 40.2717391 23.8053271 59.3478261 33.6075206 54.4021739 35.0078339 65 45.5101841 46.6304348"></polygon>
+                <ellipse id="Oval-4" stroke="#979797" stroke-width="3" fill="#FFFFFF" cx="24.1554054" cy="24.375" rx="24.1554054" ry="24.375"></ellipse>
+                <polygon id="Star-2" fill="#979797" points="24.5945946 32.0608108 16.8501267 36.1323185 18.3291885 27.5087268 12.0637824 21.4014653 20.7223607 20.1433002 24.5945946 12.2972973 28.4668285 20.1433002 37.1254068 21.4014653 30.8600007 27.5087268 32.3390624 36.1323185"></polygon>
+            </g>
         </g>
     </g>
 </svg>

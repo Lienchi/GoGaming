@@ -1,6 +1,6 @@
 .container {
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 45px;
   
 }
 
@@ -112,7 +112,6 @@ img {
   background:#FFFFFF;
   padding: 5px;
   text-align: center;
-  border-bottom: 0.5px solid #AAAAAA;
   border-right: 0.5px solid #AAAAAA;
   }
 
@@ -141,6 +140,19 @@ text-decoration:none;
 }
 
 /*user */
+
+.user-navdata {
+  background-color: #F5F5F5; 
+  margin-top: 48px; 
+  margin-bottom: 5px; 
+  padding-top: 5px;
+}
+.user-buttons {
+  margin-top: 110px; 
+  padding-top: 5px;
+  margin-bottom: 5px; 
+  background-color: rgba(256,256,256,0.6)
+}
 
 .nav-pills {
   font-size: 12px;
