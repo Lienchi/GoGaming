@@ -208,13 +208,14 @@ input[type='file'] {
 
 .card-trip {
   border-radius: 8px;
-
+  width: 167px;
+  margin: 0 auto;
 }
 
 .card-trip img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width:100%; 
+  width: 167px; 
   height: 186px;
 }
 
@@ -230,21 +231,6 @@ input[type='file'] {
 
 .card-trip-body p {
   color: #FFFFFF;
-}
-
-
-.carousel-control.left, .carousel-control.right {
-    background-image: none
-}
-
-.carousel-inner {
-   height: 120px; 
-   padding: 0 15%;
-   border-radius: 10px;
-}
-
-#myCarousel {
-  margin: 15px 0;
 }
 
 .badges{
