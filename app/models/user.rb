@@ -6,7 +6,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:facebook]
 
   #after_save :create_trip_gostation_record, on: :create
 
@@ -40,6 +41,56 @@ class User < ApplicationRecord
       "avatar.png"
     else
       user.avatar
+    end
+  end
+
+  def self.from_omniauth(auth)
+    # Case 1: Find existing user by facebook uid
+    user = User.find_by_fb_uid( auth.uid )
+    if user
+      user.fb_token = auth.credentials.token
+      user.save!
+      return user
+    end
+
+    # Case 2: Find existing user by email
+    existing_user = User.find_by_email( auth.info.email )
+    if existing_user
+      existing_user.fb_uid = auth.uid
+      existing_user.fb_token = auth.credentials.token
+      existing_user.save!
+      return existing_user
+    end
+
+    # Case 3: Create new password
+    user = User.new
+    user.fb_uid = auth.uid
+    user.fb_token = auth.credentials.token
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0,20]
+    user.save!
+    return user
+  end
+
+  def getUserLevel(exp)
+    if exp > 100000
+      return 9
+    elsif exp > 50000
+      return 8
+    elsif exp > 30000
+      return 7
+    elsif exp > 10000
+      return 6
+    elsif exp > 6000
+      return 5
+    elsif exp > 3000
+      return 4
+    elsif exp > 1000
+      return 3
+    elsif exp > 500
+      return 2
+    else
+      return 1
     end
   end
   

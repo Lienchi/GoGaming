@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406051228) do
+ActiveRecord::Schema.define(version: 20180408074158) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -141,6 +141,17 @@ ActiveRecord::Schema.define(version: 20180406051228) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sites", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "latitude"
+    t.float "longitude"
+    t.text "photo"
+    t.integer "trip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "trip_gostations", force: :cascade do |t|
     t.integer "trip_id"
     t.integer "gostation_id"
@@ -193,6 +204,8 @@ ActiveRecord::Schema.define(version: 20180406051228) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "fb_uid"
+    t.string "fb_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

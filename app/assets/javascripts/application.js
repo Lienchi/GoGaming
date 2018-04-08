@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
-//= retuire_tree .
+
 
 //= require social-share-button
+//= require data-confirm-modal
+//= require introjs
+//= retuire_tree .

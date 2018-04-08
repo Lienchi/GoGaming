@@ -25,3 +25,10 @@
     </div> 
   </div>
 </div>
+<script type="text/javascript">
+  if (gon.sign_in_count < 2) {
+    introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+      window.location.href = 'trips/1.html?multipage=true';
+    });
+  };
+</script>

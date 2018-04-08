@@ -6,7 +6,7 @@
         <h4><%= current_user.name %> </h4> 
           <div class="user-icon-text text-muted" style="margin-top: 0px;">
             <h6>
-              等級    <%= current_user.level %>     -   
+              等級    <%= current_user.getUserLevel(current_user.points) %>     -   
               徽章    <%= current_user.badges.count%>     -   
               點數    <%= current_user.points %>    
             </h6>  
@@ -41,38 +41,38 @@
     <table class="table  table-hover " style="margin-top: 85px;">
       <tbody>
         <% i=1 %>
-        <% @scores.each do |score| %>
+        <% @leaderusers.each do |user| %>
           <tr>
                
               <th class="col-xs-1 text-center media-middle" scope="row" style="padding-top: 4px;"><%=  i %><% i+=1 %></th>
             
               <td class="col-xs-2" style="padding-top: 4px;">
-                <%= link_to user_path(User.find(score['user_id'])) do %>
-                  <%= image_tag "#{User.find(score['user_id']).avatar}", class: "img-responsive img-circle " %>
+                <%= link_to user_path(user) do %>
+                  <%= image_tag "#{user.avatar}", class: "img-responsive img-circle " %>
                 <% end %>
               </td>
               <td class="col-xs-8" style="padding-top: 4px;">
                 <h4 class="display-3" style="padding-left: 15px;">
-                  <%= link_to "#{User.find(score['user_id']).name}", user_path(User.find(score['user_id'])), style: "color: #666C65;" %>
+                  <%= link_to "#{user.name}", user_path(user), style: "color: #666C65;" %>
                   
                 </h4>
-                <%= link_to user_path(User.find(score['user_id'])) do %>
+                <%= link_to user_path(user) do %>
                   <div class="col-xs-3 col-xs-offset-1">
                     <h6>等級</h6>
-                    <h4><%= User.find(score['user_id']).level %></h4>
+                    <h4><%= user.level %></h4>
                   </div>
                   <div class="col-xs-3">
                     <h6>徽章</h6>
-                    <h4><%= User.find(score['user_id']).badges.count %></h4>
+                    <h4><%= user.badges.count %></h4>
                   </div>
                   <div class="col-xs-3">
                     <h6>點數</h6>
-                    <h4><%= score['sum_points'] %></h4>
+                    <h4><%= user.points %></h4>
                   </div>
                 <% end %>
 
               <div class="col-xs-1" style="padding: 0;">
-                  <%= render partial: "shared/follow", locals: {user: User.find(score['user_id']) }%>
+                  <%= render partial: "shared/follow", locals: {user: user}%>
                 </div>
             </td>
         <%end%>

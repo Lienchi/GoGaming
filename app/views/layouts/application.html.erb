@@ -7,6 +7,11 @@
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css">
+      .introjs-helperNumberLayer{
+        font-size: 0px;
+      }
+    </style>
   </head>
 
   <body>
@@ -49,8 +54,8 @@
       <!-- <nav class="navbar-fixed-top" style="background-color: #FFFFFF; border: none; margin-top: 48px;"> -->
         <nav class="navbar-fixed-bottom" style="background-color: #FFFFFF; border: none; margin-top: 48px;">
         <% if current_user %>
-          <div class="">
-            <div class="col-xs-3 my-nav-tab">
+          <div class="" >
+            <div class="col-xs-3 my-nav-tab" >
               <%= link_to root_path do %>
                 <% if controller?("gostations")%>
                   <%= image_tag "navbar_icons/find.svg", :class => "nav-icon-style" %>
@@ -60,7 +65,7 @@
                 
               <% end %>
             </div>
-            <div class="col-xs-3 my-nav-tab">
+            <div class="col-xs-3 my-nav-tab" >
               <%= link_to trips_path do %>
                 <% if controller?("trips")%>
                   <%= image_tag "navbar_icons/play.svg", :class => "nav-icon-style" %>
@@ -145,5 +150,7 @@
     <% end %>
 
     <%= yield %>
+    
+
   </body>
 </html>
