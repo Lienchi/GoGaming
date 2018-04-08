@@ -28,6 +28,7 @@
         <div class="actions text-center ">
           <input class="btn btn-primary btn-lg float-left" type="submit" value="登入" style="margin-right: 20px;">
           <%= render "devise/shared/links" %>
+          <%= link_to "", user_facebook_omniauth_authorize_path %>
         </div>
       </div>
     <% end %>
