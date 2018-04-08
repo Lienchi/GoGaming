@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all 
+    @users = User.all
   end
+
   def show
     @user = User.find(params[:id])
-   
+
+    top_scored = Merit::Score.top_scored(limit: User.count)
+    user = top_scored.detect{|h| h['user_id'] == @user.id }
+    @user_rank = top_scored.index(user)+1
   end
 
   def update
@@ -15,7 +19,10 @@ class UsersController < ApplicationController
   end
 
   def leaderboards
-    @scores = Merit::Score.top_scored
+    @scores = Merit::Score.top_scored(
+  since_date: 50.year.ago,
+  limit: 1000000
+)
   end
 
   def f_leaderboards

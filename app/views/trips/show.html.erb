@@ -3,54 +3,11 @@
 
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Gostations Direction</title>
     <%= Gon::Base.render_data %>
     <style>
-
-      /* The side navigation menu */
-      .sidenav {
-          height: 100%; /* 100% Full-height */
-          width: 0; /* 0 width - change this with JavaScript */
-          position: fixed; /* Stay in place */
-          z-index: 1; /* Stay on top */
-          top: 0; /* Stay at the top */
-          left: 0;
-          background-color: white;/*#111; /* Black*/
-          overflow-x: hidden; /* Disable horizontal scroll */
-          padding-top: 60px; /* Place content 60px from the top */
-          transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-      }
-
-      /* The navigation menu links */
-      .sidenav a {
-          padding: 8px 8px 8px 32px;
-          text-decoration: none;
-          font-size: 25px;
-          color: #818181;
-          display: block;
-          transition: 0.3s;
-      }
-
-      /* When you mouse over the navigation links, change their color */
-      .sidenav a:hover {
-          color: #f1f1f1;
-      }
-
-      .mysidenav{
-        padding: 0 20%;
-        font-size:1.5em;
-        line-height: 1em;
-      }
-
-      /* Position and style the close button (top right corner) */
-      .sidenav .closebtn {
-          position: absolute;
-          top: 0;
-          right: 25px;
-          font-size: 36px;
-          margin-left: 50px;
-      }
      
       html, body {
         height: 80%;
@@ -122,20 +79,10 @@
             </div> 
       </div>
     <%end%>
+
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
       <div class="clearfix" style="min-height: 605px;">
-
-        <div id="mySidenav" class="sidenav">
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-          <div id="mySidenav-content" class="mysidenav">
-            <div id="mysidenav-img"></div>
-            <div id="mysidenav-content"></div>
-            <div id="mysidenav-disdur"></div>
-            <div id="mysidenav-button"></div>
-            <div id="mysidenav-directionurl"></div>
-          </div>
-        </div>
           
         <div class="row">
           <%= link_to trips_path do %>
@@ -167,9 +114,9 @@
           
           <div class="col-xs-3 col-sm-1">
               <% if @trip.is_challenged?(current_user)%>                  
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-green-sm" %>
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% else %>
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name, class: "bettery-red-sm" %>
+                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% end %>
             </div>
             <div class="col-xs-9 col-sm-11">
@@ -206,29 +153,66 @@
               </div>
             </div>
 
-            <!-- Modal for trip_gostation-->
-            <div class="modal fade" id="trip_gostation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Gogoro 師大和平店站A</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+          <!-- google marker Modal -->
+          <div class="modal fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="tripModalLongTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <img id="tripModal-img" alt="Store Photo" width="400" height="400" class="border rounded">
                   </div>
-                  <div class="modal-body">
-                    <div id="map" class="z-depth-2" style="height: 250px"></div>
-                    <p>台北市大安區和平東路一段129號(近和平東路一段141巷口)</p>
+                  <div id="tripModal-content" style="font-size: 14px;" class="text-center"></div>
+                  <div id="tripModal-disdur" style="font-size: 14px;" class="text-center"></div>
+                  <div id="tripModal-availableTime" style="font-size: 14px;" class="text-center"></div>
+                  <div id="tripModal-cellContent" style="font-size: 14px;" class="text-center"></div>
+                  <div id="tripModal-cellProgress">
+                    <div id="tripModal-cellBar"></div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">打卡 +20p</button>
-                    <button type="button" class="btn btn-primary">導航</button>
-                    <p>完成<strong>"<%= @trip.name %>"</strong>所有景點可額外獲得180 points</p>
+                </div>
+                <div class="modal-footer">
+                  <div>
+                    <a id="tripModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">打卡</a>
+                  </div>
+                  <div>
+                    <a id="tripModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
+          <!-- site marker Modal -->
+          <div class="modal fade" id="siteModalCenter" tabindex="-1" role="dialog" aria-labelledby="siteModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="siteModalLongTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <img id="siteModal-img" alt="Site Photo" width="400" height="400" class="border rounded">
+                  </div>
+                  <div id="siteModal-content" style="font-size: 14px;" class="text-center"></div>
+                  <div id="siteModal-disdur" style="font-size: 14px;" class="text-center"></div>
+                  <div id="siteModal-availableTime" style="font-size: 14px;" class="text-center"></div>
+                </div>
+                <div class="modal-footer">
+                  <div>
+                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
         </div>  
@@ -543,35 +527,90 @@
           }
         ];
 
-        /* Set the width of the side navigation to 400px */
-        function openNav(content, storePhoto, button, trip_url, directions_url, results) {
-            document.getElementById("mySidenav").style.width = "400px";
-            var mySidenavContent = document.getElementById('mySidenav-content');
+        $.ajaxSetup({
+          headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+        });
 
-            document.getElementById('mysidenav-img').innerHTML = storePhoto;
-            document.getElementById('mysidenav-content').innerHTML = content;
-            if(results.status){
-              document.getElementById('mysidenav-disdur').innerHTML = results.distance+' '+results.duration;
+        // --- HTML: <div id="tripModalCenter"></div>
+        function setMarkerModalInfo(props) {
+          var cellProgressEle = document.getElementById('tripModal-cellProgress');
+          cellProgressEle.className = '';
+          document.getElementById('tripModal-cellBar').className = '';
+
+          var markerModalEle = document.getElementById("tripModal-checkin");
+          markerModalEle.innerHTML = "";
+          markerModalEle.className = "";
+          markerModalEle.onclick = null;
+
+          if(props.id >= 0){//gostations
+            var percentage = props.fullBatteryCells/props.totalBatteryCells;
+            cellProgressEle.className = 'myProgress';
+            document.getElementById('tripModal-cellBar').className = 'myBar';
+            var elem = document.getElementById("tripModal-cellBar");
+            elem.style.width = percentage*100 + '%';
+
+            markerModalEle.style.color = "#323237";
+            markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
+            if( props.bCloseGostation ){
+              markerModalEle.style.color = "#ffffff";
+              markerModalEle.onclick = toggle;
             }
-            document.getElementById('mysidenav-button').innerHTML = button;
-            document.getElementById('mysidenav-directionurl').innerHTML = directions_url;
+
+            if(props.bCheckin){
+              markerModalEle.innerHTML = "已打卡";
+              if(props.bCloseGostation){
+                markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
+              }
+              
+            }
+            else{
+              markerModalEle.innerHTML = "打卡";
+              if(props.bCloseGostation){
+                markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
+              }
+            }
+          }
+          document.getElementById('tripModalLongTitle').innerHTML = props.title;
+          document.getElementById('tripModal-img').src = props.storePhoto;
+          document.getElementById('tripModal-content').innerHTML = '地址：'+props.address;
+          document.getElementById('tripModal-availableTime').innerHTML = '營業時間：'+props.availableTime;
+          document.getElementById('tripModal-cellContent').innerHTML = "";
+          if(props.totalBatteryCells>0){
+            document.getElementById('tripModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
+          }
+          if(props.distance!=null && props.duration!=null){
+            document.getElementById('tripModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
+          }
+          document.getElementById("tripModal-directionurl").href = props.directions_url
         }
 
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
+
+        // --- HTML: <div id="siteModalCenter"></div>
+        function setSiteMarkerModalInfo(props) {
+          document.getElementById('siteModalLongTitle').innerHTML = props.title;
+          document.getElementById('siteModal-img').src = props.storePhoto;
+          document.getElementById('siteModal-content').innerHTML = props.content;
+          document.getElementById('siteModal-availableTime').innerHTML = '營業時間：'+props.availableTime;
+
+          if(props.distance!=null && props.duration!=null){
+            document.getElementById('siteModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
+          }
+          document.getElementById("siteModal-directionurl").href = props.directions_url
         }
+
 
         var userCurrentPos = {
           lat: 0.0,
           lng: 0.0
         };
         var map = null;
-        var directionsService = null;
-        var directionsDisplay = null;
-        var infoWindow = null;
+        var gostationMarkers = [];
         var toggleFriendlyStore = false;
         var friendlyStoreMarkers = [];
+        var currentPositionMarker = null;
+        var destinationMarker = null;
+        var directionsService = null;
+        var directionsDisplay = null;
 
         // map icons
         var i_black_battery = null;
@@ -581,6 +620,7 @@
         var ig_green_black_battery = null;
         var ig_blue_black_battery = null;
         var friendly_store_icon = null;
+        var friendly_store_icon_onclick = null;
         
         // Sets the map on all markers in the array.
         function setMapOnAll(map, markers) {
@@ -598,24 +638,28 @@
         }
 
         function getGostationInfo(gostation){
-          var LocName = gostation.LocName;
-          var Address = gostation.Address;
-          var AvailableTime = gostation.AvailableTime;
-          var tripId = gon.trip_gostations[0].trip_id;
-          var StorePhoto = gostation.StorePhoto;
-          var BatteryCells = gostation.BatteryCells;
-          var FullBatteryCells = (Math.floor(Math.random()*(BatteryCells/8-1))+1)*8;
-          return {
-            directions_url: '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-2"  href="https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude+'" target="_blank">導航</a><br>',
+          var batteryCells = gostation.BatteryCells;
+          var fullBatteryCells = (Math.floor(Math.random()*(batteryCells/8-1))+1)*8-2;
 
-            trip_url: tripId >= 0 ? '<a class="btn btn-primary" rel="nofollow" data-method="get" href="/trips/'+tripId+'">挑戰任務</a><br>' : '<a class="btn btn-default">挑戰任務</a><br>',
+          var info = {
+            title: gostation.LocName,
+            storePhoto: gostation.StorePhoto,
+            address: gostation.Address,
+            availableTime: gostation.AvailableTime,
+            totalBatteryCells: batteryCells,
+            fullBatteryCells: fullBatteryCells
+          }
 
-            infoWindowContent: '<div style="color:#323237;" class="text-center">'+LocName+'</div><br>'
-              +'<div style="font-size: 14px; color:#979797;"  class="text-center">'+Address+'</div><br>'
-              +'<div style="font-size: 14px; color:#979797;"  class="text-center">營業時間：'+AvailableTime+'   /   滿電電池：'+FullBatteryCells+'/'+BatteryCells+'</div><br>',
+          info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude;
+          
+          return info;
+        }
 
-            storePhoto: '<img src="'+StorePhoto+'" alt="Store Photo" width="400" height="400" class="border rounded"><br>'
-          };
+        function hasUserCurrentPos(){
+          if(userCurrentPos.lat!=0.0 && userCurrentPos.lng!=0.0){
+            return true;
+          }
+          return false;
         }
 
         function showGostations(){
@@ -627,17 +671,47 @@
 
             var gostationInfo = getGostationInfo(gon.gostations[i]);
 
-            addMarker({
-              coords: position,
-              iconImage: i_green_black_battery,
-              content: gostationInfo.infoWindowContent,
-              storePhoto: gostationInfo.storePhoto,
-              directions_url: gostationInfo.directions_url,
-              id: gon.gostations[i].id,
-              trip_url: gostationInfo.trip_url,
-              bBelongsToTrip: true
-            });
+            gostationInfo.position = position;
+            gostationInfo.id = gon.gostations[i].id;
+            gostationInfo.iconImage = i_green_black_battery;
+
+            addMarker(gostationInfo);
           }
+        }
+
+        function promiseCalculateDisDur(des){
+          var promise = new Promise(function(resolve, reject) {
+            var results = {
+              distance: null,
+              duration: null,
+              status: false
+            }
+            if(!hasUserCurrentPos()){
+              resolve(results);
+            }
+            else{
+              var directionsServiceCalc = new google.maps.DirectionsService;
+              var start = new google.maps.LatLng(userCurrentPos.lat, userCurrentPos.lng);
+              var end = new google.maps.LatLng(des.lat, des.lng);
+              directionsServiceCalc.route({
+                origin: start,
+                destination: end,
+                travelMode: 'DRIVING',
+                avoidHighways: true
+              }, function(response, status) {
+                if (status === 'OK') {
+                  results.distance = response.routes[0].legs[0].distance.text;
+                  results.duration = response.routes[0].legs[0].duration.text;
+                  results.status = true;
+                  resolve(results);
+                } else {
+                  reject('Directions request failed due to ' + status);
+                }
+              });
+            }
+          });
+
+          return promise;
         }
 
         function calculateDisDur(des){
@@ -670,13 +744,9 @@
           return results;
         }
 
-        var currentGostationId = 0;
+        // toggle button for switch checkin status and update user's point
         var currentTripGostationId = -1;
         function toggle(){
-          move();
-          $.ajaxSetup({
-            headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-          });
           $.ajax({
             url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
             method: "POST",
@@ -687,21 +757,11 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("mysidenav-button").innerHTML = '<a style="color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">打卡</a>';
-                    $.ajax({
-                      url: "/gostations/getCurrentUserPoints",
-                      method: "POST",
-                      dataType: "json",
-                      success: function(data){
-                        document.getElementById('layout-nav-point').innerHTML = data.points;
-                      },
-                      error: function() {
-                        alert("ERROR: can not getCurrentUserPoints!");
-                      }
-                    });
+                    document.getElementById("tripModal-checkin").innerHTML = 'Checkin';
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-primary text-center col-xs-5";
                   },
                   error: function() {
-                    //alert("ERROR: can not uncheckin(1)!");
+                    alert("ERROR: can not uncheckin!");
                   }
                 });
               }
@@ -710,21 +770,11 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("mysidenav-button").innerHTML = '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-success text-center col-xs-4 col-xs-offset-1" rel="nofollow" onclick="toggle()">已打卡</a>';
-                    $.ajax({
-                      url: "/gostations/getCurrentUserPoints",
-                      method: "POST",
-                      dataType: "json",
-                      success: function(data){
-                        document.getElementById('layout-nav-point').innerHTML = data.points;
-                      },
-                      error: function() {
-                        alert("ERROR: can not getCurrentUserPoints!");
-                      }
-                    });
+                    document.getElementById("tripModal-checkin").innerHTML = '已打卡';
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
                   },
                   error: function() {
-                    //alert("ERROR: can not uncheckin(2)!");
+                    alert("ERROR: can not checkin(2)!");
                   }
                 });
               }
@@ -739,45 +789,58 @@
 
         }
 
+        function checkLatLngNearby(pos_1, pos_2, nearbyDisTH) {
+          var a = (pos_1.lat-pos_2.lat)*(pos_1.lat-pos_2.lat);
+          var b = (pos_1.lng-pos_2.lng)*(pos_1.lng-pos_2.lng);
+
+          if( Math.sqrt(a+b) < nearbyDisTH ){
+            return true;
+          }
+          return false;
+        }
+
+        function isHasPower(fullBatteryCells){
+          return fullBatteryCells>0;
+        }
+
         var activeMarkerInfo = {
           marker: null,
-          bBelongsToTrip: false,
+          bHasPower: false,
           bFriendlyStore: false
         };
         function addMarker(props){
           var marker = new google.maps.Marker({
-            position: props.coords,
+            position: props.position,
             animation: google.maps.Animation.DROP,
             map: map,
             icon: props.iconImage
           });
 
-          if(props.content){
+          if(props.directions_url){
             marker.addListener('click', function(){
               if(props.id >= 0){//gostations
-                currentGostationId = props.id;
 
                 if(activeMarkerInfo.marker!=null){
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
-                  else if(activeMarkerInfo.bBelongsToTrip){
+                  else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
                   else{
                     activeMarkerInfo.marker.setIcon(i_black_battery);
                   }
                 }
-                if(props.bBelongsToTrip){
+                if(isHasPower(props.fullBatteryCells)){
                   marker.setIcon(ig_green_black_battery);
                 }
                 else{
                   marker.setIcon(ig_black_battery);
                 }
                 activeMarkerInfo.marker = marker;
-                activeMarkerInfo.bBelongsToTrip = props.bBelongsToTrip;
+                activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
                 activeMarkerInfo.bFriendlyStore = false;
-                
+
                 // get id of trip_gostation
                 currentTripGostationId = -1;
                 for(var i=0; i<gon.trip_gostations.length; i++){
@@ -786,48 +849,47 @@
                   }
                 }
 
-                var results = calculateDisDur(props.coords);
+                var bCloseGostation = false;
+                if( checkLatLngNearby(userCurrentPos, props.position, 0.005) ){//0.005 = 500m
+                  bCloseGostation = true;
+                }
+                bCloseGostation = true;//for debug
+                var disDurPromise = promiseCalculateDisDur(props.position);
 
-                var checkin_button = '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1" ">打卡</a>';
-                var uncheckin_button = '<a style="color:gray; font-size: 16px; padding: 8px;" class="btn btn-sm btn-info text-center col-xs-4 col-xs-offset-1" >已打卡</a>';
+                disDurPromise
+                .then(function(results) {
+                  $.ajaxSetup({
+                    headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+                  });
+                  $.ajax({
+                    url: "/gostations/"+props.id+"/getCheckinStatus",
+                    method: "POST",
+                    dataType: "json",
+                    success: function(data){
+                      props.distance = results.distance;
+                      props.duration = results.duration;
+                      props.bCheckin = data.status;
+                      props.bCloseGostation = bCloseGostation;
+                      setMarkerModalInfo(props);
+                      $('#tripModalCenter').modal();
+                    },
 
-                var checkinDisTH = 0.005;//0.005 = 500m
-                //if( Math.sqrt( (userCurrentPos.lat-props.coords.lat)*(userCurrentPos.lat-props.coords.lat) + (userCurrentPos.lng-props.coords.lng)*(userCurrentPos.lng-props.coords.lng) ) < checkinDisTH )
-                //{
-                  checkin_button = '<a style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">打卡</a>';
-
-                  uncheckin_button = '<a style="color:gray; font-size: 16px; padding: 8px;" class="btn btn-sm btn-success text-center col-xs-4 col-xs-offset-1"  rel="nofollow" onclick="toggle()">已打卡</a>';
-                //}
-
-                $.ajaxSetup({
-                  headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-                });
-                $.ajax({
-                  url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
-                  method: "POST",
-                  dataType: "json",
-                  success: function(data){
-                    if(data.status){
-                      openNav(props.content, props.storePhoto, uncheckin_button, props.trip_url, props.directions_url, results);
+                    error: function() {
+                      alert("ERROR: can not getCheckinStatus!");
                     }
-                    else{
-                      openNav(props.content, props.storePhoto, checkin_button, props.trip_url, props.directions_url, results);
-                    }
-                  },
 
-                  error: function() {
-                    alert("ERROR: can not getCheckinStatus!");
-                  }
-
+                  });
+                })
+                .catch(function(err) {
+                  console.log("Can not get disDur");
                 });
               }
-              else if(props.id == -1){//friendly stores
-
+              else if(props.id == -1 || props.id == -4){//friendly stores
                 if(activeMarkerInfo.marker!=null){
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
-                  else if(activeMarkerInfo.bBelongsToTrip){
+                  else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
                   else{
@@ -838,22 +900,43 @@
                 activeMarkerInfo.marker = marker;
                 activeMarkerInfo.bFriendlyStore = true;
 
-                var results = calculateDisDur(props.coords);
-                openNav(props.content, props.storePhoto, '', '', props.directions_url, results);
 
+                var disDurPromise = promiseCalculateDisDur(props.position);
+                disDurPromise
+                .then(function(results) {
+                  props.distance = results.distance;
+                  props.duration = results.duration;
+                  if(props.id == -1){
+                    setMarkerModalInfo(props);
+                    $('#tripModalCenter').modal();
+                  }
+                  else{
+                    setSiteMarkerModalInfo(props);
+                    $('#siteModalCenter').modal();
+                  }
+                  
+                })
+                .catch(function(err) {
+                  console.log("Can not get disDur");
+                });
               }
+
             });
           }
           
           if(props.id >= 0){//gostations
-            //gostationMarkers.push(marker);
+            gostationMarkers.push(marker);
           }
           else if(props.id == -1){//friendly stores
             friendlyStoreMarkers.push(marker);
           }
           else if(props.id == -2){
-
+            destinationMarker = marker;
           }
+          else if(props.id == -3){
+            currentPositionMarker = marker;
+          }
+          
         }
 
         function displayFriendlyStores(){
@@ -861,26 +944,46 @@
 
           for(var i=0; i<gon.friendly_stores.length; i++){
             var position = {
-              lat: gon.friendly_stores[i].latitude,
-              lng: gon.friendly_stores[i].longitude
+              lat: +gon.friendly_stores[i].latitude,
+              lng: +gon.friendly_stores[i].longitude
             };
 
-            var infoWindowContent = '<div>商店名稱：'+gon.friendly_stores[i].name+'</div><br>'
-              +'<div>地址：'+gon.friendly_stores[i].address+'</div><br>'
-              +'<div>營業時間：'+gon.friendly_stores[i].open_time+'</div><br>';
+            var info = {
+              title: gon.friendly_stores[i].name,
+              storePhoto: gon.friendly_stores[i].main_photo,
+              address: gon.friendly_stores[i].address,
+              availableTime: gon.friendly_stores[i].open_time,
+              totalBatteryCells: 0
+            }
+            info.position = position;
+            info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+            info.id = -1;
+            info.iconImage = friendly_store_icon;
 
-            var directions_url = '<a style="color:#ffffff; font-size: 16px;" class="btn btn-sm btn-primary text-center col-xs-10 col-xs-offset-1"  href="https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng+'" target="_blank">導航</a><br>';
+            addMarker(info);
+          }
+        }
 
-            var storePhoto = '<img src="'+gon.friendly_stores[i].main_photo+'" alt="Store Photo" width="400" height="400"><br>';
+        function displaySites(){
 
-            addMarker({
-              coords: position,
-              iconImage: friendly_store_icon,
-              content: infoWindowContent,
-              storePhoto: storePhoto,
-              directions_url: directions_url,
-              id: -1
-            });
+          for(var i=0; i<gon.gostation_sites.length; i++){
+            var position = {
+              lat: +gon.gostation_sites[i].latitude,
+              lng: +gon.gostation_sites[i].longitude
+            };
+
+            var info = {
+              title: gon.gostation_sites[i].name,
+              content: gon.gostation_sites[i].description,
+              storePhoto: gon.gostation_sites[i].photo,
+              totalBatteryCells: 0
+            }
+            info.position = position;
+            info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+            info.id = -4;
+            info.iconImage = friendly_store_icon;
+
+            addMarker(info);
           }
         }
 
@@ -895,19 +998,6 @@
           lng /= gon.gostations.length;
           return {lat: lat, lng: lng};
         }
-        
-        document.getElementById('friendly-store-submit').addEventListener('click', function() {
-          displayFriendlyStores();
-          toggleFriendlyStore = !toggleFriendlyStore;
-          if(toggleFriendlyStore){
-            showMarkers(friendlyStoreMarkers);
-            document.getElementById('friendly-store-submit').className = "btn btn-info";
-          }
-          else{
-            clearMarkers(friendlyStoreMarkers);
-            document.getElementById('friendly-store-submit').className = "btn btn-default";
-          }
-        });
 
         function getUserCurrentPosition(){
           var promise = new Promise(function(resolve, reject) {
@@ -923,6 +1013,49 @@
           });
 
           return promise;
+        }
+
+        function FriendlyStoreControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginLeft = '18px';
+          controlUI.style.marginBottom = '8px';
+          controlUI.style.textAlign = 'center';
+          controlUI.title = 'Click to recenter the map';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '16px';
+          controlText.style.lineHeight = '32px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = '友好店家';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            displayFriendlyStores();
+                toggleFriendlyStore = !toggleFriendlyStore;
+                if(toggleFriendlyStore){
+                  showMarkers(friendlyStoreMarkers);
+                  controlText.style.color = 'rgb(250,250,250)';
+                  controlUI.style.backgroundColor = 'rgb(100,100,100)';
+                }
+                else{
+                  clearMarkers(friendlyStoreMarkers);
+                  controlText.style.color = 'rgb(25,25,25)';
+                  controlUI.style.backgroundColor  = '#fff';
+                }
+          });
+
         }
 
         function initMap() {
@@ -971,6 +1104,14 @@
             scaledSize: new google.maps.Size(35, 40)
           };
 
+          // Create the DIV to hold the control and call the FriendlyStoreControl()
+          // constructor passing in this DIV.
+          var friendlyStoreDiv = document.createElement('div');
+          var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
+
+          friendlyStoreDiv.index = 1;
+          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
+
           // find current position of user
           var locationPromise = getUserCurrentPosition();
 
@@ -985,8 +1126,8 @@
             console.log("Browser does not support Geolocation!");
           });
 
+          displaySites();
           showGostations();
-          //displayFriendlyStores();
         }
 
       </script>

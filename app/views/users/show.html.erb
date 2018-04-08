@@ -22,7 +22,8 @@
         <br>
         等級    <%= @user.level %>     -   
         徽章    <%= @user.badges.count%>     -   
-        點數    <%= @user.points %>      
+        點數    <%= @user.points %>      -
+        排名    <%= @user_rank %>
       </div>
   </div>
 
@@ -31,13 +32,13 @@
   </div>
 <div class="clearfix"></div>
 <br>
-  <div data-intro="test" class="col-xs-4 col-xs-offset-2 text-center">
-    <div class=" btn btn-green">
+  <div class="col-xs-4 col-xs-offset-2 text-center">
+    <div class=" btn btn-main">
       <%= link_to " 所有玩家 ", leaderboards_users_path%>
     </div>
   </div>
   <div class="col-xs-4 text-center">
-    <div class=" btn btn-green">
+    <div class=" btn btn-main">
       <%= link_to " 我的朋友 ", f_leaderboards_users_path%>
     </div>
   </div>

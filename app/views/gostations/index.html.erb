@@ -8,59 +8,6 @@
     <title>Gostations Direction</title>
     <%= Gon::Base.render_data %>
     <style>
-
-      /* The side navigation menu */
-      .sidenav {
-          height: 100%; /* 100% Full-height */
-          width: 0; /* 0 width - change this with JavaScript */
-          position: fixed; /* Stay in place */
-          z-index: 100; /* Stay on top */
-          top: 0; /* Stay at the top */
-          left: 0;
-          background-color: white;/*#111; /* Black*/
-          overflow-x: hidden; /* Disable horizontal scroll */
-          padding-top: 60px; /* Place content 60px from the top */
-          transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
-          color:#888888;
-      }
-
-      /* The navigation menu links */
-      .sidenav a {
-          padding: 8px 8px 8px 32px;
-          text-decoration: none;
-          font-size: 20px;
-          display: block;
-          transition: 0.3s;
-          color:#737379;
-      }
-
-
-
-      /* When you mouse over the navigation links, change their color */
-      .sidenav a:hover {
-          color: #f1f1f1;
-      }
-
-      /* Position and style the close button (top right corner) */
-      .sidenav .closebtn {
-          position: absolute;
-          top: 0;
-          right: 25px;
-          font-size: 36px;
-          margin-left: 50px;
-      }
-
-      /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-      #main {
-          transition: margin-left .3s;
-          padding: 20px;
-      }
-
-      /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-      @media screen and (max-height: 450px) {
-          .sidenav {padding-top: 15px;}
-          .sidenav a {font-size: 18px;}
-      }
      
       html, body {
         height: 100%;
@@ -81,14 +28,72 @@
         background-color: #FFEE77;
         padding: 10px;
       }
+
+      /* google map search box style */
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 0px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 60%;
+        opacity: 0.4;
+      }
+
+      #pac-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: rgb(0,0,0);
+        opacity: 1; /* Firefox */
+      }
+
+      #pac-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: rgb(0,0,0);
+      }
+
+      #pac-input::-ms-input-placeholder { /* Microsoft Edge */
+        color: rgb(0,0,0);
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      @media screen and (min-width: 768px) {
+        #pac-input {
+          display: none;
+        }
+        #pac-input-button {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        #search-box-pc {
+          display: none;
+        }
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
       <div  class="col-xs-12 col-sm-8 col-sm-offset-2">
-
-     
 
         <!-- google marker Modal -->
         <div class="modal fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
@@ -114,7 +119,7 @@
               </div>
               <div class="modal-footer">
                 <div>
-                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">Checkin</a>
+                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">打卡</a>
                 </div>
                 <div>
                   <a id="markerModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
@@ -125,7 +130,7 @@
         </div>
         <br/>
 
-        <div class="col-xs-12">
+        <div id="search-box-pc" class="col-xs-12">
 
           <div class="input-group">
             <span class="input-group-btn">
@@ -140,11 +145,13 @@
               <<input id="direction-submit" class="btn btn-primary" type="submit" value="GO">
             </span>
           </div><!-- /input-group -->
+          <div class="col-xs-12"><hr></div>
         </div>
-        <div class="col-xs-12"><hr></div>
-        
+
 
         <div class="col-xs-12">
+          <input id="pac-input" class="controls" type="text" placeholder="你想去哪裡？">
+          <div id="pac-input-button"></div>
           <div id="map" class="z-depth-2" style="height: 500px"></div>
         </div>
       </div>
@@ -381,7 +388,7 @@
           headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
         });
 
-        // --- <div id="markerModalCenter"></div>
+        // --- HTML: <div id="markerModalCenter"></div>
         function setMarkerModalInfo(props) {
           var cellProgressEle = document.getElementById('markerModal-cellProgress');
           cellProgressEle.className = '';
@@ -402,18 +409,22 @@
             markerModalEle.style.color = "#323237";
             markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
             if( props.bCloseGostation ){
+              markerModalEle.style.color = "#ffffff";
               markerModalEle.onclick = toggle;
             }
 
             if(props.bCheckin){
-              markerModalEle.innerHTML = "Uncheckin";
+              markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
               }
               
             }
             else{
-              markerModalEle.innerHTML = "Checkin";
+              markerModalEle.innerHTML = "打卡 +"+gon.checkin_pts+"Pts";
+              if(isOffPeak()){
+                markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+"Pts";
+              }
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
               }
@@ -627,7 +638,7 @@
                   url: "/gostations/"+currentGostationId+"/checkin",
                   method: "POST",
                   success: function(){
-                    document.getElementById("markerModal-checkin").innerHTML = 'Uncheckin';
+                    document.getElementById("markerModal-checkin").innerHTML = '已打卡';
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
@@ -655,6 +666,14 @@
 
           });
 
+        }
+
+        function isOffPeak(){
+          var currentdate = new Date(); 
+          var datetime = currentdate.getHours() + ":"
+                       + currentdate.getMinutes() + ":"
+                       + currentdate.getSeconds();
+          return datetime > gon.offpeak_start && datetime < gon.offpeak_end;
         }
 
         function isHasPower(fullBatteryCells){
@@ -704,11 +723,14 @@
                 if( checkLatLngNearby(userCurrentPos, props.position, 0.005) ){//0.005 = 500m
                   bCloseGostation = true;
                 }
-
+                bCloseGostation = true;//for debug
                 var disDurPromise = promiseCalculateDisDur(props.position);
 
                 disDurPromise
                 .then(function(results) {
+                  $.ajaxSetup({
+                    headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+                  });
                   $.ajax({
                     url: "/gostations/"+props.id+"/getCheckinStatus",
                     method: "POST",
@@ -805,48 +827,6 @@
           }
         }
 
-        function CenterControl(controlDiv, map) {
-
-          // Set CSS for the control border.
-          var controlUI = document.createElement('div');
-          controlUI.style.backgroundColor = '#fff';
-          controlUI.style.borderRadius = '3px';
-          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-          controlUI.style.cursor = 'pointer';
-          controlUI.style.marginBottom = '22px';
-          controlUI.style.textAlign = 'center';
-          controlUI.title = 'Click to recenter the map';
-          controlDiv.appendChild(controlUI);
-
-          // Set CSS for the control interior.
-          var controlText = document.createElement('div');
-          controlText.style.color = 'rgb(25,25,25)';
-          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-          controlText.style.fontSize = '16px';
-          controlText.style.lineHeight = '38px';
-          controlText.style.paddingLeft = '5px';
-          controlText.style.paddingRight = '5px';
-          controlText.innerHTML = '友好店家';
-          controlUI.appendChild(controlText);
-
-          // Setup the click event listeners: simply set the map to Chicago.
-          controlUI.addEventListener('click', function() {
-            displayFriendlyStores();
-                toggleFriendlyStore = !toggleFriendlyStore;
-                if(toggleFriendlyStore){
-                  showMarkers(friendlyStoreMarkers);
-                  controlText.style.color = 'rgb(250,250,250)';
-                  controlUI.style.backgroundColor = 'rgb(100,100,100)';
-                }
-                else{
-                  clearMarkers(friendlyStoreMarkers);
-                  controlText.style.color = 'rgb(25,25,25)';
-                  controlUI.style.backgroundColor  = '#fff';
-                }
-          });
-
-        }
-
         function getUserCurrentPosition(){
           var promise = new Promise(function(resolve, reject) {
             if (navigator.geolocation) {
@@ -882,7 +862,7 @@
               id: -3
             });
 
-            document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(5)+','+userCurrentPos.lng.toFixed(5);
+            document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(6)+','+userCurrentPos.lng.toFixed(6);
 
             // --- gostations
             var milestones = [];
@@ -1011,6 +991,99 @@
 
         }
 
+        function FriendlyStoreControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginLeft = '18px';
+          controlUI.style.marginBottom = '8px';
+          controlUI.style.textAlign = 'center';
+          controlUI.title = 'Click to recenter the map';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '16px';
+          controlText.style.lineHeight = '32px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = '友好店家';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            displayFriendlyStores();
+                toggleFriendlyStore = !toggleFriendlyStore;
+                if(toggleFriendlyStore){
+                  showMarkers(friendlyStoreMarkers);
+                  controlText.style.color = 'rgb(250,250,250)';
+                  controlUI.style.backgroundColor = 'rgb(100,100,100)';
+                }
+                else{
+                  clearMarkers(friendlyStoreMarkers);
+                  controlText.style.color = 'rgb(25,25,25)';
+                  controlUI.style.backgroundColor  = '#fff';
+                }
+          });
+
+        }
+
+        function SearchBoxControl(controlDiv, map) {
+
+          // Set CSS for the control border.
+          var controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = 'rgb(100,100,100)';
+          controlUI.style.borderRadius = '3px';
+          controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.marginLeft = '0px';
+          controlUI.style.marginBottom = '0px';
+          controlUI.style.marginTop = '10px';
+          controlUI.style.textAlign = 'center';
+          controlDiv.appendChild(controlUI);
+
+          // Set CSS for the control interior.
+          var controlText = document.createElement('div');
+          controlText.style.color = 'rgb(250,250,250)';
+          controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+          controlText.style.fontSize = '15px';
+          controlText.style.lineHeight = '32px';
+          controlText.style.paddingLeft = '5px';
+          controlText.style.paddingRight = '5px';
+          controlText.innerHTML = 'GO';
+          controlUI.appendChild(controlText);
+
+          // Setup the click event listeners: simply set the map to Chicago.
+          controlUI.addEventListener('click', function() {
+            directionsDisplay.set('directions', null);
+
+            var origin = '';
+            if(hasUserCurrentPos()){
+              origin = userCurrentPos.lat+','+userCurrentPos.lng;
+            }
+            var destination = document.getElementById('pac-input').value;
+            if( destination != '' ){
+              deleteDestinationMarker();
+              deleteMarkers(gostationMarkers);
+              if( origin != ''  ){
+                calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination);
+              }
+              else{
+                var geocoder = new google.maps.Geocoder();
+                var address = document.getElementById('pac-input').value;
+                geocodeAddress(geocoder, map, address);
+              }
+            }
+          });
+
+        }
+
         function initMap() {
           directionsService = new google.maps.DirectionsService;
           directionsDisplay = new google.maps.DirectionsRenderer;
@@ -1025,6 +1098,19 @@
             fullscreenControl: false,
             streetViewControl: false,
             zoomControl: false
+          });
+
+          // Create the search box and link it to the UI element.
+          var input = document.getElementById('pac-input');
+          var searchBox = new google.maps.places.SearchBox(input);
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+          var searchBoxDiv = document.getElementById('pac-input-button');
+          var searchBoxControl = new SearchBoxControl(searchBoxDiv, map);
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(searchBoxDiv);
+
+          // Bias the SearchBox results towards current map's viewport.
+          map.addListener('bounds_changed', function() {
+            searchBox.setBounds(map.getBounds());
           });
 
           i_black_battery = {
@@ -1059,13 +1145,13 @@
 
           directionsDisplay.setMap(map);
 
-          // Create the DIV to hold the control and call the CenterControl()
+          // Create the DIV to hold the control and call the FriendlyStoreControl()
           // constructor passing in this DIV.
-          var centerControlDiv = document.createElement('div');
-          var centerControl = new CenterControl(centerControlDiv, map);
+          var friendlyStoreDiv = document.createElement('div');
+          var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
 
-          centerControlDiv.index = 1;
-          map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+          friendlyStoreDiv.index = 1;
+          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
 
           setUserCurrentPosition();
           document.getElementById('current-position-submit').addEventListener('click', function() {
