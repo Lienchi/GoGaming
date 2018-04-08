@@ -61,6 +61,13 @@ img {
   display: block;
 }
 /*nav*/
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color:#FFFFFF;
+}
 
 
 .brand{
@@ -89,7 +96,7 @@ img {
   margin: 1px 1px;
   display: inline-block;
   font-size: 2em;
-  color:#323237;
+  color:#FFFFFF;
   height:50px;
 
 }
@@ -120,7 +127,7 @@ img {
   
   display: inline-block;
   font-size: 16px;
-  color: #323237;
+  color: #FFFFFF;
   padding-top:5px;
 
 }

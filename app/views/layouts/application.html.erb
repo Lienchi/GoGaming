@@ -30,7 +30,7 @@
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="pull-right text-right nav navbar-text">
+            <ul class="pull-right text-right nav navbar-text navbar-nav">
               <% if current_user %>
                 <% if current_user.role == "admin" %>
                   <li><%= link_to "後台", admin_trips_path%><li>
