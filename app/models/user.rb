@@ -43,6 +43,7 @@ class User < ApplicationRecord
       user.avatar
     end
   end
+
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
     user = User.find_by_fb_uid( auth.uid )
@@ -69,6 +70,28 @@ class User < ApplicationRecord
     user.password = Devise.friendly_token[0,20]
     user.save!
     return user
+  end
+
+  def getUserLevel(exp)
+    if exp > 100000
+      return 9
+    elsif exp > 50000
+      return 8
+    elsif exp > 30000
+      return 7
+    elsif exp > 10000
+      return 6
+    elsif exp > 6000
+      return 5
+    elsif exp > 3000
+      return 4
+    elsif exp > 1000
+      return 3
+    elsif exp > 500
+      return 2
+    else
+      return 1
+    end
   end
   
 end
