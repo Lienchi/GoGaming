@@ -43,8 +43,6 @@ gem 'ffaker'
 gem 'bootstrap', '~> 4.0.0'
 gem 'data-confirm-modal'
 gem 'introjs-rails'
-gem 'mini_magick'
-gem 'carrierwave-google-storage'
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
@@ -68,8 +66,8 @@ group :development do
 end
 
 group :production do
-  #gem 'pg'
-  gem 'mysql2', '~> 0.3.18'
+  gem 'pg'
+  #gem 'mysql2', '~> 0.3.18'#for GCP
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

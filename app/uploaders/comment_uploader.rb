@@ -14,8 +14,7 @@ class CommentUploader < CarrierWave::Uploader::Base
   end
 
   if Rails.env.production?
-    #storage :fog
-    storage :gcloud
+    storage :fog
   else
     storage :file
   end
