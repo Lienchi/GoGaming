@@ -10,6 +10,7 @@ class GostationsController < ApplicationController
     @trip_gostations = TripGostation.where(user_id: current_user.id).uniq
     gon.gostations = Gostation.all
     gon.friendly_stores = Friendlystore.all
+
     gon.offpeak_start = @@offpeak_start
     gon.offpeak_end = @@offpeak_end
     gon.checkin_pts = @@checkin_pts
