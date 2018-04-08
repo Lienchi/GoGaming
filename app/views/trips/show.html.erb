@@ -30,6 +30,55 @@
   </head>
 
   <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12&appId=1818422994855649&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- <div id="myModal" class="modal fade " role="dialog">
+      <div class="modal-dialog">
+         Modal content
+        <div class="modal-content trip-button">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><%= @trip.name%></h4>
+          </div>
+          <div class="modal-body">
+            <p><%= @trip.description %></p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <% if @trip.is_challenged?(current_user)%> 
+      <div class="container ">
+        <!-- Trigger the modal with a button -->
+        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+        <!--Modal 
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">-->
+             <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <h4 class="modal-title">恭喜你!已完成挑戰!</h4>
+              </div>
+              <div class="modal-body">
+                <%= image_tag @trip.image%>
+                <!-- FB share button -->
+                <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a>
+                </div>  
+         
+              </div>
+              <!--<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>-->
+            </div> 
+      </div>
+    <%end%>
 
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
@@ -41,7 +90,7 @@
           <% end %>
         </div>
 
-        <div id="map" class="z-depth-2" style="height: 250px"></div>
+        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可以獲得'專屬徽章'一枚。(3.)點選推荐景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
         <div id="myProgress" class="myProgress" onclick="move()">
           <div id="myBar" class="myBar"></div>
         </div>
@@ -1085,7 +1134,12 @@
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
       </script>
+      <script type="text/javascript">
+          if (RegExp('multipage', 'gi').test(window.location.search)) {
+            introJs().start();
+          }
+      </script>
 
-
+      
   </body>
 </html>

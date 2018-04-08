@@ -1,11 +1,11 @@
-<div class="col-xs-12 col-sm-3 col-md-3">
+<div class="col-xs-12 col-sm-3 col-md-3" data-intro="test">
   <% @products.each do |product|%>
     <%= image_tag product.image%>
     <p><%= product.name%></p>
     <p>$<%= product.product_points%></p>
     <%= form_for @user_product, url: user_products_path(product_id: product.id,user_id: current_user.id), method: :post do |f| %>
       <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: true}, {class: "form-control"} %>
-     <%= f.submit %>
+     <%= f.submit '兌換',data:{confirm: '確認後，你的點數將被扣除!'}, class: "btn btn-primary"%>
     <%end%>
   <%end%>
 </div>

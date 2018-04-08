@@ -1,7 +1,7 @@
 
-<div class="container">
+<divclass="container">
   <div class="col-xs-12 col-sm-8 col-sm-offset-2", style="min-height: 605px;">
-    <div class="card-deck">
+    <div class="card-deck clearfix" data-step="1" data-position= "auto" data-position="top" data-intro="騎車也可以很好玩?Gogoro準備了不同的任務，等你來挑戰!! ">
       <% @trips.each do |t| %>
         <%= link_to trip_path(t) do %>
           <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 5px;">
@@ -25,3 +25,10 @@
     </div> 
   </div>
 </div>
+<script type="text/javascript">
+  if (gon.sign_in_count < 2) {
+    introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+      window.location.href = 'trips/1.html?multipage=true';
+    });
+  };
+</script>
