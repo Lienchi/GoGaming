@@ -43,6 +43,7 @@ gem 'ffaker'
 gem 'bootstrap', '~> 4.0.0'
 gem 'data-confirm-modal'
 gem 'introjs-rails'
+gem 'mini_magick'
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
