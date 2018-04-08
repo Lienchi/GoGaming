@@ -108,7 +108,7 @@
           <% end %>
         </div>
 
-        <div id="map" class="z-depth-2" style="height: 250px"></div>
+        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可以獲得'專屬徽章'一枚。(3.)點選推荐景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
         <div id="myProgress" class="myProgress" onclick="move()">
           <div id="myBar" class="myBar"></div>
         </div>
@@ -958,7 +958,12 @@
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
       </script>
+      <script type="text/javascript">
+          if (RegExp('multipage', 'gi').test(window.location.search)) {
+            introJs().start();
+          }
+      </script>
 
-
+      
   </body>
 </html>

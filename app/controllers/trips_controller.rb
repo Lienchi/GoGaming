@@ -6,6 +6,7 @@ class TripsController < ApplicationController
     @trips_count = Trip.all.count
     @challenge_trips = Challenge.where(user_id: current_user).count
     @unchallenge_trips = @trips_count - @challenge_trips
+    gon.sign_in_count = current_user.sign_in_count
   end
 
   def show
@@ -17,6 +18,7 @@ class TripsController < ApplicationController
     @comment = Comment.new
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
     @challenge = Challenge.where(trip_id: @trip).order(:completetime).first
+    gon.sign_in_count = current_user.sign_in_count
   end
   
 
