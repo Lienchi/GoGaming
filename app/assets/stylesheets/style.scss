@@ -208,15 +208,15 @@ input[type='file'] {
 
 .card-trip {
   border-radius: 8px;
-  width: 167px;
+
   margin: 0 auto;
 }
 
 .card-trip img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width: 167px; 
-  height: 186px;
+  max-width: 100%;
+  height: auto;   
 }
 
 .card-trip-body {
@@ -458,8 +458,9 @@ input[type='file'] {
     left: 0;
     bottom: 0;
     width: 100%;
-    color: #FFFFFF;
-    background-color: #50A1D8;
+    height: 30px;
+    color: #878787;
+    background-color: rgba(256, 256, 256, 0.3);
     text-align: center;
 }
 /* button */
