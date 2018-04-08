@@ -90,6 +90,7 @@ img {
 
 .navbar-text {
   color: #FFFFFF;
+  margin: 0 15px;
 }
 
 .nav-icon{
@@ -539,6 +540,10 @@ input[type='file'] {
 .card-product img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+.card-product .card-body .card-title {
+  height: 30px;
 }
 
 
