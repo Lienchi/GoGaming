@@ -1,21 +1,21 @@
 
-<divclass="container">
-  <div class="col-xs-12 col-sm-8 col-sm-offset-2", style="min-height: 605px;">
-    <div class="card-deck clearfix" data-step="1" data-position= "auto" data-position="top" data-intro="騎車也可以很好玩?Gogoro準備了不同的任務，等你來挑戰!! ">
+<div class="container">
+  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2", style="min-height: 605px;">
+    <div class="card-deck">
+      <%  color = ["2E3618", "285AB1", "985554", "B5A38E", "96AE54", "46453C"] %>
+      <% i=0 %>
       <% @trips.each do |t| %>
         <%= link_to trip_path(t) do %>
-          <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 5px;">
-            
-
-
-            <div class="card text-right box-shadow" style="background-color: #8A130D;">
+          <div class="col-xs-6 col-sm-4" style="padding: 5px;">
+            <div class="card card-trip text-right box-shadow" style="background-color: #<%= color[i] %>;">
+              <% i+=1 %>
               <div class="card-img-top">
-                  <%= image_tag "trip/beef_noodle.png" %>
+                  <%= image_tag t.image %>
               </div>
-              <div class="card-body">
+              <div class="card-body card-trip-body">
                 <h4 class="card-title"><%= link_to "#{t.name}", trip_path(t)%></h4>
-                <p class="card-text text-muted">180 points</p>
-                <p class="card-text text-muted">101人已完成</p>
+                <p class="card-text">180 points</p>
+                <p class="card-text">101人已完成</p>
               </div>
             </div>
           </div>

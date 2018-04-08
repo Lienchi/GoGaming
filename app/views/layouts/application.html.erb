@@ -16,8 +16,8 @@
 
   <body>
     <!-- 導覽列 -->
-    <nav class="navbar">
-      <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0;">
+    <nav class="navbar" style="margin-bottom: 0px;">
+      <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0; ">
         <div class="container-fluid ">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header ">
@@ -35,7 +35,7 @@
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="pull-right text-right nav navbar-text">
+            <ul class="pull-right text-right nav navbar-text navbar-nav">
               <% if current_user %>
                 <% if current_user.role == "admin" %>
                   <li><%= link_to "後台", admin_trips_path%><li>
@@ -46,7 +46,13 @@
             </ul>
           </div>
         </div>
+      </nav>
+    </nav>
         <div class="clearfix"></div>
+<!-- nav-tab -->
+
+      <!-- <nav class="navbar-fixed-top" style="background-color: #FFFFFF; border: none; margin-top: 48px;"> -->
+        <nav class="navbar-fixed-bottom" style="background-color: #FFFFFF; border: none; margin-top: 48px;">
         <% if current_user %>
           <div class="" >
             <div class="col-xs-3 my-nav-tab" >
@@ -79,7 +85,7 @@
                 
               <% end %>            
             </div>
-            <div class="col-xs-3 my-nav-tab" >
+            <div class="col-xs-3 my-nav-tab" style="border-right: none;">
               <%= link_to products_path do %>
                 <% if controller?("products")%>
                   <%= image_tag "navbar_icons/shop.svg", :class => "nav-icon-style" %>
@@ -92,7 +98,8 @@
           </div>
         <% end %>
       </nav>
-    </nav>
+
+
     <!-- Alert-->
     <% if flash[:notice] %>
       <div class="container">
@@ -115,27 +122,31 @@
       </div>
     <% end %> 
 
-    <% if current_user %>
-      <div class="footer navbar-fixed-bottom">
-        <div  class="col-xs-1 col-xs-offset-1 user-data">
-          <div class="user-icon"><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
+<!-- footer -->
+    <% if controller?("users")%>
+    <% else %>
+      <% if current_user %>
+        <div class="footer navbar-fixed-top" style="margin-top: 48px;">
+          <div  class="col-xs-1 col-xs-offset-6 user-data">
+            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
+          </div>
+          <div  class="col-xs-1 ">
+            <div class="user-icon-text"><%= current_user.level%> </div>
+          </div>
+          <div  class="col-xs-1 user-data">
+            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/B.svg")) %> </div>
+          </div>
+          <div  class="col-xs-1 ">
+            <div class="user-icon-text"><%= current_user.badges.count%> </div>
+          </div>
+          <div  class="col-xs-1 user-data">
+            <div class="user-icon" style="height: 25px; width: 25px;"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
+          </div>
+          <div  class="col-xs-1">
+            <div class="user-icon-text"><%= current_user.points %></div>
+          </div>    
         </div>
-        <div  class="col-xs-2 ">
-          <div class="user-icon-text"><%= current_user.level%> </div>
-        </div>
-        <div  class="col-xs-1 col-xs-offset-1 user-data">
-          <div class="user-icon"><%= image_tag(("navbar_icons/B.svg")) %> </div>
-        </div>
-        <div  class="col-xs-2 ">
-          <div class="user-icon-text"><%= current_user.badges.count%> </div>
-        </div>
-        <div  class="col-xs-1 col-xs-offset-1 user-data">
-          <div class="user-icon"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
-        </div>
-        <div  class="col-xs-2">
-          <div class="user-icon-text"><%= current_user.points %></div>
-        </div>    
-      </div>
+      <% end %>
     <% end %>
 
     <%= yield %>

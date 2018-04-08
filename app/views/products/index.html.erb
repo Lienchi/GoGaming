@@ -1,17 +1,57 @@
-<div class="col-xs-12 col-sm-3 col-md-3" data-intro="test">
-  <% @products.each do |product|%>
-    <%= image_tag product.image%>
-    <p><%= product.name%></p>
-    <p>$<%= product.product_points%></p>
-    <%= form_for @user_product, url: user_products_path(product_id: product.id,user_id: current_user.id), method: :post do |f| %>
-      <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: true}, {class: "form-control"} %>
-     <%= f.submit '兌換',data:{confirm: '確認後，你的點數將被扣除!'}, class: "btn btn-primary"%>
-    <%end%>
-  <%end%>
+<div class="container">
+  <div class="text-center">
+    <h5>總共獲得點數 <%= current_user.points %> 點, 目前可兌換點數 xx 點. </h5>
+  </div>
+  <div class="card-deck">
+    <% @products.each do |product|%>
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">    
+        <div class="card card-product border rounded">
+          <h5 class="card-header"></h5>
+          <%= image_tag product.image, class: "card-img-top"  %>
+          <div class="card-body" style="padding: 5px 15px 40px 15px;">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.product_points %> points </p>
+            <button type="button" class="btn btn-main pull-right" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
+              兌換
+            </button>
+          </div>
+        </div>
+      </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+      <div class="modal fade" id=<%= "product"+product.id.to_s %> tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle"><%= product.name%></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" style="padding-bottom: 45px;">
+              <%= image_tag product.image %>
+              <p class=""><%= product.product_points%> points</p>
+              <%= form_for @user_product, url: user_products_path(product_id: product.id,user_id: current_user.id), method: :post do |f| %>
+                  <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: true}, {class: "form-control"} %>
+                  <div class="col-xs-12" style= "padding-top: 5px;">
+                    <%= f.submit "確認兌換" , :class => 'btn btn-main pull-right' %>
+                  </div>
+                <% end %>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 
 
 
 
+    
 

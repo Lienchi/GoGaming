@@ -1,6 +1,6 @@
 .container {
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 45px;
   
 }
 
@@ -61,6 +61,13 @@ img {
   display: block;
 }
 /*nav*/
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color:#FFFFFF;
+}
 
 
 .brand{
@@ -83,13 +90,14 @@ img {
 
 .navbar-text {
   color: #FFFFFF;
+  margin: 0 15px;
 }
 
 .nav-icon{
   margin: 1px 1px;
   display: inline-block;
   font-size: 2em;
-  color:#323237;
+  color:#FFFFFF;
   height:50px;
 
 }
@@ -104,7 +112,6 @@ img {
   background:#FFFFFF;
   padding: 5px;
   text-align: center;
-  border-bottom: 0.5px solid #AAAAAA;
   border-right: 0.5px solid #AAAAAA;
   }
 
@@ -120,7 +127,7 @@ img {
   
   display: inline-block;
   font-size: 16px;
-  color: #323237;
+  color: #FFFFFF;
   padding-top:5px;
 
 }
@@ -133,6 +140,19 @@ text-decoration:none;
 }
 
 /*user */
+
+.user-navdata {
+  background-color: #F5F5F5; 
+  margin-top: 48px; 
+  margin-bottom: 5px; 
+  padding-top: 5px;
+}
+.user-buttons {
+  margin-top: 110px; 
+  padding-top: 5px;
+  margin-bottom: 5px; 
+  background-color: rgba(256,256,256,0.6)
+}
 
 .nav-pills {
   font-size: 12px;
@@ -198,41 +218,31 @@ input[type='file'] {
 
 /*trips#index*/
 
-.card {
+.card-trip {
   border-radius: 8px;
 
+  margin: 0 auto;
 }
 
-.card img {
+.card-trip img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width:100%; 
-  height: 186px;
+  max-width: 100%;
+  height: auto;   
 }
 
-.card-body {
+.card-trip-body {
   height: 73px;
   padding-top: 5px;
   padding-right: 5px;
 }
 
-.card-body a {
+.card-trip-body a {
   color: #FFFFFF;
 }
 
-
-.carousel-control.left, .carousel-control.right {
-    background-image: none
-}
-
-.carousel-inner {
-   height: 120px; 
-   padding: 0 15%;
-   border-radius: 10px;
-}
-
-#myCarousel {
-  margin: 15px 0;
+.card-trip-body p {
+  color: #FFFFFF;
 }
 
 .badges{
@@ -460,8 +470,9 @@ input[type='file'] {
     left: 0;
     bottom: 0;
     width: 100%;
-    color: #FFFFFF;
-    background-color: #50A1D8;
+    height: 30px;
+    color: #878787;
+    background-color: rgba(256, 256, 256, 0.3);
     text-align: center;
 }
 /* button */
@@ -518,6 +529,20 @@ input[type='file'] {
   text-decoration:none; 
 }
 
+/* products */
+.card-product {
+  border-radius: 8px;
+  margin: 15px;
+}
 
+
+.card-product img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-product .card-body .card-title {
+  height: 30px;
+}
 
 

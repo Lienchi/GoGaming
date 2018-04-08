@@ -18,12 +18,8 @@
       <% end %>  
 
       <div class="user-icon-text text-muted">
-        <p><%= @user.followings.count %> followings</p>
-        <br>
-        等級    <%= @user.getUserLevel(@user.points) %>     -   
-        徽章    <%= @user.badges.count%>     -   
-        點數    <%= @user.points %>      -
-        排名    <%= @user_rank %>
+        <p>排名    <%= @user_rank %>   -   等級    <%= @user.getUserLevel(@user.points) %></p>
+        <p>徽章    <%= @user.badges.count%>     -    點數    <%= @user.points %> </p>       
       </div>
   </div>
 
