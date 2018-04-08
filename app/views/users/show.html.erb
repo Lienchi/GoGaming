@@ -19,7 +19,8 @@
 
       <div class="user-icon-text text-muted">
         <p>排名    <%= @user_rank %>   -   等級    <%= @user.getUserLevel(@user.points) %></p>
-        <p>徽章    <%= @user.badges.count%>     -    點數    <%= @user.points %> </p>       
+        <p>徽章    <%= @user.badges.count%>     -    點數    <%= @user.points %> </p>
+        <p>EXP    <%= @user.experience %> </p>
       </div>
   </div>
 
