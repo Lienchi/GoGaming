@@ -44,6 +44,7 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'data-confirm-modal'
 gem 'introjs-rails'
 gem 'mini_magick'
+gem 'carrierwave-google-storage'
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
