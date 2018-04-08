@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="52px" height="69px" viewBox="0 0 52 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="73px" height="69px" viewBox="0 0 73 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
     <title>Badge</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="iPhone-8" transform="translate(-186.000000, -184.000000)">
-            <g id="Badge" transform="translate(188.000000, 186.000000)">
-                <polygon id="Path-11" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="13.6530552 40.2717391 2.80062671 59.3478261 12.6028202 54.4021739 14.0031336 65 24.5054837 46.6304348"></polygon>
-                <polygon id="Path-11-Copy" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(34.657756, 52.635870) scale(-1, 1) translate(-34.657756, -52.635870) " points="34.6577556 40.2717391 23.8053271 59.3478261 33.6075206 54.4021739 35.0078339 65 45.5101841 46.6304348"></polygon>
-                <ellipse id="Oval-4" stroke="#979797" stroke-width="3" fill="#FFFFFF" cx="24.1554054" cy="24.375" rx="24.1554054" ry="24.375"></ellipse>
-                <polygon id="Star-2" fill="#979797" points="24.5945946 32.0608108 16.8501267 36.1323185 18.3291885 27.5087268 12.0637824 21.4014653 20.7223607 20.1433002 24.5945946 12.2972973 28.4668285 20.1433002 37.1254068 21.4014653 30.8600007 27.5087268 32.3390624 36.1323185"></polygon>
-            </g>
+    <g id="Badge" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(13.000000, 1.000000)">
+            <polygon id="Path-11" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="12.4076293 39.685208 0.852469952 59.9965349 11.289388 54.7306354 12.7803763 66.0147059 23.9627886 46.4556503"></polygon>
+            <polygon id="Path-11-Copy" stroke="#979797" stroke-width="3" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" transform="translate(34.772454, 52.849957) scale(-1, 1) translate(-34.772454, -52.849957) " points="34.7724537 39.685208 23.2172944 59.9965349 33.6542125 54.7306354 35.1452008 66.0147059 46.327613 46.4556503"></polygon>
+            <ellipse id="Oval-4" stroke="#979797" stroke-width="3" fill="#FFFFFF" cx="23.5900415" cy="22.7591022" rx="22.0264848" ry="22.2267256"></ellipse>
+            <polygon id="Star-2" fill="#979797" points="24.0576696 30.9425948 15.8117218 35.2777462 17.3865577 26.0957483 10.7154457 19.5930213 19.9346957 18.2533858 24.0576696 9.89932817 28.1806436 18.2533858 37.3998935 19.5930213 30.7287816 26.0957483 32.3036175 35.2777462"></polygon>
         </g>
     </g>
 </svg>

@@ -122,32 +122,7 @@
       </div>
     <% end %> 
 
-<!-- footer -->
-    <% if controller?("users")%>
-    <% else %>
-      <% if current_user %>
-        <div class="footer navbar-fixed-top" style="margin-top: 48px;">
-          <div  class="col-xs-1 col-xs-offset-6 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
-          </div>
-          <div  class="col-xs-1 ">
-            <div class="user-icon-text"><%= current_user.level%> </div>
-          </div>
-          <div  class="col-xs-1 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/B.svg")) %> </div>
-          </div>
-          <div  class="col-xs-1 ">
-            <div class="user-icon-text"><%= current_user.badges.count%> </div>
-          </div>
-          <div  class="col-xs-1 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
-          </div>
-          <div  class="col-xs-1">
-            <div class="user-icon-text"><%= current_user.points %></div>
-          </div>    
-        </div>
-      <% end %>
-    <% end %>
+
 
     <%= yield %>
     

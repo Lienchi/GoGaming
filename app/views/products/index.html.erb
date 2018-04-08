@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="text-center">
-    <h5>總共獲得點數 <%= current_user.points %> 點, 目前可兌換點數 xx 點. </h5>
+  <div class="" style="padding-left: 30px;">
+    <div class="user-icon" style="height:5px"> <%= image_tag(("navbar_icons/P.svg")) %></div>
+    <h5 style="padding-left: 30px;">總共獲得 點數 <%= current_user.points %> 點, 目前可兌換點數 xx 點. </h5>
   </div>
   <div class="card-deck">
     <% @products.each do |product|%>
@@ -10,7 +11,8 @@
           <%= image_tag product.image, class: "card-img-top"  %>
           <div class="card-body" style="padding: 5px 15px 40px 15px;">
             <h5 class="card-title"><%= product.name %></h5>
-            <p class="card-text"><%= product.product_points %> points </p>
+            <div class="user-icon" style="height:5px"> <%= image_tag(("navbar_icons/P.svg")) %></div>
+            <p class="card-text" style="padding-left: 30px;"><%= product.product_points %> 點 </p>
             <button type="button" class="btn btn-main pull-right" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
               兌換
             </button>
