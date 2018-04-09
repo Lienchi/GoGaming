@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="66px" height="32px" viewBox="0 0 66 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+<svg width="28px" height="32px" viewBox="0 0 28 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
     <title>find</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="find" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <text id="找電池" font-family="HiraginoSansGB-W3, Hiragino Sans GB" font-size="10.8" font-weight="300" fill="#80ADD7">
-            <tspan x="33" y="21">找電池</tspan>
-        </text>
         <g id="i_black_battery-copy" transform="translate(1.000000, 0.000000)">
             <path d="M8.39527463,25.7890696 C3.47019018,23.7923834 0,18.9929832 0,13.3896987 C0,5.99477232 6.04415588,0 13.5,0 C20.9558441,0 27,5.99477232 27,13.3896987 C27,18.9929832 23.5298098,23.7923834 18.6047254,25.7890696 L13.5,32 L8.39527463,25.7890696 Z" id="Combined-Shape" fill="#80ADD7"></path>
             <g id="Group-3" transform="translate(7.200000, 4.571429)" stroke="#FFFFFF" stroke-width="0.9">

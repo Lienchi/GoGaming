@@ -9,40 +9,75 @@
 
 
 <div class="container">
-  <br>
-  <br>
-  <div class="col-xs-8 user-data">
-    <h2><%= @user.name %> </h2>
-      <% if @user == current_user %>
-        <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div>  
-      <% end %>  
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <br>
+    <br>
+    <div class="col-xs-8 user-data">
+      <h2><%= @user.name %> </h2>
+         
 
-      <div class="user-icon-text text-muted">
-        <p>排名    <%= @user_rank %>   -   等級    <%= @user.getUserLevel(@user.points) %></p>
-        <p>徽章    <%= @user.badges.count%>     -    點數    <%= @user.points %> </p>
-        <p>EXP    <%= @user.experience %> </p>
+      <div class="user-icon-text">
+        <div class="col-xs-2" style="padding: 0px;">
+          <div class="" style="width: 30px; height: 30px;"><%= image_tag(("navbar_icons/trophy.svg")) %></div> 
+          <h5>排名</h5>
+        </div>
+        <div class="col-xs-2" style="padding: 6px 0px;">
+          <h2 style="color: #77D6AC"><%= @user_rank %> </h2>
+        </div>
+        <div class="clearfix"></div>       
+        <div class="col-xs-2" style="padding: 0px;">
+          <div class="user-icon"><%= image_tag(("navbar_icons/Lv.svg")) %></div> 
+          <h6 class="text-muted">等級</h6>
+        </div>
+        <div class="col-xs-2 align-middle" style="padding: 8px; ">
+          <h3 style="color: #77D6AC"><%= @user.getUserLevel(@user.points) %></h3>
+        </div>
+
+        <div class="col-xs-2" style="padding: 0px;">
+          <div class="user-icon"><%= image_tag(("navbar_icons/B.svg")) %></div> 
+          <h6 class="text-muted">徽章</h6>
+        </div>
+        <div class="col-xs-2 align-middle" style="padding: 8px; ">
+          <h3 style="color: #77D6AC"><%= @user.badges.count%></h3>
+        </div>
+
+        <div class="col-xs-2" style="padding: 0px;">
+          <div class="user-icon"><%= image_tag(("navbar_icons/P.svg")) %></div> 
+          <h6 class="text-muted">點數</h6>
+        </div>
+        <div class="col-xs-2 align-middle" style="padding: 8px; ">
+          <h3 style="color: #77D6AC"><%= @user.points %></h3>
+        </div>  
+
+        <%= current_user.experience %>    
       </div>
-  </div>
-
-  <div class="col-xs-4">
-    <%= image_tag @user.avatar, class: "img-circle avatar"%>   
-  </div>
-<div class="clearfix"></div>
-<br>
-  <div class="col-xs-4 col-xs-offset-2 text-center">
-    <div class=" btn btn-main">
-      <%= link_to " 所有玩家 ", leaderboards_users_path%>
     </div>
-  </div>
-  <div class="col-xs-4 text-center">
-    <div class=" btn btn-main">
-      <%= link_to " 我的朋友 ", f_leaderboards_users_path%>
-    </div>
-  </div>
-<div class="clearfix"></div>
-<br>
 
-  <div class="use-badge-data col-xs-12">
+    <div class="col-xs-4">
+      <%= image_tag @user.avatar, class: "img-circle avatar"%>  
+      <div class="col-xs-12  text-center" style="padding-top: 10px;">
+        <% if @user == current_user %>
+          <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div>  
+        <% end %>  
+      </div>
+      
+    </div>
+  <div class="clearfix"></div>
+  <br>
+    <div class="col-xs-4 col-xs-offset-2 text-center">
+      <div class=" btn btn-main">
+        <%= link_to " 所有玩家 ", leaderboards_users_path%>
+      </div>
+    </div>
+    <div class="col-xs-4 text-center">
+      <div class=" btn btn-main">
+        <%= link_to " 我的朋友 ", f_leaderboards_users_path%>
+      </div>
+    </div>
+  <div class="clearfix"></div>
+  <br>
+
+    <div class="use-badge-data col-xs-12">
       <% @user.badges.each do |badge| %>
         <div class="user-badge thumbnail col-xs-4 col-sm-3 col-md-2">
           <%= image_tag (badge.custom_fields[:image]) %>
@@ -52,4 +87,5 @@
         </div>
       <%end%>
     </div>
+  </div>
 </div>

@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     user.followings.each do |friend| 
       leaderboard << {:user_id => friend.id, :sum_points => friend.points }
     end
-    #leaderboard << {:user_id => user.id, :sum_points => user.points }
+    leaderboard << {:user_id => user.id, :sum_points => user.points }
     return leaderboard
   end
 
