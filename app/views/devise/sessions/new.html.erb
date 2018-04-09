@@ -1,22 +1,27 @@
-<div class="container">
-  <br>
-  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
+<div class="container login_page" style="padding: 0px;position: fixed; top: 0px;
+  left: 0px; background-image: url('<%= asset_path("login_page.svg") %>');">
+
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2", style="min-height: 605px;"">
     <br>
     <br>
+    <div class="col-xs-12", style=" padding-top: 150px;">
+      <%= image_tag "go_play.svg", style:"height: 100px;"%>
+    </div>
+    
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
-      <div class=" col-xs-12 white" style="padding:20px;">
+      <div class=" col-xs-12", style=" padding-top: 30px;">
         <div class="field form-group">
-          <%= f.label :email, class: "col-xs-4 control-label"%>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left" %>
+          
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email address", class: "float-left" %>
         </div>
         <div class="field form-group">
-          <%= f.label :password, class: "col-xs-4 control-label" %>
-          <%= f.password_field :password, autocomplete: "off", class: "float-left" %>
+          
+          <%= f.password_field :password, autocomplete: "off", placeholder: "password", class: "float-left" %>
         </div>
       </div>
-      <div class="clearfix"></div>
-      <hr/>
+
+
   <!--<% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
@@ -24,9 +29,9 @@
     </div>
   <% end -%>
 -->
-      <div class="col-xs-12 clearfix bottom white" style="min-height: 460px;" >
+      <div class="col-xs-12 clearfix bottom" style="min-height: 460px; padding: 15px 20px;" >
         <div class="actions text-center ">
-          <input class="btn btn-primary btn-lg float-left" type="submit" value="登入" style="margin-right: 20px;">
+          <input class="btn btn-main-1 btn-lg float-left" type="submit" value="登入" style="margin-right: 20px;">
           <%= render "devise/shared/links" %>
           <%= link_to "", user_facebook_omniauth_authorize_path %>
         </div>
