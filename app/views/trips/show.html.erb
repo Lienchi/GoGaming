@@ -641,6 +641,8 @@
         var ig_black_battery = null;
         var ig_green_black_battery = null;
         var ig_blue_black_battery = null;
+        var i_site = null;
+        var ig_site = null;
         var friendly_store_icon = null;
         var friendly_store_icon_onclick = null;
         
@@ -828,7 +830,8 @@
         var activeMarkerInfo = {
           marker: null,
           bHasPower: false,
-          bFriendlyStore: false
+          bFriendlyStore: false,
+          bGostationSite: false
         };
         function addMarker(props){
           var marker = new google.maps.Marker({
@@ -846,6 +849,9 @@
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
+                  else if(activeMarkerInfo.bGostationSite){
+                    activeMarkerInfo.marker.setIcon(i_site);
+                  }
                   else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
@@ -862,6 +868,7 @@
                 activeMarkerInfo.marker = marker;
                 activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
                 activeMarkerInfo.bFriendlyStore = false;
+                activeMarkerInfo.bGostationSite = false;
 
                 // get id of trip_gostation
                 currentTripGostationId = -1;
@@ -911,6 +918,9 @@
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
+                  else if(activeMarkerInfo.bGostationSite){
+                    activeMarkerInfo.marker.setIcon(i_site);
+                  }
                   else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
@@ -918,10 +928,17 @@
                     activeMarkerInfo.marker.setIcon(i_black_battery);
                   }
                 }
-                marker.setIcon(friendly_store_icon_onclick);
                 activeMarkerInfo.marker = marker;
-                activeMarkerInfo.bFriendlyStore = true;
-
+                if(props.id == -1){
+                  marker.setIcon(friendly_store_icon_onclick);
+                  activeMarkerInfo.bFriendlyStore = true;
+                  activeMarkerInfo.bGostationSite = false;
+                }
+                else if(props.id == -4){
+                  marker.setIcon(ig_site);
+                  activeMarkerInfo.bFriendlyStore = false;
+                  activeMarkerInfo.bGostationSite = true;
+                }
 
                 var disDurPromise = promiseCalculateDisDur(props.position);
                 disDurPromise
@@ -1003,7 +1020,7 @@
             info.position = position;
             info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
             info.id = -4;
-            info.iconImage = friendly_store_icon;
+            info.iconImage = i_site;
 
             addMarker(info);
           }
@@ -1125,6 +1142,16 @@
             url: "../icons/Shop.png",
             scaledSize: new google.maps.Size(35, 40)
           };
+
+          i_site = {
+            url: "../icons/i_site.png",
+            scaledSize: new google.maps.Size(28, 36)
+          }
+
+          ig_site = {
+            url: "../icons/ig_site.png",
+            scaledSize: new google.maps.Size(35, 45)
+          }
 
           // Create the DIV to hold the control and call the FriendlyStoreControl()
           // constructor passing in this DIV.

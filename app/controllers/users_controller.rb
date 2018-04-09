@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user.level = @user.getUserLevel(@user.points)
+    @user.level = @user.getUserLevel()
 
     top_scored = Merit::Score.top_scored(limit: User.count)
     user = top_scored.detect{|h| h['user_id'] == @user.id }
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     ids = scores.map{|score| score["user_id"]}
     @leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
     @leaderusers.each do |u|
-      u.level = u.getUserLevel(u.points)
+      u.level = u.getUserLevel()
     end
   end
 
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     ids = friends_scores.map{|score| score[:user_id]}
     @leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
     @leaderusers.each do |u|
-      u.level = u.getUserLevel(u.points)
+      u.level = u.getUserLevel()
     end
   end
 

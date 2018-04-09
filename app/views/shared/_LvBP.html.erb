@@ -3,13 +3,13 @@
     <div class="user-icon" style=""><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
   </div>
   <div  class="col-xs-1 ">
-    <div class="user-icon-text"><%= current_user.level%> </div>
+    <div class="user-icon-text"><%= current_user.getUserLevel() %> </div>
   </div>
   <div  class="col-xs-1 user-data">
     <div class="user-icon" style=""><%= image_tag(("navbar_icons/B.svg")) %> </div>
   </div>
   <div  class="col-xs-1 ">
-    <div class="user-icon-text"><%= current_user.badges.count%> </div>
+    <div class="user-icon-text"><%= current_user.badges.count %> </div>
   </div>
   <div  class="col-xs-1 user-data">
     <div class="user-icon" style=""> <%= image_tag(("navbar_icons/P.svg")) %></div> 
