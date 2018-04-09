@@ -47,8 +47,9 @@
       </div>
     </div> --> 
     <div class="container">
-      <!-- Trigger the modal with a button -->
+      <!-- Trigger the modal with a button
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+       -->
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -65,7 +66,7 @@
               </div>
               <br/>
               <p >恭喜你!挑戰成功!</p>  
-              <p >獲得 <%= @trip.points %></p>  
+              <p >獲得 <%= @trip.points %> 點</p>  
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -531,6 +532,12 @@
 
         $.ajaxSetup({
           headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+        });
+
+        $(document).ready(function() { 
+          if(gon.is_complete_trip){
+            $('#myModal').modal();
+          }
         });
 
         // --- HTML: <div id="tripModalCenter"></div>

@@ -16,6 +16,7 @@ class TripsController < ApplicationController
     gon.trip_gostations = @trip_gostations
     gon.friendly_stores = Friendlystore.all
     gon.gostation_sites = Site.where(trip_id: @trip.id)
+    gon.is_complete_trip = is_complete_trip?(@trip.id)
 
     @comment = Comment.new
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
