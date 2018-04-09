@@ -439,7 +439,7 @@
             document.getElementById('markerModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
           else if(props.source_url){
-            document.getElementById('tripModal-cellContent').innerHTML = '<a style="font-size: 16px; padding: 8px; width:100px; href="'+props.source_url+'" class="btn btn-sm btn-main text-center" target="_blank">更多資訊</a>';
+            document.getElementById('markerModal-cellContent').innerHTML = '<a style="font-size: 16px; padding: 8px; width:100px; href="'+props.source_url+'" class="btn btn-sm btn-main text-center" target="_blank">更多資訊</a>';
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('markerModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
