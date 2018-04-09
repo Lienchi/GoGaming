@@ -30,15 +30,25 @@
   </head>
 
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12&appId=1818422994855649&autoLogAppEvents=1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+   <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '1818422994855649',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.12'
+        });
+      };
 
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+     <button onclick="share()">點此分享</button>
     <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
          Modal content
@@ -71,9 +81,8 @@
                 <%= image_tag @trip.badge%>
                 <p>獲得 <%= @trip.points %></p>  
                 <!-- FB share button -->
-                <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a>
-                </div>  
-         
+                <button onclick="share()">點此分享</button>
+                <%= social_share_button_tag('My Gogoro Badges', :url => 'trip_url(@trip)', desc: 'My Gogoro Badges') %>
               </div>
               <!--<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -85,7 +94,6 @@
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
       <div class="clearfix" style="min-height: 605px;">
-          
         <div class="row">
           <%= link_to trips_path do %>
             <%= image_tag "navbar_icons/back_button.svg", :class => "nav-icon-style" %><%= @trip.name %>
@@ -218,7 +226,6 @@
 
 
         </div>  
-    
 <div class="clearfix"></div>
         <div class="comment-group">
           <div class="col-xs-8 col-sm-10">
@@ -1135,6 +1142,20 @@
       </script>
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
+      </script>
+      <script type="text/javascript">
+        function share(){
+          FB.ui({
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object:'https://gogaming-deployment.herokuapp.com/trips',
+          })
+        }, function(response){
+          // Debug response (optional)
+          console.log(response);
+        });
+      }
       </script>
       <script type="text/javascript">
           if (RegExp('multipage', 'gi').test(window.location.search)) {
