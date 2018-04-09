@@ -1,7 +1,7 @@
 <div class="container">
   <div class="" style="padding-left: 30px;">
     <div class="user-icon" style="height:5px"> <%= image_tag(("navbar_icons/P.svg")) %></div>
-    <h5 style="padding-left: 30px;">總共獲得 點數 <%= current_user.points %> 點, 目前可兌換點數 xx 點. </h5>
+    <h5 style="padding-left: 30px;">總共獲得 點數 <%= current_user.points %> 點, 目前可兌換點數 <%= current_user.experience %> 點. </h5>
   </div>
   <div class="card-deck">
     <% @products.each do |product|%>
