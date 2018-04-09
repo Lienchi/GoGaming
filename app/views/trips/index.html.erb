@@ -1,7 +1,8 @@
+
 <%= render partial: "shared/LvBP"%>
 <div class="container">
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2", style="min-height: 605px;">
-    <div class="card-deck">
+    <div class="card-deck clearfix" data-intro="騎車也可以很好玩?Gogoro幫你準備了不同的挑戰路線，現在就來看看吧!">
       <%  color = ["2E3618", "285AB1", "985554", "B5A38E", "96AE54", "46453C"] %>
       <% i=0 %>
       <% @trips.each do |t| %>
@@ -14,21 +15,21 @@
               </div>
               <div class="card-body card-trip-body">
                 <h4 class="card-title"><%= link_to "#{t.name}", trip_path(t)%></h4>
-                <p class="card-text"><%= t.points %> points</p>
-                <p class="card-text">101人已完成</p>
+                <p class="card-text"><%= t.points%> points</p>
+                <p class="card-text"><%= Challenge.where(trip_id: t.id).count %> 人已完成</p>
               </div>
             </div>
           </div>
         <% end %>
       <%end%>          
-       
     </div> 
   </div>
 </div>
-<script type="text/javascript">
+<script>
   if (gon.sign_in_count < 2) {
-    introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
-      window.location.href = 'trips/1.html?multipage=true';
-    });
-  };
+     introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+       window.location.href = 'trips/1.html?multipage=true';
+     });
+  }
 </script>
+
