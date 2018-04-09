@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408153835) do
+ActiveRecord::Schema.define(version: 20180409034618) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -169,6 +169,8 @@ ActiveRecord::Schema.define(version: 20180408153835) do
     t.text "gostations_index"
     t.string "description"
     t.string "image"
+    t.string "badge"
+    t.integer "points"
   end
 
   create_table "user_products", force: :cascade do |t|
