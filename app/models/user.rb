@@ -72,22 +72,22 @@ class User < ApplicationRecord
     return user
   end
 
-  def getUserLevel(exp)
-    if exp > 100000
+  def getUserLevel()
+    if self.experience > 100000
       return 9
-    elsif exp > 50000
+    elsif self.experience > 50000
       return 8
-    elsif exp > 30000
+    elsif self.experience > 30000
       return 7
-    elsif exp > 10000
+    elsif self.experience > 10000
       return 6
-    elsif exp > 6000
+    elsif self.experience > 6000
       return 5
-    elsif exp > 3000
+    elsif self.experience > 3000
       return 4
-    elsif exp > 1000
+    elsif self.experience > 1000
       return 3
-    elsif exp > 500
+    elsif self.experience > 500
       return 2
     else
       return 1
