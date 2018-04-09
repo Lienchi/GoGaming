@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2", style="min-height: 605px;">
     <div class="card-deck clearfix" data-intro="騎車也可以很好玩?Gogoro幫你準備了不同的挑戰路線，現在就來看看吧!">
@@ -21,15 +20,14 @@
           </div>
         <% end %>
       <%end%>          
-       
     </div> 
   </div>
 </div>
-<script type="text/javascript">
+<script>
   if (gon.sign_in_count < 2) {
-    introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
-      window.location.href = 'trips/1.html?multipage=true';
-    });
-  };
+     introJs().setOption('doneLabel', 'Next page').start().oncomplete(function() {
+       window.location.href = 'trips/1.html?multipage=true';
+     });
+  }
 </script>
 
