@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="35px" height="35px" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>current_location</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="gostation#index" transform="translate(-103.000000, -279.000000)">
+            <g id="current_location" transform="translate(104.000000, 280.000000)">
+                <circle id="Oval" stroke="#538AF0" stroke-width="0.5" cx="16.5" cy="16.5" r="16.5"></circle>
+                <circle id="Oval-Copy-2" stroke="#AEE1F3" stroke-width="0.5" fill="#64818C" opacity="0.143851902" cx="16.5" cy="16.5" r="16.5"></circle>
+                <circle id="Oval-Copy" fill="#FFFFFF" cx="16.5" cy="16.5" r="6.46735016"></circle>
+                <circle id="Oval-Copy-3" fill="#538AF0" cx="16.5" cy="16.5" r="5.29146831"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

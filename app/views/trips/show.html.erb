@@ -285,7 +285,7 @@
         <div class="form-group comment-group clearfix">  
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
-              <%= f.file_field :image, class: "btn", style: " width:auto;" %>
+              <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
               <input class="btn btn-main pull-right" type="submit" value="留言">
             </div>
           <% end%>
