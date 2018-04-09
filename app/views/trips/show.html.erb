@@ -30,29 +30,7 @@
   </head>
 
   <body>
-
     <%= render partial: "shared/LvBP"%>
-    <div id="fb-root"></div>
-
-   <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '1818422994855649',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v2.12'
-        });
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-     <button onclick="share()">點此分享</button>
 
     <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
@@ -109,8 +87,8 @@
           <% end %>
         </div>
 
-        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可以獲得'專屬徽章'一枚。(3.)點選推薦景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
-        
+        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可獲得'專屬徽章'一枚。(3.)點選推荐景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
+  
         <!-- <div id="myProgress" class="myProgress" onclick="move()">
           <div id="myBar" class="myBar"></div>
         </div> -->
@@ -120,7 +98,7 @@
           <%if Challenge.where(trip_id:@trip).exists?%>
             <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
             <%= @challenge.user.name%>
-            <%= @challenge.completetime%>
+            <%= @challenge.completetime%> 分鐘/完成
           <%end%>   
         </div> 
 
@@ -299,7 +277,7 @@
         <div class="form-group comment-group clearfix">  
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
-              <%= f.file_field :image, class: "btn", style: " width:auto;" %>
+              <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
               <input class="btn btn-main pull-right" type="submit" value="留言">
             </div>
           <% end%>
@@ -1184,25 +1162,9 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
       </script>
       <script type="text/javascript">
-        function share(){
-          FB.ui({
-          method: 'share_open_graph',
-          action_type: 'og.likes',
-          action_properties: JSON.stringify({
-            object:'https://gogaming-deployment.herokuapp.com/trips',
-          })
-        }, function(response){
-          // Debug response (optional)
-          console.log(response);
-        });
-      }
-      </script>
-      <script type="text/javascript">
           if (RegExp('multipage', 'gi').test(window.location.search)) {
-            introJs().start();
-          }
-      </script>
-
-      
+              introJs().start();
+            };
+      </script>  
   </body>
 </html>
