@@ -155,7 +155,8 @@
         </div>
       <!-- </div> -->
       
-      
+    </div>
+
       <script>
 
 
@@ -436,6 +437,9 @@
           document.getElementById('markerModal-cellContent').innerHTML = "";
           if(props.totalBatteryCells>0){
             document.getElementById('markerModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
+          }
+          else if(props.source_url){
+            document.getElementById('tripModal-cellContent').innerHTML = '<a style="font-size: 16px; padding: 8px; width:100px; href="'+props.source_url+'" class="btn btn-sm btn-main text-center" target="_blank">更多資訊</a>';
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('markerModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
@@ -775,6 +779,7 @@
 
 
                 var disDurPromise = promiseCalculateDisDur(props.position);
+
                 disDurPromise
                 .then(function(results) {
                   props.distance = results.distance;
@@ -825,6 +830,7 @@
             info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
             info.id = -1;
             info.iconImage = friendly_store_icon;
+            info.source_url = gon.friendly_stores[i].source_url;
 
             addMarker(info);
           }
@@ -1150,12 +1156,12 @@
           i_site = {
             url: "icons/i_site.png",
             scaledSize: new google.maps.Size(35, 45)
-          }
+          };
           // destination icon
           ig_site = {
             url: "icons/ig_site.png",
             scaledSize: new google.maps.Size(35, 45)
-          }
+          };
 
           directionsDisplay.setMap(map);
 
@@ -1191,6 +1197,7 @@
               document.getElementById('direction-start'));
 
           var autocomplete_start = new google.maps.places.Autocomplete(input_start);
+
           autocomplete_start.bindTo('bounds', map);
 
           autocomplete_start.addListener('place_changed', function() {
@@ -1219,15 +1226,13 @@
             }
           });
 
-        }
 
+        }
       </script>
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&libraries=places&callback=initMap&language=zh-TW">
       </script>
-      
-    </div>
-
+    
   </body>
 
 </html>
