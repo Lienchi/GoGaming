@@ -14,8 +14,8 @@
               </div>
               <div class="card-body card-trip-body">
                 <h4 class="card-title"><%= link_to "#{t.name}", trip_path(t)%></h4>
-                <p class="card-text">180 points</p>
-                <p class="card-text">101人已完成</p>
+                <p class="card-text"><%= t.points%></p>
+                <p class="card-text"><%= Challenge.where(trip_id:t.id).count%>人完成</p>
               </div>
             </div>
           </div>
