@@ -39,7 +39,7 @@
               <%= image_tag product.image %>
               <p class=""><%= product.product_points%> points</p>
               <%= form_for @user_product, url: user_products_path(product_id: product.id,user_id: current_user.id), method: :post do |f| %>
-                  <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: true}, {class: "form-control"} %>
+                  <%= f.collection_select :repairstore_id, Repairstore.all, :id, :name, {prompt: "請選擇兌換店家"}, {class: "form-control"} %>
                   <div class="col-xs-12" style= "padding-top: 5px;">
                     <%= f.submit "確認兌換" , :class => 'btn btn-main pull-right' %>
                   </div>

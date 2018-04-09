@@ -43,7 +43,9 @@ gem 'ffaker'
 gem 'bootstrap', '~> 4.0.0'
 gem 'data-confirm-modal'
 gem 'introjs-rails'
+gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'koala', "~> 2.2"
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'

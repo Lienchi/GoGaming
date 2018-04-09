@@ -6,7 +6,7 @@
           <h4><%= current_user.name %> </h4> 
             <div class="user-icon-text text-muted" style="margin-top: 0px;">
               <h6>
-                等級    <%= current_user.getUserLevel(current_user.points) %>     -   
+                等級    <%= current_user.getUserLevel() %>     -   
                 徽章    <%= current_user.badges.count%>     -   
                 點數    <%= current_user.points %>    
               </h6>  

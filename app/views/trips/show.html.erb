@@ -30,15 +30,29 @@
   </head>
 
   <body>
+
     <%= render partial: "shared/LvBP"%>
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12&appId=1818422994855649&autoLogAppEvents=1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+
+   <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '1818422994855649',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.12'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+     <button onclick="share()">點此分享</button>
 
     <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
@@ -54,6 +68,7 @@
         </div>
       </div>
     </div> -->
+    <!-- 完成挑戰顯示modal-->
     <% if @trip.is_challenged?(current_user)%> 
       <div class="container ">
         <!-- Trigger the modal with a button -->
@@ -68,11 +83,11 @@
                 <h4 class="modal-title">恭喜你!已完成挑戰!</h4>
               </div>
               <div class="modal-body">
-                <%= image_tag @trip.image%>
+                <%= image_tag @trip.badge%>
+                <p>獲得 <%= @trip.points %></p>  
                 <!-- FB share button -->
-                <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a>
-                </div>  
-         
+                <button onclick="share()">點此分享</button>
+                <%= social_share_button_tag('My Gogoro Badges', :url => 'trip_url(@trip)', desc: 'My Gogoro Badges') %>
               </div>
               <!--<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -223,7 +238,6 @@
 
 
         </div>  
-    
 <div class="clearfix"></div>
 <br>
         <div class="comment-group">
@@ -627,6 +641,8 @@
         var ig_black_battery = null;
         var ig_green_black_battery = null;
         var ig_blue_black_battery = null;
+        var i_site = null;
+        var ig_site = null;
         var friendly_store_icon = null;
         var friendly_store_icon_onclick = null;
         
@@ -814,7 +830,8 @@
         var activeMarkerInfo = {
           marker: null,
           bHasPower: false,
-          bFriendlyStore: false
+          bFriendlyStore: false,
+          bGostationSite: false
         };
         function addMarker(props){
           var marker = new google.maps.Marker({
@@ -832,6 +849,9 @@
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
+                  else if(activeMarkerInfo.bGostationSite){
+                    activeMarkerInfo.marker.setIcon(i_site);
+                  }
                   else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
@@ -848,6 +868,7 @@
                 activeMarkerInfo.marker = marker;
                 activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
                 activeMarkerInfo.bFriendlyStore = false;
+                activeMarkerInfo.bGostationSite = false;
 
                 // get id of trip_gostation
                 currentTripGostationId = -1;
@@ -897,6 +918,9 @@
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
+                  else if(activeMarkerInfo.bGostationSite){
+                    activeMarkerInfo.marker.setIcon(i_site);
+                  }
                   else if(activeMarkerInfo.bHasPower){
                     activeMarkerInfo.marker.setIcon(i_green_black_battery);
                   }
@@ -904,10 +928,17 @@
                     activeMarkerInfo.marker.setIcon(i_black_battery);
                   }
                 }
-                marker.setIcon(friendly_store_icon_onclick);
                 activeMarkerInfo.marker = marker;
-                activeMarkerInfo.bFriendlyStore = true;
-
+                if(props.id == -1){
+                  marker.setIcon(friendly_store_icon_onclick);
+                  activeMarkerInfo.bFriendlyStore = true;
+                  activeMarkerInfo.bGostationSite = false;
+                }
+                else if(props.id == -4){
+                  marker.setIcon(ig_site);
+                  activeMarkerInfo.bFriendlyStore = false;
+                  activeMarkerInfo.bGostationSite = true;
+                }
 
                 var disDurPromise = promiseCalculateDisDur(props.position);
                 disDurPromise
@@ -989,7 +1020,7 @@
             info.position = position;
             info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
             info.id = -4;
-            info.iconImage = friendly_store_icon;
+            info.iconImage = i_site;
 
             addMarker(info);
           }
@@ -1112,6 +1143,16 @@
             scaledSize: new google.maps.Size(35, 40)
           };
 
+          i_site = {
+            url: "../icons/i_site.png",
+            scaledSize: new google.maps.Size(28, 36)
+          }
+
+          ig_site = {
+            url: "../icons/ig_site.png",
+            scaledSize: new google.maps.Size(35, 45)
+          }
+
           // Create the DIV to hold the control and call the FriendlyStoreControl()
           // constructor passing in this DIV.
           var friendlyStoreDiv = document.createElement('div');
@@ -1141,6 +1182,20 @@
       </script>
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlueY1pKWgE_uhgFbjH8_cO2CjJCERaA&callback=initMap&language=zh-TW">
+      </script>
+      <script type="text/javascript">
+        function share(){
+          FB.ui({
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object:'https://gogaming-deployment.herokuapp.com/trips',
+          })
+        }, function(response){
+          // Debug response (optional)
+          console.log(response);
+        });
+      }
       </script>
       <script type="text/javascript">
           if (RegExp('multipage', 'gi').test(window.location.search)) {
