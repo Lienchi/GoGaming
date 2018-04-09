@@ -3,8 +3,8 @@
 }
 
 .container {
-  padding-top: 30px;
-  padding-bottom: 45px;
+  padding-top: 5px;
+  padding-bottom: 85px;
   
 }
 
@@ -161,6 +161,11 @@ text-decoration:none;
   text-decoration:none;
 }
 
+.pig-bar {
+  margin-bottom: 55px;
+  background-color: rgba(256,256,256,0.5);
+}
+
 /*user */
 
 .user-navdata {
@@ -173,7 +178,7 @@ text-decoration:none;
   margin-top: 110px; 
   padding-top: 5px;
   margin-bottom: 5px; 
-  background-color: rgba(256,256,256,0.6)
+  background-color: rgba(256,256,256,0.6);
 }
 
 .nav-pills {

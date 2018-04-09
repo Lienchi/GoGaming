@@ -1,11 +1,16 @@
 <div class="container">
-  <div class="text-center" style="padding-left: 30px;">
+  <div class="navbar-fixed-top" style="margin-top: 48px; padding-top: 10px; background-color: rgba(256,256,256,0.5);">
+    <div class="col-xs-1 col-xs-offset-1"">
+      <div class="user-icon" style="height:5px; padding-top: 5px;"> <%= image_tag(("navbar_icons/P.svg")) %></div>
+    </div>
     
-    <h5 style="padding-left: 30px;">總共獲得 經驗值 <%= current_user.experience %> 點</h5>
-    <div class="user-icon" style="height:5px"> <%= image_tag(("navbar_icons/P.svg")) %></div>
-    <h5> 目前可兌換 點數 <%= current_user.points %> 點. </h5>
+    <div class=" col-xs-9"">    
+      <h5>總共獲得點數 <%= current_user.experience %> 點</h5>   
+      <h5> 目前可兌換點數 <span style="color: #FD8484;"><%= current_user.points %><span> 點 </h5>
+    </div>
   </div>
-  <div class="card-deck">
+
+  <div class="card-deck" style="margin-top: 20px">
     <% @products.each do |product|%>
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">    
         <div class="card card-product border rounded">
@@ -30,10 +35,10 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle"><%= product.name%></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
+              <h5 class="modal-title" id="exampleModalLongTitle"><%= product.name%></h5>
             </div>
             <div class="modal-body" style="padding-bottom: 45px;">
               <%= image_tag product.image %>

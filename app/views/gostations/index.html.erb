@@ -32,12 +32,13 @@
       .controls {
         margin-top: 10px;
         border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
+        border-radius: 15px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         height: 32px;
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
       }
 
       #pac-input {
@@ -49,7 +50,7 @@
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         width: 60%;
-        opacity: 0.4;
+        opacity: 0.6;
       }
 
       #pac-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -86,6 +87,14 @@
         #search-box-pc {
           display: none;
         }
+        #map {
+          height: 562px; 
+
+        }
+        body {
+          background-color: #53C0F0;
+        }
+
       }
     </style>
   </head>
@@ -133,7 +142,7 @@
 
           <div class="input-group">
             <span class="input-group-btn">
-              <button id="current-position-submit" class="btn btn-default" type="submit">現在位置</button>
+              <button id="current-position-submit" class="btn btn-main" type="submit">現在位置</button>
             </span>
             <input  id="direction-start" type="text" class="form-control" placeholder="或 輸入起點">
           </div><!-- /input-group -->
@@ -141,17 +150,18 @@
           <div class="input-group">
             <input id="direction-end" type="text" class="form-control" placeholder="你想去哪裡？">
             <span class="input-group-btn">
-              <<input id="direction-submit" class="btn btn-primary" type="submit" value="GO">
+              <input id="direction-submit" class="btn btn-main " type="submit" value="GO" style="padding: 6px 25px; margin-left: -15px; margin-top: -4px;">
             </span>
+            <br>
           </div><!-- /input-group -->
-          <div class="col-xs-12"><hr></div>
+          <div class="col-xs-12" style="margin-bottom: 30px;"></div>
         </div>
 
 
-        <div class="">
-          <input id="pac-input" class="controls" type="text" placeholder="你想去哪裡？">
-          <div id="pac-input-button"></div>
-          <div id="map" class="z-depth-2" style="height: 650px; padding-top: -25px;"></div>
+        <div style="padding: -100;" >
+          <input id="pac-input" class="form-control" type="text" placeholder="你想去哪裡？" style="margin-top: 25px;">
+          <div id="pac-input-button" style="margin-top: 15px; margin-left: -5px;"></div>
+          <div id="map" class="z-depth-2" style="height: 592px; position: relative; top: -24px;"></div>
         </div>
       <!-- </div> -->
       
@@ -1002,8 +1012,8 @@
           controlUI.style.borderRadius = '15px';
           controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
           controlUI.style.cursor = 'pointer';
-          controlUI.style.marginLeft = '18px';
-          controlUI.style.marginBottom = '8px';
+          controlUI.style.marginLeft = '28px';
+          controlUI.style.marginBottom = '38px';
           controlUI.style.textAlign = 'center';
           controlUI.title = 'Click to recenter the map';
           controlDiv.appendChild(controlUI);
@@ -1041,11 +1051,11 @@
 
           // Set CSS for the control border.
           var controlUI = document.createElement('div');
-          controlUI.style.backgroundColor = 'rgb(100,100,100)';
-          controlUI.style.borderRadius = '3px';
+          controlUI.style.backgroundColor = '#77D6AC';
+          controlUI.style.borderRadius = '15px';
           controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
           controlUI.style.cursor = 'pointer';
-          controlUI.style.marginLeft = '0px';
+          controlUI.style.marginLeft = '-15px';
           controlUI.style.marginBottom = '0px';
           controlUI.style.marginTop = '10px';
           controlUI.style.textAlign = 'center';
@@ -1055,11 +1065,11 @@
           var controlText = document.createElement('div');
           controlText.style.color = 'rgb(250,250,250)';
           controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-          controlText.style.fontSize = '15px';
+          controlText.style.fontSize = '18px';
           controlText.style.lineHeight = '32px';
-          controlText.style.paddingLeft = '5px';
-          controlText.style.paddingRight = '5px';
-          controlText.innerHTML = 'GO';
+          controlText.style.paddingLeft = '15px';
+          controlText.style.paddingRight = '15px';
+          controlText.innerHTML = '  GO  ';
           controlUI.appendChild(controlText);
 
           // Setup the click event listeners: simply set the map to Chicago.
