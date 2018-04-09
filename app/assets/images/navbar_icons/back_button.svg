@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="13px" height="22px" viewBox="0 0 13 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
-    <title>Back button</title>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>back_button</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="trip#show" transform="translate(-12.000000, -129.000000)" fill="#77D6AC">
-            <g id="Back-button" transform="translate(12.000000, 129.000000)">
-                <polygon points="0.5 11 11 0.5 13 2.5 4.5 11 13 19.5 11 21.5"></polygon>
-            </g>
+    <g id="back_button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Back-button" fill="#77D6AC">
+            <polygon points="0.5 11 11 0.5 13 2.5 4.5 11 13 19.5 11 21.5"></polygon>
         </g>
     </g>
 </svg>

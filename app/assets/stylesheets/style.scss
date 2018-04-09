@@ -18,6 +18,10 @@
   color: #FFFFFF;
 }
 
+.text-dark {
+  color: #77D6AC;
+}
+
 
 html, body {
   height: 100%;
@@ -540,6 +544,14 @@ input[type='file'] {
   color: #77D6AC;
   background-color: #FFFFFF;
   border-color: #77D6AC;
+  text-decoration:none; 
+}
+
+.btn-gray-outline {
+  color: #77D6AC;
+  background-color: #FFFFFF;
+  border-color: #B5DBCA;
+  border-radius: 10px;
   text-decoration:none; 
 }
 

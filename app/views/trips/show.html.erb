@@ -85,17 +85,21 @@
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
       <div class="clearfix" style="min-height: 605px;">
           
-        <div class="row">
+        <div class="col-xs-12" style="padding-bottom: 10px;" >
           <%= link_to trips_path do %>
-            <%= image_tag "navbar_icons/back_button.svg", :class => "nav-icon-style" %><%= @trip.name %>
+            <h3>
+              <%= image_tag "navbar_icons/back_button.svg", :class => "nav-icon-style", style:"height: 25px; width: auto;"  %>   
+              <%= @trip.name %>
+            </h3>
           <% end %>
         </div>
 
-        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可以獲得'專屬徽章'一枚。(3.)點選推荐景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
-        <div id="myProgress" class="myProgress" onclick="move()">
+        <div data-step="2" data-intro="(1.)點選電池，前往充電站打卡，賺取點數。(2.)完成挑戰後，還可以獲得'專屬徽章'一枚。(3.)點選推薦景點，可以知道隱藏在充電站附近，有哪些好吃又好玩的地方喔!" id="map" class="z-depth-2" style="height: 250px"></div>
+        
+        <!-- <div id="myProgress" class="myProgress" onclick="move()">
           <div id="myBar" class="myBar"></div>
-        </div>
-        <p class="mt-2"><%= @trip.description %></p>
+        </div> -->
+        <p class="col-xs-12" style="padding-top: 10px;"><%= @trip.description %></p>
 
         <div class="">
           <%if Challenge.where(trip_id:@trip).exists?%>
@@ -113,23 +117,25 @@
           </div>
           
           
-          <div class="col-xs-3 col-sm-1">
+          <div class="col-xs-3 col-sm-3" style="padding: 0;">
               <% if @trip.is_challenged?(current_user)%>                  
                 <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% else %>
                 <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% end %>
             </div>
-            <div class="col-xs-9 col-sm-11">
+            <div class="col-xs-9 col-sm-9" style="padding: 0px;">
               <ul>
-                <li><%= link_to "永康牛肉麵" %></li>
+                <li>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
+                    永康牛肉麵
+                  </button>
+                </li>
               </ul>
 
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
-              永康牛肉麵
-            </button>
+
 
             <!-- Modal for sight-->
             <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -159,29 +165,29 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="tripModalLongTitle"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
+                  <h3 class="modal-title text-center" id="tripModalLongTitle"></h3>
                 </div>
                 <div class="modal-body">
                   <div>
-                    <img id="tripModal-img" alt="Store Photo" width="400" height="400" class="border rounded">
+                    <img id="tripModal-img" alt="Store Photo" width="300" height="300" class="border rounded">
                   </div>
-                  <div id="tripModal-content" style="font-size: 14px;" class="text-center"></div>
-                  <div id="tripModal-disdur" style="font-size: 14px;" class="text-center"></div>
-                  <div id="tripModal-availableTime" style="font-size: 14px;" class="text-center"></div>
-                  <div id="tripModal-cellContent" style="font-size: 14px;" class="text-center"></div>
+                  <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
+                  <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
+                  <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
+                  <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-cellProgress">
                     <div id="tripModal-cellBar"></div>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <div>
-                    <a id="tripModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5" rel="nofollow">打卡</a>
+                  <div class="col-xs-4 col-xs-offset-1 text-center"">
+                    <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow">打卡</a>
                   </div>
-                  <div>
-                    <a id="tripModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                  <div class="col-xs-4 col-xs-offset-2">
+                    <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
                   </div>
                 </div>
               </div>
@@ -219,21 +225,22 @@
         </div>  
     
 <div class="clearfix"></div>
+<br>
         <div class="comment-group">
-          <div class="col-xs-8 col-sm-10">
-            <h5>推薦景點</h5>
+          <div class="col-xs-8 col-sm-10" style="padding-left: 0px;">
+            <h4>推薦景點</h4>
           </div>
 
           <div class="clearfix"></div>
           <br/>
           <div class="">
             <% @comments.each do |comment|%>
-              <div class="comment col-xs-12 col-sm-6 col-xs-6">
+              <div class="comment col-xs-12 ">
 
                 <div class="media">
                   <div class="media-left ">
                     <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-main" data-toggle="modal" data-target=#<%= "comment#{comment.id}"%> >
+                  <button type="button" class="btn btn-gray-outline" data-toggle="modal" data-target=#<%= "comment#{comment.id}"%> >
                     <%= image_tag comment.image, class: "img-fluid", style: "width:64px;border-radius:5px"%>
                   </button>
 
@@ -278,8 +285,8 @@
         <div class="form-group comment-group clearfix">  
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
-              <%= f.file_field :image, style: " width:90px;" %>
-              <input class="btn btn-main" type="submit" value="留言">
+              <%= f.file_field :image, class: "btn", style: " width:auto;" %>
+              <input class="btn btn-main pull-right" type="submit" value="留言">
             </div>
           <% end%>
         </div>
@@ -550,10 +557,10 @@
             var elem = document.getElementById("tripModal-cellBar");
             elem.style.width = percentage*100 + '%';
 
-            markerModalEle.style.color = "#323237";
+            // markerModalEle.style.color = "#323237";
             markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
             if( props.bCloseGostation ){
-              markerModalEle.style.color = "#ffffff";
+              // markerModalEle.style.color = "#ffffff";
               markerModalEle.onclick = toggle;
             }
 
@@ -573,7 +580,7 @@
           }
           document.getElementById('tripModalLongTitle').innerHTML = props.title;
           document.getElementById('tripModal-img').src = props.storePhoto;
-          document.getElementById('tripModal-content').innerHTML = '地址：'+props.address;
+          document.getElementById('tripModal-content').innerHTML = ''+props.address;
           document.getElementById('tripModal-availableTime').innerHTML = '營業時間：'+props.availableTime;
           document.getElementById('tripModal-cellContent').innerHTML = "";
           if(props.totalBatteryCells>0){
@@ -1020,8 +1027,8 @@
 
           // Set CSS for the control border.
           var controlUI = document.createElement('div');
-          controlUI.style.backgroundColor = '#fff';
-          controlUI.style.borderRadius = '3px';
+          controlUI.style.backgroundColor = '#77D6AC';
+          controlUI.style.borderRadius = '15px';
           controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
           controlUI.style.cursor = 'pointer';
           controlUI.style.marginLeft = '18px';
@@ -1032,12 +1039,12 @@
 
           // Set CSS for the control interior.
           var controlText = document.createElement('div');
-          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.color = '#FFFFFF';
           controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-          controlText.style.fontSize = '16px';
+          controlText.style.fontSize = '14px';
           controlText.style.lineHeight = '32px';
-          controlText.style.paddingLeft = '5px';
-          controlText.style.paddingRight = '5px';
+          controlText.style.paddingLeft = '10px';
+          controlText.style.paddingRight = '10px';
           controlText.innerHTML = '友好店家';
           controlUI.appendChild(controlText);
 
