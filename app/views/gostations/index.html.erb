@@ -995,8 +995,8 @@
 
           // Set CSS for the control border.
           var controlUI = document.createElement('div');
-          controlUI.style.backgroundColor = '#fff';
-          controlUI.style.borderRadius = '3px';
+          controlUI.style.backgroundColor = '#77D6AC';
+          controlUI.style.borderRadius = '15px';
           controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
           controlUI.style.cursor = 'pointer';
           controlUI.style.marginLeft = '18px';
@@ -1007,12 +1007,12 @@
 
           // Set CSS for the control interior.
           var controlText = document.createElement('div');
-          controlText.style.color = 'rgb(25,25,25)';
+          controlText.style.color = '#FFFFFF';
           controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-          controlText.style.fontSize = '16px';
+          controlText.style.fontSize = '14px';
           controlText.style.lineHeight = '32px';
-          controlText.style.paddingLeft = '5px';
-          controlText.style.paddingRight = '5px';
+          controlText.style.paddingLeft = '10px';
+          controlText.style.paddingRight = '10px';
           controlText.innerHTML = '友好店家';
           controlUI.appendChild(controlText);
 
@@ -1022,13 +1022,13 @@
                 toggleFriendlyStore = !toggleFriendlyStore;
                 if(toggleFriendlyStore){
                   showMarkers(friendlyStoreMarkers);
-                  controlText.style.color = 'rgb(250,250,250)';
-                  controlUI.style.backgroundColor = 'rgb(100,100,100)';
+                  controlText.style.color = '#77D6AC';
+                  controlUI.style.backgroundColor = '#FFFFFF';
                 }
                 else{
                   clearMarkers(friendlyStoreMarkers);
-                  controlText.style.color = 'rgb(25,25,25)';
-                  controlUI.style.backgroundColor  = '#fff';
+                  controlText.style.color = '#FFFFFF';
+                  controlUI.style.backgroundColor  = '#77D6AC';
                 }
           });
 
