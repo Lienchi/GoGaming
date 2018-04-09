@@ -45,39 +45,39 @@
           </div>
         </div>
       </div>
-    </div> -->
-    <!-- 完成挑戰顯示modal-->
-    <% if @trip.is_challenged?(current_user)%> 
-      <div class="container ">
-        <!-- Trigger the modal with a button -->
-        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-        <!--Modal 
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">-->
-             <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                <h4 class="modal-title">恭喜你!已完成挑戰!</h4>
+    </div> --> 
+    <div class="container">
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+      
+            </div>
+            <div class="modal-body text-center">
+              <div style="width: 90px;margin:0 auto;">
+                <%= image_tag @trip.badge, style:"width:100px;height100px;"%>
               </div>
-              <div class="modal-body">
-                <%= image_tag @trip.badge%>
-                <p>獲得 <%= @trip.points %></p>  
-                <!-- FB share button -->
-                <button onclick="share()">點此分享</button>
-                <%= social_share_button_tag('My Gogoro Badges', :url => 'trip_url(@trip)', desc: 'My Gogoro Badges') %>
-              </div>
-              <!--<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>-->
-            </div> 
+              <br/>
+              <p >恭喜你!挑戰成功!</p>  
+              <p >獲得 <%= @trip.points %></p>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
-    <%end%>
+    </div>
 
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
-      <div class="clearfix" style="min-height: 605px;">
-          
+      <div class="clearfix" style="min-height: 605px;">   
         <div class="col-xs-12" style="padding-bottom: 10px;" >
           <%= link_to trips_path do %>
             <h3>
