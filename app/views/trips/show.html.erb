@@ -91,7 +91,7 @@
           <%if Challenge.where(trip_id:@trip).exists?%>
             <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
             <%= @challenge.user.name%>
-            <%= @challenge.completetime%>
+            <%= @challenge.completetime%> 分鐘/完成
           <%end%>   
         </div> 
 
