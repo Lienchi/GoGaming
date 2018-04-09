@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="60px" viewBox="0 0 50 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>ig_green_battery</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-17.3%" y="-14.8%" width="134.6%" height="129.5%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="2.7" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="ig_green_battery" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="i_green_black_battery" transform="translate(2.000000, 3.000000)">
+            <path d="M14.5518094,44.2443725 C6.01499632,40.8188078 0,32.5848367 0,22.9717019 C0,10.2847813 10.4765369,0 23.4,0 C36.3234631,0 46.8,10.2847813 46.8,22.9717019 C46.8,32.5848367 40.7850037,40.8188078 32.2481906,44.2443725 L23.4,54.9 L14.5518094,44.2443725 Z" id="Combined-Shape" fill="#77D6AC" filter="url(#filter-1)"></path>
+            <path d="M15.5727544,41.7436911 C8.02095828,38.7207826 2.7,31.4546693 2.7,22.9715053 C2.7,11.7758621 11.9677057,2.7 23.4,2.7 C34.8322943,2.7 44.1,11.7758621 44.1,22.9715053 C44.1,31.4546693 38.7790417,38.7207826 31.2272456,41.7436911 L23.4,51.1468085 L15.5727544,41.7436911 Z" id="Combined-Shape-Copy" fill="#000000" filter="url(#filter-2)"></path>
+            <g id="Group-3" transform="translate(12.600000, 8.100000)" stroke="#77D6AC" stroke-width="1.8">
+                <path d="M0.0739522214,25.6773279 L0,25.6773279 L0,4.22307692 L21.6,4.22307692 L21.6,25.6773279 L21.5260478,25.6773279 C20.8971982,27.9424517 16.334818,29.7 10.8,29.7 C5.26518197,29.7 0.702801816,27.9424517 0.0739522214,25.6773279 Z" id="Combined-Shape" fill="#000000" stroke-linecap="round" stroke-linejoin="round"></path>
+                <ellipse id="Oval-2-Copy" fill="#000000" cx="10.8" cy="3.32307692" rx="10.8" ry="3.32307692"></ellipse>
+                <path d="M2.81506465,5.34398857 L18.7618336,1.12914188" id="Path-2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M11.4703478,16.0242096 C12.9922987,14.4328843 14.5022929,13.2631454 16.6737245,14.0153259 C16.7188445,14.0309554 16.7684902,14.0482725 16.8091995,14.0704513 C19.109492,15.3236742 19.1888115,17.8481728 17.5983663,18.9720625 C14.6072875,21.0857112 11.5858545,18.3533734 9.58950982,16.0242096 C7.8676797,14.0153259 5.76605163,12.7226652 3.86504208,14.4328843 C2.40442021,15.7469142 2.40779302,18.4837406 4.88961204,19.3627401 C6.98320423,20.1042391 8.13000044,19.3627401 9.58950982,18.0494706" id="Path-3"></path>
+            </g>
+        </g>
+    </g>
+</svg>

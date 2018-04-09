@@ -16,85 +16,105 @@
 
   <body>
     <!-- 導覽列 -->
-    <nav class="navbar" style="margin-bottom: 0px;">
-      <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0; ">
-        <div class="container-fluid ">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header ">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    <% if current_user %>
+      <nav class="navbar" style="margin-bottom: 0px;">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0; ">
+          <div class="container-fluid ">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header ">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
 
-            <div class="nav-icon brand">
-                <%= image_tag "navbar_icons/gogoro.svg", style:"width:100px;"%>
+              <div class="nav-icon brand">
+                  <%= image_tag "navbar_icons/gogoro.svg", style:"width:100px;"%>
+              </div>
+
             </div>
-
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="pull-right text-right nav navbar-text navbar-nav">
+                <% if current_user %>
+                  <% if current_user.role == "admin" %>
+                    <li><%= link_to "後台", admin_trips_path%><li>
+                  <%end%>
+                <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
+                <li><%= link_to('修改密碼', edit_user_registration_path) %></li>
+                <% end %>
+              </ul>
+            </div>
           </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="pull-right text-right nav navbar-text navbar-nav">
-              <% if current_user %>
-                <% if current_user.role == "admin" %>
-                  <li><%= link_to "後台", admin_trips_path%><li>
-                <%end%>
-              <li><%= link_to('登出', destroy_user_session_path, method: :delete) %></li>
-              <li><%= link_to('修改密碼', edit_user_registration_path) %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
+        </nav>
       </nav>
-    </nav>
+    <% end %>
         <div class="clearfix"></div>
 <!-- nav-tab -->
 
       <!-- <nav class="navbar-fixed-top" style="background-color: #FFFFFF; border: none; margin-top: 48px;"> -->
-        <nav class="navbar-fixed-bottom" style="background-color: #FFFFFF; border: none; margin-top: 48px;">
+        <nav class="navbar-fixed-bottom" style="background-color: #53C0F0; border: none; ">
         <% if current_user %>
           <div class="" >
-            <div class="col-xs-3 my-nav-tab" >
-              <%= link_to root_path do %>
-                <% if controller?("gostations")%>
+
+            <%= link_to root_path do %>
+              <% if controller?("gostations")%>
+                <div class="col-xs-3 my-nav-tab white-bg" >
                   <%= image_tag "navbar_icons/find.svg", :class => "nav-icon-style" %>
-                <% else %>
+                  <h6 class="blue-text">找電池</h6>
+                </div>
+              <% else %>
+                <div class="col-xs-3 my-nav-tab" >
                   <%= image_tag "navbar_icons/g_find.svg", :class => "nav-icon-style" %>
-                <% end %>
-                
-              <% end %>
-            </div>
-            <div class="col-xs-3 my-nav-tab" >
-              <%= link_to trips_path do %>
-                <% if controller?("trips")%>
+                  <h6 class="white-text">找電池</h6>
+                </div>
+              <% end %>             
+            <% end %>
+            
+
+            
+            <%= link_to trips_path do %>
+              <% if controller?("trips")%>
+                <div class="col-xs-3 my-nav-tab white-bg" >
                   <%= image_tag "navbar_icons/play.svg", :class => "nav-icon-style" %>
-                <% else %>
+                  <h6 class="blue-text">去玩耍</h6>
+                </div>
+              <% else %>
+                <div class="col-xs-3 my-nav-tab" >
                   <%= image_tag "navbar_icons/g_play.svg", :class => "nav-icon-style" %>
-                <% end %>
-                
-              <% end %>
-            </div>
-            <div class="col-xs-3 my-nav-tab">
-              <%= link_to user_path(current_user) do %>
-                <% if controller?("users")%>
+                  <h6 class="white-text">去玩耍</h6>
+                </div>
+              <% end %>           
+            <% end %>
+            
+            <%= link_to user_path(current_user) do %>
+              <% if controller?("users")%>
+                <div class="col-xs-3 my-nav-tab white-bg" >
                   <%= image_tag "navbar_icons/point.svg", :class => "nav-icon-style" %>
-                <% else %>
+                  <h6 class="blue-text">看積分</h6>
+                </div>
+              <% else %>
+                <div class="col-xs-3 my-nav-tab" >
                   <%= image_tag "navbar_icons/g_point.svg", :class => "nav-icon-style" %>
-                <% end %>
-                
-              <% end %>            
-            </div>
-            <div class="col-xs-3 my-nav-tab" style="border-right: none;">
-              <%= link_to products_path do %>
-                <% if controller?("products")%>
+                  <h6 class="white-text">看積分</h6>
+                </div>
+              <% end %>                
+            <% end %>            
+            
+            <%= link_to products_path do %>
+              <% if controller?("products")%>
+                <div class="col-xs-3 my-nav-tab white-bg" style="border-right: none;">
                   <%= image_tag "navbar_icons/shop.svg", :class => "nav-icon-style" %>
-                <% else %>
+                  <h6 class="blue-text">換商品</h6>
+                </div>
+              <% else %>
+                <div class="col-xs-3 my-nav-tab" style="border-right: none;">
                   <%= image_tag "navbar_icons/g_shop.svg", :class => "nav-icon-style" %>
-                <% end %>
-                
-              <% end %>    
-            </div>
+                  <h6 class="white-text">換商品</h6>
+                </div>
+              <% end %>
+            <% end %> 
           </div>
         <% end %>
       </nav>
@@ -122,32 +142,7 @@
       </div>
     <% end %> 
 
-<!-- footer -->
-    <% if controller?("users")%>
-    <% else %>
-      <% if current_user %>
-        <div class="footer navbar-fixed-top" style="margin-top: 48px;">
-          <div  class="col-xs-1 col-xs-offset-6 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
-          </div>
-          <div  class="col-xs-1 ">
-            <div class="user-icon-text"><%= current_user.level%> </div>
-          </div>
-          <div  class="col-xs-1 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"><%= image_tag(("navbar_icons/B.svg")) %> </div>
-          </div>
-          <div  class="col-xs-1 ">
-            <div class="user-icon-text"><%= current_user.badges.count%> </div>
-          </div>
-          <div  class="col-xs-1 user-data">
-            <div class="user-icon" style="height: 25px; width: 25px;"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
-          </div>
-          <div  class="col-xs-1">
-            <div class="user-icon-text"><%= current_user.points %></div>
-          </div>    
-        </div>
-      <% end %>
-    <% end %>
+
 
     <%= yield %>
     

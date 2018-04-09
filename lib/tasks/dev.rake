@@ -311,5 +311,11 @@ namespace :dev do
     puts "now you have #{Site.count} gostation sites!"
   end
 
+  task create_super_user: :environment do
+    u = User.create!(name: "麥克", email: "lienchi.lai@gmail.com", password: "123456", role: "admin")
+    u.add_points(99999, category: 'gostation')
+    u.experience = 99999
+    u.save
+  end
 
 end
