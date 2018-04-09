@@ -99,30 +99,30 @@
         <div class="modal fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="markerModalLongTitle"></h5>
+              <div class="modal-header">                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
+                <h3 class="modal-title text-center" id="markerModalLongTitle"></h3>
               </div>
               <div class="modal-body">
                 <div>
                   <img id="markerModal-img" alt="Store Photo" width="400" height="400" class="border rounded">
                 </div>
-                <div id="markerModal-content" style="font-size: 14px;" class="text-center"></div>
-                <div id="markerModal-disdur" style="font-size: 14px;" class="text-center"></div>
-                <div id="markerModal-availableTime" style="font-size: 14px;" class="text-center"></div>
-                <div id="markerModal-cellContent" style="font-size: 14px;" class="text-center"></div>
+                <div id="markerModal-content" style="font-size: 16px;" class="text-center"></div>
+                <div id="markerModal-disdur" style="font-size: 12px;" class="text-center"></div>
+                <div id="markerModal-availableTime" style="font-size: 12px;" class="text-center"></div>
+                <div id="markerModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-cellProgress">
                   <div id="markerModal-cellBar"></div>
                 </div>
               </div>
               <div class="modal-footer">
-                <div>
-                  <a id="markerModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">打卡</a>
+                <div class="col-xs-4 col-xs-offset-1 ">
+                  <a id="markerModal-checkin" style="text-align:center; font-size: 16px;  width: 100px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5" rel="nofollow">打卡</a>
                 </div>
-                <div>
-                  <a id="markerModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                <div class="col-xs-4 col-xs-offset-2">
+                  <a id="markerModal-directionurl" style="padding: 8px; font-size: 16px;  width: 100px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -406,17 +406,17 @@
             var elem = document.getElementById("markerModal-cellBar");
             elem.style.width = percentage*100 + '%';
 
-            markerModalEle.style.color = "#323237";
-            markerModalEle.className = "btn btn-sm btn-default text-center col-xs-5";
+            // markerModalEle.style.color = "#323237";
+            markerModalEle.className = "btn btn-sm btn-main text-center";
             if( props.bCloseGostation ){
-              markerModalEle.style.color = "#ffffff";
+              // markerModalEle.style.color = "#ffffff";
               markerModalEle.onclick = toggle;
             }
 
             if(props.bCheckin){
               markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-main-outline text-center";
               }
               
             }
@@ -426,13 +426,13 @@
                 markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+"Pts";
               }
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-main text-center";
               }
             }
           }
           document.getElementById('markerModalLongTitle').innerHTML = props.title;
           document.getElementById('markerModal-img').src = props.storePhoto;
-          document.getElementById('markerModal-content').innerHTML = '地址：'+props.address;
+          document.getElementById('markerModal-content').innerHTML = ''+props.address;
           document.getElementById('markerModal-availableTime').innerHTML = '營業時間：'+props.availableTime;
           document.getElementById('markerModal-cellContent').innerHTML = "";
           if(props.totalBatteryCells>0){
@@ -615,7 +615,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("markerModal-checkin").innerHTML = 'Checkin';
-                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-primary text-center col-xs-5";
+                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main text-center";
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
                       method: "POST",
@@ -639,7 +639,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("markerModal-checkin").innerHTML = '已打卡';
-                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
+                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main-outline text-center";
                     $.ajax({
                       url: "/gostations/getCurrentUserPoints",
                       method: "POST",
