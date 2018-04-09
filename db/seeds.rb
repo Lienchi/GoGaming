@@ -46,7 +46,7 @@ puts "Default admin created!"
 
 30.times do |i|
   user_name = FFaker::Name.first_name
-  User.create!(email: "#{user_name}@example.com", password: "123456", name: "#{user_name}")
+  User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}")
 end
 puts "now you have #{User.count} users data!"
 
@@ -63,9 +63,12 @@ puts "User's followships created"
 Checkin.destroy_all
 
 User.all.each do |u|
-  Gostation.all.sample(rand(5..15)).each do |g|
+  Gostation.all.sample(rand(10..20)).each do |g|
     g.checkins.create!(user: u)
-    u.add_points(5, category: 'gostation')
+    rand_pts = rand(300..600)
+    u.add_points(rand_pts, category: 'gostation')
+    u.experience += rand_pts
+    u.save
   end
 end
 puts "Checkins created"
@@ -171,7 +174,7 @@ gostation_list = [
                      "台塑政大加油站", "台北捷運唭哩岸站"],
 
                     ["中油石門加油站", "中油大嘉好加油站", "台北捷運淡水站",
-                     "台北捷運民權西路站", "中油信義路加油站"],
+                     "北投熱海溫泉大飯店站", "中油福林加油站"],
 
                     ["7-ELEVEN 安安店站", "善化國小站", "7-ELEVEN 仁伯店站",
                      "全聯台南明興店站", "Gogoro 台南公園店站"]#,

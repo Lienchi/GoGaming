@@ -127,7 +127,7 @@
 
             </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sight">
+            <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
               永康牛肉麵
             </button>
 
@@ -146,8 +146,8 @@
                     <p>位於台北市的永康牛肉麵最早發跡於永康公園旁的小牛肉麵攤，已經有五十幾年的歷史了喔!川味道地的牛肉麵，愛吃的你，趕快去嘗嘗!</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
-                    <button type="button" class="btn btn-primary">導航</button>
+                    <button type="button" class="btn btn-sm btn-main-outline" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
+                    <button type="button" class="btn btn-sm btn-main">導航</button>
                     <p>完成<strong>"<%= @trip.name %>"</strong>所有景點可額外獲得180 points</p>
                   </div>
                 </div>
@@ -178,10 +178,10 @@
                 </div>
                 <div class="modal-footer">
                   <div>
-                    <a id="tripModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5" rel="nofollow">打卡</a>
+                    <a id="tripModal-checkin" style="text-align:center; color:#ffffff; font-size: 16px;  padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5" rel="nofollow">打卡</a>
                   </div>
                   <div>
-                    <a id="tripModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                    <a id="tripModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
                   </div>
                 </div>
               </div>
@@ -208,7 +208,7 @@
                 </div>
                 <div class="modal-footer">
                   <div>
-                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-primary text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
                   </div>
                 </div>
               </div>
@@ -233,7 +233,7 @@
                 <div class="media">
                   <div class="media-left ">
                     <!-- Button trigger modal -->
-                  <button type="button" class="btn" data-toggle="modal" data-target=#<%= "comment#{comment.id}"%> >
+                  <button type="button" class="btn btn-main" data-toggle="modal" data-target=#<%= "comment#{comment.id}"%> >
                     <%= image_tag comment.image, class: "img-fluid", style: "width:64px;border-radius:5px"%>
                   </button>
 
@@ -279,7 +279,7 @@
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
               <%= f.file_field :image, style: " width:90px;" %>
-              <input class="btn btn-default" type="submit" value="留言">
+              <input class="btn btn-main" type="submit" value="留言">
             </div>
           <% end%>
         </div>
@@ -560,14 +560,14 @@
             if(props.bCheckin){
               markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-info text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-main-outline text-center col-xs-5";
               }
               
             }
             else{
               markerModalEle.innerHTML = "打卡";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-primary text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-main text-center col-xs-5";
               }
             }
           }
@@ -759,7 +759,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = 'Checkin';
-                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-primary text-center col-xs-5";
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
                   },
                   error: function() {
                     alert("ERROR: can not uncheckin!");
@@ -772,7 +772,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '已打卡';
-                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-info text-center col-xs-5";
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-outline text-center col-xs-5";
                   },
                   error: function() {
                     alert("ERROR: can not checkin(2)!");

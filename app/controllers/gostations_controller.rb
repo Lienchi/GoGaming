@@ -19,14 +19,15 @@ class GostationsController < ApplicationController
 
   def checkin
     @checkin = @gostation.checkins.create!(user: current_user)
-    #@gostation.count_checkins
-    #redirect_back(fallback_location: root_path)
 
     if checkin_time(@checkin, @@offpeak_start, @@offpeak_end)
-      current_user.add_points(checkin_pts_offpeak, category: 'gostation')
-
+      current_user.add_points(@@checkin_pts_offpeak, category: 'gostation')
+      current_user.experience += @@checkin_pts_offpeak
+      current_user.save
     else
-      current_user.add_points(checkin_pts, category: 'gostation')
+      current_user.add_points(@@checkin_pts, category: 'gostation')
+      current_user.experience += @@checkin_pts
+      current_user.save
     end
 
     # if checkin_time(@checkin, "14:00:00", "16:00:00")
@@ -37,9 +38,9 @@ class GostationsController < ApplicationController
   def uncheckin
     checkins = Checkin.where(gostation: @gostation, user: current_user)
     checkins.destroy_all
-    current_user.subtract_points(checkin_pts, category: 'gostation')
-    #@gostation.count_checkins
-    #redirect_back(fallback_location: root_path)
+    current_user.subtract_points(@@checkin_pts, category: 'gostation')
+    current_user.experience -= @@checkin_pts
+    current_user.save
   end
 
   def getCheckinStatus
