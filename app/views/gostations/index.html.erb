@@ -11,15 +11,14 @@
      
       html, body {
         height: 100%;
-        margin: 50;
-        padding: 50;
+        margin: 0;
+        padding: 0;
       }
 
       #map {
-        height: 80%;
-        width: 90%;
-        margin: auto;
-        border-radius: 10px;
+        height: 100%;
+        width: 100%;
+        margin: 0;
       }
 
 
@@ -93,8 +92,8 @@
 
   <body>
     <%= render partial: "shared/LvBP"%>
-    <div class="container">
-      <div  class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="container" style="padding: 0px;">
+      <!-- <div  class="col-xs-12 col-sm-8 col-sm-offset-2"> -->
 
         <!-- google marker Modal -->
         <div class="modal fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
@@ -150,12 +149,12 @@
         </div>
 
 
-        <div class="col-xs-12">
+        <div class="">
           <input id="pac-input" class="controls" type="text" placeholder="你想去哪裡？">
           <div id="pac-input-button"></div>
-          <div id="map" class="z-depth-2" style="height: 500px"></div>
+          <div id="map" class="z-depth-2" style="height: 650px; padding-top: -25px;"></div>
         </div>
-      </div>
+      <!-- </div> -->
       
       
       <script>

@@ -61,6 +61,9 @@ img {
   display: block;
 }
 /*nav*/
+.navbar-default{
+  padding-bottom: 0px;
+}
 .navbar-default .navbar-nav > li > a {
   color: #FFFFFF;
 }
@@ -109,11 +112,21 @@ img {
 }
 
 .my-nav-tab {
-  background:#FFFFFF;
+  background:#239AE8;
   padding: 5px;
   text-align: center;
-  border-right: 0.5px solid #AAAAAA;
+  border-right: 0.5px solid #FFFFFF;
   }
+
+.white-bg {
+  background: #FFFFFF;
+}
+.white-text {
+  color: #FFFFFF;
+}
+.blue-text {
+  color: #80ADD7;
+}
 
 .nav-number{
   margin: 1px 1px;
@@ -228,7 +241,7 @@ input[type='file'] {
 .card-trip img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  max-width: 100%;
+  width: 100%;
   height: auto;   
 }
 
