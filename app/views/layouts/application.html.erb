@@ -16,8 +16,7 @@
 
   <body>
     <!-- 導覽列 -->
-    <% if controller?("devise")%>
-    <% else %>
+    <% if current_user %>
       <nav class="navbar" style="margin-bottom: 0px;">
         <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0; ">
           <div class="container-fluid ">
