@@ -90,9 +90,6 @@
 
         <div id="trip-show-map" class="z-depth-2" style="height: 250px"></div>
   
-        <!-- <div id="myProgress" class="myProgress" onclick="move()">
-          <div id="myBar" class="myBar"></div>
-        </div> -->
         <p class="col-xs-12" style="padding-top: 10px;"><%= @trip.description %></p>
 
         <div class="">
@@ -170,6 +167,9 @@
                   <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
                   <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
+                  <div>
+                    <a id="tripModal-moreinfo" style=" font-size: 12px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" href="" target="_blank">更多資訊</a>
+                  </div>
                   <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-cellProgress">
                     <div id="tripModal-cellBar"></div>
@@ -293,19 +293,8 @@
     </div>
     </div>
 
-      
-
 
       <script>
-        var width = 20;
-        function move(){
-          var elem = document.getElementById("myBar");
-          if(width<=100){
-            width+= 20; 
-          }
-          elem.style.width = width + '%';
-        }
-
         var googleMapStyle = [
           {
             "elementType": "geometry",
@@ -587,8 +576,8 @@
           if(props.totalBatteryCells>0){
             document.getElementById('tripModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
-          else if(props.source_url){
-            document.getElementById('tripModal-cellContent').innerHTML = '<a style="font-size: 16px; padding: 8px; width:100px; href="'+props.source_url+'" class="btn btn-sm btn-main text-center" target="_blank">更多資訊</a>';
+          if(props.source_url){
+            document.getElementById('tripModal-moreinfo').href = props.source_url;
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('tripModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
@@ -771,7 +760,7 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("tripModal-checkin").innerHTML = 'Checkin';
+                    document.getElementById("tripModal-checkin").innerHTML = '打卡';
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
                   },
                   error: function() {
@@ -788,7 +777,7 @@
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-outline text-center col-xs-5";
                   },
                   error: function() {
-                    alert("ERROR: can not checkin(2)!");
+                    alert("ERROR: can not checkin!");
                   }
                 });
               }
@@ -881,7 +870,7 @@
                     headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
                   });
                   $.ajax({
-                    url: "/gostations/"+props.id+"/getCheckinStatus",
+                    url: "/trip_gostations/"+currentTripGostationId+"/getCheckinStatus",
                     method: "POST",
                     dataType: "json",
                     success: function(data){
@@ -1121,6 +1110,16 @@
 
           ig_green_black_battery = {
             url: "../icons/ig_green_black_battery.png",
+            scaledSize: new google.maps.Size(42, 48)
+          };
+
+          i_blue_black_battery = {
+            url: "../icons/i_blue_black_battery.png",
+            scaledSize: new google.maps.Size(28, 32)
+          };
+
+          ig_blue_black_battery = {
+            url: "../icons/ig_blue_black_battery.png",
             scaledSize: new google.maps.Size(42, 48)
           };
 
