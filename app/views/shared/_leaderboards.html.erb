@@ -1,0 +1,51 @@
+<table class="table  table-hover " style="margin-top: 85px;">
+      <tbody>
+        <% i=1 %>
+        <% @leaderusers.each do |user| %>
+          <tr>
+               
+              <th class="col-xs-1 text-center align-bottom" scope="row" style="padding: 23px 3px 0 0 ; margin-left: -5;">
+                <% if i == 1 %>
+                  <%= image_tag ("navbar_icons/trophy1.svg"), style:"width: 35px; margin-top: -8px;" %>
+                <% elsif i == 2 %>
+                  <%= image_tag ("navbar_icons/trophy2.svg"), style:"width: 35px; margin-top: -8px;" %>
+                <% elsif i == 3 %>
+                  <%= image_tag ("navbar_icons/trophy3.svg"), style:"width: 35px; margin-top: -8px;" %>
+                <% else %>
+                  <%=  i %>
+                <% end %>
+                <% i+=1 %>
+                </th>
+            
+              <td class="col-xs-2 align-bottom" style="padding: 4px 0 0 0;">
+                <%= link_to user_path(user) do %>
+                  <%= image_tag "#{user.avatar}", class: "img-responsive img-circle " %>
+                <% end %>
+              </td>
+              <td class="col-xs-8" style="padding: 4px 0 4px 0;">
+                <h4 class="display-3" style="padding-left: 10px;">
+                  <%= link_to "#{user.name}", user_path(user), style: "color: #666C65;" %>
+                  
+                </h4>
+                <%= link_to user_path(user) do %>
+                  <div class="col-xs-3 col-xs-offset-1" style="padding: 4px 0 4px 0;" >
+                    <h6>等級</h6>
+                    <h4><%= user.level %></h4>
+                  </div>
+                  <div class="col-xs-3" style="padding: 4px 0 4px 0;" >
+                    <h6>徽章</h6>
+                    <h4><%= user.badges.count %></h4>
+                  </div>
+                  <div class="col-xs-3"  style="padding: 4px 0 4px 0;">
+                    <h6>點數</h6>
+                    <h4><%= user.experience %></h4>
+                  </div>
+                <% end %>
+
+              <div class="col-xs-1" style="padding: 0;">
+                  <%= render partial: "shared/follow", locals: {user: user}%>
+                </div>
+            </td>
+        <%end%>
+      </tbody>
+    </table>
