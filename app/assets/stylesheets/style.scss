@@ -289,20 +289,7 @@ input[type='file'] {
 
 }
 
-.bettery-green{
-  border-radius: 10%;
-  border:1px solid #A1CA76;
-  margin:10px auto;
-  padding: 15px;
-}
-.bettery-red{
-  border-radius: 10%;
-  border:1px solid #FFB6B6;
-  margin:10px auto;
-  padding: 15px;
-  box-shadow:0px 0px 10px #FF9999;
 
-}
 
 .bettery-green-sm{
   border-radius: 10%;
@@ -328,17 +315,7 @@ input[type='file'] {
   height:100%;
 }
 
-.typewriter{
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: 
-    typing 2.5s steps(40, end),
-    blink-caret .75s step-end infinite;
-  animation-delay: 1s;
-}
+
 
 .trip-screen{
    margin-top:30px;
@@ -393,17 +370,6 @@ input[type='file'] {
   margin-bottom:10px;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0;opacity:0;}
-  to { width: 100% ;opacity:1;}
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: orange; }
-}
 
 /* Text transition*/
 
@@ -427,80 +393,9 @@ input[type='file'] {
   to{box-shadow:0px 0px 10px #6495ED;}
 }
 
-/*
- * Keyframes
 
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
 
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
- */
-
-
-/*
- * CSS Page Transitions
- * Don't forget to add vendor prefixes!
-   */
-.m-scene {
-  /** Basic styles for an animated element */
-  .scene_element {
-    animation-duration: 0.25s;
-    transition-timing-function: ease-in;
-    animation-fill-mode: both;
-
-  }
-
-  /** An element that fades in */
-  .scene_element--fadein {
-    animation-name: fadeIn;
-  }
-
-  /** An element that fades in and slides up */
-  .scene_element--fadeinup {
-    animation-name: fadeInUp;
-  }
-
-  /** An element that fades in and slides from the right */
-  .scene_element--fadeinright {
-    animation-name: fadeInRight;
-  }
-}
-
-
-  .m-scene.is-exiting .scene-element {
-  animation-direction: alternate-reverse;
-  }
 
 /* footer */
 
