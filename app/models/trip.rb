@@ -13,6 +13,8 @@ class Trip < ApplicationRecord
   has_many :commented_users, through: :comments, source: :user
 
   serialize :gostations_index
+
+  has_many :sites
   
   def is_challenged?(user)
     self.challenged_users.include?(user)

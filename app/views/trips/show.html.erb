@@ -113,12 +113,14 @@
             </div>
             <div class="col-xs-9 col-sm-9" style="padding: 0px;">
               <ul>
-                <li>
-                  <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
-                    永康牛肉麵
-                  </button>
-                </li>
+                <% @sites.each do |site|%>
+                  <li>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
+                      <%= site.name%>
+                    </button>
+                  </li>
+               <%end%>
               </ul>
 
             </div>
@@ -136,29 +138,30 @@
               <%end%>   
             </div> 
 
-
+          <% @sites.each do |site|%>
             <!-- Modal for sight-->
             <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">永康牛肉麵</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle"><%= site.name%></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p>位於台北市的永康牛肉麵最早發跡於永康公園旁的小牛肉麵攤，已經有五十幾年的歷史了喔!川味道地的牛肉麵，愛吃的你，趕快去嘗嘗!</p>
+                    <%= image_tag site.photo%>
+                    <p><%= site.description%></p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-main-outline" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
                     <button type="button" class="btn btn-sm btn-main">導航</button>
-                    <p>完成<strong>"<%= @trip.name %>"</strong>所有景點可額外獲得180 points</p>
+                    <p>完成<strong>"<%= @trip.name %>"</strong></p>
                   </div>
                 </div>
               </div>
             </div>
-
+          <%end%>
           <!-- google marker Modal -->
           <div class="modal fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
