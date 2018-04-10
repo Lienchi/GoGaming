@@ -12,19 +12,19 @@
     <g id="trophy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(6.000000, 2.000000)">
             <g id="Rectangle-3-Copy-2">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="#FFF68A" fill-rule="evenodd" xlink:href="#path-1"></use>
                 <rect stroke="#979797" stroke-width="3" x="26.5" y="43.5" width="8.40350877" height="14.1052632" rx="3.2"></rect>
             </g>
             <g id="Combined-Shape">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <use fill="#FFF68A" fill-rule="evenodd" xlink:href="#path-2"></use>
                 <path stroke="#979797" stroke-width="3" d="M45.4298246,64.0438596 L45.4298246,58.5750487 C45.4298246,56.2260803 44.2836526,54.5 43.2278159,54.5 L18.7020086,54.5 C17.6461719,54.5 16.5,56.2260803 16.5,58.5750487 L16.5,64.0438596 L45.4298246,64.0438596 Z"></path>
             </g>
             <g id="Combined-Shape">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                <use fill="#FFF68A" fill-rule="evenodd" xlink:href="#path-3"></use>
                 <path stroke="#979797" stroke-width="3" d="M60.0789474,24.6143661 L60.0789474,12.2211188 C60.0789474,12.256093 60.0615498,12.2222278 59.9393088,12.1071083 C59.700673,11.8823753 59.2920312,11.6414419 58.745638,11.423801 C57.4847534,10.9215619 55.7114788,10.622807 53.800554,10.622807 L7.77839335,10.622807 C5.86746857,10.622807 4.09419394,10.9215619 2.83330932,11.423801 C2.28691621,11.6414419 1.87827433,11.8823753 1.6396386,12.1071083 C1.51739753,12.2222278 1.5,12.256093 1.5,12.2211188 L1.5,24.6143661 C1.5,29.9551878 14.555387,34.9912281 30.7894737,34.9912281 C47.0235603,34.9912281 60.0789474,29.9551878 60.0789474,24.6143661 Z"></path>
             </g>
             <g id="Combined-Shape">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                <use fill="#FFF68A" fill-rule="evenodd" xlink:href="#path-4"></use>
                 <path stroke="#979797" stroke-width="3" d="M50.9561404,27.1102284 L50.9561404,5.42204568 C50.9561404,3.25915907 49.1802274,1.5 46.9824561,1.5 L14.5964912,1.5 C12.39872,1.5 10.622807,3.25915907 10.622807,5.42204568 L10.622807,27.1102284 C10.622807,37.7464986 19.638103,46.3947368 30.7894737,46.3947368 C41.9408444,46.3947368 50.9561404,37.7464986 50.9561404,27.1102284 Z"></path>
             </g>
         </g>

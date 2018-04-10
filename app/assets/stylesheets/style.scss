@@ -3,9 +3,15 @@
 }
 
 .container {
-  padding-top: 30px;
-  padding-bottom: 45px;
+  padding-top: 5px;
+  padding-bottom: 85px;
   
+}
+
+.form-text-tyle {
+  font-size: 14px;
+  color: #848484;
+  font-weight: 100;
 }
 
 .border{
@@ -166,6 +172,11 @@ text-decoration:none;
   text-decoration:none;
 }
 
+.pig-bar {
+  margin-bottom: 55px;
+  background-color: rgba(256,256,256,0.5);
+}
+
 /*user */
 
 .user-navdata {
@@ -178,7 +189,7 @@ text-decoration:none;
   margin-top: 110px; 
   padding-top: 5px;
   margin-bottom: 5px; 
-  background-color: rgba(256,256,256,0.6)
+  background-color: rgba(256,256,256,0.6);
 }
 
 .nav-pills {
@@ -516,6 +527,14 @@ input[type='file'] {
   color: #53C0F0;
   background-color: #FFFFFF;
   border-color: #53C0F0;
+  border-radius: 20px;
+  text-decoration:none; 
+}
+
+.btn-main-1-outline-1 {
+  color: #FFFFFF;
+  background-color: #53C0F0;
+  border-color: #87D3F4;
   border-radius: 20px;
   text-decoration:none; 
 }

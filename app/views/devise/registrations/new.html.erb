@@ -1,44 +1,43 @@
-<div class="container">
-  <br/>
-  <div class="border col-xs-12 col-sm-8 col-sm-offset-2 white", style="min-height: 605px;">
-    <!--<h2 class="text-center">註冊</h2>-->
-<br>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
-      <%= devise_error_messages! %>
-      <div class="white" style="padding:20px;">
-        <div class="field form-group">
-          <%= f.label :name, class: "col-xs-4 control-label"%>
-          <%= f.text_field :name, class: "float-left"%>
-        </div>
+<body class="login_page" style="background-image: url('<%= asset_path("login_page.svg") %>'); background-repeat: repeat-x; background-position: top center; background-color: #FFFFFF; background-attachment: fixed; ">
 
-        <div class="field form-group">
-          <%= f.label :email, class: "col-xs-4 control-label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left" %>
-        </div>
+  <div class="container">
+    <br/>
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-text-tyle", style="min-height: 605px;  margin-top: 100px;">
+      <!--<h2 class="text-center">註冊</h2>-->
+  <br>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="" style="padding:20px;">
+          <div class="field form-group">
+            <%= f.label :姓名, class: "col-xs-4 control-label"%>
+            <%= f.text_field :name, class: "float-left border rounded"%>
+          </div>
 
-        <div class="field form-group">
-          
-          <%= f.password_field :password, autocomplete: "off" , class: "float-left", placeholder: "" %>
-          <%= f.label :password, class: "col-xs-4 control-label" %>
-            <p><% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %></p>
-        </div>
+          <div class="field form-group">
+            <%= f.label :email, class: "col-xs-4 control-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left border rounded" %>
+          </div>
 
-        <div class="field form-group">
-          <%= f.label :password_confirmation, class: "col-xs-4 control-label" %>
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left"%>
+          <div class="field form-group">
+            <%= f.password_field :password, autocomplete: "off" , class: "float-left border rounded text-center text-muted", placeholder: "最少#{@minimum_password_length}位數" %>
+            <%= f.label :密碼, class: "col-xs-4 control-label" %>
+              
+          </div>
+
+          <div class="field form-group">
+            <%= f.label :密碼確認, class: "col-xs-4 control-label" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left border rounded"%>
+          </div>
         </div>
-      </div>
-      <hr/>
-      <div class="col-xs-12 clearfix bottom white" style="min-height: 360px;">
-        <div class="actions station-buttom">
-          <input class="tn btn-primary btn-lg float-left" type="submit" value="註冊">
-          <!-- <%= render "devise/shared/links" %> -->
+        <div class="col-xs-12 clearfix" style="min-height: 360px; margin-top: 40px;">
+          <div class="actions station-buttom">
+            <input class="btn btn-main-1 btn-lg float-left" type="submit" value="註冊">
+            <!-- <%= render "devise/shared/links" %> -->
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>    
-</div>
+      <% end %>
+    </div>    
+  </div>
+</body>
   
 
