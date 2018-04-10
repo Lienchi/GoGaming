@@ -50,7 +50,7 @@
       <!-- Trigger the modal with a button
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
        -->
-      <!-- Modal -->
+      <!-- Modal for complete trip-->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         
@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- end of Modal for complete trip-->
 
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
@@ -99,26 +99,21 @@
 
 
         <div class="trip-data col-xs-12">
-          <br>
-          <div class="col-xs-12">            
-          </div>
-          
-          
-          <div class="col-xs-3 col-sm-3" style="padding: 0;">
+          <div class="col-xs-3 col-sm-3" style="margin-top: 15px; padding: 0;">
               <% if @trip.is_challenged?(current_user)%>                  
                 <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% else %>
                 <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
               <% end %>
             </div>
-            <div class="col-xs-9 col-sm-9" style="padding: 0px;">
+            <div class="col-xs-9 col-sm-9" style="padding: 5px;">
               <ul>
                 <% @sites.each do |site|%>
-                  <li>
+                  <li class="col-sm-6">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight">
+                    <!-- <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight"> -->
                       <%= site.name%>
-                    </button>
+                    <!-- </button> -->
                   </li>
                <%end%>
               </ul>
@@ -126,7 +121,7 @@
             </div>
             <div class="clearfix"></div>
 
-            <div class="row text-center align-bottom" style=" padding-top: 20px;">
+            <div class="row text-center align-bottom" style="">
               最快完成者：
               <%if Challenge.where(trip_id:@trip).exists?%>
                 <%= @challenge.user.name%>
@@ -134,7 +129,7 @@
                 
                 在 <%= @challenge.completetime.round %> 分鐘內完成
               <% else %>
-                還沒有人挑戰喔！快來試試！
+                還沒有人挑戰喔！快來搶頭香！
               <%end%>   
             </div> 
 
@@ -179,14 +174,15 @@
                   <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
                   <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                  <div id="tripModal-moreinfo-div">
-                    <a id="tripModal-moreinfo" style=" font-size: 12px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" href="" target="_blank">更多資訊</a>
+                  <div id="tripModal-moreinfo-div" class="col-xs-4 col-xs-offset-4">
+                    <a id="tripModal-moreinfo" style=" font-size: 12px; margin-top: 8px; margin-bottom: 8px;padding: 8px; width:100px; " class="btn btn-main-outline text-center" href="" target="_blank">更多資訊</a>
                   </div>
                   <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-cellProgress">
                     <div id="tripModal-cellBar"></div>
                   </div>
                 </div>
+                <div class="clearfix"></div>
                 <div class="modal-footer">
                   <div class="col-xs-4 col-xs-offset-1" >
                     <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow">打卡</a>
@@ -221,8 +217,8 @@
                   <div class="col-xs-4 col-xs-offset-1" >
                     <a id="siteModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="" rel="nofollow"></a>
                   </div>
-                  <div class="col-xs-4 col-xs-offset-2">
-                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-7" href="" target="_blank">導航</a>
+                  <div class="col-xs-5 col-xs-offset-2">
+                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main" href="" target="_blank">導航</a>
                   </div>
                 </div>
               </div>
@@ -233,9 +229,9 @@
         </div>  
 <div class="clearfix"></div>
 <br>
-        <div class="comment-group">
+        <div class="comment-group" style="padding-left: 0px;">
           <div class="col-xs-8 col-sm-10" style="padding-left: 0px;">
-            <h4>推薦景點</h4>
+            <h4>好玩推薦</h4>
           </div>
 
           <div class="clearfix"></div>
