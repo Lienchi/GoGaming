@@ -22,6 +22,7 @@ class TripsController < ApplicationController
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
     @challenge = Challenge.where(trip_id: @trip).order(:completetime).first
     gon.sign_in_count = current_user.sign_in_count
+    @sites = Site.where(trip_id: @trip.id)
   end
   
 

@@ -1,27 +1,23 @@
 # GoGaming
 
-## This is a gamification web application for Gogoro, a Smartscooter  company, aiming to improve below:
+## This is a gamification web application for Gogoro, a Smartscooter  company, aiming at below:
 
-* user experience and participation.
-* utilization ratio of Smartscooter and Smart Energy
+* Improve the way of searching Gostations.
+* Makes Riding Gogoro to be fun!
 
 ## In this application, users are able to :
 
-* get directions , nearby Gostations and Gogoro friendly store.
-* Checkin gostation
-* challenge on a Trip
-* win Points , Badges, and upgrade on Leaderboard. (PBL)
-* Follow another user
-* leave a Comment on a Trip
+* Plan their routes, directions and find Gostations or Friendly Store nearby
+* Challenge on a Trip and get badge, points if trip is completed
+* Be rewarded by badges, points , ranking and Gogoro products.
+
 
 
 
 # Screenshot
 
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/index.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/trip_index.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/trip_show.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/user_show.png)
+![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/root.png)
+
 
 # Getting Started
 
@@ -40,7 +36,6 @@ Please check on [Merit](https://github.com/merit-gem/merit) to understand the PB
 
 
 - **Challenge:**  a trip which user completed
-- **Trip_gostation:** a gostation "belongs to a trip" 
 - **Checkin:** a gostation which user checkin to ("not belongs to a trip")
 
 
