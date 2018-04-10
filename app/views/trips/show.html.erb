@@ -46,7 +46,7 @@
         </div>
       </div>
     </div> --> 
-    <div class="container">
+    <div class="modal-trip-show">
       <!-- Trigger the modal with a button
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
        -->
@@ -66,10 +66,10 @@
               </div>
               <br/>
               <p >恭喜你!挑戰成功!</p>  
-              <p >獲得 <%= @trip.points %> 點</p>  
+              <p >已獲得 <%= @trip.points %> 點</p>  
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-main-outline" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -92,13 +92,9 @@
   
         <p class="col-xs-12" style="padding-top: 10px;"><%= @trip.description %></p>
 
-        <div class="">
-          <%if Challenge.where(trip_id:@trip).exists?%>
-            <%= image_tag @challenge.user.avatar, style:"width:100px;"%>
-            <%= @challenge.user.name%>
-            <%= @challenge.completetime%> 分鐘/完成
-          <%end%>   
-        </div> 
+<div class="clearfix"></div>
+
+        
 
 
 
@@ -126,6 +122,19 @@
               </ul>
 
             </div>
+            <div class="clearfix"></div>
+
+            <div class="row text-center align-bottom" style=" padding-top: 20px;">
+              最快完成者：
+              <%if Challenge.where(trip_id:@trip).exists?%>
+                <%= @challenge.user.name%>
+                <%= image_tag @challenge.user.avatar, style:"width:30px; display: inline-block;"%>
+                
+                在 <%= @challenge.completetime.round %> 分鐘內完成
+              <% else %>
+                還沒有人挑戰喔！快來試試！
+              <%end%>   
+            </div> 
 
 
             <!-- Modal for sight-->
