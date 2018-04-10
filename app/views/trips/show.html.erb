@@ -1014,8 +1014,8 @@
         }
 
         function calculateGostationCenter(){
-          lat = 0.0;
-          lng = 0.0;
+          var lat = 0.0;
+          var lng = 0.0;
           for(var i=0; i<gon.gostations.length; i++){
             lat += +gon.gostations[i].Latitude;
             lng += +gon.gostations[i].Longitude;
@@ -1084,6 +1084,55 @@
 
         }
 
+        function calculateGostationBounds(){
+          var bounds = {
+            ne:{
+              lat: 0.0,
+              lng: 0.0,
+            },
+            sw:{
+              lat: 1000.0,
+              lng: 1000.0,
+            }
+          }
+          for(var i=0; i<gon.gostations.length; i++){
+            bounds.ne.lat = Math.max(bounds.ne.lat, +gon.gostations[i].Latitude);
+            bounds.ne.lng = Math.max(bounds.ne.lng, +gon.gostations[i].Longitude);
+            bounds.sw.lat = Math.min(bounds.sw.lat, +gon.gostations[i].Latitude);
+            bounds.sw.lng = Math.min(bounds.sw.lng, +gon.gostations[i].Longitude);
+          }
+          return bounds;
+        }
+
+        function getBoundsZoomLevel(mapWidth, mapHeight) {
+          var bounds = calculateGostationBounds();
+          var WORLD_DIM = { height: 256, width: 256 };
+          var ZOOM_MAX = 21;
+
+          function latRad(lat) {
+              var sin = Math.sin(lat * Math.PI / 180);
+              var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+              return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+          }
+
+          function zoom(mapPx, worldPx, fraction) {
+              return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+          }
+
+          var ne = bounds.ne;
+          var sw = bounds.sw;
+
+          var latFraction = (latRad(ne.lat) - latRad(sw.lat)) / Math.PI;
+
+          var lngDiff = ne.lng - sw.lng;
+          var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+          var latZoom = zoom(mapHeight, WORLD_DIM.height, latFraction);
+          var lngZoom = zoom(mapWidth, WORLD_DIM.width, lngFraction);
+
+          return Math.min(latZoom, lngZoom, ZOOM_MAX);
+        }
+
         function initMap() {
           directionsService = new google.maps.DirectionsService;
           directionsDisplay = new google.maps.DirectionsRenderer;
@@ -1099,6 +1148,10 @@
             streetViewControl: false,
             zoomControl: false
           });
+
+          // dynamic calculate zoom level
+          var zoomLevel = getBoundsZoomLevel(350, 250);
+          map.setZoom(zoomLevel);
 
           i_black_battery = {
             url: "../icons/i_black_battery.png",
