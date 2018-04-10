@@ -120,20 +120,21 @@
                 <div id="markerModal-content" style="font-size: 16px;" class="text-center"></div>
                 <div id="markerModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                <div id="markerModal-moreinfo-div">
-                  <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" href="" target="_blank">更多資訊</a>
+                <div id="markerModal-moreinfo-div" class="col-xs-4 col-xs-offset-4" style="padding: 8px; margin-left: -10px">
+                  <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px 4px; margin-top: 5px; margin-bottom: 5px;width:83px; " class="btn btn-sm btn-main-outline text-center" href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="markerModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-cellProgress">
                   <div id="markerModal-cellBar"></div>
                 </div>
               </div>
+              <div class="clearfix"></div>  
               <div class="modal-footer">
-                <div class="col-xs-4 col-xs-offset-1 ">
-                  <a id="markerModal-checkin" style="text-align:center; font-size: 16px;  width: 100px; padding: 8px;" class="btn btn-sm btn-main text-center col-xs-5" rel="nofollow">打卡</a>
+                <div class="col-xs-4 col-xs-offset-1">
+                  <a id="markerModal-checkin" style="text-align:center; font-size: 16px;  width: 100px; padding: 8px;" class="btn btn-sm btn-main text-center " rel="nofollow">打卡</a>
                 </div>
-                <div class="col-xs-4 col-xs-offset-2">
-                  <a id="markerModal-directionurl" style="padding: 8px; font-size: 16px;  width: 100px;" class="btn btn-sm btn-main text-center col-xs-5 col-xs-offset-2" href="" target="_blank">導航</a>
+                <div class="col-xs-4 col-xs-offset-2" style="padding: 0;">
+                  <a id="markerModal-directionurl" style="padding: 8px; font-size: 16px;  width: 100px;" class="btn btn-sm btn-main text-center " href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -141,19 +142,19 @@
         </div>
         <br/>
 
-        <div id="search-box-pc" class="col-xs-12">
+        <div id="search-box-pc" class="col-xs-12 col-sm-8 col-sm-offset-2" style="margin-top: 15px;">
 
           <div class="input-group">
             <span class="input-group-btn">
-              <button id="current-position-submit" class="btn btn-main" style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;"" type="submit">現在位置</button>
+              <button id="current-position-submit" class="btn btn-main" style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;""  type="submit">現在位置</button>
             </span>
-            <input  id="direction-start" type="text" class="form-control boarder rounded" placeholder="或 輸入起點">
+            <input  id="direction-start" type="text" class="form-control boarder rounded" style="border-radius: 0 10px 10px 0; "placeholder="或 輸入起點">
           </div><!-- /input-group -->
-          <br>
-          <div class="input-group">
+
+          <div class="input-group" style="margin-top: 10px;">
             <input id="direction-end" type="text" class="form-control border rounded" placeholder="你想去哪裡？">
             <span class="input-group-btn">
-              <input id="direction-submit" class="btn btn-main " type="submit" value="GO" style="padding: 6px 20px 6px 20px; margin-left: 0px; margin-top: -4px; border-radius: 0 10px 10px 0; ">
+              <input id="direction-submit" class="btn btn-main " type="submit" value="GO" style="padding: 6px 25px 6px 25px; margin-left: 0px; margin-top: -4px; border-radius: 0 10px 10px 0; ">
             </span>
             <br>
           </div><!-- /input-group -->
@@ -162,8 +163,8 @@
 
 
         <div style="padding: -100;" >
-          <input id="pac-input" class="form-control border rounded" type="text" placeholder="你想去哪裡？" style="margin-top: 25px; border-radius: 15px;">
-          <div id="pac-input-button" style="margin-top: 15px; margin-left: -5px;"></div>
+          <input id="pac-input" class="form-control border rounded" type="text" placeholder="你想去哪裡？" style="margin-top: 55px; border-radius: 15px;">
+          <div id="pac-input-button" style="margin-top: 45px; margin-left: -5px;"></div>
           <div id="map" class="z-depth-2" style="height: 592px; position: relative; top: -24px;"></div>
         </div>
       <!-- </div> -->
