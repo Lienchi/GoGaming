@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409034618) do
+ActiveRecord::Schema.define(version: 20180410144440) do
 
   create_table "badges_sashes", force: :cascade do |t|
     t.integer "badge_id"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180409034618) do
     t.text "description"
     t.float "latitude"
     t.float "longitude"
-    t.text "photo"
+    t.string "photo"
     t.integer "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
