@@ -1,27 +1,5 @@
 <div class="container" style="padding-top: 20px;">
-  <%= link_to user_path(current_user) do %>    
-    <div class="row user-navdata navbar-fixed-top" style="">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-        
-        <div class="col-xs-8 col-xs-offset-1 user-data">
-          <h4><%= current_user.name %> </h4> 
-            <div class="user-icon-text text-muted" style="margin-top: 0px;">
-              <h6>
-                等級    <%= current_user.getUserLevel() %>     -   
-                徽章    <%= current_user.badges.count%>     -   
-                點數    <%= current_user.points %>    
-              </h6>  
-            </div>
-            <br>
-        </div>
-        <div class="col-xs-2" style=" padding: 5px 0;">
-
-        <%= image_tag current_user.avatar, class: "img-circle img-responsive text-center " , style: "width: 40px; height: auto;" %>   
-        </div>
-      
-      </div>
-    </div>
-  <% end %>
+  <%= render partial: "shared/user_top" %>
   
 
   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="min-height: 605px;">
@@ -41,45 +19,6 @@
       </div>
     <div class="clearfix"></div>
 
-    <table class="table  table-hover " style="margin-top: 85px;">
-      <tbody>
-        <% i=1 %>
-        <% @leaderusers.each do |user| %>
-          <tr>
-               
-              <th class="col-xs-1 text-center media-middle" scope="row" style="padding-top: 4px;"><%=  i %><% i+=1 %></th>
-            
-              <td class="col-xs-2" style="padding-top: 4px;">
-                <%= link_to user_path(user) do %>
-                  <%= image_tag "#{user.avatar}", class: "img-responsive img-circle " %>
-                <% end %>
-              </td>
-              <td class="col-xs-8" style="padding-top: 4px;">
-                <h4 class="display-3" style="padding-left: 15px;">
-                  <%= link_to "#{user.name}", user_path(user), style: "color: #666C65;" %>
-                  
-                </h4>
-                <%= link_to user_path(user) do %>
-                  <div class="col-xs-3 col-xs-offset-1">
-                    <h6>等級</h6>
-                    <h4><%= user.level %></h4>
-                  </div>
-                  <div class="col-xs-3">
-                    <h6>徽章</h6>
-                    <h4><%= user.badges.count %></h4>
-                  </div>
-                  <div class="col-xs-3">
-                    <h6>點數</h6>
-                    <h4><%= user.experience %></h4>
-                  </div>
-                <% end %>
-
-              <div class="col-xs-1" style="padding: 0;">
-                  <%= render partial: "shared/follow", locals: {user: user}%>
-                </div>
-            </td>
-        <%end%>
-      </tbody>
-    </table>
+    <%= render partial: "shared/leaderboards" %>
   </div>
 </div>
