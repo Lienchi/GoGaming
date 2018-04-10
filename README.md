@@ -16,7 +16,7 @@
 
 # Screenshot
 
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/root.png)
+<img src="https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/root.png" width="30%">
 
 
 # Getting Started
