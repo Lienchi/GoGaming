@@ -24,7 +24,7 @@
         <div class="col-xs-2 col-xs-offset-1" style="padding: 6px 0px;">
           <h2 style="color: #77D6AC"><%= @user_rank %> </h2>
         </div>
-        <div class="col-xs-2 col-xs-offset-2" style="padding: 10px 0;">
+        <div class="col-xs-2 col-xs-offset-2" style="padding-top: 10px;">
           <% if @user == current_user %>
             <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div>  
           <% end %> 
