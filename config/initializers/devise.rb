@@ -18,10 +18,7 @@ Devise.setup do |config|
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
-  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], 
-  scope: "public_profile,email", 
-  info_fields: "email,name", 
-  callback_url: "https://gogaming-deployment.herokuapp.com/users/auth/facebook/callback"
+
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
