@@ -65,13 +65,8 @@
                 <%= image_tag @trip.badge, style:"width:100px;height100px;"%>
               </div>
               <br/>
-<<<<<<< HEAD
               <p >恭喜你!已挑戰成功!</p>  
               <p >本次任務獲得 <%= @trip.points %> 點</p>  
-=======
-              <p >恭喜你!挑戰成功!</p>  
-              <p >已獲得 <%= @trip.points %> 點</p>  
->>>>>>> a7883f3a2e137e0e0dbc098656b71a020e5c5297
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-main-outline" data-dismiss="modal">Close</button>
@@ -1007,8 +1002,9 @@
               lat: +gon.gostation_sites[i].latitude,
               lng: +gon.gostation_sites[i].longitude
             };
-
+          
             var info = {
+
               title: gon.gostation_sites[i].name,
               content: gon.gostation_sites[i].description,
               storePhoto: gon.gostation_sites[i].photo,
