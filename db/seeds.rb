@@ -46,7 +46,9 @@ puts "Default admin created!"
 
 30.times do |i|
   user_name = FFaker::Name.first_name
-  User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}")
+  file = "avatar/user#{i+1}.jpg"
+  User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}", avatar: file)
+  
 end
 puts "now you have #{User.count} users data!"
 
