@@ -9,17 +9,15 @@
 
 * Plan their routes, directions and find Gostations or Friendly Store nearby
 * Challenge on a Trip and get badge, points if trip is completed
-* Reward by badges, points , ranking and Gogoro products.
+* Be rewarded by badges, points , ranking and Gogoro products.
 
 
 
 
 # Screenshot
 
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/index.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/trip_index.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/trip_show.png)
-![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/user_show.png)
+![image](https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/root.png)
+
 
 # Getting Started
 
