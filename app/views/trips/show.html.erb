@@ -167,7 +167,7 @@
                   <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
                   <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
                   <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                  <div>
+                  <div id="tripModal-moreinfo-div">
                     <a id="tripModal-moreinfo" style=" font-size: 12px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" href="" target="_blank">更多資訊</a>
                   </div>
                   <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
@@ -577,7 +577,11 @@
             document.getElementById('tripModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
           if(props.source_url){
+            document.getElementById('tripModal-moreinfo-div').style = "display: inline";
             document.getElementById('tripModal-moreinfo').href = props.source_url;
+          }
+          else{
+            document.getElementById('tripModal-moreinfo-div').style = "display: none";
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('tripModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;

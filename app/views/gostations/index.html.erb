@@ -111,7 +111,7 @@
                 <div id="markerModal-content" style="font-size: 16px;" class="text-center"></div>
                 <div id="markerModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                <div>
+                <div id="markerModal-moreinfo-div">
                   <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="markerModal-cellContent" style="font-size: 12px;" class="text-center"></div>
@@ -442,7 +442,11 @@
             document.getElementById('markerModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
           if(props.source_url){
+            document.getElementById('markerModal-moreinfo-div').style = "display: inline";
             document.getElementById('markerModal-moreinfo').href = props.source_url;
+          }
+          else{
+            document.getElementById('markerModal-moreinfo-div').style = "display: none";
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('markerModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
