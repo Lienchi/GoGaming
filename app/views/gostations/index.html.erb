@@ -904,8 +904,7 @@
           });
         }
 
-        function geocodeAddress(geocoder, map) {
-          var address = document.getElementById('direction-end').value;
+        function geocodeAddress(geocoder, map, address) {
           geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
               map.setZoom(12);
@@ -990,10 +989,10 @@
           return milestones;    
         }
         
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination) {
           directionsService.route({
-            origin: document.getElementById('direction-start').value,
-            destination: document.getElementById('direction-end').value,
+            origin: origin,
+            destination: destination,
             travelMode: 'DRIVING',
             avoidHighways: true
           }, function(response, status) {
@@ -1103,8 +1102,7 @@
               }
               else{
                 var geocoder = new google.maps.Geocoder();
-                var address = document.getElementById('pac-input').value;
-                geocodeAddress(geocoder, map, address);
+                geocodeAddress(geocoder, map, destination);
               }
             }
           });
@@ -1198,15 +1196,17 @@
 
           document.getElementById('direction-submit').addEventListener('click', function() {
             directionsDisplay.set('directions', null);
-            if(document.getElementById('direction-end').value != ''){
+            var destination = document.getElementById('direction-end').value;
+            if(destination != ''){
               deleteDestinationMarker();
               deleteMarkers(gostationMarkers);
-              if( document.getElementById('direction-start').value != ''  ){
-                calculateAndDisplayRoute(directionsService, directionsDisplay);
+              var origin = document.getElementById('direction-start').value;
+              if( origin != ''  ){
+                calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination);
               }
               else{
                 var geocoder = new google.maps.Geocoder();
-                geocodeAddress(geocoder, map);
+                geocodeAddress(geocoder, map, destination);
               }
             }
           });
