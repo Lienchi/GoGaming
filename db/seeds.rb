@@ -86,15 +86,15 @@ puts "Checkins created"
 # Products
 Product.destroy_all
 
-Product.create!(name:"GOGORO 安全帽 S PERFORMANCE - 黑暗騎士"   ,product_points: 5880   ,image:"products/helmet.jpg")
-Product.create!(name:"鋪棉飛行夾克"   ,product_points: 3490   ,image:"products/clothe.jpg")
-Product.create!(name:"越野前貨架"  ,product_points: 4580   ,image:"products/front_rack.jpg")
-Product.create!(name:"GOGORO安全帽 競賽風格 - 復刻款(銀)"   ,product_points: 2990   ,image:"products/helmet2.jpg")
-Product.create!(name:"反光條紋 女裝T恤"  ,product_points: 690    ,image:"products/tshirt.jpg")
 Product.create!(name:"經典鑰匙皮套"   ,product_points: 690    ,image:"products/keyholder.jpg")
-Product.create!(name:"GOGORO 2 PEBBLE 多功能風鏡"   ,product_points: 4320   ,image:"products/mirror.jpg")
-Product.create!(name:"GOGORO 2 復古造型座墊"   ,product_points: 4980   ,image:"products/seat.jpg")
+Product.create!(name:"反光條紋 女裝T恤"  ,product_points: 690    ,image:"products/tshirt.jpg")
+Product.create!(name:"GOGORO安全帽 競賽風格 - 復刻款(銀)"   ,product_points: 2990   ,image:"products/helmet2.jpg")
 Product.create!(name:"GOGORO 2 一體成型鋁合金踏墊"   ,product_points: 3390    ,image:"products/floorpad.jpg")
+Product.create!(name:"鋪棉飛行夾克"   ,product_points: 3490   ,image:"products/clothe.jpg")
+Product.create!(name:"GOGORO 2 PEBBLE 多功能風鏡"   ,product_points: 4320   ,image:"products/mirror.jpg")
+Product.create!(name:"越野前貨架"  ,product_points: 4580   ,image:"products/front_rack.jpg")
+Product.create!(name:"GOGORO 2 復古造型座墊"   ,product_points: 4980   ,image:"products/seat.jpg")
+Product.create!(name:"GOGORO 安全帽 S PERFORMANCE - 黑暗騎士"   ,product_points: 5880   ,image:"products/helmet.jpg")
 
 # Repairstore
 Repairstore.destroy_all

@@ -1,3 +1,4 @@
+ /*
  $(document).ready(function(){
       var tour = new Tour({
         storage: false,
@@ -5,16 +6,16 @@
         {
           element: "#demo",
           title: "Title of my step",
-          content: "Content of my step"
+          content: "Content of my step",
           placement: "bottom"
         },
         {
           element: "#toggle",
           title: "Title of my step",
-          content: "Content of my step"
+          content: "Content of my step",
           placement: "bottom"
         }
-      ],});
+      ]});
 
       // Initialize the tour
       tour.init();
@@ -23,4 +24,4 @@
       tour.start();
       tour.restart()
     });     
-
+*/
