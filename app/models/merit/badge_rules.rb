@@ -51,11 +51,9 @@ module Merit
         trip_gostation.status
       end
 
-      badge_id = 0
-      Trip.all.each do |t|
-        badge_id = badge_id + 1
-        grant_on 'trip_gostations#check', badge_id: badge_id do |trip_gostation|
-          trip_gostation.trip_id == t.id && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
+      6.times do |trip_id|
+        grant_on 'trip_gostations#check', badge_id: trip_id do |trip_gostation|
+          trip_gostation.trip_id == trip_id && !!Challenge.find_by(trip_id: (trip_gostation.trip_id), user_id: (trip_gostation.user_id))
         end
       end
 
