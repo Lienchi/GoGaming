@@ -44,13 +44,21 @@ User.create!(
   )
 puts "Default admin created!"
 
-30.times do |i|
-  user_name = FFaker::Name.first_name
-  file = "avatar/user#{i+1}.jpg"
-  User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}", avatar: file)
-  
+15.times do |i|
+  user_name = FFaker::Name.first_name_female
+  u = User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}")
+  u.avatar = Rails.root.join( "public/images/female/user#{rand(1..9)}.jpg").open
+  u.save
 end
-puts "now you have #{User.count} users data!"
+
+15.times do |i|
+  user_name = FFaker::Name.first_name_male
+  u = User.create!(email: "user#{15+i}@example.com", password: "123456", name: "#{user_name}")
+  u.avatar = Rails.root.join( "public/images/male/user#{rand(1..10)}.jpg").open
+  u.save
+end
+puts "now you have #{User.count} users data"
+  
 
 
 Followship.destroy_all
