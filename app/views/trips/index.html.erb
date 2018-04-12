@@ -17,14 +17,14 @@
                 <%= link_to trip_path(t)  do%>
                  <div class="card-body card-trip-body" >
                   
-                    <h4 class="card-title"  ><%= link_to "#{t.name}", trip_path(t)%></h4>
-                    <p class="card-text" ><%= t.points%> 點</p>
-                    <div class="card-text col-sm-8" style="padding-left: 0;"><%= Challenge.where(trip_id:t.id).count%>人完成</div>
-                    <div class="col-sm-4" style="padding-right: 0; margin-top: -8px;">
+                    <h4 class="card-title" style="margin-bottom: 6px" ><%= link_to "#{t.name}", trip_path(t)%></h4>
+                    <h6 class="card-text text-muted" ><%= t.points%> 點</h6>
+                    <h6 class="card-text col-sm-8 text-muted" style="padding-left: 0;"><%= Challenge.where(trip_id:t.id).count%>人完成</h6>
+                    <div class="col-sm-4" style="padding-right: 0; margin-top: -25px;">
                       <% if t.is_challenged?(current_user)%>   
-                        <%= link_to " Done ", trip_path(t), class:"pull-right btn btn-sm btn-main-1", style:"width: 70px;" %>
+                        <%= link_to " Done ", trip_path(t), class:"pull-right btn btn-sm btn-main-1-outline", style:"width: 48px; " %>
                       <% else %>
-                        <%= link_to " Go ", trip_path(t), class:"pull-right btn btn-sm btn-main", style:"width: 70px;" %>
+                        <%= link_to " GO ", trip_path(t), class:"pull-right btn btn-sm btn-main", style:"width: 48px; " %>
                       <% end %>
                     </div>
 

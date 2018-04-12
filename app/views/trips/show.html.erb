@@ -79,6 +79,10 @@
     <div class="container">
     <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
       <div class="clearfix" style="min-height: 605px;">   
+        
+
+        <div id="trip-show-map" class="z-depth-2" style="height: 250px"></div>
+
         <div class="col-xs-12" style="padding-bottom: 10px;" >
           <%= link_to trips_path do %>
             <h3>
@@ -87,8 +91,6 @@
             </h3>
           <% end %>
         </div>
-
-        <div id="trip-show-map" class="z-depth-2" style="height: 250px"></div>
   
         <p class="col-xs-12" style="padding-top: 10px;"><%= @trip.description %></p>
 
