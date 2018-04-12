@@ -13,11 +13,11 @@
         <div class=" col-xs-8 col-xs-offset-2", style=" padding-top: 30px;">
           <div class="field form-group">
             
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email address", class: "float-left form-control border rounded" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email address", class: "float-left form-control border rounded border-R" %>
           </div>
           <div class="field form-group">
             
-            <%= f.password_field :password, autocomplete: "off", placeholder: "password", class: "float-left form-control border rounded" %>
+            <%= f.password_field :password, autocomplete: "off", placeholder: "password", class: "float-left form-control border rounded border-R" %>
           </div>
         </div>
 
@@ -31,7 +31,8 @@
   -->
         <div class="col-xs-12 clearfix bottom" style=" padding: 15px 20px;" >
           <div class="actions text-center ">
-            <input class="btn btn-main-1 btn-lg float-left" type="submit" value="出發" style="margin-right: 20px;">
+            <input class="btn btn-main-1 float-left" type="submit" value="出發" style="margin-right: 20px; padding-left: 25px;
+  padding-right: 25px;">
             <%= render "devise/shared/links" %>
           </div>
         </div>

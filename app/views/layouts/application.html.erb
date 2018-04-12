@@ -18,8 +18,8 @@
     <!-- 導覽列 -->
     <% if current_user %>
       <nav class="navbar" style="margin-bottom: 0px;">
-        <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #53C0F0; ">
-          <div class="container-fluid ">
+        <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #FFFFFF; ">
+          <div class="container-fluid " style=" padding-bottom: 1.5px;"">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header ">
               <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -36,10 +36,10 @@
             </div>
 
             <div class="navbar-nav" style="">
-              <div class="btn btn-main-1-outline-1"  style=" float: left; display: inline-block; margin: 1px 15px 6px 15px;">
+              <div class="nav-btn"  style=" float: left;  ">
                 <% if current_user %>
                   <% if current_user.role == "admin" %>
-                    <%= link_to "後台", admin_trips_path, class: "text-white"  %>
+                    <%= link_to "後台", admin_trips_path, class: ""  %>
                   <% end %>
                 <% end %>
               </div>
@@ -47,9 +47,9 @@
 
 
             <div class="navbar-nav">
-              <div class=" pull-right  btn btn-main-1-outline-1" style=" float: right; display: inline-block; margin: 1px 15px 6px 15px;">
+              <div class=" pull-right nav-btn" style=" float: right; ">
                 <% if current_user %>
-                  <%= link_to('登出', destroy_user_session_path, method: :delete, class: "text-white"  ) %>
+                  <%= link_to('登出', destroy_user_session_path, method: :delete, class: ""  ) %>
                 <% end %>
               </div>
             </div>

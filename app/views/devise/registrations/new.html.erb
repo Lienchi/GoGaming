@@ -10,28 +10,28 @@
         <div class="" style="padding:20px;">
           <div class="field form-group">
             <%= f.label :ID, class: "col-xs-4 col-sm-3 control-label text-uppercase"%>
-            <%= f.text_field :name, class: "float-left border rounded col-xs-8 col-sm-9 "%>
+            <%= f.text_field :name, class: "float-left border rounded col-xs-8 col-sm-9 border-R"%>
           </div>
 
           <div class="field form-group">
             <%= f.label :email, class: "col-xs-4 col-sm-3 control-label" %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left border rounded col-xs-8 col-sm-9 " %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "float-left border rounded col-xs-8 col-sm-9 border-R" %>
           </div>
 
           <div class="field form-group">
             <%= f.label :密碼, class: "col-xs-4 col-sm-3 control-label" %>
-            <%= f.password_field :password, autocomplete: "off" , class: "float-left border rounded text-center text-muted col-xs-8 col-sm-9 ", placeholder: "最少#{@minimum_password_length}位數" %>
+            <%= f.password_field :password, autocomplete: "off" , class: "float-left border rounded text-center text-muted col-xs-8 col-sm-9 border-R", placeholder: "最少#{@minimum_password_length}位數" %>
               
           </div>
 
           <div class="field form-group">
             <%= f.label :密碼確認, class: "col-xs-4 col-sm-3 control-label" %>
-            <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left border rounded col-xs-8 col-sm-9 "%>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "float-left border rounded col-xs-8 col-sm-9 border-R"%>
           </div>
         </div>
         <div class="col-xs-12 clearfix" style="min-height: 360px; margin-top: 40px;">
           <div class="actions station-buttom">
-            <input class="btn btn-main-1 btn-lg float-left" type="submit" value="註冊">
+            <input class="btn btn-main-1 float-left" type="submit" value="註冊">
             <!-- <%= render "devise/shared/links" %> -->
           </div>
         </div>
