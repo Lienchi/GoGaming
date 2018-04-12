@@ -6,21 +6,26 @@
       <%  color = ["2E3618", "285AB1", "985554", "B5A38E", "96AE54", "46453C"] %>
       <% i=0 %>
       <% @trips.each do |t| %>
+      
           <div class="col-xs-6 col-sm-4" style="padding: 5px;">
-            <div class="card card-trip text-right box-shadow" style="background-color: #<%= color[i] %>;">
+            <div class="card card-trip text-right box-shadow border" style="border-color: #<%= color[i] %>;">
+              
               <% i+=1 %>
               <div class="card-img-top">
                  <%= link_to(image_tag(t.image), trip_path(t)) %>
               </div>
-                <%= link_to trip_path(t) do %>
+                <%= link_to trip_path(t)  do%>
                  <div class="card-body card-trip-body">
-                    <h4 class="card-title"><%= link_to "#{t.name}", trip_path(t)%></h4>
-                    <p class="card-text"><%= t.points%>Points</p>
-                    <p class="card-text"><%= Challenge.where(trip_id:t.id).count%>人完成</p>
+                  
+                    <h4 class="card-title" , style="color: #<%= color[i] %>;" ><%= link_to "#{t.name}", trip_path(t)%></h4>
+                    <p class="card-text"  style="color: #<%= color[i] %>;"><%= t.points%> 點</p>
+                    <p class="card-text"  style="color: #<%= color[i] %>;"><%= Challenge.where(trip_id:t.id).count%>人完成</p>
+                  
                 </div>
               <%end%>
             </div>
           </div>
+
       <%end%>         
     </div> 
   </div>
