@@ -46,6 +46,7 @@ gem 'introjs-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'koala', "~> 2.2"
+gem 'rest-client'
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
