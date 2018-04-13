@@ -10,21 +10,27 @@
     <style>
      
       html, body {
-        height: 80%;
-        margin: 50;
-        padding: 50;
+        height: 100%;
+
       }
       #trip-show-map {
         height: 50%;
-        width: 90%;
+        width: 100%;
         margin: auto;
-        border-radius: 10px;
+        border-radius: 1px;
       }
 
       #directions-panel {
         margin-top: 10px;
         background-color: #FFEE77;
         padding: 10px;
+      }
+
+      @media screen and (min-width: 768px) {
+        #trip-show-map{
+          margin-top: 60px;
+        }
+
       }
     </style>
   </head>
@@ -76,159 +82,160 @@
       </div>
     </div><!-- end of Modal for complete trip-->
 
-    <div class="container">
-    <div  class="col-xs-12 col-sm-8 col-sm-offset-2 ">
-      <div class="clearfix" style="min-height: 605px;">   
-        <div class="col-xs-12" style="padding-bottom: 10px;" >
-          <%= link_to trips_path do %>
-            <h3>
-              <%= image_tag "navbar_icons/back_button.svg", :class => "nav-icon-style", style:"height: 25px; width: auto;"  %>   
-              <%= @trip.name %>
-            </h3>
+    <div class="container" style="padding: 0px 0px 55px 0px;">
+      <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
+    
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 10px; margin-top: 10px;" >
+        <h3 class="col-xs-12 text-center">
+          <%= @trip.name %>
+        </h3>
+        <p class="col-xs-12" ><%= @trip.description %></p>
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="trip-data col-xs-12 col-sm-8 col-sm-offset-2">          
+        
+<br>
+        
+        <div class="col-xs-4 col-sm-4" style="margin-top: 3px; padding: 0;">
+          <% if @trip.is_challenged?(current_user)%>                  
+            <%= image_tag @trip.badge, alt: @trip.name %>
+          <% else %>
+            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 1;" %>
           <% end %>
         </div>
+        <div class="col-xs-8 col-sm-8" style="">
+          <% if Challenge.where(trip_id:@trip).exists?%>
+            <p>             
+              <%= image_tag @challenge.user.avatar, style:"width:30px; display: inline-block;"%>
+              <%= @challenge.user.name%>
+            </p>
 
-        <div id="trip-show-map" class="z-depth-2" style="height: 250px"></div>
-  
-        <p class="col-xs-12" style="padding-top: 10px;"><%= @trip.description %></p>
+            <p style="padding-left: 35px;">在 <%= @challenge.completetime.round %> 分鐘內完成 </p>
+          <% else %>
+            還沒有人完成喔！快來搶頭香！
+          <%end%>   
+          <hr style="margin: 5px auto;">
+          <% if @trip.is_challenged?(current_user)%> 
+            <% if @challenge.user == current_user %>
+              恭喜你，成為紀錄保持人！
+            <% else %>
+              <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%>
+              你在 <%= Challenge.where(user_id: current_user, trip_id: @trip).first.completetime.round %> 分鐘內完成
+            <% end %>
+          <% else %>
+            任務還沒完成，趕快出發吧！
+          <% end %>
+        </div> 
 
-<div class="clearfix"></div>
-
-        
-
-
-
-        <div class="trip-data col-xs-12">
-          <div class="col-xs-3 col-sm-3" style="margin-top: 15px; padding: 0;">
-              <% if @trip.is_challenged?(current_user)%>                  
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
-              <% else %>
-                <%= image_tag Merit::Badge.find(@trip.id).custom_fields[:image],alt: @trip.name %>
-              <% end %>
-            </div>
-            <div class="col-xs-9 col-sm-9" style="padding: 5px;">
-              <ul>
-                <% @sites.each do |site|%>
-                  <li class="col-sm-6">
-                    <!-- Button trigger modal -->
-                    <!-- <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight"> -->
-                      <%= site.name%>
-                    <!-- </button> -->
-                  </li>
-               <%end%>
-              </ul>
-
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="row text-center align-bottom" style="">
-              最快完成者：
-              <%if Challenge.where(trip_id:@trip).exists?%>
-                <%= @challenge.user.name%>
-                <%= image_tag @challenge.user.avatar, style:"width:30px; display: inline-block;"%>
-                
-                在 <%= @challenge.completetime.round %> 分鐘內完成
-              <% else %>
-                還沒有人挑戰喔！快來搶頭香！
-              <%end%>   
-            </div> 
-
+        <ul style="list-style-type: none; padding-left: 0px;">
+          <li class="col-xs-12 text-center"><h4>任務景點</h4></li>
           <% @sites.each do |site|%>
-            <!-- Modal for sight-->
-            <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><%= site.name%></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <%= image_tag site.photo%>
-                    <p><%= site.description%></p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-main-outline" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
-                    <button type="button" class="btn btn-sm btn-main">導航</button>
-                    <p>完成<strong>"<%= @trip.name %>"</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <%end%>
-          <!-- google marker Modal -->
-          <div class="modal fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
+            <li class="col-xs-4" style="padding-right: 0px;">
+              <!-- Button trigger modal -->
+              <!-- <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight"> -->
+                <%= site.name%>
+              <!-- </button> -->
+            </li>
+         <%end%>
+        </ul>
+        <div class="clearfix"></div>
+
+        <% @sites.each do |site|%>
+          <!-- Modal for sight-->
+          <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h3 class="modal-title text-center" id="tripModalLongTitle"></h3>
-                </div>
-                <div class="modal-body">
-                  <div>
-                    <img id="tripModal-img" alt="Store Photo" width="300" height="300" class="border rounded">
-                  </div>
-                  <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
-                  <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
-                  <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                  <div id="tripModal-moreinfo-div" class="col-xs-4 col-xs-offset-4">
-                    <a id="tripModal-moreinfo" style=" font-size: 12px; margin-top: 8px; margin-bottom: 8px;padding: 8px; width:100px; " class="btn btn-main-outline text-center" href="" target="_blank">更多資訊</a>
-                  </div>
-                  <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
-                  <div id="tripModal-cellProgress">
-                    <div id="tripModal-cellBar"></div>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="modal-footer">
-                  <div class="col-xs-4 col-xs-offset-1" >
-                    <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow">打卡</a>
-                  </div>
-                  <div class="col-xs-4 col-xs-offset-2">
-                    <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- site marker Modal -->
-          <div class="modal fade" id="siteModalCenter" tabindex="-1" role="dialog" aria-labelledby="siteModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">               
+                  <h5 class="modal-title" id="exampleModalLongTitle"><%= site.name%></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
-                  <h3 class="modal-title text-center" id="siteModalLongTitle"></h3>
                 </div>
                 <div class="modal-body">
-                  <div>
-                    <img id="siteModal-img" alt="Site Photo" width="400" height="400" class="border rounded">
-                  </div>
-                  <div id="siteModal-content" style="font-size: 14px;" class="text-center"></div>
-                  <div id="siteModal-disdur" style="font-size: 14px;" class="text-center"></div>
-                  <div id="siteModal-availableTime" style="font-size: 14px;" class="text-center"></div>
+                  <%= image_tag site.photo%>
+                  <p><%= site.description%></p>
                 </div>
                 <div class="modal-footer">
-                  <div class="col-xs-4 col-xs-offset-1" >
-                    <a id="siteModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="" rel="nofollow"></a>
-                  </div>
-                  <div class="col-xs-5 col-xs-offset-2">
-                    <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main" href="" target="_blank">導航</a>
-                  </div>
+                  <button type="button" class="btn btn-sm btn-main-outline" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
+                  <button type="button" class="btn btn-sm btn-main">導航</button>
+                  <p>完成<strong>"<%= @trip.name %>"</strong></p>
                 </div>
               </div>
             </div>
           </div>
+        <%end%>
+        <!-- google marker Modal -->
+        <div class="modal fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="tripModalLongTitle"></h3>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <img id="tripModal-img" alt="Store Photo" width="300" height="300" class="border rounded">
+                </div>
+                <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
+                <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
+                <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
+                <div id="tripModal-moreinfo-div" class="col-xs-4 col-xs-offset-4">
+                  <a id="tripModal-moreinfo" style=" font-size: 12px; margin-top: 8px; margin-bottom: 8px;padding: 8px; width:100px; " class="btn btn-main-outline text-center" href="" target="_blank">更多資訊</a>
+                </div>
+                <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
+                <div id="tripModal-cellProgress">
+                  <div id="tripModal-cellBar"></div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="modal-footer">
+                <div class="col-xs-4 col-xs-offset-1" >
+                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow">打卡</a>
+                </div>
+                <div class="col-xs-4 col-xs-offset-2">
+                  <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- site marker Modal -->
+        <div class="modal fade" id="siteModalCenter" tabindex="-1" role="dialog" aria-labelledby="siteModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">               
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="siteModalLongTitle"></h3>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <img id="siteModal-img" alt="Site Photo" width="400" height="400" class="border rounded">
+                </div>
+                <div id="siteModal-content" style="font-size: 14px;" class="text-center"></div>
+                <div id="siteModal-disdur" style="font-size: 14px;" class="text-center"></div>
+                <div id="siteModal-availableTime" style="font-size: 14px;" class="text-center"></div>
+              </div>
+              <div class="modal-footer">
+                <div class="col-xs-4 col-xs-offset-1" >
+                  <a id="siteModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="" rel="nofollow"></a>
+                </div>
+                <div class="col-xs-5 col-xs-offset-2">
+                  <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main" href="" target="_blank">導航</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
 
-        </div>  
-<div class="clearfix"></div>
-<br>
         <div class="comment-group" style="padding-left: 0px;">
           <div class="col-xs-8 col-sm-10" style="padding-left: 0px;">
             <h4>好玩推薦</h4>
@@ -293,13 +300,10 @@
             </div>
           <% end%>
         </div>
-
-
       </div>
-      
-      <br/>
-    </div>
-    </div>
+    </div>  
+
+    
 
       <script>
         // common functions defined in assets/javascripts/google_map_common.js

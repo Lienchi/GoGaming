@@ -12,20 +12,20 @@
     </div>
     <div class="col-xs-8">  
       <%= f.label :更新大頭貼 %>
-      <%= f.file_field :avatar, class: "form-control  border rounded", style:"" %>
+      <%= f.file_field :avatar, class: "form-control  border border-R"%>
     </div>
   </div>
   <div class="clearfix"></div>
 
   <div class="field">
     <%= f.label :ID, class:"text-uppercase" %>
-    <%= f.text_field :name, class: "form-control  border rounded" %>
+    <%= f.text_field :name, class: "form-control  border border-R" %>
   </div>
 
   
   <div class="field">
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  border rounded" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  border border-R" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -34,16 +34,16 @@
 
   <div class="field">
     <%= f.label :密碼 %>
-    <%= f.password_field :password, autocomplete: "off", placeholder:"最少#{@minimum_password_length}位數,若不想重設請略過" , class: "form-control  border rounded" %>
+    <%= f.password_field :password, autocomplete: "off", placeholder:"最少#{@minimum_password_length}位數,若不想重設請略過" , class: "form-control  border border-R" %>
   </div>
   <div class="field">
     <%= f.label :密碼確認 %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control  border rounded" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control  border border-R" %>
   </div>
 
   <div class="field">
     <%= f.label :目前密碼 %> 
-    <%= f.password_field :current_password, autocomplete: "off", placeholder:"請輸入更新前密碼" , class: "form-control  border rounded"%>
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: "請輸入更新前密碼" , class: "form-control  border border-R"%>
   </div>
   <br/>
 

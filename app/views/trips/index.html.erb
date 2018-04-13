@@ -1,26 +1,42 @@
 
 <%= render partial: "shared/LvBP"%>
-<div class="container">
-  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2", style="min-height: 605px;">
+<div class="container" style="padding: 30px 0px 55px 0px">
+  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2", style="min-height: 605px; padding: 0px 5px;">
     <div class="card-deck clearfix">
       <%  color = ["2E3618", "285AB1", "985554", "B5A38E", "96AE54", "46453C"] %>
       <% i=0 %>
       <% @trips.each do |t| %>
+      
           <div class="col-xs-6 col-sm-4" style="padding: 5px;">
-            <div class="card card-trip text-right box-shadow" style="background-color: #<%= color[i] %>;">
+            <div class="card card-trip box-shadow border" style="border-color: #<%= color[i] %>; margin-left: 5px;">
+              
               <% i+=1 %>
               <div class="card-img-top">
                  <%= link_to(image_tag(t.image), trip_path(t)) %>
               </div>
-                <%= link_to trip_path(t) do %>
-                 <div class="card-body card-trip-body">
-                    <h4 class="card-title"><%= link_to "#{t.name}", trip_path(t)%></h4>
-                    <p class="card-text"><%= t.points%>Points</p>
-                    <p class="card-text"><%= Challenge.where(trip_id:t.id).count%>人完成</p>
+                <%= link_to trip_path(t)  do%>
+                 <div class="card-body card-trip-body" >
+                    
+                    <h4 class="card-title" style="margin-bottom: 6px" ><%= link_to "#{t.name}", trip_path(t)%></h4>
+                    
+                    <h6 class="card-text text-muted" ><%= t.points%> 點</h6>
+                    <h6 class="card-text col-sm-8 text-muted" style="padding-left: 0;"><%= Challenge.where(trip_id:t.id).count%>人完成</h6>
+                    <div class="col-sm-4" style="padding-right: 0; margin-top: -25px;">
+                      <% if t.is_challenged?(current_user)%>   
+                        <%= link_to " Done ", trip_path(t), class:"pull-right btn btn-sm btn-main-1-outline", style:"width: 48px; " %>
+                      <% else %>
+                        <%= link_to " GO ", trip_path(t), class:"pull-right btn btn-sm btn-main-1", style:"width: 48px; " %>
+                      <% end %>
+                      
+                    </div>
+                    <br>
+
+                    
                 </div>
               <%end%>
             </div>
           </div>
+
       <%end%>         
     </div> 
   </div>
