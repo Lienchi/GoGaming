@@ -393,5 +393,20 @@ function checkLatLngNearby(pos_1, pos_2, nearbyDisTH) {
   return false;
 }
 
+function getUserCurrentPosition(){
+  var promise = new Promise(function(resolve, reject) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function(position){
+          resolve(position)
+        }
+      );
+    } else {
+      reject("Can not get current position!");
+    }
+  });
+
+  return promise;
+}
 
 
