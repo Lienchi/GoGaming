@@ -253,6 +253,27 @@ function deleteMarker(marker) {
   }
 }
 
+function setMarkersIcon(markers, icon) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setIcon(icon);
+  }
+}
+
+function openMarkersInfowindow(markers) {
+  for (var i = 0; i < markers.length; i++) {
+    if(markers[i].infowindow){
+      markers[i].infowindow.open(map, markers[i]);
+    }
+  }
+}
+
+function closeMarkersInfowindow(markers) {
+  for (var i = 0; i < markers.length; i++) {
+    if(markers[i].infowindow){
+      markers[i].infowindow.close(map, markers[i]);
+    }
+  }
+}
 
 var userCurrentPos = {
   lat: 0.0,
@@ -367,17 +388,66 @@ function FriendlyStoreControl(controlDiv, map) {
   // Setup the click event listeners: simply set the map to Chicago.
   controlUI.addEventListener('click', function() {
     displayFriendlyStores();
-        toggleFriendlyStore = !toggleFriendlyStore;
-        if(toggleFriendlyStore){
-          showMarkers(map, friendlyStoreMarkers);
-          controlText.style.color = '#77D6AC';
-          controlUI.style.backgroundColor = '#FFFFFF';
-        }
-        else{
-          clearMarkers(friendlyStoreMarkers);
-          controlText.style.color = '#FFFFFF';
-          controlUI.style.backgroundColor  = '#77D6AC';
-        }
+    toggleFriendlyStore = !toggleFriendlyStore;
+    if(toggleFriendlyStore){
+      showMarkers(map, friendlyStoreMarkers);
+      controlText.style.color = '#77D6AC';
+      controlUI.style.backgroundColor = '#FFFFFF';
+    }
+    else{
+      clearMarkers(friendlyStoreMarkers);
+      controlText.style.color = '#FFFFFF';
+      controlUI.style.backgroundColor  = '#77D6AC';
+    }
+  });
+
+}
+
+var toggleGostationSite = false;
+function GostationSiteControl(controlDiv, map) {
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#77D6AC';
+  controlUI.style.borderRadius = '15px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginLeft = '18px';
+  controlUI.style.marginBottom = '8px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = '#FFFFFF';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '14px';
+  controlText.style.lineHeight = '32px';
+  controlText.style.paddingLeft = '10px';
+  controlText.style.paddingRight = '10px';
+  controlText.innerHTML = '切換站點';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    displayGostations();
+    displaySites();
+    toggleGostationSite = !toggleGostationSite;
+    if(toggleGostationSite){
+      setMarkersIcon(siteMarkers, i_site);
+      openMarkersInfowindow(siteMarkers);
+      setMarkersIcon(gostationMarkers, i_green_black_battery_sm);
+      controlText.style.color = '#77D6AC';
+      controlUI.style.backgroundColor = '#FFFFFF';
+    }
+    else{
+      setMarkersIcon(gostationMarkers, i_green_black_battery);
+      setMarkersIcon(siteMarkers, i_site_sm);
+      closeMarkersInfowindow(siteMarkers);
+      controlText.style.color = '#FFFFFF';
+      controlUI.style.backgroundColor  = '#77D6AC';
+    }
   });
 
 }
