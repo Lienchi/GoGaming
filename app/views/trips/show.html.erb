@@ -126,7 +126,7 @@
               你在 <%= Challenge.where(user_id: current_user, trip_id: @trip).first.completetime.round %> 分鐘內完成
             <% end %>
           <% else %>
-            任務還沒完成，趕快出發吧！
+            你的任務還沒完成，趕快出發！
           <% end %>
         </div> 
 
