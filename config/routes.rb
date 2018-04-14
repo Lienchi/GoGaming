@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
     collection do
       post :getCurrentUserPoints
+      post :getCurrentUserExp
     end
   end
 

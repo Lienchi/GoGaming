@@ -175,6 +175,7 @@ Trip.create!(id: 6, name: "台南直直去", image: File.open(Rails.root.join("a
              description: "歷史幽久的台南古城，除了道地的古早味，還有希臘城堡般的建築等著你，和三五好友來趟文化之旅，一起一探就竟，蹦出新滋味吧!",
              badge: "badges/Tainan.svg", points: 300)
 
+puts "have created #{TripGostation.count} trips!"
 
 gostation_list = [
                     ["台北捷運劍潭站", "台北捷運民權西路站", "中油信義路加油站",
@@ -187,7 +188,7 @@ gostation_list = [
                      "Gogoro 信義松仁授權服務中心站", "中油中崙加油站"],
 
                     ["先奕實業站", "便利停車場建國站", "艋舺公園地下停車場站",
-                     "台塑政大加油站", "台北捷運唭哩岸站"],
+                     "台塑政大加油站", "台北捷運唭哩岸站A"],
 
                     ["中油石門加油站", "中油大嘉好加油站", "台北捷運淡水站",
                      "北投熱海溫泉大飯店站", "中油福林加油站"],
@@ -202,7 +203,7 @@ Trip.all.each do |t|
   gostation_list[idx].each do |g|
     t.gostations_index.push(Gostation.where(LocName: g).first.id)
   end
-  t.save
+  t.save!
   idx = idx + 1
 end
 puts "have created trips!"

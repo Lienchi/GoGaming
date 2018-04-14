@@ -31,8 +31,6 @@ class TripGostationsController < ApplicationController
     render :json => { :status => status }
   end
 
-  
-
   private
 
   def set_trip_gostation

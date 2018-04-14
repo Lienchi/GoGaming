@@ -394,6 +394,7 @@
 
         var map = null;
         var gostationMarkers = [];
+        var siteMarkers = [];
         var friendlyStoreMarkers = [];
         var currentPositionMarker = null;
         var destinationMarker = null;
@@ -401,13 +402,13 @@
         var directionsDisplay = null;
 
         // map icons
-        var i_black_battery = null;
-        var ig_black_battery = null;
         var i_green_black_battery = null;
+        var i_green_black_battery_sm = null;
         var ig_green_black_battery = null;
         var i_blue_black_battery = null;
         var ig_blue_black_battery = null;
         var i_site = null;
+        var i_site_sm = null;
         var ig_site = null;
         var friendly_store_icon = null;
         var friendly_store_icon_onclick = null;
@@ -430,7 +431,9 @@
           return info;
         }
 
-        function showGostations(){
+        function displayGostations(){
+          if(gostationMarkers.length>0){ return; }
+
           for(var i=0; i<gon.gostations.length; i++){
             var position = {};
             position.lat = +gon.gostations[i].Latitude;
@@ -462,6 +465,17 @@
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '打卡';
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
+                    $.ajax({
+                      url: "/gostations/getCurrentUserExp",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserExp!");
+                      }
+                    });
                   },
                   error: function() {
                     alert("ERROR: can not uncheckin!");
@@ -475,6 +489,17 @@
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '已打卡';
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-outline text-center col-xs-5";
+                    $.ajax({
+                      url: "/gostations/getCurrentUserExp",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserExp!");
+                      }
+                    });
                   },
                   error: function() {
                     alert("ERROR: can not checkin!");
@@ -498,7 +523,6 @@
 
         var activeMarkerInfo = {
           marker: null,
-          bHasPower: false,
           bFriendlyStore: false,
           bGostationSite: false
         };
@@ -510,32 +534,47 @@
             icon: props.iconImage
           });
 
+          if(props.id==-4){
+            marker.infowindow = new google.maps.InfoWindow({
+              content: props.title
+            });
+          }
+
           if(props.directions_url){
             marker.addListener('click', function(){
-              if(props.id >= 0){//gostations
-
+              // --- switch marker icon
+              if(props.id>=0 || props.id==-1 || props.id==-4){
                 if(activeMarkerInfo.marker!=null){
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
                   }
                   else if(activeMarkerInfo.bGostationSite){
-                    activeMarkerInfo.marker.setIcon(i_site);
-                  }
-                  else if(activeMarkerInfo.bHasPower){
-                    activeMarkerInfo.marker.setIcon(i_green_black_battery);
+                    if(toggleGostationSite){
+                      activeMarkerInfo.marker.setIcon(i_site);
+                    }
+                    else{
+                      activeMarkerInfo.marker.setIcon(i_site_sm);
+                    }
                   }
                   else{
-                    activeMarkerInfo.marker.setIcon(i_black_battery);
+                    if(toggleGostationSite){
+                      activeMarkerInfo.marker.setIcon(i_green_black_battery_sm);
+                    }
+                    else{
+                      activeMarkerInfo.marker.setIcon(i_green_black_battery);
+                    }
                   }
                 }
-                if(isHasPower(props.fullBatteryCells)){
-                  marker.setIcon(ig_green_black_battery);
+              }
+
+              if(props.id >= 0){//gostations
+                if(toggleGostationSite){
+                  marker.setIcon(i_green_black_battery_sm);
                 }
                 else{
-                  marker.setIcon(ig_black_battery);
+                  marker.setIcon(ig_green_black_battery);
                 }
                 activeMarkerInfo.marker = marker;
-                activeMarkerInfo.bHasPower = isHasPower(props.fullBatteryCells);
                 activeMarkerInfo.bFriendlyStore = false;
                 activeMarkerInfo.bGostationSite = false;
 
@@ -584,31 +623,23 @@
                 });
               }
               else if(props.id == -1 || props.id == -4){//friendly stores
-                if(activeMarkerInfo.marker!=null){
-                  if(activeMarkerInfo.bFriendlyStore){
-                    activeMarkerInfo.marker.setIcon(friendly_store_icon);
-                  }
-                  else if(activeMarkerInfo.bGostationSite){
-                    activeMarkerInfo.marker.setIcon(i_site);
-                  }
-                  else if(activeMarkerInfo.bHasPower){
-                    activeMarkerInfo.marker.setIcon(i_green_black_battery);
-                  }
-                  else{
-                    activeMarkerInfo.marker.setIcon(i_black_battery);
-                  }
-                }
-                activeMarkerInfo.marker = marker;
+
                 if(props.id == -1){
                   marker.setIcon(friendly_store_icon_onclick);
                   activeMarkerInfo.bFriendlyStore = true;
                   activeMarkerInfo.bGostationSite = false;
                 }
                 else if(props.id == -4){
-                  marker.setIcon(ig_site);
+                  if(toggleGostationSite){
+                    marker.setIcon(ig_site);
+                  }
+                  else{
+                    marker.setIcon(i_site_sm);
+                  }
                   activeMarkerInfo.bFriendlyStore = false;
                   activeMarkerInfo.bGostationSite = true;
                 }
+                activeMarkerInfo.marker = marker;
 
                 var disDurPromise = promiseCalculateDisDur(props.position);
                 disDurPromise
@@ -645,6 +676,9 @@
           else if(props.id == -3){
             currentPositionMarker = marker;
           }
+          else if(props.id == -4){
+            siteMarkers.push(marker);
+          }
           
         }
 
@@ -675,6 +709,7 @@
         }
 
         function displaySites(){
+          if(siteMarkers.length>0){ return; }
 
           for(var i=0; i<gon.gostation_sites.length; i++){
             var position = {
@@ -701,29 +736,19 @@
         function calculateGostationCenter(){
           var lat = 0.0;
           var lng = 0.0;
-          for(var i=0; i<gon.gostations.length; i++){
-            lat += +gon.gostations[i].Latitude;
-            lng += +gon.gostations[i].Longitude;
-          }
-          lat /= gon.gostations.length;
-          lng /= gon.gostations.length;
-          return {lat: lat, lng: lng};
-        }
-
-        function getUserCurrentPosition(){
-          var promise = new Promise(function(resolve, reject) {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(
-                function(position){
-                  resolve(position)
-                }
-              );
-            } else {
-              reject("Can not get current position!");
+          if(gon.gostations.length > 0){
+            for(var i=0; i<gon.gostations.length; i++){
+              lat += +gon.gostations[i].Latitude;
+              lng += +gon.gostations[i].Longitude;
             }
-          });
-
-          return promise;
+            lat /= gon.gostations.length;
+            lng /= gon.gostations.length;
+          }
+          else{
+            lat = 23.65566;
+            lng = 120.96387;
+          }
+          return {lat: lat, lng: lng};
         }
 
         function calculateGostationBounds(){
@@ -747,6 +772,7 @@
         }
 
         function getBoundsZoomLevel(mapWidth, mapHeight) {
+          if(gon.gostations.length <= 0){ return 8; }
           var bounds = calculateGostationBounds();
           var WORLD_DIM = { height: 256, width: 256 };
           var ZOOM_MAX = 21;
@@ -795,19 +821,14 @@
           var zoomLevel = getBoundsZoomLevel(350, 250);
           map.setZoom(zoomLevel);
 
-          i_black_battery = {
-            url: "../icons/i_black_battery.png",
-            scaledSize: new google.maps.Size(28, 32)
-          };
-
-          ig_black_battery = {
-            url: "../icons/ig_black_battery.png",
-            scaledSize: new google.maps.Size(42, 48)
-          };
-
           i_green_black_battery = {
             url: "../icons/i_green_black_battery.png",
             scaledSize: new google.maps.Size(28, 32)
+          };
+
+          i_green_black_battery_sm = {
+            url: "../icons/i_green_black_battery.png",
+            scaledSize: new google.maps.Size(14, 16)
           };
 
           ig_green_black_battery = {
@@ -840,6 +861,11 @@
             scaledSize: new google.maps.Size(28, 36)
           };
 
+          i_site_sm = {
+            url: "../icons/i_site.png",
+            scaledSize: new google.maps.Size(14, 18)
+          };
+
           ig_site = {
             url: "../icons/ig_site.png",
             scaledSize: new google.maps.Size(35, 45)
@@ -854,6 +880,16 @@
 
           friendlyStoreDiv.index = 1;
           map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
+
+
+          // Create the DIV to hold the control and call the GostationSiteControl()
+          // constructor passing in this DIV.
+          var gostationSiteDiv = document.createElement('div');
+          var gostationSiteControl = new GostationSiteControl(gostationSiteDiv, map);
+
+          gostationSiteDiv.index = 2;
+          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(gostationSiteDiv);
+
 
           // find current position of user
           var locationPromise = getUserCurrentPosition();
@@ -870,7 +906,8 @@
           });
 
           displaySites();
-          showGostations();
+          setMarkersIcon(siteMarkers, i_site_sm);
+          displayGostations();
         }
 
       </script>

@@ -52,6 +52,10 @@ class GostationsController < ApplicationController
     render :json => { :points => current_user.points }
   end
 
+  def getCurrentUserExp
+    render :json => { :experience => current_user.experience }
+  end
+
   # check if the ckeckin_in time in certain time zone
   def checkin_time(checkin, start_time, end_time)
     # ex: checkin_time(@checkin, "22:00:00", "23:59:59")
