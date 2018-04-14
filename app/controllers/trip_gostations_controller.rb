@@ -5,10 +5,12 @@ class TripGostationsController < ApplicationController
     #toggle status for testing
     if @trip_gostation.status == false
       @trip_gostation.update(status: "ture")
+      current_user.add_points(5, category: 'trip_gostations')
       current_user.experience += 5
       current_user.save
     else
       @trip_gostation.update(status: "false")
+      current_user.subtract_points(5, category: 'trip_gostations')
       current_user.experience -= 5
       current_user.save
     end
@@ -19,7 +21,9 @@ class TripGostationsController < ApplicationController
       @completetime = ((@last-@first)/60).round(2)
       Challenge.create!(user_id: current_user.id, trip_id: @trip_gostation.trip_id, completetime: @completetime )
 
-      current_user.experience += Trip.find(@trip_gostation.trip_id).points
+      trip_points = Trip.find(@trip_gostation.trip_id).points
+      current_user.add_points(trip_points, category: 'trip_gostations')
+      current_user.experience += trip_points
       current_user.save
 
       redirect_to trip_path(@trip_gostation.trip_id)
