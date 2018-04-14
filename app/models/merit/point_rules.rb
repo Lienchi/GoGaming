@@ -25,25 +25,11 @@ module Merit
       # ]
       #
       # score -10, :on => 'comments#destroy'
-      score 5, on: 'trip_gostations#check', category: 'trip_gostations'
-      score 100, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 1, user_id: (trip_gostation.user_id)).present?
-      end
-      score 300, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 2, user_id: (trip_gostation.user_id)).present?
-      end
-      score 100, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 3, user_id: (trip_gostation.user_id)).present?
-      end
-      score 150, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 4, user_id: (trip_gostation.user_id)).present?
-      end
-      score 250, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 5, user_id: (trip_gostation.user_id)).present?
-      end
-      score 300, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
-        Challenge.find_by(trip_id: 6, user_id: (trip_gostation.user_id)).present?
-      end
+      #score 5, on: 'trip_gostations#check', category: 'trip_gostations'
+
+      #score 100, on: 'trip_gostations#check', category: 'trip_gostations' do |trip_gostation|
+      #  Challenge.find_by(trip_id: 1, user_id: (trip_gostation.user_id)).present?
+      #end
       #score 5, on: 'gostations#checkin', category: 'gostations'
 
     end

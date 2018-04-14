@@ -127,7 +127,6 @@ Trip.create!(id: 6, name: "新竹東西南北", image: File.open(Rails.root.join
              description: "誰說打麻將只能在桌上打?你也可以一邊騎gogoro，一邊打麻將，趕快搜集完所有東南西北Gostation，看誰先糊牌!",
              badge: "badges/Hsinchu.svg", points: 300)
 
-puts "have created #{TripGostation.count} trips!"
 
 gostation_list = [
                     ["Gogoro 師大和平店站A", "中油內湖加油站", "中油新生北路加油站",
@@ -159,7 +158,7 @@ Trip.all.each do |t|
   idx = idx + 1
 end
 puts "have created trips!"
-puts "now you have #{Trip.count} trips data!"
+puts "now you have #{Trip.count} trips!"
 
 
 # User
