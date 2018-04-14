@@ -57,7 +57,7 @@
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
        -->
       <!-- Modal for complete trip-->
-      <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal modal-style fade" id="myModal" role="dialog">
         <div class="modal-dialog">
         
           <!-- Modal content-->
@@ -85,7 +85,7 @@
     <div class="container" style="padding: 0px 0px 55px 0px;">
       <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
     
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 10px; margin-top: 10px;" >
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 8px; margin-top: 10px;" >
         <h3 class="col-xs-12 text-center">
           <%= @trip.name %>
         </h3>
@@ -95,15 +95,12 @@
 
       <div class="trip-data col-xs-12 col-sm-8 col-sm-offset-2">          
         
-<br>
         
-        <div class="col-xs-4 col-sm-4" style="margin-top: 3px; padding: 0;">
+        <div class="col-xs-4 col-sm-4" style="margin-top: 3px; padding: 15;">
           <% if @trip.is_challenged?(current_user)%>                  
-            <%= image_tag @trip.badge, alt: @trip.name %>
+            <%= image_tag @trip.badge, alt: @trip.name, style:"width: 90px; height: auto;" %>
           <% else %>
-            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  opacity: 1;" %>
+            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 1;" %>
           <% end %>
         </div>
         <div class="col-xs-8 col-sm-8" style="">
@@ -115,7 +112,8 @@
 
             <p style="padding-left: 35px;">在 <%= @challenge.completetime.round %> 分鐘內完成 </p>
           <% else %>
-            還沒有人完成喔！快來搶頭香！
+            <p>還沒有人完成喔！快來搶頭香！</p>
+            <br>
           <%end%>   
           <hr style="margin: 5px auto;">
           <% if @trip.is_challenged?(current_user)%> 
@@ -130,22 +128,11 @@
           <% end %>
         </div> 
 
-        <ul style="list-style-type: none; padding-left: 0px;">
-          <li class="col-xs-12 text-center"><h4>任務景點</h4></li>
-          <% @sites.each do |site|%>
-            <li class="col-xs-4" style="padding-right: 0px;">
-              <!-- Button trigger modal -->
-              <!-- <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#sight"> -->
-                <%= site.name%>
-              <!-- </button> -->
-            </li>
-         <%end%>
-        </ul>
         <div class="clearfix"></div>
 
         <% @sites.each do |site|%>
           <!-- Modal for sight-->
-          <div class="modal fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal modal-style fade" id="sight" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -155,12 +142,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <%= image_tag site.photo%>
+                  <%= image_tag site.photo, class:"img-fluid" %>
                   <p><%= site.description%></p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-main-outline" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
-                  <button type="button" class="btn btn-sm btn-main">導航</button>
+                  <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
+                  <button type="button" class="btn btn-sm btn-main-outline">導航</button>
                   <p>完成<strong>"<%= @trip.name %>"</strong></p>
                 </div>
               </div>
@@ -168,7 +155,7 @@
           </div>
         <%end%>
         <!-- google marker Modal -->
-        <div class="modal fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
+        <div class="modal modal-style fade" id="tripModalCenter" tabindex="-1" role="dialog" aria-labelledby="tripModalLongTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -184,8 +171,8 @@
                 <div id="tripModal-content" style="font-size: 16px;" class="text-center"></div>
                 <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                <div id="tripModal-moreinfo-div" class="col-xs-4 col-xs-offset-4">
-                  <a id="tripModal-moreinfo" style=" font-size: 12px; margin-top: 8px; margin-bottom: 8px;padding: 8px; width:100px; " class="btn btn-main-outline text-center" href="" target="_blank">更多資訊</a>
+                <div id="tripModal-moreinfo-div" class="col-xs-6 col-xs-offset-3 text-center">
+                  <a id="tripModal-moreinfo" style=" font-size: 12px; margin: 8px; padding: 8px; width:100px; " class="btn btn-main-outline text-center " href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="tripModal-cellProgress">
@@ -195,10 +182,10 @@
               <div class="clearfix"></div>
               <div class="modal-footer">
                 <div class="col-xs-4 col-xs-offset-1" >
-                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow">打卡</a>
+                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow" data-dismiss="modal" >打卡</a>
                 </div>
                 <div class="col-xs-4 col-xs-offset-2">
-                  <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
+                  <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main-outline text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -206,7 +193,7 @@
         </div>
 
         <!-- site marker Modal -->
-        <div class="modal fade" id="siteModalCenter" tabindex="-1" role="dialog" aria-labelledby="siteModalLongTitle" aria-hidden="true">
+        <div class="modal modal-style fade" id="siteModalCenter" tabindex="-1" role="dialog" aria-labelledby="siteModalLongTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">               
@@ -228,7 +215,7 @@
                   <a id="siteModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="" rel="nofollow"></a>
                 </div>
                 <div class="col-xs-5 col-xs-offset-2">
-                  <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main" href="" target="_blank">導航</a>
+                  <a id="siteModal-directionurl" style="color:#ffffff; font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main-outline" href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -239,6 +226,7 @@
         <div class="comment-group" style="padding-left: 0px;">
           <div class="col-xs-8 col-sm-10" style="padding-left: 0px;">
             <h4>好玩推薦</h4>
+            <h6 class="text-muted">與我們分享你的私房景點</h6>
           </div>
 
           <div class="clearfix"></div>
@@ -255,7 +243,7 @@
                   </button>
 
                   <!-- Modal -->
-                  <div class="modal fade" id=<%= "comment#{comment.id}" %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal  modal-style fade" id=<%= "comment#{comment.id}" %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -296,7 +284,7 @@
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
               <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
-              <input class="btn btn-main pull-right" type="submit" value="留言">
+              <input class="btn btn-main-outline pull-right" type="submit" value="留言">
             </div>
           <% end%>
         </div>
@@ -346,7 +334,7 @@
             if(props.bCheckin){
               markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-main-outline text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-gray-outline text-center col-xs-5";
               }
               
             }
@@ -487,7 +475,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '已打卡';
-                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-outline text-center col-xs-5";
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-gray-outline text-center col-xs-5";
                     $.ajax({
                       url: "/gostations/getCurrentUserExp",
                       method: "POST",

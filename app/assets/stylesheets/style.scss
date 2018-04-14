@@ -1,6 +1,4 @@
-.flash.alert:empty{
-  display: none;
-}
+
 
 .container {
   padding-top: 30px;
@@ -84,6 +82,17 @@ img {
   height: auto;
   display: block;
 }
+
+.modal-style {
+  margin-top: 70px;
+}
+
+.modal-style img {
+  height: auto;
+  width: 100%;
+  display:block; margin:auto;
+}
+
 /*nav*/
 .navbar-default{
   padding-bottom: 0px;
