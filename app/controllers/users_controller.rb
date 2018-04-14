@@ -10,7 +10,10 @@ class UsersController < ApplicationController
 
     top_scored = Merit::Score.top_scored(limit: User.count)
     user = top_scored.detect{|h| h['user_id'] == @user.id }
-    @user_rank = top_scored.find_index(user)+1
+    @user_rank = User.count
+    if user
+      @user_rank = top_scored.find_index(user)+1
+    end
   end
 
   def update
