@@ -34,27 +34,8 @@ end
 
 
 
-
 Merit::Badge.create!(
   id: 1,
-  name: "Taipei_night_market",
-  description: "台北逛夜市",
-  level: "1",
-  custom_fields: { image: "badges/Taipei_night_market.svg"}
-)
-
-
-Merit::Badge.create!(
-  id: 2,
-  name: "Hsinchu",
-  description: "新竹東西南北",
-  level: "1",
-  custom_fields: { image: "badges/Hsinchu.svg"}
-)
-
-
-Merit::Badge.create!(
-  id: 3,
   name: "Taipei_beef_noodle",
   description: "大口吃牛肉",
   level: "1",
@@ -63,7 +44,7 @@ Merit::Badge.create!(
 
 
 Merit::Badge.create!(
-  id: 4,
+  id: 2,
   name: "Temple_love",
   description: "孤單終結",
   level: "1",
@@ -72,7 +53,7 @@ Merit::Badge.create!(
 
 
 Merit::Badge.create!(
-  id: 5,
+  id: 3,
   name: "North_shore",
   description: "北海小英雄",
   level: "1",
@@ -80,12 +61,29 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 6,
+  id: 4,
   name: "Tainan",
   description: "台南直直去",
   level: "1",
   custom_fields: { image: "badges/Tainan.svg"}
 )
+
+Merit::Badge.create!(
+  id: 5,
+  name: "Taipei_night_market",
+  description: "台北逛夜市",
+  level: "1",
+  custom_fields: { image: "badges/Taipei_night_market.svg"}
+)
+
+Merit::Badge.create!(
+  id: 6,
+  name: "Hsinchu",
+  description: "新竹東西南北",
+  level: "1",
+  custom_fields: { image: "badges/Hsinchu.svg"}
+)
+
 
 Merit::Badge.create!(
   id: 101,
