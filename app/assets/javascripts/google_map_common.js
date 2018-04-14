@@ -479,4 +479,19 @@ function getUserCurrentPosition(){
   return promise;
 }
 
+function createGoogleMapDirUrl(start, end){
+  return 'https://www.google.com/maps/dir/'+start+'/'+end;
+}
+
+function getDirectionUrl(destination){
+  if(hasUserCurrentPos()){
+    origin = userCurrentPos.lat+','+userCurrentPos.lng;
+    return createGoogleMapDirUrl(origin, destination);
+  }
+  else{
+    return createGoogleMapDirUrl('', destination);
+  }
+}
+
+
 

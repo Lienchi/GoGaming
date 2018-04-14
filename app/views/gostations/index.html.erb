@@ -242,7 +242,7 @@
         }
 
         
-
+        var gogoro_headquarter = {lat: 25.048672, lng: 121.545576};
         var map = null;
         var gostationMarkers = [];
         var friendlyStoreMarkers = [];
@@ -293,8 +293,7 @@
             totalBatteryCells: batteryCells,
             fullBatteryCells: fullBatteryCells
           }
-
-          info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude;
+          info.directions_url = getDirectionUrl(gostation.Latitude+','+gostation.Longitude);
           
           return info;
         }
@@ -549,7 +548,8 @@
               totalBatteryCells: 0
             }
             info.position = position;
-            info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+            info.directions_url = getDirectionUrl(position.lat+','+position.lng);
+
             info.id = -1;
             info.iconImage = friendly_store_icon;
             info.source_url = gon.friendly_stores[i].source_url;
@@ -563,8 +563,13 @@
 
           var locationPromise = getUserCurrentPosition();
 
-          locationPromise
+          // Apply a timeout of 5 seconds to doSomething
+          let doIt = promiseTimeout(5000, locationPromise);
+
+          // Wait for the promise to get resolved
+          doIt
           .then(function(position) {
+            // Use response
             userCurrentPos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -587,9 +592,28 @@
               milestones: milestones
             });
           })
+          // Wait for the promise to get rejected or timed out
           .catch(function(err) {
+            // Deal with error
             console.log("Can not get current position!");
-          });
+
+            map.setZoom(12);
+            map.setCenter(gogoro_headquarter);
+            addMarker({
+              position: gogoro_headquarter,
+              iconImage: i_site,
+              id: -3
+            });
+
+            // --- gostations
+            var milestones = [];
+            milestones.push(gogoro_headquarter);
+            setMarkerInfo({
+              gostations: gon.gostations,
+              milestones: milestones
+            });
+          })
+
         }
 
         function geocodeAddress(geocoder, map, address) {

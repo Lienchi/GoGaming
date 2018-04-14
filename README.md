@@ -64,17 +64,17 @@ A trip include many trip_gostations , if all the trip_gostations#check status is
 
 
 # Authors
-- Lienchi  
-- Sapphirekuo 
-- anna770822
+- [Lienchi](https://github.com/Lienchi)  
+- [Sapphirekuo](https://github.com/sapphirekuo)
+- [anna770822](https://github.com/anna770822)
 
 # In Progress
 - Stablize Google Map Function
 - RSpec
 - Adjust UI
-- Add picture to site modal
+- Add picture to site modal (done)
 - Add trips#show site list to modal
 - Detect user current location when checkin (or every few hours?)
 - Limit Checkin count to "8" per month
-- Attach gogaming.solutions to heroku sites
+- Attach gogaming.solutions to heroku sites (done)
 
