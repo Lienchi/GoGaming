@@ -8,7 +8,7 @@ class UserProductsController < ApplicationController
    
     if @repairstore.blank?
       redirect_to products_path
-      flash[:alert]="未選擇取貨店家"
+      flash[:notice]="請選擇取貨店家"
     elsif current_user.points > @product.product_points
       @user_product.save!
       current_user.subtract_points(@product.product_points)
@@ -17,7 +17,7 @@ class UserProductsController < ApplicationController
       flash[:notice] = "商品成功兌換，請於" + " #{@repairstore.name} " + "取貨!"
     else
       redirect_to products_path
-      flash[:alert] = "您的點數不足，請加把勁挑戰任務!"
+      flash[:notice] = "您的點數不足，請加把勁挑戰任務!"
     end
   end
 
