@@ -465,6 +465,17 @@
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '打卡';
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
+                    $.ajax({
+                      url: "/gostations/getCurrentUserExp",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserExp!");
+                      }
+                    });
                   },
                   error: function() {
                     alert("ERROR: can not uncheckin!");
@@ -478,6 +489,17 @@
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = '已打卡';
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-outline text-center col-xs-5";
+                    $.ajax({
+                      url: "/gostations/getCurrentUserExp",
+                      method: "POST",
+                      dataType: "json",
+                      success: function(data){
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
+                      },
+                      error: function() {
+                        alert("ERROR: can not getCurrentUserExp!");
+                      }
+                    });
                   },
                   error: function() {
                     alert("ERROR: can not checkin!");

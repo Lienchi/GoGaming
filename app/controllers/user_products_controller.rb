@@ -9,8 +9,7 @@ class UserProductsController < ApplicationController
     if @repairstore.blank?
       redirect_to products_path
       flash[:alert]="未選擇取貨店家"
-    elsif
-      current_user.points > @product.product_points
+    elsif current_user.points > @product.product_points
       @user_product.save!
       current_user.subtract_points(@product.product_points)
       UserMailer.notify_order_create(@user_product).deliver_now!

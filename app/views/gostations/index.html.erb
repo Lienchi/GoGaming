@@ -345,14 +345,14 @@
                     }
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main text-center";
                     $.ajax({
-                      url: "/gostations/getCurrentUserPoints",
+                      url: "/gostations/getCurrentUserExp",
                       method: "POST",
                       dataType: "json",
                       success: function(data){
-                        document.getElementById('layout-nav-point').innerHTML = data.points;
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
                       },
                       error: function() {
-                        alert("ERROR: can not getCurrentUserPoints!");
+                        alert("ERROR: can not getCurrentUserExp!");
                       }
                     });
                   },
@@ -369,14 +369,14 @@
                     document.getElementById("markerModal-checkin").innerHTML = '已打卡';
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main-outline text-center";
                     $.ajax({
-                      url: "/gostations/getCurrentUserPoints",
+                      url: "/gostations/getCurrentUserExp",
                       method: "POST",
                       dataType: "json",
                       success: function(data){
-                        document.getElementById('layout-nav-point').innerHTML = data.points;
+                        document.getElementById('layout-nav-exp').innerHTML = data.experience;
                       },
                       error: function() {
-                        alert("ERROR: can not getCurrentUserPoints!");
+                        alert("ERROR: can not getCurrentUserExp!");
                       }
                     });
                   },
