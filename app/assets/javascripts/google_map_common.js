@@ -426,7 +426,7 @@ function GostationSiteControl(controlDiv, map) {
   controlText.style.lineHeight = '32px';
   controlText.style.paddingLeft = '10px';
   controlText.style.paddingRight = '10px';
-  controlText.innerHTML = '切換站點';
+  controlText.innerHTML = '切換景點';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners: simply set the map to Chicago.
