@@ -736,12 +736,18 @@
         function calculateGostationCenter(){
           var lat = 0.0;
           var lng = 0.0;
-          for(var i=0; i<gon.gostations.length; i++){
-            lat += +gon.gostations[i].Latitude;
-            lng += +gon.gostations[i].Longitude;
+          if(gon.gostations.length > 0){
+            for(var i=0; i<gon.gostations.length; i++){
+              lat += +gon.gostations[i].Latitude;
+              lng += +gon.gostations[i].Longitude;
+            }
+            lat /= gon.gostations.length;
+            lng /= gon.gostations.length;
           }
-          lat /= gon.gostations.length;
-          lng /= gon.gostations.length;
+          else{
+            lat = 23.65566;
+            lng = 120.96387;
+          }
           return {lat: lat, lng: lng};
         }
 
@@ -766,6 +772,7 @@
         }
 
         function getBoundsZoomLevel(mapWidth, mapHeight) {
+          if(gon.gostations.length <= 0){ return 8; }
           var bounds = calculateGostationBounds();
           var WORLD_DIM = { height: 256, width: 256 };
           var ZOOM_MAX = 21;
