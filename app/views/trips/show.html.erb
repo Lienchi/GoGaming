@@ -425,8 +425,7 @@
             totalBatteryCells: batteryCells,
             fullBatteryCells: fullBatteryCells
           }
-
-          info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+gostation.Latitude+','+gostation.Longitude;
+          info.directions_url = getDirectionUrl(gostation.Latitude+','+gostation.Longitude);
           
           return info;
         }
@@ -699,7 +698,7 @@
               totalBatteryCells: 0
             }
             info.position = position;
-            info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+            info.directions_url = getDirectionUrl(position.lat+','+position.lng);
             info.id = -1;
             info.iconImage = friendly_store_icon;
             info.source_url = gon.friendly_stores[i].source_url;
@@ -725,7 +724,7 @@
               totalBatteryCells: 0
             }
             info.position = position;
-            info.directions_url = 'https://www.google.com/maps/dir/Current+Location/'+position.lat+','+position.lng;
+            info.directions_url = getDirectionUrl(position.lat+','+position.lng);
             info.id = -4;
             info.iconImage = i_site;
 
