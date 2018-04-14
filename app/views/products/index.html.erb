@@ -26,6 +26,7 @@
             <% if current_user.points >= product.product_points %>
               <button type="button" class="btn btn-main-outline pull-right" style="margin-top: -10px;" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
                 兌換
+              </button>                                                                                                      
             <%else%>
               <button type="button" class="btn btn-gray-outline pull-right"  style="margin-top: -10px;" >
                 點數不足
