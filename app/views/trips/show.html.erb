@@ -106,14 +106,15 @@
         <div class="col-xs-8 col-sm-8" style="">
           <% if Challenge.where(trip_id:@trip).exists?%>
             <p>             
-              <%= image_tag @challenge.user.avatar, style:"width:30px; display: inline-block;"%>
+              <%= image_tag @challenge.user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%>
               <%= @challenge.user.name%>
             </p>
 
             <p style="padding-left: 35px;">在 <%= @challenge.completetime.round %> 分鐘內完成 </p>
           <% else %>
-            <p>還沒有人完成喔！快來搶頭香！</p>
             <br>
+            <p>還沒有人完成喔！快來搶頭香！</p>
+            
           <%end%>   
           <hr style="margin: 5px auto;">
           <% if @trip.is_challenged?(current_user)%> 
@@ -258,7 +259,7 @@
                           <h5 class="modal-title" id="exampleModalLabel">
                             <p><%= comment.comment %></p>
                           <p class="text-right">
-                            <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>  
+                            <%= image_tag current_user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>  
                           </p>
                           </h5>
                           
@@ -275,7 +276,7 @@
                   <div class="col-xs-8">
                     <%= link_to user_path(comment.user) do %>
                       <h6 class="col-xs-12 text-muted pull-right" style="padding: 0px 0px 3px 0px;">
-                        <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>                        
+                        <%= image_tag current_user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>                        
                       </h6>
                     <% end %>
                     
@@ -296,7 +297,7 @@
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
               <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
-              <input class="btn btn-main-outline pull-right" type="submit" value="留言">
+              <input class="btn btn-main-1-outline pull-right" type="submit" value="留言">
             </div>
           <% end%>
         </div>

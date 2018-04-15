@@ -1,5 +1,5 @@
 <div class="navbar-fixed-top pig-bar" style="">
-  <div  class="col-xs-1 col-xs-offset-4 user-data">
+  <!-- <div  class="col-xs-1 col-xs-offset-4 user-data">
     <div class="user-icon" style=""><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
   </div>
   <div  class="col-xs-1 ">
@@ -10,13 +10,15 @@
   </div>
   <div  class="col-xs-1 ">
     <div class="user-icon-text"><%= current_user.badges.count %> </div>
-  </div>
+  </div> -->
   <%= link_to products_path do %>
-    <div  class="col-xs-1 user-data">
-      <div class="user-icon" style=""> <%= image_tag(("navbar_icons/P.svg")) %></div> 
+    <div class="col-xs-11">
+      <div  class="pull-right">
+        <div id="layout-nav-exp" class="user-icon-text"><%= current_user.experience %></div>
+      </div> 
+      <div  class="user-data pull-right">
+        <div class="user-icon" style="margin-right: 5px;"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
+      </div>   
     </div>
-    <div  class="col-xs-1">
-      <div id="layout-nav-exp" class="user-icon-text"><%= current_user.experience %></div>
-    </div>    
   <% end %>
 </div>
