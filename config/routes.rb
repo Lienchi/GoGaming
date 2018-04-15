@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :challenges, only:[:create]
+  resources :challenges, only:[:create] do
+    member do
+      post :setDisplayModalStatus
+    end
+  end
 
 
   resources :trip_gostations, only:[:show] do 

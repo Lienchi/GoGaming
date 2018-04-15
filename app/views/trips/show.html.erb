@@ -313,8 +313,17 @@
         });
 
         $(document).ready(function() { 
-          if(gon.is_complete_trip){
+          if(gon.displayModal){
             $('#myModal').modal();
+            $.ajax({
+              url: "/challenges/"+gon.current_challenge_id+"/setDisplayModalStatus",
+              method: "POST",
+              success: function(){
+              },
+              error: function(){
+                alert("ERROR: can not setDisplayModalStatus!");
+              }
+            });
           }
         });
 
