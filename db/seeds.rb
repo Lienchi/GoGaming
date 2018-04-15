@@ -170,17 +170,17 @@ User.create!(
   )
 puts "Default admin created!"
 
-15.times do |i|
+8.times do |i|
   user_name = FFaker::Name.first_name_female
   u = User.create!(email: "user#{i}@example.com", password: "123456", name: "#{user_name}")
-  u.avatar = Rails.root.join( "public/images/female/user#{rand(1..9)}.jpg").open
+  u.avatar = Rails.root.join( "public/images/female/user#{i+1}.jpg").open
   u.save
 end
 
-15.times do |i|
+8.times do |i|
   user_name = FFaker::Name.first_name_male
-  u = User.create!(email: "user#{15+i}@example.com", password: "123456", name: "#{user_name}")
-  u.avatar = Rails.root.join( "public/images/male/user#{rand(1..10)}.jpg").open
+  u = User.create!(email: "user#{8+i}@example.com", password: "123456", name: "#{user_name}")
+  u.avatar = Rails.root.join( "public/images/male/user#{i+1}.jpg").open
   u.save
 end
 puts "now you have #{User.count} users data"
@@ -189,7 +189,7 @@ puts "now you have #{User.count} users data"
 Followship.destroy_all
 
 User.all.each do |current|
-  User.all.sample(10) do |following|
+  User.all.sample(2) do |following|
     current.followships.create!(user_id: current.id, following_id: following.id)
   end
 end
