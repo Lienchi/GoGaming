@@ -542,7 +542,7 @@
             icon: props.iconImage
           });
 
-          if(props.id==-4){
+          if(props.id == markerType.SITE){
             marker.infowindow = new google.maps.InfoWindow({
               content: props.title
             });
@@ -551,7 +551,7 @@
           if(props.directions_url){
             marker.addListener('click', function(){
               // --- switch marker icon
-              if(props.id>=0 || props.id==-1 || props.id==-4){
+              if(props.id>=0 || props.id==markerType.FRIENDLY_STORE || props.id==markerType.SITE){
                 if(activeMarkerInfo.marker!=null){
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
@@ -630,14 +630,14 @@
                   console.log("Can not get disDur");
                 });
               }
-              else if(props.id == -1 || props.id == -4){//friendly stores
+              else if(props.id == markerType.FRIENDLY_STORE || props.id == markerType.SITE){//friendly stores
 
-                if(props.id == -1){
+                if(props.id == markerType.FRIENDLY_STORE){
                   marker.setIcon(friendly_store_icon_onclick);
                   activeMarkerInfo.bFriendlyStore = true;
                   activeMarkerInfo.bGostationSite = false;
                 }
-                else if(props.id == -4){
+                else if(props.id == markerType.SITE){
                   if(toggleGostationSite){
                     marker.setIcon(ig_site);
                   }
@@ -654,7 +654,7 @@
                 .then(function(results) {
                   props.distance = results.distance;
                   props.duration = results.duration;
-                  if(props.id == -1){
+                  if(props.id == markerType.FRIENDLY_STORE){
                     setMarkerModalInfo(props);
                     $('#tripModalCenter').modal();
                   }
@@ -675,16 +675,16 @@
           if(props.id >= 0){//gostations
             gostationMarkers.push(marker);
           }
-          else if(props.id == -1){//friendly stores
+          else if(props.id == markerType.FRIENDLY_STORE){//friendly stores
             friendlyStoreMarkers.push(marker);
           }
-          else if(props.id == -2){
+          else if(props.id == markerType.DESTINATION){
             destinationMarker = marker;
           }
-          else if(props.id == -3){
+          else if(props.id == markerType.CURRENT_LOCATION){
             currentPositionMarker = marker;
           }
-          else if(props.id == -4){
+          else if(props.id == markerType.SITE){
             siteMarkers.push(marker);
           }
           
@@ -708,7 +708,7 @@
             }
             info.position = position;
             info.directions_url = getDirectionUrl(position.lat+','+position.lng);
-            info.id = -1;
+            info.id = markerType.FRIENDLY_STORE;
             info.iconImage = friendly_store_icon;
             info.source_url = gon.friendly_stores[i].source_url;
 
@@ -734,7 +734,7 @@
             }
             info.position = position;
             info.directions_url = getDirectionUrl(position.lat+','+position.lng);
-            info.id = -4;
+            info.id = markerType.SITE;
             info.iconImage = i_site;
 
             addMarker(info);
