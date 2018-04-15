@@ -11,7 +11,7 @@
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="gogoro 帶你出去玩" />
     <meta property="og:description"        content="一起挑戰路線，解鎖徽章吧!" />
-    <meta property="og:image"              content="https://github.com/Lienchi/GoGaming/blob/master/app/assets/images/screenshot/root.png" />
+    <meta property="og:image"              content="https://gogaming-deployment.herokuapp.com/assets/navbar_icons/gogoro-f078efaa21e010b448220ab0a93ef0c174cd53eeae4823a303a963eefa4904c5.svg" />
 
     <style type="text/css">
       .introjs-helperNumberLayer{
@@ -21,6 +21,14 @@
   </head>
 
   <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.12&appId=1818422994855649&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     <!-- 導覽列 -->
     <% if current_user %>
       <nav class="navbar" style="margin-bottom: 0px;">
