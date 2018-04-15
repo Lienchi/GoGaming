@@ -369,6 +369,7 @@ function FriendlyStoreControl(controlDiv, map) {
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
   controlUI.style.marginRight = '30px';
+  controlUI.style.marginLeft = '30px';
   controlUI.style.marginBottom = '11px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to recenter the map';
