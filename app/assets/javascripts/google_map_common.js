@@ -364,12 +364,12 @@ function FriendlyStoreControl(controlDiv, map) {
 
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#77D6AC';
+  controlUI.style.backgroundColor = '#24586e';
   controlUI.style.borderRadius = '15px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginLeft = '18px';
-  controlUI.style.marginBottom = '8px';
+  controlUI.style.marginRight = '30px';
+  controlUI.style.marginBottom = '11px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
@@ -391,13 +391,13 @@ function FriendlyStoreControl(controlDiv, map) {
     toggleFriendlyStore = !toggleFriendlyStore;
     if(toggleFriendlyStore){
       showMarkers(map, friendlyStoreMarkers);
-      controlText.style.color = '#77D6AC';
+      controlText.style.color = '#24586e';
       controlUI.style.backgroundColor = '#FFFFFF';
     }
     else{
       clearMarkers(friendlyStoreMarkers);
       controlText.style.color = '#FFFFFF';
-      controlUI.style.backgroundColor  = '#77D6AC';
+      controlUI.style.backgroundColor  = '#24586e';
     }
   });
 
@@ -408,12 +408,12 @@ function GostationSiteControl(controlDiv, map) {
 
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#77D6AC';
+  controlUI.style.backgroundColor = '#24586e';
   controlUI.style.borderRadius = '15px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginLeft = '18px';
-  controlUI.style.marginBottom = '8px';
+  controlUI.style.marginLeft = '30px';
+  controlUI.style.marginBottom = '-3px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
@@ -438,7 +438,7 @@ function GostationSiteControl(controlDiv, map) {
       setMarkersIcon(siteMarkers, i_site);
       openMarkersInfowindow(siteMarkers);
       setMarkersIcon(gostationMarkers, i_green_black_battery_sm);
-      controlText.style.color = '#77D6AC';
+      controlText.style.color = '#24586e';
       controlUI.style.backgroundColor = '#FFFFFF';
     }
     else{
@@ -446,7 +446,7 @@ function GostationSiteControl(controlDiv, map) {
       setMarkersIcon(siteMarkers, i_site_sm);
       closeMarkersInfowindow(siteMarkers);
       controlText.style.color = '#FFFFFF';
-      controlUI.style.backgroundColor  = '#77D6AC';
+      controlUI.style.backgroundColor  = '#24586e';
     }
   });
 

@@ -86,7 +86,7 @@
       <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
     
       <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 8px; margin-top: 10px;" >
-        <h3 class="col-xs-12 text-center">
+        <h3 class="col-xs-12 text-center" style="color: #24586e;">
           <%= @trip.name %>
         </h3>
         <p class="col-xs-12" ><%= @trip.description %></p>
@@ -100,7 +100,7 @@
           <% if @trip.is_challenged?(current_user)%>                  
             <%= image_tag @trip.badge, alt: @trip.name, style:"width: 90px; height: auto;" %>
           <% else %>
-            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 1;" %>
+            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(85%); filter: grayscale(85%); opacity: 1;" %>
           <% end %>
         </div>
         <div class="col-xs-8 col-sm-8" style="">
@@ -231,7 +231,6 @@
         <div class="comment-group" style="padding-left: 0px;">
           <div class="col-xs-12 text-center" style="padding-left: 0px;">
             <h4>好玩推薦</h4>
-            <h6 class="text-muted">與我們分享你的私房景點</h6>
           </div>
 
           <div class="clearfix"></div>
@@ -294,6 +293,8 @@
         </div>
 
         <div class="form-group comment-group clearfix">  
+          <h6 class="text-muted text-center">與我們分享你的私房景點</h6>
+          <br>
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
               <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
@@ -879,7 +880,7 @@
           var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
 
           friendlyStoreDiv.index = 1;
-          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
+          map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(friendlyStoreDiv);
 
 
           // Create the DIV to hold the control and call the GostationSiteControl()
