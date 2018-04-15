@@ -31,7 +31,7 @@
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-
+<!--
   <div class="field">
     <%= f.label :密碼 %>
     <%= f.password_field :password, autocomplete: "off", placeholder:"最少#{@minimum_password_length}位數,若不想重設請略過" , class: "form-control  border border-R" %>
@@ -46,7 +46,8 @@
     <%= f.password_field :current_password, autocomplete: "off", placeholder: "請輸入更新前密碼" , class: "form-control  border border-R"%>
   </div>
   <br/>
-
+-->
+<br/>
   <div class="actions text-center">
     <input class="btn btn-main" type="submit" value="更新" style="padding: 6px 28px;">
     <%= link_to "返回上頁", :back , class:"btn btn-main-outline" %>
