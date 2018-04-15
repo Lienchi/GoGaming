@@ -33,18 +33,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :密碼 %>
-    <%= f.password_field :password, autocomplete: "off", placeholder:"最少#{@minimum_password_length}位數,若不想重設請略過" , class: "form-control  border border-R" %>
-  </div>
-  <div class="field">
-    <%= f.label :密碼確認 %>
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control  border border-R" %>
-  </div>
-
-  <div class="field">
     <%= f.label :目前密碼 %> 
     <%= f.password_field :current_password, autocomplete: "off", placeholder: "請輸入更新前密碼" , class: "form-control  border border-R"%>
   </div>
+
+  <div class="field">
+    <%= f.label :更新密碼 %>
+    <%= f.password_field :password, autocomplete: "off", placeholder:"最少#{@minimum_password_length}位數,若不想重設請略過" , class: "form-control  border border-R" %>
+  </div>
+  <div class="field">
+    <%= f.label :更新密碼確認 %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control  border border-R" %>
+  </div>
+
   <br/>
 
   <div class="actions text-center">
@@ -54,9 +55,9 @@
 <% end %>
 <br/>
 <br/>
-<div class="text-center">
+<!-- <div class="text-center">
   <p><%= button_to "取消註冊", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger", style:"border-radius: 20px;" %></p>
-</div>
+</div> -->
 
 
 

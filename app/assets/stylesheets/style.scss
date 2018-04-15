@@ -373,15 +373,15 @@ input[type='file'] {
   top:5%;
   width:90%;
   background-color:#FFFFFF;
-  border-radius:50px;
-  border: 2px solid #DDDDDD;
+  border-radius: 0px;
+  border: 1px solid #DDDDDD;
 }
 
 .myBar{
   width:25%;
-  height:10px;;
-  background: linear-gradient(to right, #6495ED, #E0FFFF);
-  border-radius:50px;
+  height:10px;
+  background: linear-gradient(to right, #0069d2, #00D7FF, #E1FF32);
+  border-radius: 0px;
 }
 
 
@@ -513,8 +513,8 @@ input[type='file'] {
 
 .btn-dark-blue {
   color: #FFFFFF;
-  background-color: #24586e;
-  border-color: #24586e;
+  background-color: #0069D2;
+  border-color: #0069D2;
   border-radius: 25px;
   text-decoration:none; 
   

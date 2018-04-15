@@ -58,7 +58,7 @@
       <% if @user == current_user %>
         <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div>  
       <% else %>
-        <div class="text-center" style="margin: 0px auto;">
+        <div class="text-center" style="margin: 0px 0px 0px 50px;">
           <%= render partial: "shared/follow", locals: {user: @user} %>
         </div>
       <% end %> 
