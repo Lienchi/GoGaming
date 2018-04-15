@@ -481,7 +481,6 @@ DEPENDENCIES
   koala (~> 2.2)
   listen (>= 3.0.5, < 3.2)
   merit!
-  omniauth
   omniauth-facebook
   pg
   puma (~> 3.7)

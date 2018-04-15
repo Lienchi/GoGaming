@@ -351,7 +351,7 @@
               
             }
             else{
-              markerModalEle.innerHTML = "打卡";
+              markerModalEle.innerHTML = "打卡 +5 點";
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-main text-center col-xs-5";
               }
@@ -462,7 +462,7 @@
                   url: "/trip_gostations/"+currentTripGostationId+"/check",
                   method: "POST",
                   success: function(){
-                    document.getElementById("tripModal-checkin").innerHTML = '打卡';
+                    document.getElementById("tripModal-checkin").innerHTML = "打卡 +5 點";
                     document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
                     $.ajax({
                       url: "/gostations/getCurrentUserExp",
