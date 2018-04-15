@@ -81,13 +81,47 @@
         </div>
       </div>
     </div><!-- end of Modal for complete trip-->
+    
+
+
+      <!-- Modal for tour -->
+      <div id="tour" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="clearfix">
+               <div class="col-xs-4"><%= image_tag "/icons/i_green_black_battery.png" , style: "width:50px;margin:0 auto;" %></div>
+                <h4 class="col-xs-4 float-left text-center">前往所有充電站打卡<br/><br/>即可解鎖徽章</h4>
+                <p class="col-xs-4"> <%= image_tag @trip.badge, style:"width:60px;height:60px;margin:0 auto;"%></p></p>  
+              </div>
+              <br/>
+           
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
 
     <div class="container" style="padding: 0px 0px 55px 0px;">
       <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
     
       <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 8px; margin-top: 10px;" >
         <h3 class="col-xs-12 text-center">
-          <%= @trip.name %>
+          <%= @trip.name %>   
+           <!-- Trigger the modal with a button -->
+           <% if current_user.challenges.count == 0 %>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tour">點我提示</button>
+          <% end %>
+
         </h3>
         <p class="col-xs-12" ><%= @trip.description %></p>
       </div>
