@@ -15,7 +15,7 @@
 <br>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "忘記密碼?", new_password_path(resource_name) %><br />
+  <%= link_to "忘記密碼?", new_password_path(resource_name) %><br /><br/>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -27,5 +27,5 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
-    <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path %>
+    <%= link_to "使用facebook登入", user_facebook_omniauth_authorize_path, class: "fb-login-button"   %>
 <% end -%>
