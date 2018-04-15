@@ -62,6 +62,13 @@ A trip include many trip_gostations , if all the trip_gostations#check status is
 - Heroku
 - Amazon S3
 
+# Custom Config setting
+
+Please set you own configurations for both development and production
+
+- config/locales/email
+- config/locales/facebook.yml
+- config/initializers/carrierwave.rb
 
 # Authors
 - [Lienchi](https://github.com/Lienchi)  
@@ -69,11 +76,11 @@ A trip include many trip_gostations , if all the trip_gostations#check status is
 - [anna770822](https://github.com/anna770822)
 
 # In Progress
-- Stablize Google Map Function
+- Stablize Google Map Function (done)
 - RSpec
 - Adjust UI
 - Add picture to site modal (done)
-- Add trips#show site list to modal
+- Add trips#show site list to modal (done)
 - Detect user current location when checkin (or every few hours?)
 - Limit Checkin count to "8" per month
 - Attach gogaming.solutions to heroku sites (done)
