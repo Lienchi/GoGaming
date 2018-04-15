@@ -1,0 +1,1 @@
+$("#user-id-<%= @followship.following_id %>").html("<%=j ( link_to "Follow", followships_path(following_id: @user), remote: true, method: :post, class: "btn btn-default pull-right my-btn btn-lg" ) %>");

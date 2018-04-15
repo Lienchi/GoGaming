@@ -1,11 +1,18 @@
 <% if user != current_user%>
   <% if current_user.following?(user)%>
-    <%= link_to followship_path(user), method: :delete, class: "" do %>
-      <%= image_tag "navbar_icons/g_follow.svg", style:"width: 30px; height: auto; padding-top: 4px;" %>
-    <% end %>
+    <div id="user-id-<%= user.id %>">
+      <%= link_to followship_path(user), remote: true, method: :delete, class: "" do %>
+        <%= image_tag "navbar_icons/g_follow.svg", style:"width: 30px; height: auto; padding-top:12px;" %>
+      <% end %>
+    </div>
+
   <%else%>
-    <%= link_to followships_path(following_id: user), method: :post, class: "" do %>
-      <%= image_tag "navbar_icons/follow.svg", style:"width: 30px; height: auto;" %>
-    <% end %>
+
+    <div id="user-id-<%= user.id %>">
+      <%= link_to followships_path(following_id: user), remote: true, method: :post, class: "" do %>
+        <%= image_tag "navbar_icons/follow.svg", style:"width: 30px; height: auto; padding-top:8px;" %>
+      <% end %>
+    </div>
+    
   <%end%>
 <%end%>
