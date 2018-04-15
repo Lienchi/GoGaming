@@ -7,7 +7,7 @@
       
       <div class=" col-xs-9" style=" padding-top: 5px;">    
         
-        <h5> 可兌換 <span style="color: #FD8484;"><%= current_user.points %></span> 點 / 共獲得 <%= current_user.experience %> 點 </h5> 
+        <h5>  <span style="color: #FD8484;"><%= current_user.points %></span> 點可兌換 / 共獲得 <%= current_user.experience %> 點 </h5> 
       </div>
     </div>
   </div>
@@ -24,11 +24,11 @@
             <p class="card-text" style="padding-left: 30px;"><%= product.product_points %> 點 </p>
 
             <% if current_user.points >= product.product_points %>
-              <button type="button" class="btn btn-main-outline pull-right" style="margin-top: -10px; " data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
+              <button type="button" class="btn btn-main-outline pull-right" style="margin-top: -10px;" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
                 兌換
               </button>                                                                                                      
             <%else%>
-              <button type="button" class="btn btn-main pull-right">
+              <button type="button" class="btn btn-gray-outline pull-right"  style="margin-top: -10px;" >
                 點數不足
               </button>
             <%end%>
@@ -40,7 +40,7 @@
 
 
     <!-- Modal -->
-      <div class="modal fade" id=<%= "product"+product.id.to_s %> tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal modal-style fade" id=<%= "product"+product.id.to_s %> tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">

@@ -1,6 +1,4 @@
-.flash.alert:empty{
-  display: none;
-}
+
 
 .container {
   padding-top: 30px;
@@ -84,6 +82,17 @@ img {
   height: auto;
   display: block;
 }
+
+.modal-style {
+  margin-top: 70px;
+}
+
+.modal-style img {
+  height: auto;
+  width: 100%;
+  display:block; margin:auto;
+}
+
 /*nav*/
 .navbar-default{
   padding-bottom: 0px;
@@ -488,9 +497,9 @@ input[type='file'] {
 }
 
 .btn-gray-outline {
-  color: #28E1A5;
+  color: #B9BCBF;
   background-color: #FFFFFF;
-  border-color: #B5DBCA;
+  border-color: #F1F3F3;
   border-radius: 25px;
   text-decoration:none; 
 }
