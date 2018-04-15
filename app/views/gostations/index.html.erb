@@ -211,9 +211,9 @@
               
             }
             else{
-              markerModalEle.innerHTML = "打卡 +"+gon.checkin_pts+"Pts";
+              markerModalEle.innerHTML = "打卡 +"+gon.checkin_pts+" 點";
               if(isOffPeak()){
-                markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+"Pts";
+                markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+" 點";
               }
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-main text-center";
@@ -338,9 +338,9 @@
                   url: "/gostations/"+currentGostationId+"/uncheckin",
                   method: "POST",
                   success: function(){
-                    document.getElementById("markerModal-checkin").innerHTML = "打卡 +"+gon.checkin_pts+"Pts";
+                    document.getElementById("markerModal-checkin").innerHTML = "打卡 +"+gon.checkin_pts+" 點";
                     if(isOffPeak()){
-                      document.getElementById("markerModal-checkin").innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+"Pts";
+                      document.getElementById("markerModal-checkin").innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+" 點";
                     }
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main text-center";
                     $.ajax({
@@ -563,8 +563,8 @@
 
           var locationPromise = getUserCurrentPosition();
 
-          // Apply a timeout of 5 seconds to doSomething
-          let doIt = promiseTimeout(5000, locationPromise);
+          // Apply a timeout
+          let doIt = promiseTimeout(2500, locationPromise);
 
           // Wait for the promise to get resolved
           doIt
@@ -601,7 +601,7 @@
             map.setCenter(gogoro_headquarter);
             addMarker({
               position: gogoro_headquarter,
-              iconImage: i_site,
+              iconImage: ig_site,
               id: -3
             });
 
