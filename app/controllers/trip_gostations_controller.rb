@@ -19,7 +19,7 @@ class TripGostationsController < ApplicationController
       @first = Trip.find(@trip_gostation.trip_id).trip_gostations.where(user_id:current_user.id).order(:updated_at).first.updated_at
       @last = Trip.find(@trip_gostation.trip_id).trip_gostations.where(user_id:current_user.id).order(updated_at: :desc).first.updated_at
       @completetime = ((@last-@first)/60).round(2)
-      Challenge.create!(user_id: current_user.id, trip_id: @trip_gostation.trip_id, completetime: @completetime )
+      Challenge.create!(user_id: current_user.id, trip_id: @trip_gostation.trip_id, completetime: @completetime, displaymodal: true )
 
       trip_points = Trip.find(@trip_gostation.trip_id).points
       current_user.add_points(trip_points, category: 'trip_gostations')

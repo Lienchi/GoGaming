@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_create :create_trip_gostation
+  after_create :create_trip_gostation, :initialize_points
   
   mount_uploader :avatar, PhotoUploader
   has_merit
@@ -124,6 +124,12 @@ class User < ApplicationRecord
         )
       end
     end
+  end
+
+  def initialize_points
+    self.add_points(10, category: 'gostation')
+    self.experience += 10
+    self.save
   end
   
 end

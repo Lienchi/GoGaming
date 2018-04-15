@@ -18,6 +18,14 @@ class TripsController < ApplicationController
     gon.gostation_sites = Site.where(trip_id: @trip.id)
     gon.is_complete_trip = is_complete_trip?(@trip.id)
 
+    current_challenge = Challenge.where(trip_id: @trip.id, user_id: current_user.id).first
+    if current_challenge
+      gon.displayModal = current_challenge.displaymodal
+      gon.current_challenge_id = current_challenge.id
+    else
+      gon.displayModal = false
+    end
+
     @comment = Comment.new
     @comments = Comment.where(trip_id: @trip).order(created_at: :desc)
     @challenge = Challenge.where(trip_id: @trip).order(:completetime).first

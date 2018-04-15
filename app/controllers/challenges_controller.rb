@@ -3,6 +3,10 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.create(challenge_params)
   end
   
+  def setDisplayModalStatus
+    challenge = Challenge.find(params[:id])
+    challenge.update(displaymodal: false)
+  end
 
   private 
 
