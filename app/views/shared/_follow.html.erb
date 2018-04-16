@@ -2,7 +2,7 @@
   <% if current_user.following?(user)%>
     <div id="user-id-<%= user.id %>">
       <%= link_to followship_path(user), remote: true, method: :delete, class: "" do %>
-        <%= image_tag "navbar_icons/g_follow.svg", style:"width: 30px; height: auto; padding-top:3px;" %>
+        <%= image_tag "navbar_icons/g_follow.svg", id:"btn-unfollow", style:"" %>
       <% end %>
     </div>
 
@@ -10,7 +10,7 @@
 
     <div id="user-id-<%= user.id %>">
       <%= link_to followships_path(following_id: user), remote: true, method: :post, class: "" do %>
-        <%= image_tag "navbar_icons/follow.svg", style:"width: 30px; height: auto; padding-top:0px;" %>
+        <%= image_tag "navbar_icons/follow.svg", id:"btn-follow", style:"" %>
       <% end %>
     </div>
     

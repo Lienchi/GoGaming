@@ -121,7 +121,7 @@
                 <div id="markerModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-availableTime" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-moreinfo-div" class="col-xs-4 col-xs-offset-4" style="padding: 8px; margin-left: -10px">
-                  <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px 4px; margin-top: 5px; margin-bottom: 5px;width:83px; " class="btn btn-sm btn-main-outline text-center" href="" target="_blank">更多資訊</a>
+                  <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px 4px; margin-top: 5px; margin-bottom: 5px;width:83px; " class="btn btn-sm btn-main-1-outline text-center" href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="markerModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-cellProgress">
@@ -131,10 +131,10 @@
               <div class="clearfix"></div>  
               <div class="modal-footer">
                 <div class="col-xs-4 col-xs-offset-1">
-                  <a id="markerModal-checkin" style="text-align:center; font-size: 16px;  width: 100px; padding: 8px;" class="btn btn-sm btn-main text-center " rel="nofollow">打卡</a>
+                  <a id="markerModal-checkin" style="text-align:center; font-size: 16px;  width: 100px; padding: 8px;" class="btn btn-sm btn-main-2 text-center " rel="nofollow">打卡</a>
                 </div>
                 <div class="col-xs-4 col-xs-offset-2" style="padding: 0;">
-                  <a id="markerModal-directionurl" style="padding: 8px; font-size: 16px;  width: 100px;" class="btn btn-sm btn-main-outline text-center " href="" target="_blank">導航</a>
+                  <a id="markerModal-directionurl" style="padding: 8px; font-size: 16px;  width: 100px;" class="btn btn-sm btn-main-1-outline text-center " href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -197,7 +197,7 @@
             elem.style.width = percentage*100 + '%';
 
             // markerModalEle.style.color = "#323237";
-            markerModalEle.className = "btn btn-sm btn-main text-center";
+            markerModalEle.className = "btn btn-sm btn-main-2 text-center";
             if( props.bCloseGostation ){
               // markerModalEle.style.color = "#ffffff";
               markerModalEle.onclick = toggle;
@@ -216,7 +216,7 @@
                 markerModalEle.innerHTML = "離峰 +"+gon.checkin_pts_offpeak+" 點";
               }
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-main text-center";
+                markerModalEle.className = "btn btn-sm btn-main-2 text-center";
               }
             }
           }
@@ -342,7 +342,7 @@
                     if(isOffPeak()){
                       document.getElementById("markerModal-checkin").innerHTML = "離峰 +"+gon.checkin_pts_offpeak+" 點";
                     }
-                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main text-center";
+                    document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main-2 text-center";
                     $.ajax({
                       url: "/gostations/getCurrentUserExp",
                       method: "POST",
@@ -712,7 +712,7 @@
           var controlText = document.createElement('div');
           controlText.style.color = 'rgb(250,250,250)';
           controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-          controlText.style.fontSize = '18px';
+          controlText.style.fontSize = '16px';
           controlText.style.lineHeight = '32px';
           controlText.style.paddingLeft = '15px';
           controlText.style.paddingRight = '15px';

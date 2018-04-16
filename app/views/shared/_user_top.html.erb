@@ -1,13 +1,14 @@
 <%= link_to user_path(current_user) do %>
     <div class="col-xs-12 user-navdata  navbar-fixed-top">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-        <div class="col-xs-3 col-xs-offset-1" style="margin-top: 10px;  padding-left: 30px; padding-right: 0px;">
-          <%= image_tag current_user.avatar, class: "img-circle img-responsive text-center " , style: "width: 40px; height: auto;" %>   
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 ">
+        <div class="col-xs-3 col-xs-offset-1 user-top">
+          <%= image_tag current_user.avatar, class: "img-circle img-responsive text-center" %>   
         </div>
 
-        <div class="col-xs-7  user-data" style="margin-top: 10px;">
-          <h4><%= current_user.name %> </h4> 
-            <div class="user-icon-text text-muted" style="margin-top: 0px;">
+        <div class="col-xs-7">
+          <div class="user-top-data"></div>
+          <h4 class=""><%= current_user.name %> </h4> 
+            <div class="user-top-text text-muted">
               <h6>
                 <span class="text-gray">等級</span>    <%= current_user.getUserLevel() %>        
                 <span class="text-gray">徽章</span>    <%= current_user.badges.count%>        

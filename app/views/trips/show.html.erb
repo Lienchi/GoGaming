@@ -41,7 +41,7 @@
     <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
          Modal content
-        <div class="modal-content trip-button">
+        <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"><%= @trip.name%></h4>
@@ -95,15 +95,24 @@
             </div>
             <div class="modal-body">
               <div class="clearfix">
-               <div class="col-xs-4"><%= image_tag "/icons/i_green_black_battery.png" , style: "width:50px;margin:0 auto;" %></div>
-                <h4 class="col-xs-4 float-left text-center">前往所有充電站打卡<br/><br/>即可解鎖徽章</h4>
-                <p class="col-xs-4"> <%= image_tag @trip.badge, style:"width:60px;height:60px;margin:0 auto;"%></p></p>  
+               <div class="col-xs-2">
+                <%= image_tag "/icons/i_green_black_battery.png" , style: "width:30px;margin:0 auto;" %>
+              </div>
+              <div class="col-xs-6 text-dark pd0 " style="line-height: 35px;">前往所有充電站完成打卡</div>
+              <div class="clearfix"></div>
+              <div class="col-xs-7 col-xs-offset-2 pd0 text-dark" style="line-height: 58px;">即可解鎖徽章，獲得額外點數</div>
+              <div class="col-xs-3"> 
+                <%= image_tag @trip.badge, style:"width:60px;height:60px;margin:0 auto;"%>
+              </div>  
+              <div class="col-xs-3 col-xs-offset-9 text-center text-dark">
+                <h6>+ <%= @trip.points%> 點</h6>
+              </div>
               </div>
               <br/>
            
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-main-1-outline" data-dismiss="modal">Close</button>
             </div>
           </div>
 
@@ -118,10 +127,10 @@
         <h3 class="col-xs-12 text-center" style="color: #24586e;">
           <%= @trip.name %>
            <!-- Trigger the modal with a button -->
-           <% if current_user.challenges.count == 0 %>
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tour">點我提示</button>
-          <% end %>
         </h3>
+        <% if current_user.challenges.count == 0 %>
+              <button type="button" class="btn btn-sm btn-main-1-outline pull-right" data-toggle="modal" data-target="#tour">怎麼玩？</button>
+          <% end %>
         <p class="col-xs-12" ><%= @trip.description %></p>
       </div>
       <div class="clearfix"></div>
@@ -181,10 +190,10 @@
                 </div>
                 <div class="modal-footer">
                   <div class="col-xs-4 col-xs-offset-1 text-center" >
-                    <button type="button" class="btn btn-sm btn-main" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
+                    <button type="button" class="btn btn-sm btn-main-1" data-toggle="modal" data-target="#trip_gostation" data-dismiss="modal">去打卡</button>
                   </div>
                   <div class="col-xs-4 col-xs-offset-2 text-center">
-                    <button type="button" class="btn btn-sm btn-main-outline">導航</button>
+                    <button type="button" class="btn btn-sm btn-main-1-outline">導航</button>
                   </div>
                   <p>完成<strong>"<%= @trip.name %>"</strong></p>
                 </div>
@@ -210,7 +219,7 @@
                 <div id="tripModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="tripModal-availableTime" style="font-size: 12px;" class="text-center"></div>
                 <div id="tripModal-moreinfo-div" class="col-xs-6 col-xs-offset-3 text-center">
-                  <a id="tripModal-moreinfo" style=" font-size: 12px; margin: 8px; padding: 8px; width:100px; " class="btn btn-main-outline text-center " href="" target="_blank">更多資訊</a>
+                  <a id="tripModal-moreinfo" style=" font-size: 12px; margin: 8px; padding: 8px; width:100px; " class="btn btn-main-1-outline text-center " href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="tripModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="tripModal-cellProgress">
@@ -220,10 +229,10 @@
               <div class="clearfix"></div>
               <div class="modal-footer">
                 <div class="col-xs-4 col-xs-offset-1 text-center" >
-                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow" >打卡</a>
+                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main-1 text-center" rel="nofollow" >打卡</a>
                 </div>
                 <div class="col-xs-4 col-xs-offset-2 text-center">
-                  <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main-outline text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
+                  <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main-1-outline text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -253,7 +262,7 @@
                   <a id="siteModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="" rel="nofollow"></a>
                 </div>
                 <div class="col-xs-5 col-xs-offset-2 text-center">
-                  <a id="siteModal-directionurl" style=" font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main-outline" href="" target="_blank">導航</a>
+                  <a id="siteModal-directionurl" style=" font-size: 16px; padding: 10px 35px;" class="btn btn-sm btn-main-1-outline" href="" target="_blank">導航</a>
                 </div>
               </div>
             </div>
@@ -330,7 +339,7 @@
           <br>
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
-              <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
+              <%= f.file_field :image, class: "btn form-control-file"%>
               <input class="btn btn-main-1-outline pull-right" type="submit" value="留言">
             </div>
           <% end%>
@@ -397,7 +406,7 @@
             else{
               markerModalEle.innerHTML = "打卡 +5 點";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-main text-center col-xs-5";
+                markerModalEle.className = "btn btn-sm btn-main-2 text-center col-xs-5";
               }
             }
           }
@@ -507,7 +516,7 @@
                   method: "POST",
                   success: function(){
                     document.getElementById("tripModal-checkin").innerHTML = "打卡 +5 點";
-                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main text-center col-xs-5";
+                    document.getElementById("tripModal-checkin").className = "btn btn-sm btn-main-2 text-center col-xs-5";
                     $.ajax({
                       url: "/gostations/getCurrentUserExp",
                       method: "POST",

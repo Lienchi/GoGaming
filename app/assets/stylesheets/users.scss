@@ -1,3 +1,117 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.leaderboards {
+  padding-top: 20px;
+}
+
+.user-navdata {
+  background-color: #F5F5F5; 
+  margin-top: 48px; 
+  margin-bottom: 5px; 
+  padding-top: 5px;
+}
+
+.user-top {
+  margin-top: 2px;  padding-left: 30px; padding-right: 0px;
+}
+
+.user-top img {
+  width: 50px;
+  height: 50px;
+}
+
+.user-top-data{
+  margin-top: 10px;
+}
+
+.user-top-text{
+  margin-top: 10px;
+  margin-top: 0px;
+}
+
+.user-icon{
+  height: 25px; 
+  width: 25px;
+
+}
+
+
+.user-data {
+  margin-top: 5px;
+  color: #6C6565;
+  padding: 15px 5px 0px 0px;
+
+}
+
+.user-data h2 {
+  margin-bottom: 5px; margin-left: -3px;
+}
+
+
+.user-avatar {
+  padding: 12px;
+}
+
+.avatar {
+  width: 83px;
+
+}
+
+#btn-to-leaderboard {
+  padding: 5px 15px;
+}
+
+#share-follow {
+  margin: 5px auto; padding-left: 10px;
+}
+
+#follow-icon-show {
+  margin: 0px 0px 0px 50px;
+}
+
+.user-buttons {
+  margin-top: 110px; 
+  padding-top: 5px;
+  margin-bottom: 5px; 
+  background-color: rgba(256,256,256,0.6);
+}
+
+#btn-unfollow{
+  width: 30px; height: auto; padding-top:3px;
+}
+
+#btn-follow{
+  width: 30px; height: auto; padding-top:0px;
+}
+
+/* leaderboards */
+
+#leader-table {
+  margin-top: 85px;
+}
+
+#trophys {
+  padding: 23px 3px 0 0 ; margin-left: -5;
+}
+
+#leader-avatar{
+  padding: 4px 0 0 0;
+}
+
+.trophy {
+  width: 35px; margin-top: 0px;
+}
+
+.leader-item {
+  padding: 4px 0 4px 0;
+}
+
+#leader-follow {
+  padding: 11px 0px 0px 0px;
+}
+
+.display-3{
+  padding-left: 10px;
+}
