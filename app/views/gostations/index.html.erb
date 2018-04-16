@@ -120,8 +120,8 @@
                 <div id="markerModal-content" style="font-size: 16px;" class="text-center"></div>
                 <div id="markerModal-disdur" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-availableTime" style="font-size: 12px;" class="text-center"></div>
-                <div id="markerModal-moreinfo-div" class="col-xs-4 col-xs-offset-4">
-                  <a id="markerModal-moreinfo" style=" font-size: 12px; padding: 8px 4px; margin-top: 5px; margin-bottom: 5px;width:83px; " class="btn btn-sm btn-main-1-outline text-center" href="" target="_blank">更多資訊</a>
+                <div id="markerModal-moreinfo-div" class="col-xs-6 col-xs-offset-3 text-center">
+                  <a id="markerModal-moreinfo" style=" font-size: 12px; margin: 8px; padding: 8px; width:100px; " class="btn btn-sm btn-main-1-outline text-center" href="" target="_blank">更多資訊</a>
                 </div>
                 <div id="markerModal-cellContent" style="font-size: 12px;" class="text-center"></div>
                 <div id="markerModal-cellProgress">
@@ -229,11 +229,13 @@
             document.getElementById('markerModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
           if(props.source_url){
-            document.getElementById('markerModal-moreinfo-div').style = "padding: 8px; margin-left: -10px display: inline";
+            document.getElementById('markerModal-moreinfo-div').style.display = "block";
             document.getElementById('markerModal-moreinfo').href = props.source_url;
+            document.getElementById('markerModal-moreinfo').style.display = "block";
           }
           else{
-            document.getElementById('markerModal-moreinfo-div').style = "display: none";
+            document.getElementById('markerModal-moreinfo-div').style.display = "none";
+            document.getElementById('markerModal-moreinfo').style.display = "none";
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('markerModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;

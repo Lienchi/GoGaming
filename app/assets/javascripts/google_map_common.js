@@ -367,13 +367,17 @@ function createMilestone(route, dist){
   return milestones;    
 }
 
+var before_toggle_bg = '#0069D2';
+var after_toggle_bg = '#FFFFFF';
+var before_toggle_text = after_toggle_bg;
+var after_toggle_text = before_toggle_bg;
 
 var toggleFriendlyStore = false;
 function FriendlyStoreControl(controlDiv, map) {
 
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#0069D2';
+  controlUI.style.backgroundColor = before_toggle_bg;
   controlUI.style.borderRadius = '15px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
@@ -386,7 +390,7 @@ function FriendlyStoreControl(controlDiv, map) {
 
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
-  controlText.style.color = '#FFFFFF';
+  controlText.style.color = before_toggle_text;
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '14px';
   controlText.style.lineHeight = '32px';
@@ -401,13 +405,13 @@ function FriendlyStoreControl(controlDiv, map) {
     toggleFriendlyStore = !toggleFriendlyStore;
     if(toggleFriendlyStore){
       showMarkers(map, friendlyStoreMarkers);
-      controlText.style.color = '#24586e';
-      controlUI.style.backgroundColor = '#FFFFFF';
+      controlText.style.color = after_toggle_text;
+      controlUI.style.backgroundColor = after_toggle_bg;
     }
     else{
       clearMarkers(friendlyStoreMarkers);
-      controlText.style.color = '#FFFFFF';
-      controlUI.style.backgroundColor  = '#24586e';
+      controlText.style.color = before_toggle_text;
+      controlUI.style.backgroundColor  = before_toggle_bg;
     }
   });
 
@@ -418,7 +422,7 @@ function GostationSiteControl(controlDiv, map) {
 
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
-  controlUI.style.backgroundColor = '#0069D2';
+  controlUI.style.backgroundColor = before_toggle_bg;
   controlUI.style.borderRadius = '15px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
@@ -430,7 +434,7 @@ function GostationSiteControl(controlDiv, map) {
 
   // Set CSS for the control interior.
   var controlText = document.createElement('div');
-  controlText.style.color = '#FFFFFF';
+  controlText.style.color = before_toggle_text;
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '14px';
   controlText.style.lineHeight = '32px';
@@ -448,15 +452,15 @@ function GostationSiteControl(controlDiv, map) {
       setMarkersIcon(siteMarkers, i_site);
       openMarkersInfowindow(siteMarkers);
       setMarkersIcon(gostationMarkers, i_green_black_battery_sm);
-      controlText.style.color = '#24586e';
-      controlUI.style.backgroundColor = '#FFFFFF';
+      controlText.style.color = after_toggle_text;
+      controlUI.style.backgroundColor = after_toggle_bg;
     }
     else{
       setMarkersIcon(gostationMarkers, i_green_black_battery);
       setMarkersIcon(siteMarkers, i_site_sm);
       closeMarkersInfowindow(siteMarkers);
-      controlText.style.color = '#FFFFFF';
-      controlUI.style.backgroundColor  = '#24586e';
+      controlText.style.color = before_toggle_text;
+      controlUI.style.backgroundColor  = before_toggle_bg;
     }
   });
 

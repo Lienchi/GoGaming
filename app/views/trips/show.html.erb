@@ -419,11 +419,13 @@
             document.getElementById('tripModal-cellContent').innerHTML = '滿電電池：'+props.fullBatteryCells+' / '+props.totalBatteryCells;
           }
           if(props.source_url){
-            document.getElementById('tripModal-moreinfo-div').style = "display: inline";
+            document.getElementById('tripModal-moreinfo-div').style.display = "block";
             document.getElementById('tripModal-moreinfo').href = props.source_url;
+            document.getElementById('tripModal-moreinfo').style.display = "block";
           }
           else{
-            document.getElementById('tripModal-moreinfo-div').style = "display: none";
+            document.getElementById('tripModal-moreinfo-div').style.display = "none";
+            document.getElementById('tripModal-moreinfo').style.display = "none";
           }
           if(props.distance!=null && props.duration!=null){
             document.getElementById('tripModal-disdur').innerHTML = '預估：'+props.distance+' '+props.duration;
