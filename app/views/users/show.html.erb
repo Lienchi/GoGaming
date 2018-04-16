@@ -52,6 +52,26 @@
       <div class=" btn btn-sm btn-main-1-outline" style="padding: 5px 15px;">
         <%= link_to " 排行榜 ", leaderboards_users_path %>
       </div>
+
+      <%= image_tag @user.avatar, class: "img-circle avatar"%>  
+      <div class="col-xs-12  text-center" style="margin: 5px -8px;">
+         <% if @user==current_user %>
+          <div class=" btn btn-sm btn-main-outline">
+            <%= link_to " 更新資料 ", edit_user_registration_path %>
+          </div>
+         <% else %>
+          <div class="" style="padding: 5px 0 0 3px;">
+            <%= render partial: "shared/follow", locals: {user: @user} %>
+          </div>
+         <% end %>
+      </div>
+      <div class="col-xs-12 text-center" style="margin: 0 auto">
+        <% if @user == current_user %>
+          <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="<%'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div>  
+          <div class="fb-share-button" data-href="<% 'https://gogaming-deployment.herokuapp.com/users/'+'@user.id'%>" data-layout="button" data-size="small" data-mobile-iframe="true">
+          <a target="_blank" href="<%'https://m.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgogaming-deployment.herokuapp.com%2Fusers%2F'+'@user.id'+'&amp;src=sdkpreparse'%>" class="fb-xfbml-parse-ignore">FB分享</a></div> 
+        <% end %> 
+      </div>
     </div> 
 
     <div class="col-xs-4 text-center" style="margin: 5px auto; padding-left: 10px;">

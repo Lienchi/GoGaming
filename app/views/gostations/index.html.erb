@@ -148,7 +148,7 @@
             <span class="input-group-btn">
               <button id="current-position-submit" class="btn btn-dark-blue" style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;""  type="submit">現在位置</button>
             </span>
-            <input  id="direction-start" type="text" class="form-control boarder rounded" style="border-radius: 0 10px 10px 0; "placeholder="或 輸入起點">
+            <input  id="direction-start" type="text" class="form-control boarder rounded" style="border-radius: 0 10px 10px 0; " placeholder="或 輸入起點">
           </div><!-- /input-group -->
 
           <div class="input-group" style="margin-top: 10px;">
@@ -420,6 +420,13 @@
             icon: props.iconImage
           });
 
+          if(props.id == markerType.GOGORO_HEADQUARTER){
+            marker.infowindow = new google.maps.InfoWindow({
+              content: "gogoro 總部"
+            });
+            marker.infowindow.open(map, marker);
+          }
+
           if(props.address){
             marker.addListener('click', function(){
               if(props.id >= 0){//gostations
@@ -482,7 +489,7 @@
                   console.log("Can not get disDur");
                 });
               }
-              else if(props.id == -1){//friendly stores
+              else if(props.id == markerType.FRIENDLY_STORE){//friendly stores
                 if(activeMarkerInfo.marker!=null){
                   if(activeMarkerInfo.bFriendlyStore){
                     activeMarkerInfo.marker.setIcon(friendly_store_icon);
@@ -519,13 +526,13 @@
           if(props.id >= 0){//gostations
             gostationMarkers.push(marker);
           }
-          else if(props.id == -1){//friendly stores
+          else if(props.id == markerType.FRIENDLY_STORE){//friendly stores
             friendlyStoreMarkers.push(marker);
           }
-          else if(props.id == -2){
+          else if(props.id == markerType.DESTINATION || props.id == markerType.GOGORO_HEADQUARTER){
             destinationMarker = marker;
           }
-          else if(props.id == -3){
+          else if(props.id == markerType.CURRENT_LOCATION){
             currentPositionMarker = marker;
           }
           
@@ -550,7 +557,7 @@
             info.position = position;
             info.directions_url = getDirectionUrl(position.lat+','+position.lng);
 
-            info.id = -1;
+            info.id = markerType.FRIENDLY_STORE;
             info.iconImage = friendly_store_icon;
             info.source_url = gon.friendly_stores[i].source_url;
 
@@ -566,6 +573,9 @@
           // Apply a timeout
           let doIt = promiseTimeout(2500, locationPromise);
 
+          directionsDisplay.set('directions', null);
+          deleteMarkers(gostationMarkers);
+          deleteDestinationMarker();
           // Wait for the promise to get resolved
           doIt
           .then(function(position) {
@@ -579,7 +589,7 @@
             addMarker({
               position: userCurrentPos,
               iconImage: i_site,
-              id: -3
+              id: markerType.CURRENT_LOCATION
             });
 
             document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(6)+','+userCurrentPos.lng.toFixed(6);
@@ -602,7 +612,7 @@
             addMarker({
               position: gogoro_headquarter,
               iconImage: ig_site,
-              id: -3
+              id: markerType.GOGORO_HEADQUARTER
             });
 
             // --- gostations
@@ -617,7 +627,7 @@
         }
 
         function geocodeAddress(geocoder, map, address) {
-          geocoder.geocode({'address': address}, function(results, status) {
+          geocoder.geocode( {'address': address, 'componentRestrictions': {'country': 'TW'} }, function(results, status) {
             if (status === 'OK') {
               map.setZoom(12);
               map.setCenter(results[0].geometry.location);
@@ -625,7 +635,7 @@
               addMarker({
                 position: results[0].geometry.location,
                 iconImage: ig_site,
-                id: -2
+                id: markerType.DESTINATION
               });
             } else {
               alert('Geocode was not successful for the following reason: ' + status);
@@ -838,7 +848,11 @@
           var input_start = /** @type {!HTMLInputElement} */(
               document.getElementById('direction-start'));
 
-          var autocomplete_start = new google.maps.places.Autocomplete(input_start);
+          var options = {
+            componentRestrictions: {country: 'TW'}
+          };
+
+          var autocomplete_start = new google.maps.places.Autocomplete(input_start, options);
 
           autocomplete_start.bindTo('bounds', map);
 
@@ -855,7 +869,7 @@
           var input_end = /** @type {!HTMLInputElement} */(
               document.getElementById('direction-end'));
 
-          var autocomplete_end = new google.maps.places.Autocomplete(input_end);
+          var autocomplete_end = new google.maps.places.Autocomplete(input_end, options);
           autocomplete_end.bindTo('bounds', map);
 
           autocomplete_end.addListener('place_changed', function() {

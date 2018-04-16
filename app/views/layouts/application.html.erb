@@ -12,12 +12,8 @@
     <meta property="og:title"              content="gogoro 帶你出去玩" />
     <meta property="og:description"        content="一起挑戰路線，解鎖徽章吧!" />
     <meta property="og:image"              content="https://gogaming-deployment.herokuapp.com/assets/navbar_icons/gogoro-f078efaa21e010b448220ab0a93ef0c174cd53eeae4823a303a963eefa4904c5.svg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style type="text/css">
-      .introjs-helperNumberLayer{
-        font-size: 0px;
-      }
-    </style>
   </head>
 
   <body>
@@ -160,19 +156,20 @@
     <% if flash[:notice] %>
       <div class="col-xs-12" style="margin-top: 40px;  position:absolute; top:50px; z-index:10; ">
         <div class="">
-          <div class="alert alert-success alert-dismissible" role="alert">
+          <div id= "success-alert" class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <%= notice %>
+            <%= notice%>
           </div>
         </div>
       </div>
-    <% end %>
-    
-
-
+    <% end %> 
+  </div>
 
     <%= yield %>
-    
-
+    <script type="text/javascript">
+    $("#success-alert").fadeTo(1000, 500).slideUp(500, function(){
+    $("#success-alert").alert('close');
+      });
+    </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #devise_for :users, :controllers => { registrations: 'registrations' }
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root "gostations#index"
@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :challenges, only:[:create]
+  resources :challenges, only:[:create] do
+    member do
+      post :setDisplayModalStatus
+    end
+  end
 
 
   resources :trip_gostations, only:[:show] do 

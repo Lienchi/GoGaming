@@ -222,6 +222,14 @@ var googleMapStyle = [
   }
 ];
 
+const markerType = {
+    GOSTATION: 0,
+    FRIENDLY_STORE: -1,
+    DESTINATION: -2,
+    CURRENT_LOCATION: -3,
+    GOGORO_HEADQUARTER: -5
+}
+
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map, markers) {
