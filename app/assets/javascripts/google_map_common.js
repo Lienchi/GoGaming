@@ -227,6 +227,7 @@ const markerType = {
     FRIENDLY_STORE: -1,
     DESTINATION: -2,
     CURRENT_LOCATION: -3,
+    SITE: -4,
     GOGORO_HEADQUARTER: -5
 }
 
@@ -471,6 +472,46 @@ function checkLatLngNearby(pos_1, pos_2, nearbyDisTH) {
   }
   return false;
 }
+
+var ha_options = {
+  enableHighAccuracy: true,
+  timeout: 2500,
+  maximumAge: 0
+};
+
+var la_options = {
+  enableHighAccuracy: false,
+  timeout: 2500,
+  maximumAge: 0
+};
+
+function setCurrentPos(pos){
+  userCurrentPos = {
+    lat: pos.coords.latitude,
+    lng: pos.coords.longitude
+  };
+}
+
+function tr_gcp_success(pos) {
+  setCurrentPos(pos);
+};
+
+function displayGcpErrorMsg(err){
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+}
+
+function trip_show_getCurrentPosition(){
+  function error(err) {
+    displayGcpErrorMsg(err);
+  };
+
+  function gcp_error(err) {
+    displayGcpErrorMsg(err);
+    navigator.geolocation.getCurrentPosition(tr_gcp_success, error, la_options);
+  };
+
+  navigator.geolocation.getCurrentPosition(tr_gcp_success, gcp_error, ha_options);
+};
 
 function getUserCurrentPosition(){
   var promise = new Promise(function(resolve, reject) {

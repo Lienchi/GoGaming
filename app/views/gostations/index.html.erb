@@ -565,66 +565,66 @@
           }
         }
 
+        function setUserCurrentMarker(){
+          map.setZoom(12);
+          map.setCenter(userCurrentPos);
+          addMarker({
+            position: userCurrentPos,
+            iconImage: i_site,
+            id: markerType.CURRENT_LOCATION
+          });
+
+          document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(6)+','+userCurrentPos.lng.toFixed(6);
+
+          // --- gostations
+          var milestones = [];
+          milestones.push(userCurrentPos);
+          setMarkerInfo({
+            gostations: gon.gostations,
+            milestones: milestones
+          });
+        };
+
+        function setGogoroHeadquarter(){
+
+          map.setZoom(12);
+          map.setCenter(gogoro_headquarter);
+          addMarker({
+            position: gogoro_headquarter,
+            iconImage: ig_site,
+            id: markerType.GOGORO_HEADQUARTER
+          });
+
+          // --- gostations
+          var milestones = [];
+          milestones.push(gogoro_headquarter);
+          setMarkerInfo({
+            gostations: gon.gostations,
+            milestones: milestones
+          });
+        }
+
         function setUserCurrentPosition(){
           deleteCurrentPositionMarker();
 
-          var locationPromise = getUserCurrentPosition();
+          function gi_gcp_success(pos) {
+            setCurrentPos(pos);
+            setUserCurrentMarker();
+          };
 
-          // Apply a timeout
-          let doIt = promiseTimeout(2500, locationPromise);
+          function error(err) {
+            displayGcpErrorMsg(err);
+            setGogoroHeadquarter();
+          };
 
-          directionsDisplay.set('directions', null);
-          deleteMarkers(gostationMarkers);
-          deleteDestinationMarker();
-          // Wait for the promise to get resolved
-          doIt
-          .then(function(position) {
-            // Use response
-            userCurrentPos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            map.setZoom(12);
-            map.setCenter(userCurrentPos);
-            addMarker({
-              position: userCurrentPos,
-              iconImage: i_site,
-              id: markerType.CURRENT_LOCATION
-            });
+          function gi_gcp_error(err) {
+            displayGcpErrorMsg(err);
+            navigator.geolocation.getCurrentPosition(gi_gcp_success, error, la_options);
+          };
 
-            document.getElementById('direction-start').value = userCurrentPos.lat.toFixed(6)+','+userCurrentPos.lng.toFixed(6);
+          navigator.geolocation.getCurrentPosition(gi_gcp_success, gi_gcp_error, ha_options);
 
-            // --- gostations
-            var milestones = [];
-            milestones.push(userCurrentPos);
-            setMarkerInfo({
-              gostations: gon.gostations,
-              milestones: milestones
-            });
-          })
-          // Wait for the promise to get rejected or timed out
-          .catch(function(err) {
-            // Deal with error
-            console.log("Can not get current position!");
-
-            map.setZoom(12);
-            map.setCenter(gogoro_headquarter);
-            addMarker({
-              position: gogoro_headquarter,
-              iconImage: ig_site,
-              id: markerType.GOGORO_HEADQUARTER
-            });
-
-            // --- gostations
-            var milestones = [];
-            milestones.push(gogoro_headquarter);
-            setMarkerInfo({
-              gostations: gon.gostations,
-              milestones: milestones
-            });
-          })
-
-        }
+        };
 
         function geocodeAddress(geocoder, map, address) {
           geocoder.geocode( {'address': address, 'componentRestrictions': {'country': 'TW'} }, function(results, status) {
