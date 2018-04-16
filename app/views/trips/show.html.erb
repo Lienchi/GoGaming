@@ -75,7 +75,7 @@
               <p >本次任務獲得 <%= @trip.points %> 點</p>  
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-main-outline" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-main-1-outline" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -115,13 +115,12 @@
       <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
     
       <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 8px; margin-top: 10px;" >
-        <h3 class="col-xs-12 text-center">
-          <%= @trip.name %>   
+        <h3 class="col-xs-12 text-center" style="color: #24586e;">
+          <%= @trip.name %>
            <!-- Trigger the modal with a button -->
            <% if current_user.challenges.count == 0 %>
               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#tour">點我提示</button>
           <% end %>
-
         </h3>
         <p class="col-xs-12" ><%= @trip.description %></p>
       </div>
@@ -134,20 +133,21 @@
           <% if @trip.is_challenged?(current_user)%>                  
             <%= image_tag @trip.badge, alt: @trip.name, style:"width: 90px; height: auto;" %>
           <% else %>
-            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 1;" %>
+            <%= image_tag @trip.badge, alt: @trip.name, style:"-webkit-filter: grayscale(85%); filter: grayscale(85%); opacity: 1;" %>
           <% end %>
         </div>
         <div class="col-xs-8 col-sm-8" style="">
           <% if Challenge.where(trip_id:@trip).exists?%>
             <p>             
-              <%= image_tag @challenge.user.avatar, style:"width:30px; display: inline-block;"%>
+              <%= image_tag @challenge.user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%>
               <%= @challenge.user.name%>
             </p>
 
             <p style="padding-left: 35px;">在 <%= @challenge.completetime.round %> 分鐘內完成 </p>
           <% else %>
-            <p>還沒有人完成喔！快來搶頭香！</p>
             <br>
+            <p>還沒有人完成喔！快來搶頭香！</p>
+            
           <%end%>   
           <hr style="margin: 5px auto;">
           <% if @trip.is_challenged?(current_user)%> 
@@ -220,7 +220,7 @@
               <div class="clearfix"></div>
               <div class="modal-footer">
                 <div class="col-xs-4 col-xs-offset-1 text-center" >
-                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow" data-dismiss="modal" >打卡</a>
+                  <a id="tripModal-checkin" style="font-size: 16px;  padding: 8px; width:100px;" class="btn btn-sm btn-main text-center" rel="nofollow" >打卡</a>
                 </div>
                 <div class="col-xs-4 col-xs-offset-2 text-center">
                   <a id="tripModal-directionurl" style=" font-size: 16px; padding: 8px; width:100px; " class="btn btn-sm btn-main-outline text-center" style="margin: 0 auto;" href="" target="_blank">導航</a>
@@ -264,7 +264,6 @@
         <div class="comment-group" style="padding-left: 0px;">
           <div class="col-xs-12 text-center" style="padding-left: 0px;">
             <h4>好玩推薦</h4>
-            <h6 class="text-muted">與我們分享你的私房景點</h6>
           </div>
 
           <div class="clearfix"></div>
@@ -292,7 +291,7 @@
                           <h5 class="modal-title" id="exampleModalLabel">
                             <p><%= comment.comment %></p>
                           <p class="text-right">
-                            <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>  
+                            <%= image_tag current_user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>  
                           </p>
                           </h5>
                           
@@ -309,7 +308,7 @@
                   <div class="col-xs-8">
                     <%= link_to user_path(comment.user) do %>
                       <h6 class="col-xs-12 text-muted pull-right" style="padding: 0px 0px 3px 0px;">
-                        <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>                        
+                        <%= image_tag current_user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%> <%=comment.user.name%> <%= (comment.created_at).strftime("%m/%d/%Y") %>                        
                       </h6>
                     <% end %>
                     
@@ -327,10 +326,12 @@
         </div>
 
         <div class="form-group comment-group clearfix">  
+          <h6 class="text-muted text-center">與我們分享你的私房景點</h6>
+          <br>
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
               <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
-              <input class="btn btn-main-outline pull-right" type="submit" value="留言">
+              <input class="btn btn-main-1-outline pull-right" type="submit" value="留言">
             </div>
           <% end%>
         </div>
@@ -921,7 +922,7 @@
           var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
 
           friendlyStoreDiv.index = 1;
-          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
+          map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(friendlyStoreDiv);
 
 
           // Create the DIV to hold the control and call the GostationSiteControl()

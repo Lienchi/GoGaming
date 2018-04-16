@@ -7,18 +7,19 @@
     <div class="clearfix"></div>
       <div class="user-buttons navbar-fixed-top">
         <div class="col-xs-4 col-xs-offset-2 text-center">
-          <div class=" btn btn-main">
+          <div class=" btn btn-main-1 ">
             <%= link_to " 所有玩家 ", leaderboards_users_path%>
           </div>
         </div>
         <div class="col-xs-4 text-center">
-          <div class=" btn btn-main-outline">
+          <div class=" btn btn-main-1-outline">
             <%= link_to " 我的朋友 ", f_leaderboards_users_path%>
           </div>
         </div>
       </div>
     <div class="clearfix"></div>
-
-    <%= render partial: "shared/leaderboards" %>
+    <div style="margin-top: 10px;" >
+      <%= render partial: "shared/leaderboards" %>
+    </div>
   </div>
 </div>

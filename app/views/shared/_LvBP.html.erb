@@ -12,11 +12,11 @@
     <div class="user-icon-text"><%= current_user.badges.count %> </div>
   </div>
   <%= link_to products_path do %>
-    <div  class="col-xs-1 user-data">
-      <div class="user-icon" style=""> <%= image_tag(("navbar_icons/P.svg")) %></div> 
+    <div class="col-xs-1 user-data">
+      <div class="user-icon" style="margin-right: 5px;"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
     </div>
-    <div  class="col-xs-1">
+    <div class="col-xs-2 user-icon">
       <div id="layout-nav-exp" class="user-icon-text"><%= current_user.experience %></div>
-    </div>    
+    </div>  
   <% end %>
 </div>

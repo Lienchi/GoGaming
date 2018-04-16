@@ -30,8 +30,15 @@
   color: #FFFFFF;
 }
 
+.text-gray{
+  color: #B9BCBF;
+}
 .text-dark {
   color: #28E1A5;
+}
+
+.mt-0 {
+  margin-top: 0px;
 }
 
 
@@ -155,7 +162,7 @@ img {
 }
 
 .my-nav-tab {
-  background:#28C3FF;
+  background:#2396DB;
   padding: 5px;
   text-align: center;
   border-right: 0.5px solid #FFFFFF;
@@ -230,7 +237,7 @@ text-decoration:none;
   margin-top: 30px;
 }
 .avatar {
-  width: 90px;
+  width: 83px;
 
 }
 
@@ -366,15 +373,15 @@ input[type='file'] {
   top:5%;
   width:90%;
   background-color:#FFFFFF;
-  border-radius:50px;
-  border: 2px solid #DDDDDD;
+  border-radius: 0px;
+  border: 1px solid #DDDDDD;
 }
 
 .myBar{
   width:25%;
-  height:10px;;
-  background: linear-gradient(to right,#0044BB, #5599FF,#00FFFF , #ADFF2F, #DDFF77);
-  border-radius:50px;
+  height:10px;
+  background: linear-gradient(to right, #0069d2, #00D7FF, #E1FF32);
+  border-radius: 0px;
 }
 
 
@@ -436,8 +443,8 @@ input[type='file'] {
 /* button */
 .btn-main-1 {
   color: #FFFFFF;
-  background-color: #53C0F0;
-  border-color: #53C0F0;
+  background-color: #00D7FF;
+  border-color: #00D7FF;
   border-radius: 25px;
   text-decoration:none; 
 
@@ -446,14 +453,14 @@ input[type='file'] {
 .btn-main-1-outline {
   color: #323237;
   background-color: #FFFFFF;
-  border-color: #53C0F0;
+  border-color: #00D7FF;
   border-radius: 25px;
   text-decoration:none; 
 }
 
 .btn-main-1-outline-1 {
   color: #FFFFFF;
-  background-color: #53C0F0;
+  background-color: #00D7FF;
   border-color: #87D3F4;
   border-radius: 25px;
   text-decoration:none; 
@@ -502,6 +509,15 @@ input[type='file'] {
   border-color: #F1F3F3;
   border-radius: 25px;
   text-decoration:none; 
+}
+
+.btn-dark-blue {
+  color: #FFFFFF;
+  background-color: #0069D2;
+  border-color: #0069D2;
+  border-radius: 25px;
+  text-decoration:none; 
+  
 }
 
 /* products */

@@ -92,7 +92,7 @@
 
         }
         body {
-          background-color: #53C0F0;
+          
         }
 
       }
@@ -146,7 +146,7 @@
 
           <div class="input-group">
             <span class="input-group-btn">
-              <button id="current-position-submit" class="btn btn-main" style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;""  type="submit">現在位置</button>
+              <button id="current-position-submit" class="btn btn-dark-blue" style="border-bottom-left-radius: 10px; border-top-left-radius: 10px;""  type="submit">現在位置</button>
             </span>
             <input  id="direction-start" type="text" class="form-control boarder rounded" style="border-radius: 0 10px 10px 0; " placeholder="或 輸入起點">
           </div><!-- /input-group -->
@@ -154,7 +154,7 @@
           <div class="input-group" style="margin-top: 10px;">
             <input id="direction-end" type="text" class="form-control border rounded" placeholder="你想去哪裡？">
             <span class="input-group-btn">
-              <input id="direction-submit" class="btn btn-main " type="submit" value="GO" style="padding: 6px 25px 6px 25px; margin-left: 0px; margin-top: -4px; border-radius: 0 10px 10px 0; ">
+              <input id="direction-submit" class="btn btn-dark-blue" type="submit" value="GO" style="padding: 6px 25px 6px 25px; margin-left: 0px; margin-top: -4px; border-radius: 0 10px 10px 0; ">
             </span>
             <br>
           </div><!-- /input-group -->
@@ -165,7 +165,7 @@
         <div style="padding: -100;" >
           <input id="pac-input" class="form-control border rounded" type="text" placeholder="你想去哪裡？" style="margin-top: 55px; border-radius: 15px;">
           <div id="pac-input-button" style="margin-top: 45px; margin-left: -5px;"></div>
-          <div id="map" class="z-depth-2" style="min-height: 592px; max-height: 975px; position: relative; top: -24px;"></div>
+          <div id="map" class="z-depth-2" style="min-height: 592px; max-height: 900px; position: relative; top: -24px;"></div>
         </div>
       <!-- </div> -->
       
@@ -206,14 +206,14 @@
             if(props.bCheckin){
               markerModalEle.innerHTML = "已打卡";
               if(props.bCloseGostation){
-                markerModalEle.className = "btn btn-sm btn-main-outline text-center";
+                markerModalEle.className = "btn btn-sm btn-gray-outline text-center";
               }
               
             }
             else{
               markerModalEle.innerHTML = "打卡 +"+gon.checkin_pts+" 點";
               if(isOffPeak()){
-                markerModalEle.innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+" 點";
+                markerModalEle.innerHTML = "離峰 +"+gon.checkin_pts_offpeak+" 點";
               }
               if(props.bCloseGostation){
                 markerModalEle.className = "btn btn-sm btn-main text-center";
@@ -340,7 +340,7 @@
                   success: function(){
                     document.getElementById("markerModal-checkin").innerHTML = "打卡 +"+gon.checkin_pts+" 點";
                     if(isOffPeak()){
-                      document.getElementById("markerModal-checkin").innerHTML = "離峰打卡 +"+gon.checkin_pts_offpeak+" 點";
+                      document.getElementById("markerModal-checkin").innerHTML = "離峰 +"+gon.checkin_pts_offpeak+" 點";
                     }
                     document.getElementById("markerModal-checkin").className = "btn btn-sm btn-main text-center";
                     $.ajax({
@@ -698,7 +698,7 @@
 
           // Set CSS for the control border.
           var controlUI = document.createElement('div');
-          controlUI.style.backgroundColor = '#77D6AC';
+          controlUI.style.backgroundColor = '#0069D2';
           controlUI.style.borderRadius = '15px';
           controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
           controlUI.style.cursor = 'pointer';
@@ -821,7 +821,7 @@
           var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
 
           friendlyStoreDiv.index = 1;
-          map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(friendlyStoreDiv);
+          map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(friendlyStoreDiv);
 
           setUserCurrentPosition();
           document.getElementById('current-position-submit').addEventListener('click', function() {
