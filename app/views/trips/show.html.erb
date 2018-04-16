@@ -41,7 +41,7 @@
     <!-- <div id="myModal" class="modal fade " role="dialog">
       <div class="modal-dialog">
          Modal content
-        <div class="modal-content trip-button">
+        <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title"><%= @trip.name%></h4>
@@ -330,7 +330,7 @@
           <br>
           <%= form_for [@trip, @comment] do |f|%>
             <%= f.text_area :comment, class: "form-control" %>
-              <%= f.file_field :image, class: "btn form-control-file", style: " width:auto;" %>
+              <%= f.file_field :image, class: "btn form-control-file"%>
               <input class="btn btn-main-1-outline pull-right" type="submit" value="留言">
             </div>
           <% end%>

@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="navbar-fixed-top" style="margin-top: 48px; padding-top: 10px; background-color: rgba(256,256,256,0.5);">
+  <div class="navbar-fixed-top" id="pig-points">
     <div class="col-xs-12">
       <div class="col-xs-1 col-xs-offset-1"">
-        <div class="user-icon" style="height:5px;"> <%= image_tag(("navbar_icons/P.svg")) %></div>
+        <div class="pig-icon"> <%= image_tag(("navbar_icons/P.svg")) %></div>
       </div>
       
       <div class=" col-xs-9" style=" padding-top: 5px;">    
@@ -18,17 +18,17 @@
         <div class="card card-product border rounded">
           <h5 class="card-header"></h5>
           <%= image_tag product.image, class: "card-img-top"  %>
-          <div class="card-body" style="padding: 5px 15px 40px 15px;">
+          <div class="card-body card-product-body">
             <h5 class="card-title"><%= product.name %></h5>
-            <div class="user-icon" style="height:5px"> <%= image_tag(("navbar_icons/P.svg")) %></div>
-            <p class="card-text" style="padding-left: 30px;"><%= product.product_points %> 點 </p>
+            <div class="col-xs-1 pd0 pig-icon"> <%= image_tag(("navbar_icons/P.svg")) %></div>
+            <div class="col-xs-6 pig-icon-text" style=""> <%= product.product_points %> 點 </div>
 
             <% if current_user.points >= product.product_points %>
-              <button type="button" class="btn btn-main pull-right" style="margin-top: -10px;" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
+              <button type="button" class="btn btn-main pull-right" style="margin-top: -5px;" data-toggle="modal" data-target= <%= "#product"+product.id.to_s %>>
                 兌換
               </button>                                                                                                      
             <%else%>
-              <button type="button" class="btn btn-gray-outline pull-right"  style="margin-top: -10px;" >
+              <button type="button" class="btn btn-gray-outline pull-right"  style="margin-top: -5px;" >
                 點數不足
               </button>
             <%end%>

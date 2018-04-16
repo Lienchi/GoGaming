@@ -1,3 +1,61 @@
 // Place all the styles related to the trips controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#tirp-index {
+  padding-top: 30px; padding-bottom: 55px;
+}
+
+.card-trip {
+  border-radius: 8px;
+  border-width: 1px;
+  margin: 15px;
+}
+
+.card-trip img {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  width: 100%;
+  height: auto;   
+}
+
+.card-trip-body {
+  height: 73px;
+  padding-top: 5px;
+  padding-right: 5px;
+  margin-left: 10px;
+}
+
+.card-trip-body h4{
+  margin-bottom: 6px;
+}
+
+.card-trip-body a {
+  
+}
+
+.card-trip-body p {
+  
+}
+
+#card-trip-btns{
+  padding-right: 0; 
+  margin-top: -5px; 
+  margin-right: 10px;
+}
+
+.btn-52px {
+  width: 52px; 
+}
+
+
+.comment-group{
+  width:90%;
+  margin: 10px auto;
+}
+.comment{
+  background:#FFFFFF;
+  border-radius:10px;
+  margin-bottom:10px;
+}
