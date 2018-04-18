@@ -371,9 +371,28 @@ var before_toggle_bg = '#0069D2';
 var after_toggle_bg = '#FFFFFF';
 var before_toggle_text = after_toggle_bg;
 var after_toggle_text = before_toggle_bg;
-
 var toggleFriendlyStore = false;
-function FriendlyStoreControl(controlDiv, map) {
+
+function addFriendlyStoreButtonListener(controlUI, controlText, toggleFlag){
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    displayFriendlyStores();
+    toggleFlag = !toggleFlag;
+    if(toggleFlag){
+      showMarkers(map, friendlyStoreMarkers);
+      controlText.style.color = after_toggle_text;
+      controlUI.style.backgroundColor = after_toggle_bg;
+    }
+    else{
+      clearMarkers(friendlyStoreMarkers);
+      controlText.style.color = before_toggle_text;
+      controlUI.style.backgroundColor  = before_toggle_bg;
+    }
+  });
+}
+
+// Set button control for gostation#index
+function indexFriendlyStoreControl(controlDiv, map) {
 
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
@@ -399,22 +418,37 @@ function FriendlyStoreControl(controlDiv, map) {
   controlText.innerHTML = '友好店家';
   controlUI.appendChild(controlText);
 
-  // Setup the click event listeners: simply set the map to Chicago.
-  controlUI.addEventListener('click', function() {
-    displayFriendlyStores();
-    toggleFriendlyStore = !toggleFriendlyStore;
-    if(toggleFriendlyStore){
-      showMarkers(map, friendlyStoreMarkers);
-      controlText.style.color = after_toggle_text;
-      controlUI.style.backgroundColor = after_toggle_bg;
-    }
-    else{
-      clearMarkers(friendlyStoreMarkers);
-      controlText.style.color = before_toggle_text;
-      controlUI.style.backgroundColor  = before_toggle_bg;
-    }
-  });
+  addFriendlyStoreButtonListener(controlUI, controlText, toggleFriendlyStore);
+}
 
+// Set button control for trip#show
+function tripFriendlyStoreControl(controlDiv, map) {
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = before_toggle_bg;
+  controlUI.style.borderRadius = '15px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginRight = '30px';
+  controlUI.style.marginLeft = '30px';
+  controlUI.style.marginBottom = '16px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = before_toggle_text;
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '14px';
+  controlText.style.lineHeight = '32px';
+  controlText.style.paddingLeft = '10px';
+  controlText.style.paddingRight = '10px';
+  controlText.innerHTML = '友好店家';
+  controlUI.appendChild(controlText);
+
+  addFriendlyStoreButtonListener(controlUI, controlText, toggleFriendlyStore);
 }
 
 var toggleGostationSite = false;
