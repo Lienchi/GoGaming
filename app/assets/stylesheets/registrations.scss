@@ -10,13 +10,12 @@
   background-attachment: fixed;
 }
 
-@media screen and (min-width: 769px) {
-  #pac-input {
-    display: none;
-  }
-  #pac-input-button {
-    display: none;
-  }
+#go-play {
+  padding-top: 80px;
+}
+
+#go-play img {
+  height: 102px;
 }
 
 @media screen and (max-width: 400px) {
@@ -25,10 +24,20 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width: 768px) {
   .login_page {
     background-image: url('login_page_ipad.svg'); 
     background-size: cover;
   }
+  #go-play {
+    
+  }
+   #go-play img {
+    width: 345px;
+    height: auto;
+    margin: 0px auto;
+
+   }
 
 }
+
