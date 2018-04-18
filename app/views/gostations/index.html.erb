@@ -307,7 +307,7 @@
 
         function getGostationInfo(gostation){
           var batteryCells = gostation.BatteryCells;
-          var fullBatteryCells = (Math.floor(Math.random()*(batteryCells/8-1))+1)*8-2;
+          var fullBatteryCells = (Math.floor(Math.random()*(batteryCells/8))+1)*8-2;
 
           var info = {
             title: gostation.LocName,
