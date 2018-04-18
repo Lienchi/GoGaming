@@ -1,13 +1,14 @@
 <div class="container">
   <div class="navbar-fixed-top" id="pig-points">
     <div class="col-xs-12">
-      <div class="col-xs-1 col-xs-offset-1"">
-        <div class="pig-icon"> <%= image_tag(("navbar_icons/P.svg")) %></div>
-      </div>
+
       
-      <div class=" col-xs-9" style=" padding-top: 5px;">    
+      <div class=" col-xs-12" style=" padding-top: 5px; padding-left: 45px;">    
         
-        <h5>  <span style="color: #FD8484;"><%= current_user.points %></span> 點可兌換 / 共獲得 <%= current_user.experience %> 點 </h5> 
+        <h5>  
+          <span class="pig-icon"> <%= image_tag(("navbar_icons/P.svg"), class:"pig-icon") %></span>
+          <span style="color: #FD8484;"><%= current_user.points %></span> 點可兌換 / 共獲得 <%= current_user.experience %> 點 
+        </h5> 
       </div>
     </div>
   </div>
