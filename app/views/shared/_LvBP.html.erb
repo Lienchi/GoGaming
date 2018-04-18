@@ -1,5 +1,5 @@
 <div class="navbar-fixed-top pig-bar">
-  <div  class="col-xs-1 col-xs-offset-4 piggy">
+  <!-- <div  class="col-xs-1 col-xs-offset-4 piggy">
     <div ><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
   </div>
   <div  class="col-xs-1 piggy-text">
@@ -18,5 +18,32 @@
     <div class="col-xs-2 piggy-text">
       <div id="layout-nav-exp"><%= current_user.experience %></div>
     </div>  
+  <% end %> -->
+
+  
+  
+  
+  
+  <%= link_to products_path do %>  
+    <div class="pull-right piggy-text">
+      <div id="layout-nav-exp"><%= current_user.experience %></div>
+    </div>  
+    <div class="pull-right piggy">
+      <div id="piggy-piggy"> <%= image_tag(("navbar_icons/P.svg")) %></div> 
+    </div>
   <% end %>
+  <div  class="pull-right piggy-text">
+    <div><%= current_user.badges.count %> </div>
+  </div>
+  <div  class="pull-right piggy">
+    <div ><%= image_tag(("navbar_icons/B.svg")) %> </div>
+  </div>
+  <div  class="pull-right piggy-text">
+    <div><%= current_user.getUserLevel() %> </div>
+  </div>
+  <div  class="pull-right piggy">
+    <div ><%= image_tag(("navbar_icons/Lv.svg")) %> </div>
+  </div>
+
+
 </div>
