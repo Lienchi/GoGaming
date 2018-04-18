@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .login_page {
-  background-image: url('login_page.svg'); 
+  background-image: asset-url('images/login_page.svg'); 
   background-repeat: repeat-x; 
   background-position: top center; 
   background-color: #FFFFFF; 
@@ -18,15 +18,10 @@
   height: 102px;
 }
 
-@media screen and (max-width: 400px) {
-  .login_page {
-    background-image: url('login_page.svg'); 
-  }
-}
 
 @media screen and (width: 768px) {
   .login_page {
-    background-image: url('login_page_ipad.svg'); 
+    background-image: asset-url('images/login_page_ipad.svg'); 
     background-size: cover;
   }
   #go-play {
