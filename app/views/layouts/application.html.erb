@@ -56,8 +56,8 @@
             </div>
 
 
-            <div class="navbar-nav">
-              <div class=" pull-right nav-btn" style=" float: right; ">
+            <div class="navbar-nav pull-right">
+              <div class="nav-btn" style=" float: right; ">
                 <% if current_user %>
                   <%= link_to('登出', destroy_user_session_path, method: :delete, class: ""  ) %>
                 <% end %>
