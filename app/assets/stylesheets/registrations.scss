@@ -1,3 +1,34 @@
 // Place all the styles related to the registrations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login_page {
+  background-image: url('login_page.svg'); 
+  background-repeat: repeat-x; 
+  background-position: top center; 
+  background-color: #FFFFFF; 
+  background-attachment: fixed;
+}
+
+@media screen and (min-width: 769px) {
+  #pac-input {
+    display: none;
+  }
+  #pac-input-button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .login_page {
+    background-image: url('login_page.svg'); 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login_page {
+    background-image: url('login_page_ipad.svg'); 
+    background-size: cover;
+  }
+
+}

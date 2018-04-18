@@ -74,12 +74,16 @@
         font-family: Roboto;
       }
 
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 769px) {
         #pac-input {
           display: none;
         }
         #pac-input-button {
           display: none;
+        }
+
+        #map {
+          min-height: 592px;
         }
       }
 
@@ -88,8 +92,26 @@
           display: none;
         }
         #map {
-          height: 562px; 
 
+          min-height: 592px;
+
+        }
+      }
+
+      @media screen and (width: 768px) {
+        #search-box-pc {
+          display: none;
+        }
+
+        #map {
+          min-height: 924px;
+        }
+        #map-div {
+          height: auto; 
+          max-width: 768px;
+          max-height: 900px;
+          margin-left: -9px;
+          margin-right: -9px;
         }
         body {
           
@@ -101,7 +123,7 @@
 
   <body>
     <%= render partial: "shared/LvBP"%>
-    <div class="container" style="padding: 0px;">
+    <div class="container" style="padding: 0px; ">
       <!-- <div  class="col-xs-12 col-sm-8 col-sm-offset-2"> -->
         <!-- google marker Modal -->
         <div class="modal fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
@@ -162,10 +184,10 @@
         </div>
 
 
-        <div style="padding: -100;" >
+        <div id="map-div" style="padding: -100;" >
           <input id="pac-input" class="form-control border rounded" type="text" placeholder="你想去哪裡？" style="margin-top: 55px; border-radius: 15px;">
           <div id="pac-input-button" style="margin-top: 45px; margin-left: -5px;"></div>
-          <div id="map" class="z-depth-2" style="min-height: 592px; max-height: 900px; position: relative; top: -24px;"></div>
+          <div id="map" class="z-depth-2" style=" max-height: 1000px; position: relative; top: -24px;"></div>
         </div>
       <!-- </div> -->
       
