@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def leaderboards
     scores = Merit::Score.top_scored(limit: User.count)
     ids = scores.map{|score| score["user_id"]}
-    @leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
+    @leaderusers = User.find(ids)
     @leaderusers.each do |u|
       u.level = u.getUserLevel()
     end
