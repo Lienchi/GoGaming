@@ -26,12 +26,58 @@
         padding: 10px;
       }
 
-      @media screen and (min-width: 768px) {
+      #trip-show-map{
+        
+      }
+      #trip-map-div {
+        
+        height: 350px;
+        width: 100%;
+      }
+
+
+      @media screen and (min-width: 769px) {
         #trip-show-map{
           margin-top: 60px;
         }
 
       }
+
+      @media screen and (width: 768px) {
+        
+        #trip-map-div {
+          height: 500px;
+          margin-left: -9px;
+         
+        }
+        #trip-show-map {
+          height: 500px;
+          width: 768px;
+          position: fixed; 
+          top: 0px;
+
+        }
+
+      }
+
+      @media screen and (max-width: 499px) {
+        #trip-map-div{
+
+          height: 350px;
+          
+        }
+
+        #trip-show-map {
+          height: 350px; 
+          position: fixed; 
+          top: 0px;
+        }
+
+      }
+
+      
+
+
     </style>
   </head>
 
@@ -121,7 +167,9 @@
 
 
     <div class="container" style="padding: 0px 0px 55px 0px;">
-      <div id="trip-show-map" class="z-depth-2" style="height: 350px; position: fixed; top: 0px;" ></div>
+      <div id="trip-map-div" style="" >
+        <div id="trip-show-map" class="z-depth-2" style="" ></div>
+      </div>
     
       <div class="col-xs-12 col-sm-8 col-sm-offset-2" style="padding-bottom: 8px; margin-top: 10px;" >
         <h3 class="col-xs-12 text-center" style="color: #24586e;">

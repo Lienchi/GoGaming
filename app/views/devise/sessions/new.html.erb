@@ -1,16 +1,16 @@
-<body class="login_page" style="background-image: url('<%= asset_path("login_page.svg") %>'); background-repeat: repeat-x; background-position: top center; background-color: #FFFFFF; background-attachment: fixed; ">
+<body class="login_page" style=" ">
   <div class="container" >
 
     <div class="col-xs-12" style="position: relative;  top: 10px;">
       <br>
       <br>
-      <div class="col-xs-12", style=" padding-top: 80px;">
-        <%= image_tag "go_play.svg", style:"height: 102px;"%>
+      <div class="col-xs-12" id="go-play", style="">
+        <%= image_tag "go_play.svg", style:"" %>
       </div>
       
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html =>{:class => 'form-horizontal text-center'}) do |f| %>
-        <div class=" col-xs-8 col-xs-offset-2", style=" padding-top: 30px;">
+        <div class=" col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3", style=" padding-top: 30px;">
           <div class="field form-group">
             
             <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email address", class: "float-left form-control border rounded border-R" %>
