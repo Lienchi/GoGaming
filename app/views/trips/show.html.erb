@@ -211,7 +211,7 @@
             <% if @challenge.user == current_user %>
               恭喜你，成為紀錄保持人！
             <% else %>
-              <%= image_tag current_user.avatar, style:"width:30px; display: inline-block;"%>
+              <%= image_tag current_user.avatar, class:"img-circle", style:"width:30px; display: inline-block;"%>
               你在 <%= Challenge.where(user_id: current_user, trip_id: @trip).first.completetime.round %> 分鐘內完成
             <% end %>
           <% else %>

@@ -83,8 +83,15 @@
         }
 
         #map {
-          min-height: 592px;
+          min-height: 650px;
         }
+
+        #map-div {
+          height: auto; 
+          max-height: 922px;
+        }
+
+
       }
 
       @media screen and (max-width: 767px) {
@@ -93,8 +100,26 @@
         }
         #map {
 
-          min-height: 592px;
+          min-height: 725px;
 
+        }
+        #map-div {
+          height: auto; 
+          max-height: 922px;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        #search-box-pc {
+          display: none;
+        }
+        #map {
+
+          min-height: 650px;
+
+        }
+        #map-div {
+          height: auto; 
+          max-height: 922px;
         }
       }
 
@@ -104,26 +129,22 @@
         }
 
         #map {
-          min-height: 822px;
+          min-height: 922px;
         }
         #map-div {
           height: auto; 
           max-width: 768px;
-          max-height: 822px;
+          max-height: 922px;
           margin-left: -9px;
           margin-right: -9px;
         }
-        body {
-          
-        }
-
       }
     </style>
   </head>
 
   <body>
     <%= render partial: "shared/LvBP"%>
-    <div class="container" style="padding: 0px; ">
+    <div class="container" style="padding: 0px; min-height: 750px;">
       <!-- <div  class="col-xs-12 col-sm-8 col-sm-offset-2"> -->
         <!-- google marker Modal -->
         <div class="modal modal-style fade" id="markerModalCenter" tabindex="-1" role="dialog" aria-labelledby="markerModalLongTitle" aria-hidden="true">
