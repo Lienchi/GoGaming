@@ -400,9 +400,9 @@ function indexFriendlyStoreControl(controlDiv, map) {
   controlUI.style.borderRadius = '15px';
   controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
   controlUI.style.cursor = 'pointer';
-  controlUI.style.marginRight = '30px';
+  controlUI.style.marginRight = '60px';
   controlUI.style.marginLeft = '30px';
-  controlUI.style.marginBottom = '16px';
+  controlUI.style.marginBottom = '100px';
   controlUI.style.textAlign = 'center';
   controlUI.title = 'Click to recenter the map';
   controlDiv.appendChild(controlUI);
