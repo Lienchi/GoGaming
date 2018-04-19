@@ -40,7 +40,7 @@ class User < ApplicationRecord
   
   def check_avatar(user)
     if user.avatar.nil?
-      "avatar.png"
+      "avatar.svg"
     else
       user.avatar
     end

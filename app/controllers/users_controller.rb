@@ -24,18 +24,21 @@ class UsersController < ApplicationController
   end
 
   def leaderboards
-    scores = Merit::Score.top_scored(limit: User.count)
-    ids = scores.map{|score| score["user_id"]}
-    @leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
+    #scores = Merit::Score.top_scored(limit: User.count)
+    #ids = scores.map{|score| score["user_id"]}
+    #@leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
+    @leaderusers = User.order("experience DESC")
     @leaderusers.each do |u|
       u.level = u.getUserLevel()
     end
   end
 
   def f_leaderboards
-    friends_scores = friends_leaderboards(current_user).sort_by { |k, v| k[:sum_points]}.reverse
-    ids = friends_scores.map{|score| score[:user_id]}
-    @leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
+    #friends_scores = friends_leaderboards(current_user).sort_by { |k, v| k[:sum_points]}.reverse
+    #ids = friends_scores.map{|score| score[:user_id]}
+    #@leaderusers = User.find(ids).sort_by{|m| ids.index(m.id)}
+    current_user_array = User.where(id: current_user.id)
+    @leaderusers = (current_user.followings+current_user_array).sort_by{|u| -u[:experience]}
     @leaderusers.each do |u|
       u.level = u.getUserLevel()
     end

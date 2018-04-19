@@ -51,6 +51,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
   def default_url
-    ActionController::Base.helpers.asset_path([version_name, "avatar.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path([version_name, "avatar.svg"].compact.join('_'))
   end
 end

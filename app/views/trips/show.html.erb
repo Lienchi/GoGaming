@@ -978,7 +978,7 @@
           // Create the DIV to hold the control and call the FriendlyStoreControl()
           // constructor passing in this DIV.
           var friendlyStoreDiv = document.createElement('div');
-          var friendlyStoreControl = new FriendlyStoreControl(friendlyStoreDiv, map);
+          var friendlyStoreControl = new tripFriendlyStoreControl(friendlyStoreDiv, map);
 
           friendlyStoreDiv.index = 1;
           map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(friendlyStoreDiv);
