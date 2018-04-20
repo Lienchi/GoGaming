@@ -114,16 +114,18 @@ class User < ApplicationRecord
   end
 
   def create_trip_gostation
+    tripgostations = []
     Trip.all.each do |t|
       t.gostations_index.each do |gid|
-        TripGostation.create!(
-            user_id: self.id,
-            trip_id: t.id,
-            gostation_id: gid,
-            status: false
+        tripgostations << TripGostation.new(
+          user_id: self.id,
+          trip_id: t.id,
+          gostation_id: gid,
+          status: false
         )
       end
     end
+    TripGostation.import! tripgostations
   end
 
   def initialize_points
