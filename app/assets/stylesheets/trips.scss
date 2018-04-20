@@ -2,6 +2,71 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+html, body {
+  height: 100%;
+}
+
+#trip-show-map {
+  height: 50%;
+  width: 100%;
+  margin: auto;
+  border-radius: 1px;
+}
+
+#directions-panel {
+  margin-top: 10px;
+  background-color: #FFEE77;
+  padding: 10px;
+}
+
+#trip-show-map{
+  
+}
+#trip-map-div {
+  
+  height: 350px;
+  width: 100%;
+}
+
+
+@media screen and (min-width: 769px) {
+  #trip-show-map{
+    margin-top: 60px;
+  }
+
+}
+
+@media screen and (width: 768px) {
+  
+  #trip-map-div {
+    height: 500px;
+    margin-left: -9px;
+   
+  }
+  #trip-show-map {
+    height: 500px;
+    width: 768px;
+    position: fixed; 
+    top: 0px;
+
+  }
+
+}
+
+@media screen and (max-width: 499px) {
+  #trip-map-div{
+
+    height: 350px;
+    
+  }
+
+  #trip-show-map {
+    height: 350px; 
+    position: fixed; 
+    top: 0px;
+  }
+
+}
 
 #tirp-index {
   padding-top: 30px; padding-bottom: 55px;

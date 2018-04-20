@@ -1,3 +1,136 @@
 // Place all the styles related to the gostations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// gostation index style
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+
+#directions-panel {
+  margin-top: 10px;
+  background-color: #FFEE77;
+  padding: 10px;
+}
+
+/* google map search box style */
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 0px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 60%;
+  opacity: 0.6;
+}
+
+#pac-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(0,0,0);
+  opacity: 1; /* Firefox */
+}
+
+#pac-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgb(0,0,0);
+}
+
+#pac-input::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgb(0,0,0);
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+@media screen and (min-width: 769px) {
+  #pac-input {
+    display: none;
+  }
+  #pac-input-button {
+    display: none;
+  }
+
+  #map {
+    min-height: 650px;
+  }
+
+  #map-div {
+    height: auto; 
+    max-height: 922px;
+  }
+
+
+}
+
+@media screen and (max-width: 767px) {
+  #search-box-pc {
+    display: none;
+  }
+  #map {
+
+    min-height: 725px;
+
+  }
+  #map-div {
+    height: auto; 
+    max-height: 922px;
+  }
+}
+@media screen and (max-width: 767px) {
+  #search-box-pc {
+    display: none;
+  }
+  #map {
+
+    min-height: 650px;
+
+  }
+  #map-div {
+    height: auto; 
+    max-height: 922px;
+  }
+}
+
+@media screen and (width: 768px) {
+  #search-box-pc {
+    display: none;
+  }
+
+  #map {
+    min-height: 922px;
+  }
+  #map-div {
+    height: auto; 
+    max-width: 768px;
+    max-height: 922px;
+    margin-left: -9px;
+    margin-right: -9px;
+  }
+}
